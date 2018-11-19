@@ -9,19 +9,7 @@ router.get('/api', function(req, res) {
 // Insert routes below
 router.use('/api/gitrepository', require('./gitrepository'));
 
-//router.use('/api/users', require('./users'));
-//router.use('/api/professors', require('./professors'));
 
-/*
-// All other routes redirect to the index.html
-router.route('/owner').get(function (req, res) {
-    res.sendfile(req.app.get('appPath') + '/owner.html');
-});
-
-router.route('/buyer').get(function (req, res) {
-    res.sendfile(req.app.get('appPath') + '/buyer.html');
-});
-*/
 
 router.route('/*').get(function (req, res) {
     var relativeAppPath = req.app.get('appPath');
