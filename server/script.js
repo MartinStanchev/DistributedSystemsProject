@@ -6,7 +6,7 @@ module.exports = {
         var classNames = [];
         var classExtends = [];
         var classConecteds = [];
-
+        var excist;
         var readMe = fs.readFileSync("q2.xml", 'utf8');
     
         if(readMe.includes(".java")){
@@ -50,18 +50,23 @@ module.exports = {
                     if(line.includes(classNames[j])){
                         if(currentClassName != classNames[j]){
                             var classConected = {MainClass:currentClassName , UsedClass:classNames[j]};
-                            classConecteds.push(classConected);
+                            //classConecteds.push(classConected);
 
-                          /*  if(classConecteds.length < 1){
+                            if(classConecteds.length < 1){
                                 classConecteds.push(classConected);
                             }
                             else{
+                                excist = false;
                                 for(var k = 0; k < classConecteds.length; k++){
-                                    if((classConecteds[k].MainClass != classConected.MainClass) || (classConecteds[k].UsedClass != classConected.UsedClass)){
-                                        classConecteds.push(classConected);
+                                    if((classConecteds[k].MainClass === classConected.MainClass) && (classConecteds[k].UsedClass == classConected.UsedClass)){
+                                        excist = true;
+                                        break;
                                     }
                                  }
-                            }*/
+                                 if(excist === false){
+                                    classConecteds.push(classConected);
+                                 }
+                            }
                         }
                     }
                 }

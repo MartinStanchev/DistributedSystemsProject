@@ -1,15 +1,7 @@
 var express = require('express');
 var router = express.Router();
-var ClassSchema = require('../models/Classes');
 var DiagramSchema = require('../models/Diagram');
-
-//Get all classes and connection to a diagram
-router.get('/:id/classes', function(req, res, next) {
-    ClassSchema.find({ Diagram: req.params.id}, function(err, Diagram) {
-      if (err) { return next(err); }
-      res.status(200).json({"data": Diagram});
-    });
-});
+const script = require('../script');
 
 //Get all diagrams
 router.get('/', function(req, res, next) {
@@ -22,7 +14,10 @@ router.get('/', function(req, res, next) {
 
 router.post('/', function(req, res, next) {
     var Diagram = new DiagramSchema({
-        user :  req.params.id
+        GitRepo :  req.body.GitRepo,
+        Classes : req.body.Classes,
+        classExtends : req.body.classExtends,
+        classConecteds : req.body.classConecteds
     });
     Diagram.save(function(err) {
     if (err) {
@@ -32,4 +27,10 @@ router.post('/', function(req, res, next) {
     });
 });
 
-module.exports = router;
+router.get('/prosses', function(req, res, next) {
+    var value=  script.readXML();
+    res.json({"data" : value})
+    res.status(200);
+});
+
+ module.exports = router;

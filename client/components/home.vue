@@ -252,6 +252,7 @@ module.exports = {
     beforeMount(){
         this.init()
     },
+    
     mounted () {
      //   this.init();
     }
