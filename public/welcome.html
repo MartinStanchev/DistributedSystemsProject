@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css">
+    <link rel="stylesheet" href="styles.css">
+    <title>Profile</title>
+</head>
+
+<body>
+	<div id="app">
+	  <nav class="navbar navbar-expand-md navbar-dark bg-dark">
+  <a class="navbar-brand" href="#">Group 5 </a>
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarColor01" aria-controls="navbarColor01" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+
+  <div class="collapse navbar-collapse">
+  <ul class="nav navbar-nav ml-auto">
+      <li class="nav-item">
+	  <img :src="user.avatar_url" class="img-responsive" id="profile-image"> 
+		 <p> {{user.login }}</p>
+	  </li>
+	 
+		
+    </ul>
+  </div>
+		</nav>
+		<div id="container">
+	
+	<ul>
+		<li v-for="repo in repos">{{repo.full_name}}
+		<p>Repo description: {{repo.description}}</p>
+			<a v-bind:href="repo.html_url" target="_blank">Github repo link</a>
+		</li>
+		</ul>
+	</div>
+ </div>
+</body>
+	<script src="https://cdn.jsdelivr.net/npm/vue"></script>
+	 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
+  <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+	
+<script>
+
+	var app = new Vue({
+		el: '#app',
+		data: {
+			user: [],
+			repos: []
+		
+	}, 
+		methods: {
+		queryGitRepo: function () {
+			
+   const query = window.location.search.substring(1)
+    const token = query.split('access_token=')[1]
+	  fetch('https://api.github.com/user/repos', {
+        headers: {
+            Authorization: 'token ' + token
+        }
+    })
+        .then(res => res.json())
+		.then(res => {
+		this.repos = res;
+		
+	}
+	)},
+	queryGitUser: function() {
+			 const query = window.location.search.substring(1)
+			 const token = query.split('access_token=')[1]
+	  fetch('https://api.github.com/user', {
+        headers: {
+            Authorization: 'token ' + token
+        }
+    })
+        .then(res => res.json())
+		.then(res => {
+		this.user = res;
+			
+			
+		}
+	 )
+	}
+		}, beforeMount() {
+		this.queryGitUser();
+		this.queryGitRepo();
+			
+	}	
+	})
+        
+//	fetch('https://api.github.com/user/repos', {
+//        headers: {
+//            Authorization: 'token ' + token
+//        }
+//    })
+//        .then(res => res.json())
+//        .then(res => {
+//           res.map(function(repo){
+//			   
+//		   })
+//            
+//        })
+</script>
+
+</html>
