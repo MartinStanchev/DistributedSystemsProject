@@ -1,10 +1,5 @@
-<!-- ownerHome.vue -->
-<!-- This is a really basic (static) Vue component.
-We just demonstrate how data (variables in the Vue instance) can be bound to HTML elements -->
 <template>
-  <div onload="init()">
   <div id="myDiagramDiv" style="border: solid 1px black; width:100%; height:600px"></div>
-</div>
 </template>
 
 <script>
@@ -182,18 +177,70 @@ module.exports = {
                 new go.Binding("toArrow", "relationship", convertToArrow))
             );
         // setup a few example class nodes and relationships
-        var nodedata = [];
-        for(var i = 0 ; i < classNames.length ; i++){
-            nodedata.push({key: classNames[i] ,key : classNames[i]});
-        }
-
-        var linkdata = [];
-        for(var i = 0 ; i < classExtends.length ; i++){
-            linkdata.push( { from: classExtends[i].subClass, to: classExtends[i].superClass, relationship: "generalization" });
-        }
-        for(var i = 0 ; i < classConecteds.length ; i++){
-            linkdata.push({ from: classConecteds[i].MainClass, to: classConecteds[i].UsedClass, relationship: "aggregation" });
-        }
+    var nodedata = [
+      {
+        key: 1,
+        name: "BankAccount",
+        properties: [
+          { name: "owner", type: "String", visibility: "public" },
+          { name: "balance", type: "Currency", visibility: "public", default: "0" }
+        ],
+        methods: [
+          { name: "deposit", parameters: [{ name: "amount", type: "Currency" }], visibility: "public" },
+          { name: "withdraw", parameters: [{ name: "amount", type: "Currency" }], visibility: "public" }
+        ]
+      },
+      {
+        key: 11,
+        name: "Person",
+        properties: [
+          { name: "name", type: "String", visibility: "public" },
+          { name: "birth", type: "Date", visibility: "protected" }
+        ],
+        methods: [
+          { name: "getCurrentAge", type: "int", visibility: "public" }
+        ]
+      },
+      {
+        key: 12,
+        name: "Student",
+        properties: [
+          { name: "classes", type: "List<Course>", visibility: "public" }
+        ],
+        methods: [
+          { name: "attend", parameters: [{ name: "class", type: "Course" }], visibility: "private" },
+          { name: "sleep", visibility: "private" }
+        ]
+      },
+      {
+        key: 13,
+        name: "Professor",
+        properties: [
+          { name: "classes", type: "List<Course>", visibility: "public" }
+        ],
+        methods: [
+          { name: "teach", parameters: [{ name: "class", type: "Course" }], visibility: "private" }
+        ]
+      },
+      {
+        key: 14,
+        name: "Course",
+        properties: [
+          { name: "name", type: "String", visibility: "public" },
+          { name: "description", type: "String", visibility: "public" },
+          { name: "professor", type: "Professor", visibility: "public" },
+          { name: "location", type: "String", visibility: "public" },
+          { name: "times", type: "List<Time>", visibility: "public" },
+          { name: "prerequisites", type: "List<Course>", visibility: "public" },
+          { name: "students", type: "List<Student>", visibility: "public" }
+        ]
+      }
+    ];
+    var linkdata = [
+      { from: 12, to: 11, relationship: "generalization" },
+      { from: 13, to: 11, relationship: "generalization" },
+      { from: 14, to: 13, relationship: "aggregation" }
+    ];
         myDiagram.model = $(go.GraphLinksModel,
         {
         copiesArrays: true,
@@ -202,10 +249,13 @@ module.exports = {
         linkDataArray: linkdata
         });
         },
-    //This basically means that once Vue is ready, we call getCamels() to fetch
-    //all camels and populate our DOM tree with them.
+    beforeMount(){
+        this.init()
+    },
     mounted () {
-        this.getClass();
-    }}
+     //   this.init();
+    }
+    }
 };
+
 </script>

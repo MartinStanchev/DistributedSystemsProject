@@ -52,14 +52,14 @@ module.exports = {
                             var classConected = {MainClass:currentClassName , UsedClass:classNames[j]};
                             classConecteds.push(classConected);
 
-                           /* if(classConecteds.length < 1){
+                          /*  if(classConecteds.length < 1){
                                 classConecteds.push(classConected);
                             }
                             else{
                                 for(var k = 0; k < classConecteds.length; k++){
-                                    if(classConecteds[k].MainClass !== classConected.MainClass || classConecteds[k].UsedClass !== classConected.UsedClass){
-                                     classConecteds.push(classConected);
-                                     }
+                                    if((classConecteds[k].MainClass != classConected.MainClass) || (classConecteds[k].UsedClass != classConected.UsedClass)){
+                                        classConecteds.push(classConected);
+                                    }
                                  }
                             }*/
                         }
@@ -67,13 +67,7 @@ module.exports = {
                 }
             }
         }
-        console.log("all class names");
-        console.log(classNames);
-        console.log("all extended classes");
-        console.log(classExtends);
-        console.log("all connected classes");
-        console.log(classConecteds);
-        return [classNames,classExtend,classConecteds];
+        return [classNames,classExtends,classConecteds];
     },
 
 };
