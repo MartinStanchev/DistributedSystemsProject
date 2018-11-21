@@ -21,7 +21,7 @@ router.get('/oauth/redirect', (req, res) => {
     }
   }).then((response) => {
     const accessToken = response.data.access_token
-    res.redirect(`/welcome.html?access_token=${accessToken}`)
+    res.redirect(`/profile.html?access_token=${accessToken}`)
   })
 })
 
