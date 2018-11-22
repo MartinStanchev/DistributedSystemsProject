@@ -9,6 +9,9 @@ router.get('/api', function(req, res) {
 // Insert routes below
 router.use('/api/gitrepository', require('./gitrepository'));
 
+router.use('/api/gitrepo', require('./gitrepo.controller'));
+router.use('/api/diagrams', require('./diagram.controller'));
+
 
 
 router.route('/*').get(function (req, res) {
