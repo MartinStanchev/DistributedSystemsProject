@@ -38,4 +38,10 @@ router.route('/*').get(function (req, res) {
     res.sendFile(absoluteAppPath + '/index.html');
 });
 
+router.route('/uml').get(function (req, res) {
+  var relativeAppPath = req.app.get('appPath');
+  var absoluteAppPath = path.resolve(relativeAppPath);
+  res.sendFile(absoluteAppPath + '/index2.html');
+});
+
 module.exports = router
