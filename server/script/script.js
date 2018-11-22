@@ -51,7 +51,6 @@ module.exports = {
                     if(line.includes(classNames[j])){
                         if(currentClassName != classNames[j]){
                             var classConected = {MainClass:currentClassName , UsedClass:classNames[j]};
-                            //classConecteds.push(classConected);
 
                             if(classConecteds.length < 1){
                                 classConecteds.push(classConected);
