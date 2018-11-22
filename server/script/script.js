@@ -1,13 +1,14 @@
 var fs = require('fs');
-var express = require('express');
+var DiagramSchema = require('../models/Diagram');
+var classNames = [];
+var classExtends = [];
+var classConecteds = [];
 
 module.exports = {
     readXML : function(){
-        var classNames = [];
-        var classExtends = [];
-        var classConecteds = [];
+
         var excist;
-        var readMe = fs.readFileSync("q2.xml", 'utf8');
+        var readMe = fs.readFileSync("/DistributedSystemsProject/resources/javaProject.xml", 'utf8');
     
         if(readMe.includes(".java")){
             var arrayOfLines = readMe.split("\n"); 
@@ -72,7 +73,21 @@ module.exports = {
                 }
             }
         }
+        this.SaveDiagram();
         return [classNames,classExtends,classConecteds];
     },
-
+    SaveDiagram : function(){
+            var Diagram = new DiagramSchema({
+                GitRepo :  "", //TODO: needs to be fixed base on the git repo
+                Classes : classNames,
+                classExtends : classExtends,
+                classConecteds : classConecteds
+            });
+            Diagram.save(function(err) {
+            if (err) {
+              return next(err);
+            }
+              return (Diagram);
+            });
+    }
 };

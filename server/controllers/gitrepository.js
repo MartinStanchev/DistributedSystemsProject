@@ -6,7 +6,7 @@ var secret = "topsecret"; // Not used - can be implemented later for security
 var repoPath = "server/git_repositories/"
 var Git = require("nodegit");
 var path = require('path');
-var Repo = require('../models/repos');
+var Repo = require('../models/Diagram');
 
 
 // Get products with sorting query

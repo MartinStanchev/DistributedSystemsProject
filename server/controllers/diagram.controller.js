@@ -1,7 +1,7 @@
 var express = require('express');
 var router = express.Router();
 var DiagramSchema = require('../models/Diagram');
-const script = require('../script');
+const script = require('./../script/script.js');
 
 //Get all diagrams
 router.get('/', function(req, res, next) {
