@@ -2,7 +2,7 @@ var app = new Vue({
     el: '#profile'
     , data: {
         user: []
-        , repos: []
+        , diagrams: []
     }
     , methods: {
         queryGitRepo: function () {
@@ -13,7 +13,7 @@ var app = new Vue({
                     Authorization: 'token ' + token
                 }
             }).then(res => res.json()).then(res => {
-                this.repos = res;
+                this.diagrams = res;
             })
         }
         , queryGitUser: function () {
@@ -29,11 +29,11 @@ var app = new Vue({
         }
         , addRepo: function (repoUrl) {
             console.log(repoUrl)
-            let Repo = {
-                url: repoUrl
+            let Diagram = {
+                GitRepo: repoUrl
             };
-            axios.post('/api/gitrepository', Repo).then((response) => {
-                return Repo;
+            axios.post('/api/diagrams', Diagram).then((response) => {
+                return Diagram;
             }).catch((error) => {
                 console.log(error);
             });

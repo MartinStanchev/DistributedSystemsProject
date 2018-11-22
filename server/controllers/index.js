@@ -26,13 +26,13 @@ router.get('/oauth/redirect', (req, res) => {
 })
 
 // Insert routes below
-router.use('/api/gitrepository', require('./gitrepository'));
+//router.use('/api/gitrepository', require('./gitrepository'));
 router.use('/api/xml', require('./xmlEncoder.js'));
 router.use('/api/diagrams', require('./diagram.controller'));
 
 
 
-router.route('/*').get(function (req, res) {
+router.route('/').get(function (req, res) {
     var relativeAppPath = req.app.get('appPath');
     var absoluteAppPath = path.resolve(relativeAppPath);
     res.sendFile(absoluteAppPath + '/index.html');
@@ -41,7 +41,7 @@ router.route('/*').get(function (req, res) {
 router.route('/uml').get(function (req, res) {
   var relativeAppPath = req.app.get('appPath');
   var absoluteAppPath = path.resolve(relativeAppPath);
-  res.sendFile(absoluteAppPath + '/index2.html');
+  res.sendFile(absoluteAppPath + '/uml.html');
 });
 
 module.exports = router

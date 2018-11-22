@@ -3,3 +3,4 @@ node_modules/*
 server/git_repositories/*
 client/build/*
 package-lock.json
+resources/*
