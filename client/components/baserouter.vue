@@ -12,13 +12,11 @@
   
     <div class="row">
 
-      <div class="col-sm-1 centered">
-      </div>
-      <div class="col-sm-10 centered">
+
+      <div class="col-sm-12 centered">
         <router-view></router-view>
       </div>
-      <div class="col-sm-1 centered">
-      </div>
+
     </div>
   
   <div class="jumbotron text-center w-75 mx-auto " style="margin-bottom:0">
