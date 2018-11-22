@@ -26,7 +26,10 @@ router.get('/oauth/redirect', (req, res) => {
 })
 
 // Insert routes below
-router.use('/api/repos', require('./gitrepository'));
+router.use('/api/gitrepository', require('./gitrepository'));
+router.use('/api/xml', require('./xmlEncoder.js'));
+router.use('/api/gitrepo', require('./gitrepo.controller'));
+router.use('/api/diagrams', require('./diagram.controller'));
 
 
 
