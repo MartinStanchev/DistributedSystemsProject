@@ -1,0 +1,700 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<unit xmlns="http://www.srcML.org/srcML/src" revision="0.9.5" url="home/marts/dev/DistributedSystemsProject/resources/javaProject.zip">
+
+<unit revision="0.9.5" language="Java" filename="library-system-master/Address.java" hash="1c74893ccaa8f25b6c49205e0cc25aef489d744d"><package>package <name>Libary</name>;</package>
+
+<class><specifier>public</specifier> class <name>Address</name> <block>{
+	
+	<decl_stmt><decl><specifier>private</specifier> <type><name>String</name></type> <name>streetName</name></decl>;</decl_stmt>
+	<decl_stmt><decl><specifier>private</specifier> <type><name>int</name></type> <name>streetNum</name></decl>;</decl_stmt>
+	<decl_stmt><decl><specifier>private</specifier> <type><name>int</name></type> <name>zipCode</name></decl>;</decl_stmt>
+	<decl_stmt><decl><specifier>private</specifier> <type><name>String</name></type> <name>city</name></decl>;</decl_stmt>
+	<decl_stmt><decl><specifier>private</specifier> <type><name>String</name></type> <name>country</name></decl>;</decl_stmt>
+	
+
+
+	<constructor><specifier>public</specifier> <name>Address</name><parameter_list>(<parameter><decl><type><name>String</name></type> <name>streetName</name></decl></parameter>, <parameter><decl><type><name>int</name></type> <name>streetNum</name></decl></parameter>, <parameter><decl><type><name>int</name></type> <name>zipCode</name></decl></parameter>, <parameter><decl><type><name>String</name></type> <name>city</name></decl></parameter>, <parameter><decl><type><name>String</name></type> <name>country</name></decl></parameter>)</parameter_list> <block>{
+		<expr_stmt><expr><name><name>this</name><operator>.</operator><name>streetName</name></name> <operator>=</operator> <name>streetName</name></expr>;</expr_stmt>
+		<expr_stmt><expr><name><name>this</name><operator>.</operator><name>streetNum</name></name> <operator>=</operator> <name>streetNum</name></expr>;</expr_stmt>
+		<expr_stmt><expr><name><name>this</name><operator>.</operator><name>zipCode</name></name> <operator>=</operator> <name>zipCode</name></expr>;</expr_stmt>
+		<expr_stmt><expr><name><name>this</name><operator>.</operator><name>city</name></name> <operator>=</operator> <name>city</name></expr>;</expr_stmt>
+		<expr_stmt><expr><name><name>this</name><operator>.</operator><name>country</name></name> <operator>=</operator> <name>country</name></expr>;</expr_stmt>
+	}</block></constructor>
+	
+	<decl_stmt><decl><specifier>private</specifier> <type><name>String</name></type> <name>StreetName</name></decl>;</decl_stmt>
+	<function><specifier>public</specifier> <type><name>String</name></type> <name>getStreetName</name><parameter_list>()</parameter_list> <block>{
+		<return>return <expr><name>StreetName</name></expr>;</return>
+	}</block></function>
+
+
+
+	<function><specifier>public</specifier> <type><name>void</name></type> <name>setStreetName</name><parameter_list>(<parameter><decl><type><name>String</name></type> <name>streetName</name></decl></parameter>)</parameter_list> <block>{
+		<expr_stmt><expr><name>StreetName</name> <operator>=</operator> <name>streetName</name></expr>;</expr_stmt>
+	}</block></function>
+
+
+
+	<function><specifier>public</specifier> <type><name>int</name></type> <name>getStreetNum</name><parameter_list>()</parameter_list> <block>{
+		<return>return <expr><name>streetNum</name></expr>;</return>
+	}</block></function>
+
+
+
+	<function><specifier>public</specifier> <type><name>void</name></type> <name>setStreetNum</name><parameter_list>(<parameter><decl><type><name>int</name></type> <name>streetNum</name></decl></parameter>)</parameter_list> <block>{
+		<expr_stmt><expr><name><name>this</name><operator>.</operator><name>streetNum</name></name> <operator>=</operator> <name>streetNum</name></expr>;</expr_stmt>
+	}</block></function>
+
+
+
+	<function><specifier>public</specifier> <type><name>int</name></type> <name>getZipCode</name><parameter_list>()</parameter_list> <block>{
+		<return>return <expr><name>zipCode</name></expr>;</return>
+	}</block></function>
+
+
+
+	<function><specifier>public</specifier> <type><name>void</name></type> <name>setZipCode</name><parameter_list>(<parameter><decl><type><name>int</name></type> <name>zipCode</name></decl></parameter>)</parameter_list> <block>{
+		<expr_stmt><expr><name><name>this</name><operator>.</operator><name>zipCode</name></name> <operator>=</operator> <name>zipCode</name></expr>;</expr_stmt>
+	}</block></function>
+
+
+
+	<function><specifier>public</specifier> <type><name>String</name></type> <name>getCity</name><parameter_list>()</parameter_list> <block>{
+		<return>return <expr><name>city</name></expr>;</return>
+	}</block></function>
+
+
+
+	<function><specifier>public</specifier> <type><name>void</name></type> <name>setCity</name><parameter_list>(<parameter><decl><type><name>String</name></type> <name>city</name></decl></parameter>)</parameter_list> <block>{
+		<expr_stmt><expr><name><name>this</name><operator>.</operator><name>city</name></name> <operator>=</operator> <name>city</name></expr>;</expr_stmt>
+	}</block></function>
+
+
+
+	<function><specifier>public</specifier> <type><name>String</name></type> <name>getCountry</name><parameter_list>()</parameter_list> <block>{
+		<return>return <expr><name>country</name></expr>;</return>
+	}</block></function>
+
+
+
+	<function><specifier>public</specifier> <type><name>void</name></type> <name>setCountry</name><parameter_list>(<parameter><decl><type><name>String</name></type> <name>country</name></decl></parameter>)</parameter_list> <block>{
+		<expr_stmt><expr><name><name>this</name><operator>.</operator><name>country</name></name> <operator>=</operator> <name>country</name></expr>;</expr_stmt>
+	}</block></function>
+
+	<function><specifier>public</specifier> <type><name>String</name></type> <name>toString</name><parameter_list>()</parameter_list> <block>{
+		<return>return <expr><name>streetName</name> <operator>+</operator> <literal type="string">" "</literal> <operator>+</operator><name>streetNum</name> <operator>+</operator><literal type="string">", "</literal>  <operator>+</operator> <name>zipCode</name> <operator>+</operator> <literal type="string">" "</literal> <operator>+</operator> <name>city</name></expr>;</return>
+	}</block></function>
+
+	
+}</block></class>
+
+</unit>
+
+<unit revision="0.9.5" language="Java" filename="library-system-master/Customer.java" hash="f0ce96a258b05a15995eb6b355219d4aed543aee"><package>package <name>Libary</name>;</package>
+
+<import>import <name><name>java</name><operator>.</operator><name>util</name><operator>.</operator><name>ArrayList</name></name>;</import>
+<import>import <name><name>java</name><operator>.</operator><name>util</name><operator>.</operator><name>concurrent</name><operator>.</operator><name>atomic</name><operator>.</operator><name>AtomicInteger</name></name>;</import>
+
+<class><specifier>public</specifier> class <name>Customer</name> <block>{
+	<decl_stmt><decl><specifier>public</specifier> <specifier>static</specifier> <type><name>AtomicInteger</name></type> <name>count</name> <init>= <expr><operator>new</operator> <call><name>AtomicInteger</name><argument_list>(<argument><expr><literal type="number">0</literal></expr></argument>)</argument_list></call></expr></init></decl>;</decl_stmt>
+	<decl_stmt><decl><specifier>private</specifier> <type><name>String</name></type> <name>name</name></decl>;</decl_stmt>
+	<decl_stmt><decl><specifier>private</specifier> <type><name>int</name></type> <name>libaryCard</name></decl>;</decl_stmt>
+	<decl_stmt><decl><specifier>private</specifier> <type><name>String</name></type> <name>phoneNumber</name></decl>;</decl_stmt>
+	<decl_stmt><decl><specifier>private</specifier> <type><name>Address</name></type> <name>address</name></decl>;</decl_stmt>
+	<decl_stmt><decl><specifier>private</specifier> <type><name><name>ArrayList</name><argument_list type="generic">&lt;<argument><name>Books</name></argument>&gt;</argument_list></name></type> <name>bookHistory</name></decl>;</decl_stmt>
+	<decl_stmt><decl><specifier>private</specifier> <type><name>int</name></type> <name>debit</name></decl>;</decl_stmt>
+	<decl_stmt><decl><specifier>private</specifier> <specifier>static</specifier> <type><specifier>final</specifier> <name>int</name></type> <name>DELAY_FEE</name> <init>= <expr><literal type="number">2</literal></expr></init></decl>;</decl_stmt> 
+	 <decl_stmt><decl><type><name><name>ArrayList</name><argument_list type="generic">&lt;<argument><name>Books</name></argument>&gt;</argument_list></name></type> <name>loanedBooks</name></decl>;</decl_stmt>
+
+	
+
+
+<constructor><name>Customer</name> <parameter_list>(<parameter><decl><type><name>String</name></type> <name>name</name></decl></parameter>, <parameter><decl><type><name>String</name></type> <name>phoneNumber</name></decl></parameter>, <parameter><decl><type><name>String</name></type> <name>streetName</name></decl></parameter>, <parameter><decl><type><name>int</name></type> <name>streetNum</name></decl></parameter>, <parameter><decl><type><name>int</name></type> <name>zipCode</name></decl></parameter>, <parameter><decl><type><name>String</name></type> <name>city</name></decl></parameter>, <parameter><decl><type><name>String</name></type> <name>country</name></decl></parameter>)</parameter_list> <block>{
+	<expr_stmt><expr><name><name>this</name><operator>.</operator><name>name</name></name> <operator>=</operator> <name>name</name></expr>;</expr_stmt>
+	<expr_stmt><expr><name><name>this</name><operator>.</operator><name>libaryCard</name></name> <operator>=</operator> <call><name><name>count</name><operator>.</operator><name>incrementAndGet</name></name><argument_list>()</argument_list></call></expr>;</expr_stmt>
+	<expr_stmt><expr><name><name>this</name><operator>.</operator><name>phoneNumber</name></name> <operator>=</operator> <name>phoneNumber</name></expr>;</expr_stmt>
+	<expr_stmt><expr><name><name>this</name><operator>.</operator><name>address</name></name> <operator>=</operator> <operator>new</operator> <call><name>Address</name><argument_list>(<argument><expr><name>streetName</name></expr></argument>, <argument><expr><name>streetNum</name></expr></argument>, <argument><expr><name>zipCode</name></expr></argument>, <argument><expr><name>city</name></expr></argument>, <argument><expr><name>country</name></expr></argument>)</argument_list></call></expr>;</expr_stmt>
+	<expr_stmt><expr><name><name>this</name><operator>.</operator><name>bookHistory</name></name> <operator>=</operator> <operator>new</operator> <call><name><name>ArrayList</name><argument_list type="generic">&lt;<argument><name>Books</name></argument>&gt;</argument_list></name><argument_list>()</argument_list></call></expr>;</expr_stmt>
+	<expr_stmt><expr><name><name>this</name><operator>.</operator><name>loanedBooks</name></name> <operator>=</operator> <operator>new</operator> <call><name><name>ArrayList</name><argument_list type="generic">&lt;<argument><name>Books</name></argument>&gt;</argument_list></name><argument_list>()</argument_list></call></expr>;</expr_stmt>
+	<expr_stmt><expr><name><name>this</name><operator>.</operator><name>debit</name></name> <operator>=</operator> <literal type="number">0</literal></expr>;</expr_stmt>
+	
+
+}</block></constructor>
+
+<function><specifier>public</specifier> <type><name>void</name></type> <name>ChargeCustomer</name><parameter_list>(<parameter><decl><type><name>long</name></type> <name>days</name></decl></parameter>)</parameter_list>
+<block>{
+	<expr_stmt><expr><name>debit</name> <operator>+=</operator> <name>DELAY_FEE</name> <operator>*</operator> <name>days</name></expr>;</expr_stmt>
+}</block></function>
+
+<function><specifier>public</specifier> <type><name>int</name></type> <name>getDebit</name><parameter_list>()</parameter_list> <block>{
+	<return>return <expr><name>debit</name></expr>;</return>
+}</block></function>
+
+
+
+<function><specifier>public</specifier> <specifier>static</specifier> <type><name>AtomicInteger</name></type> <name>getCount</name><parameter_list>()</parameter_list> <block>{
+	<return>return <expr><name>count</name></expr>;</return>
+}</block></function>
+
+
+
+
+<function><specifier>public</specifier> <specifier>static</specifier> <type><name>void</name></type> <name>setCount</name><parameter_list>(<parameter><decl><type><name>AtomicInteger</name></type> <name>count</name></decl></parameter>)</parameter_list> <block>{
+	<expr_stmt><expr><name><name>Customer</name><operator>.</operator><name>count</name></name> <operator>=</operator> <name>count</name></expr>;</expr_stmt>
+}</block></function>
+
+
+
+
+<function><specifier>public</specifier> <type><name>String</name></type> <name>getName</name><parameter_list>()</parameter_list> <block>{
+	<return>return <expr><name>name</name></expr>;</return>
+}</block></function>
+
+
+
+
+<function><specifier>public</specifier> <type><name>void</name></type> <name>setName</name><parameter_list>(<parameter><decl><type><name>String</name></type> <name>name</name></decl></parameter>)</parameter_list> <block>{
+	<expr_stmt><expr><name><name>this</name><operator>.</operator><name>name</name></name> <operator>=</operator> <name>name</name></expr>;</expr_stmt>
+}</block></function>
+
+
+
+
+<function><specifier>public</specifier> <type><name>int</name></type> <name>getLibaryCard</name><parameter_list>()</parameter_list> <block>{
+	<return>return <expr><name>libaryCard</name></expr>;</return>
+}</block></function>
+
+
+
+
+<function><specifier>public</specifier> <type><name>void</name></type> <name>setLibaryCard</name><parameter_list>(<parameter><decl><type><name>int</name></type> <name>libaryCard</name></decl></parameter>)</parameter_list> <block>{
+	<expr_stmt><expr><name><name>this</name><operator>.</operator><name>libaryCard</name></name> <operator>=</operator> <name>libaryCard</name></expr>;</expr_stmt>
+}</block></function>
+
+
+
+
+<function><specifier>public</specifier> <type><name>String</name></type> <name>getPhoneNumber</name><parameter_list>()</parameter_list> <block>{
+	<return>return <expr><name>phoneNumber</name></expr>;</return>
+}</block></function>
+
+
+
+
+
+
+
+
+
+<function><specifier>public</specifier> <type><name>Address</name></type> <name>getAddress</name><parameter_list>()</parameter_list> <block>{
+	<return>return <expr><name>address</name></expr>;</return>
+}</block></function>
+
+
+
+
+
+
+
+
+
+<function><specifier>public</specifier> <type><name><name>ArrayList</name><argument_list type="generic">&lt;<argument><name>Books</name></argument>&gt;</argument_list></name></type> <name>getBookHistory</name><parameter_list>()</parameter_list> <block>{
+	<return>return <expr><name>bookHistory</name></expr>;</return>
+}</block></function>
+
+
+
+
+<function><specifier>public</specifier> <type><name>void</name></type> <name>setBookHistory</name><parameter_list>(<parameter><decl><type><name><name>ArrayList</name><argument_list type="generic">&lt;<argument><name>Books</name></argument>&gt;</argument_list></name></type> <name>bookHistory</name></decl></parameter>)</parameter_list> <block>{
+	<expr_stmt><expr><name><name>this</name><operator>.</operator><name>bookHistory</name></name> <operator>=</operator> <name>bookHistory</name></expr>;</expr_stmt>
+}</block></function>
+
+
+
+
+<function><specifier>public</specifier> <type><name><name>ArrayList</name><argument_list type="generic">&lt;<argument><name>Books</name></argument>&gt;</argument_list></name></type> <name>getLoanedBooks</name><parameter_list>()</parameter_list> <block>{
+	<return>return <expr><name>loanedBooks</name></expr>;</return>
+}</block></function>
+
+
+
+
+<function><specifier>public</specifier> <type><name>void</name></type> <name>addLoanedBooks</name><parameter_list>(<parameter><decl><type><name>Books</name></type> <name>loanedBook</name></decl></parameter>)</parameter_list> <block>{
+	
+	<expr_stmt><expr><call><name><name>loanedBooks</name><operator>.</operator><name>add</name></name><argument_list>(<argument><expr><name>loanedBook</name></expr></argument>)</argument_list></call></expr>;</expr_stmt>
+}</block></function>
+
+<function><annotation>@<name>Override</name></annotation>
+<specifier>public</specifier> <type><name>String</name></type> <name>toString</name><parameter_list>()</parameter_list> <block>{
+	<decl_stmt><decl><type><name>String</name></type> <name>info</name> <init>= <expr><literal type="string">""</literal></expr></init></decl>;</decl_stmt>
+	<expr_stmt><expr><name>info</name> <operator>+=</operator> <literal type="string">"\n"</literal></expr>;</expr_stmt>
+	<expr_stmt><expr><name>info</name> <operator>+=</operator> <literal type="string">"Customer has been registered: "</literal> <operator>+</operator> <literal type="string">"\n"</literal></expr>;</expr_stmt>
+	<expr_stmt><expr><name>info</name> <operator>+=</operator> <literal type="string">"Name: "</literal> <operator>+</operator> <name>name</name> <operator>+</operator> <literal type="string">"\n"</literal></expr>;</expr_stmt>
+	<expr_stmt><expr><name>info</name> <operator>+=</operator> <literal type="string">"Library Card ID: "</literal> <operator>+</operator> <name>libaryCard</name> <operator>+</operator> <literal type="string">"\n"</literal></expr>;</expr_stmt>
+	<expr_stmt><expr><name>info</name> <operator>+=</operator> <literal type="string">"Address: "</literal> <operator>+</operator> <name>address</name> <operator>+</operator> <literal type="string">"\n"</literal></expr>;</expr_stmt>
+	<expr_stmt><expr><name>info</name> <operator>+=</operator> <literal type="string">"Phone Number: "</literal> <operator>+</operator> <name>phoneNumber</name></expr>;</expr_stmt>
+	<return>return <expr><name>info</name></expr>;</return>
+}</block></function>
+	
+<function><specifier>public</specifier> <type><name>String</name></type> <name>customerInformation</name><parameter_list>()</parameter_list> <block>{
+	<decl_stmt><decl><type><name>String</name></type> <name>info</name> <init>= <expr><literal type="string">""</literal></expr></init></decl>;</decl_stmt>
+	<expr_stmt><expr><name>info</name> <operator>+=</operator> <literal type="string">"\n"</literal></expr>;</expr_stmt>
+	<expr_stmt><expr><name>info</name> <operator>+=</operator> <literal type="string">"Customer Information: "</literal> <operator>+</operator> <literal type="string">"\n"</literal></expr>;</expr_stmt>
+	<expr_stmt><expr><name>info</name> <operator>+=</operator> <literal type="string">"Name: "</literal> <operator>+</operator> <name>name</name> <operator>+</operator> <literal type="string">" (ID: "</literal> <operator>+</operator> <name>libaryCard</name> <operator>+</operator> <literal type="string">")"</literal> <operator>+</operator> <literal type="string">"\n"</literal></expr>;</expr_stmt>
+	<expr_stmt><expr><name>info</name> <operator>+=</operator> <literal type="string">"Address: "</literal> <operator>+</operator> <name>address</name> <operator>+</operator> <literal type="string">"\n"</literal></expr>;</expr_stmt>
+	<expr_stmt><expr><name>info</name> <operator>+=</operator> <literal type="string">"Phone Number: "</literal> <operator>+</operator> <name>phoneNumber</name> <operator>+</operator> <literal type="string">"\n"</literal></expr>;</expr_stmt>
+	<expr_stmt><expr><name>info</name> <operator>+=</operator> <literal type="string">"Total Debit: "</literal> <operator>+</operator> <name>debit</name> <operator>+</operator> <literal type="string">" SEK \n"</literal></expr>;</expr_stmt>
+	<expr_stmt><expr><name>info</name> <operator>+=</operator> <literal type="string">"Loan History: \n"</literal></expr>;</expr_stmt>
+	
+	<return>return <expr><name>info</name></expr>;</return>
+}</block></function>
+
+
+}</block></class>
+</unit>
+
+<unit revision="0.9.5" language="Java" filename="library-system-master/Main.java" hash="a4fc15e6591d04ee44958157e15a46a4b13defcf"><package>package <name>Libary</name>;</package>
+
+
+
+<import>import <name><name>java</name><operator>.</operator><name>util</name><operator>.</operator><name>Scanner</name></name>;</import>
+
+<class><specifier>public</specifier> class <name>Main</name> <block>{
+
+	<decl_stmt><decl><type><name>Libary</name></type> <name>Customer</name> <init>= <expr><operator>new</operator> <call><name>Libary</name><argument_list>()</argument_list></call></expr></init></decl>;</decl_stmt>
+	<decl_stmt><decl><type><name>Libary</name></type> <name>Books</name> <init>= <expr><operator>new</operator> <call><name>Libary</name><argument_list>()</argument_list></call></expr></init></decl>;</decl_stmt>
+	<decl_stmt><decl><type><name>Scanner</name></type> <name>input</name> <init>= <expr><operator>new</operator> <call><name>Scanner</name><argument_list>(<argument><expr><name><name>System</name><operator>.</operator><name>in</name></name></expr></argument>)</argument_list></call></expr></init></decl>;</decl_stmt>
+
+	<function><specifier>public</specifier> <type><name>void</name></type> <name>run</name><parameter_list>()</parameter_list> <block>{
+		
+		
+		<expr_stmt><expr><call><name><name>Customer</name><operator>.</operator><name>addCustomer</name></name><argument_list>(<argument><expr><literal type="string">"Rakel"</literal></expr></argument>, <argument><expr><literal type="string">"03728409045"</literal></expr></argument>, <argument><expr><literal type="string">"Bygget"</literal></expr></argument>, <argument><expr><literal type="number">82</literal></expr></argument>, <argument><expr><literal type="number">34013</literal></expr></argument>, <argument><expr><literal type="string">"Ljungby"</literal></expr></argument>, <argument><expr><literal type="string">"Sweden"</literal></expr></argument>)</argument_list></call></expr>;</expr_stmt>
+		<expr_stmt><expr><call><name><name>Customer</name><operator>.</operator><name>addCustomer</name></name><argument_list>(<argument><expr><literal type="string">"Esra"</literal></expr></argument>, <argument><expr><literal type="string">"01255223130"</literal></expr></argument>, <argument><expr><literal type="string">"Hagaskog"</literal></expr></argument>, <argument><expr><literal type="number">89</literal></expr></argument>, <argument><expr><literal type="number">61024</literal></expr></argument>, <argument><expr><literal type="string">"ÃstergÃ¶tland"</literal></expr></argument>, <argument><expr><literal type="string">"Sweden"</literal></expr></argument>)</argument_list></call></expr>;</expr_stmt>
+		<expr_stmt><expr><call><name><name>Books</name><operator>.</operator><name>addBook</name></name><argument_list>(<argument><expr><literal type="string">"Think and Grow Rich"</literal></expr></argument>,<argument><expr><literal type="string">"Napoleon Hill"</literal></expr></argument>, <argument><expr><literal type="string">"Self-help"</literal></expr></argument>, <argument><expr><literal type="string">"The Ralston Society"</literal></expr></argument>, <argument><expr><literal type="char">'S'</literal></expr></argument>)</argument_list></call></expr>;</expr_stmt>
+		<expr_stmt><expr><call><name><name>Books</name><operator>.</operator><name>addBook</name></name><argument_list>(<argument><expr><literal type="string">"Outliers"</literal></expr></argument>, <argument><expr><literal type="string">"Malcolm Gladwell"</literal></expr></argument>, <argument><expr><literal type="string">"Psychology"</literal></expr></argument>, <argument><expr><literal type="string">"Little, Brown and Company"</literal></expr></argument>, <argument><expr><literal type="char">'P'</literal></expr></argument>)</argument_list></call></expr>;</expr_stmt>
+		<expr_stmt><expr><call><name><name>Books</name><operator>.</operator><name>addBook</name></name><argument_list>(<argument><expr><literal type="string">"The Catcher in the Rye"</literal></expr></argument>,<argument><expr><literal type="string">"J.D Salinger"</literal></expr></argument>, <argument><expr><literal type="string">"Realistic Fiction"</literal></expr></argument>, <argument><expr><literal type="string">"Little, Brown and Company"</literal></expr></argument>, <argument><expr><literal type="char">'R'</literal></expr></argument>)</argument_list></call></expr>;</expr_stmt>
+		<expr_stmt><expr><call><name><name>Books</name><operator>.</operator><name>addBook</name></name><argument_list>(<argument><expr><literal type="string">"The Lord of the Rings"</literal></expr></argument>, <argument><expr><literal type="string">"J. R. R. Tolkien"</literal></expr></argument>, <argument><expr><literal type="string">"Fantasy"</literal></expr></argument>, <argument><expr><literal type="string">"Allen &amp; Unwin"</literal></expr></argument>, <argument><expr><literal type="char">'F'</literal></expr></argument>)</argument_list></call></expr>;</expr_stmt>
+		<decl_stmt><decl><type><name>int</name></type> <name>option</name></decl>;</decl_stmt>
+
+		<do>do <block>{
+
+			<expr_stmt><expr><call><name>menu</name><argument_list>()</argument_list></call></expr>;</expr_stmt>
+			<expr_stmt><expr><call><name><name>System</name><operator>.</operator><name>out</name><operator>.</operator><name>print</name></name><argument_list>(<argument><expr><literal type="string">" Type the option number: "</literal></expr></argument>)</argument_list></call></expr>;</expr_stmt>
+
+			<expr_stmt><expr><name>option</name> <operator>=</operator> <call><name><name>input</name><operator>.</operator><name>nextInt</name></name><argument_list>()</argument_list></call></expr>;</expr_stmt>
+			<expr_stmt><expr><call><name><name>input</name><operator>.</operator><name>nextLine</name></name><argument_list>()</argument_list></call></expr>;</expr_stmt>
+
+			<switch>switch <condition>(<expr><name>option</name></expr>)</condition> <block>{
+			<case>case <expr><literal type="number">1</literal></expr>:</case>
+				<expr_stmt><expr><call><name>registerCustomer</name><argument_list>()</argument_list></call></expr>;</expr_stmt>
+				<break>break;</break>
+
+			<case>case <expr><literal type="number">2</literal></expr>:</case>
+				<expr_stmt><expr><call><name>addBook</name><argument_list>()</argument_list></call></expr>;</expr_stmt>
+				<break>break;</break>
+
+			<case>case <expr><literal type="number">3</literal></expr>:</case>
+				<expr_stmt><expr><call><name>borrowBook</name><argument_list>()</argument_list></call></expr>;</expr_stmt>
+				
+				<break>break;</break>
+
+			<case>case <expr><literal type="number">4</literal></expr>:</case>
+				<expr_stmt><expr><call><name>returnBook</name><argument_list>()</argument_list></call></expr>;</expr_stmt>
+				
+				<break>break;</break>
+				
+			<case>case <expr><literal type="number">5</literal></expr>:</case>
+				<expr_stmt><expr><call><name><name>Books</name><operator>.</operator><name>retrieveBookList</name></name><argument_list>()</argument_list></call></expr>;</expr_stmt>
+				<break>break;</break> 
+				
+				
+			<case>case <expr><literal type="number">6</literal></expr>:</case> 
+				
+				<expr_stmt><expr><call><name><name>Books</name><operator>.</operator><name>retrieveDelayedBookList</name></name><argument_list>()</argument_list></call></expr>;</expr_stmt>
+
+				<break>break;</break>
+				
+				
+			<case>case <expr><literal type="number">7</literal></expr>:</case> 
+				<expr_stmt><expr><call><name><name>System</name><operator>.</operator><name>out</name><operator>.</operator><name>println</name></name><argument_list>(<argument><expr><literal type="string">"What's the customers libary ID?"</literal></expr></argument>)</argument_list></call></expr>;</expr_stmt>
+				<decl_stmt><decl><type><name>int</name></type> <name>libraryCard</name> <init>= <expr><call><name><name>input</name><operator>.</operator><name>nextInt</name></name><argument_list>()</argument_list></call></expr></init></decl>;</decl_stmt>
+				<expr_stmt><expr><call><name><name>Customer</name><operator>.</operator><name>retrieveCustomerHistory</name></name><argument_list>(<argument><expr><name>libraryCard</name></expr></argument>)</argument_list></call></expr>;</expr_stmt>
+				<break>break;</break>
+				
+				
+			<case>case <expr><literal type="number">8</literal></expr>:</case> 
+				<expr_stmt><expr><call><name><name>Books</name><operator>.</operator><name>bookStatistics</name></name><argument_list>()</argument_list></call></expr>;</expr_stmt>
+				<break>break;</break>
+			}</block></switch>
+
+		}</block> while <condition>(<expr><name>option</name> <operator>!=</operator> <literal type="number">9</literal></expr>)</condition>;</do>
+
+	}</block></function>
+
+	<function><specifier>public</specifier> <specifier>static</specifier> <type><name>void</name></type> <name>menu</name><parameter_list>()</parameter_list> <block>{
+		<expr_stmt><expr><call><name><name>System</name><operator>.</operator><name>out</name><operator>.</operator><name>println</name></name><argument_list>(<argument><expr><literal type="string">" "</literal></expr></argument>)</argument_list></call></expr>;</expr_stmt>
+		<expr_stmt><expr><call><name><name>System</name><operator>.</operator><name>out</name><operator>.</operator><name>println</name></name><argument_list>(<argument><expr><literal type="string">" === Welcome to the Libary System === "</literal></expr></argument>)</argument_list></call></expr>;</expr_stmt>
+		<expr_stmt><expr><call><name><name>System</name><operator>.</operator><name>out</name><operator>.</operator><name>println</name></name><argument_list>(<argument><expr><literal type="string">" Choose an option below: "</literal></expr></argument>)</argument_list></call></expr>;</expr_stmt>
+		<expr_stmt><expr><call><name><name>System</name><operator>.</operator><name>out</name><operator>.</operator><name>println</name></name><argument_list>(<argument><expr><literal type="string">" "</literal></expr></argument>)</argument_list></call></expr>;</expr_stmt>
+		<expr_stmt><expr><call><name><name>System</name><operator>.</operator><name>out</name><operator>.</operator><name>println</name></name><argument_list>(<argument><expr><literal type="string">" 1. Register a customer. "</literal></expr></argument>)</argument_list></call></expr>;</expr_stmt>
+		<expr_stmt><expr><call><name><name>System</name><operator>.</operator><name>out</name><operator>.</operator><name>println</name></name><argument_list>(<argument><expr><literal type="string">" 2. Register a book. "</literal></expr></argument>)</argument_list></call></expr>;</expr_stmt>
+		<expr_stmt><expr><call><name><name>System</name><operator>.</operator><name>out</name><operator>.</operator><name>println</name></name><argument_list>(<argument><expr><literal type="string">" 3. Borrow book. "</literal></expr></argument>)</argument_list></call></expr>;</expr_stmt>
+		<expr_stmt><expr><call><name><name>System</name><operator>.</operator><name>out</name><operator>.</operator><name>println</name></name><argument_list>(<argument><expr><literal type="string">" 4. Return book. "</literal></expr></argument>)</argument_list></call></expr>;</expr_stmt>
+		<expr_stmt><expr><call><name><name>System</name><operator>.</operator><name>out</name><operator>.</operator><name>println</name></name><argument_list>(<argument><expr><literal type="string">" 5. Retrieve book list. "</literal></expr></argument>)</argument_list></call></expr>;</expr_stmt>
+		<expr_stmt><expr><call><name><name>System</name><operator>.</operator><name>out</name><operator>.</operator><name>println</name></name><argument_list>(<argument><expr><literal type="string">" 6. Retrieve delayed book list"</literal></expr></argument>)</argument_list></call></expr>;</expr_stmt>
+		<expr_stmt><expr><call><name><name>System</name><operator>.</operator><name>out</name><operator>.</operator><name>println</name></name><argument_list>(<argument><expr><literal type="string">" 7. Retrieve customer book history. "</literal></expr></argument>)</argument_list></call></expr>;</expr_stmt>
+		<expr_stmt><expr><call><name><name>System</name><operator>.</operator><name>out</name><operator>.</operator><name>println</name></name><argument_list>(<argument><expr><literal type="string">" 8. Most borrowed books "</literal></expr></argument>)</argument_list></call></expr>;</expr_stmt>
+		
+
+	}</block></function>
+
+	<function><specifier>public</specifier> <type><name>void</name></type> <name>registerCustomer</name><parameter_list>()</parameter_list> <block>{
+		<decl_stmt><decl><type><name>Scanner</name></type> <name>input</name> <init>= <expr><operator>new</operator> <call><name>Scanner</name><argument_list>(<argument><expr><name><name>System</name><operator>.</operator><name>in</name></name></expr></argument>)</argument_list></call></expr></init></decl>;</decl_stmt>
+
+		<expr_stmt><expr><call><name><name>System</name><operator>.</operator><name>out</name><operator>.</operator><name>println</name></name><argument_list>(<argument><expr><literal type="string">"Register customers's name?"</literal></expr></argument>)</argument_list></call></expr>;</expr_stmt>
+		<decl_stmt><decl><type><name>String</name></type> <name>name</name> <init>= <expr><call><name><name>input</name><operator>.</operator><name>nextLine</name></name><argument_list>()</argument_list></call></expr></init></decl>;</decl_stmt>
+
+		<expr_stmt><expr><call><name><name>System</name><operator>.</operator><name>out</name><operator>.</operator><name>println</name></name><argument_list>(<argument><expr><literal type="string">"Register Customer's phone Number?"</literal></expr></argument>)</argument_list></call></expr>;</expr_stmt>
+		<decl_stmt><decl><type><name>String</name></type> <name>phoneNumber</name> <init>= <expr><call><name><name>input</name><operator>.</operator><name>nextLine</name></name><argument_list>()</argument_list></call></expr></init></decl>;</decl_stmt>
+		
+		<expr_stmt><expr><call><name><name>System</name><operator>.</operator><name>out</name><operator>.</operator><name>println</name></name><argument_list>(<argument><expr><literal type="string">"Customer's Street Name?"</literal></expr></argument>)</argument_list></call></expr>;</expr_stmt>
+		<decl_stmt><decl><type><name>String</name></type> <name>streetName</name> <init>= <expr><call><name><name>input</name><operator>.</operator><name>nextLine</name></name><argument_list>()</argument_list></call></expr></init></decl>;</decl_stmt>
+
+		<expr_stmt><expr><call><name><name>System</name><operator>.</operator><name>out</name><operator>.</operator><name>println</name></name><argument_list>(<argument><expr><literal type="string">"Customer's Street Number?"</literal></expr></argument>)</argument_list></call></expr>;</expr_stmt>
+		<decl_stmt><decl><type><name>int</name></type> <name>streetNum</name> <init>= <expr><call><name><name>input</name><operator>.</operator><name>nextInt</name></name><argument_list>()</argument_list></call></expr></init></decl>;</decl_stmt>
+		<expr_stmt><expr><call><name><name>input</name><operator>.</operator><name>nextLine</name></name><argument_list>()</argument_list></call></expr>;</expr_stmt>
+
+		<expr_stmt><expr><call><name><name>System</name><operator>.</operator><name>out</name><operator>.</operator><name>println</name></name><argument_list>(<argument><expr><literal type="string">"Customer's Zip Code?"</literal></expr></argument>)</argument_list></call></expr>;</expr_stmt>
+		<decl_stmt><decl><type><name>int</name></type> <name>zipCode</name> <init>= <expr><call><name><name>input</name><operator>.</operator><name>nextInt</name></name><argument_list>()</argument_list></call></expr></init></decl>;</decl_stmt>
+		<expr_stmt><expr><call><name><name>input</name><operator>.</operator><name>nextLine</name></name><argument_list>()</argument_list></call></expr>;</expr_stmt>
+
+		<expr_stmt><expr><call><name><name>System</name><operator>.</operator><name>out</name><operator>.</operator><name>println</name></name><argument_list>(<argument><expr><literal type="string">"Customer's City?"</literal></expr></argument>)</argument_list></call></expr>;</expr_stmt>
+		<decl_stmt><decl><type><name>String</name></type> <name>city</name> <init>= <expr><call><name><name>input</name><operator>.</operator><name>nextLine</name></name><argument_list>()</argument_list></call></expr></init></decl>;</decl_stmt>
+
+		<expr_stmt><expr><call><name><name>System</name><operator>.</operator><name>out</name><operator>.</operator><name>println</name></name><argument_list>(<argument><expr><literal type="string">"Customer's Country?"</literal></expr></argument>)</argument_list></call></expr>;</expr_stmt>
+		<decl_stmt><decl><type><name>String</name></type> <name>country</name> <init>= <expr><call><name><name>input</name><operator>.</operator><name>nextLine</name></name><argument_list>()</argument_list></call></expr></init></decl>;</decl_stmt>
+
+		<expr_stmt><expr><call><name><name>Customer</name><operator>.</operator><name>addCustomer</name></name><argument_list>(<argument><expr><name>name</name></expr></argument>, <argument><expr><name>phoneNumber</name></expr></argument>, <argument><expr><name>streetName</name></expr></argument>, <argument><expr><name>streetNum</name></expr></argument>, <argument><expr><name>zipCode</name></expr></argument>, <argument><expr><name>city</name></expr></argument>, <argument><expr><name>country</name></expr></argument>)</argument_list></call></expr>;</expr_stmt>
+	}</block></function>
+
+	<function><specifier>public</specifier> <type><name>void</name></type> <name>addBook</name><parameter_list>()</parameter_list> <block>{
+		<expr_stmt><expr><call><name><name>System</name><operator>.</operator><name>out</name><operator>.</operator><name>println</name></name><argument_list>(<argument><expr><literal type="string">"Register book title?"</literal></expr></argument>)</argument_list></call></expr>;</expr_stmt>
+		<decl_stmt><decl><type><name>String</name></type> <name>title</name> <init>= <expr><call><name><name>input</name><operator>.</operator><name>nextLine</name></name><argument_list>()</argument_list></call></expr></init></decl>;</decl_stmt>
+
+		<expr_stmt><expr><call><name><name>System</name><operator>.</operator><name>out</name><operator>.</operator><name>println</name></name><argument_list>(<argument><expr><literal type="string">"What's the name of the author?"</literal></expr></argument>)</argument_list></call></expr>;</expr_stmt>
+		<decl_stmt><decl><type><name>String</name></type> <name>author</name> <init>= <expr><call><name><name>input</name><operator>.</operator><name>nextLine</name></name><argument_list>()</argument_list></call></expr></init></decl>;</decl_stmt>
+
+		<expr_stmt><expr><call><name><name>System</name><operator>.</operator><name>out</name><operator>.</operator><name>println</name></name><argument_list>(<argument><expr><literal type="string">"What genre is it?"</literal></expr></argument>)</argument_list></call></expr>;</expr_stmt>
+		<decl_stmt><decl><type><name>String</name></type> <name>genre</name> <init>= <expr><call><name><name>input</name><operator>.</operator><name>nextLine</name></name><argument_list>()</argument_list></call></expr></init></decl>;</decl_stmt>
+
+		<expr_stmt><expr><call><name><name>System</name><operator>.</operator><name>out</name><operator>.</operator><name>println</name></name><argument_list>(<argument><expr><literal type="string">"Name of the publisher?"</literal></expr></argument>)</argument_list></call></expr>;</expr_stmt>
+		<decl_stmt><decl><type><name>String</name></type> <name>publisher</name> <init>= <expr><call><name><name>input</name><operator>.</operator><name>nextLine</name></name><argument_list>()</argument_list></call></expr></init></decl>;</decl_stmt>
+
+		<expr_stmt><expr><call><name><name>System</name><operator>.</operator><name>out</name><operator>.</operator><name>println</name></name><argument_list>(<argument><expr><literal type="string">"Which book shelf is it in?"</literal></expr></argument>)</argument_list></call></expr>;</expr_stmt>
+		<decl_stmt><decl><type><name>char</name></type> <name>shelf</name> <init>= <expr><call><name><name>input</name><operator>.</operator><name>next</name></name><argument_list>()</argument_list></call><operator>.</operator><call><name>charAt</name><argument_list>(<argument><expr><literal type="number">0</literal></expr></argument>)</argument_list></call></expr></init></decl>;</decl_stmt>
+
+		<expr_stmt><expr><call><name><name>Books</name><operator>.</operator><name>addBook</name></name><argument_list>(<argument><expr><name>title</name></expr></argument>, <argument><expr><name>author</name></expr></argument>, <argument><expr><name>genre</name></expr></argument>, <argument><expr><name>publisher</name></expr></argument>, <argument><expr><name>shelf</name></expr></argument>)</argument_list></call></expr>;</expr_stmt>
+
+	}</block></function>
+	
+	<function><specifier>public</specifier> <type><name>void</name></type> <name>borrowBook</name><parameter_list>()</parameter_list> <block>{
+		<expr_stmt><expr><call><name><name>System</name><operator>.</operator><name>out</name><operator>.</operator><name>println</name></name><argument_list>(<argument><expr><literal type="string">"What's your libary card ID?"</literal></expr></argument>)</argument_list></call></expr>;</expr_stmt>
+		<decl_stmt><decl><type><name>int</name></type> <name>libraryCard</name> <init>= <expr><call><name><name>input</name><operator>.</operator><name>nextInt</name></name><argument_list>()</argument_list></call></expr></init></decl>;</decl_stmt>
+		
+		<expr_stmt><expr><call><name><name>System</name><operator>.</operator><name>out</name><operator>.</operator><name>println</name></name><argument_list>(<argument><expr><literal type="string">"What's the ID of the book you want to borrow?"</literal></expr></argument>)</argument_list></call></expr>;</expr_stmt>
+		<decl_stmt><decl><type><name>int</name></type> <name>bookId</name> <init>= <expr><call><name><name>input</name><operator>.</operator><name>nextInt</name></name><argument_list>()</argument_list></call></expr></init></decl>;</decl_stmt>
+		<expr_stmt><expr><call><name><name>input</name><operator>.</operator><name>nextLine</name></name><argument_list>()</argument_list></call></expr>;</expr_stmt>
+
+		
+		<if>if <condition>(<expr><call><name><name>Customer</name><operator>.</operator><name>checkCustomerId</name></name><argument_list>(<argument><expr><name>libraryCard</name></expr></argument>)</argument_list></call> <operator>==</operator> <literal type="boolean">true</literal></expr>)</condition><then> <block>{
+			<if>if <condition>(<expr><call><name><name>Books</name><operator>.</operator><name>checkbookId</name></name><argument_list>(<argument><expr><name>bookId</name></expr></argument>)</argument_list></call> <operator>==</operator> <literal type="boolean">true</literal></expr>)</condition><then> <block>{
+				<if>if<condition>(<expr><call><name><name>Books</name><operator>.</operator><name>retrieveBookObject</name></name><argument_list>(<argument><expr><name>bookId</name></expr></argument>)</argument_list></call><operator>.</operator><call><name>getStatus</name><argument_list>()</argument_list></call> <operator>==</operator> <literal type="string">"Available"</literal></expr>)</condition><then> <block>{
+				<expr_stmt><expr><call><name><name>Customer</name><operator>.</operator><name>retrieveCustomerObject</name></name><argument_list>(<argument><expr><name>libraryCard</name></expr></argument>)</argument_list></call><operator>.</operator><call><name>addLoanedBooks</name><argument_list>(<argument><expr><call><name><name>Books</name><operator>.</operator><name>retrieveBookObject</name></name><argument_list>(<argument><expr><name>bookId</name></expr></argument>)</argument_list></call></expr></argument>)</argument_list></call></expr>;</expr_stmt><empty_stmt>;</empty_stmt>
+				<expr_stmt><expr><call><name><name>System</name><operator>.</operator><name>out</name><operator>.</operator><name>println</name></name><argument_list>(<argument><expr><literal type="string">"(Book ID: "</literal> <operator>+</operator> <name>bookId</name> <operator>+</operator> <literal type="string">") "</literal> <operator>+</operator> <call><name><name>Books</name><operator>.</operator><name>retrieveBookObject</name></name><argument_list>(<argument><expr><name>bookId</name></expr></argument>)</argument_list></call><operator>.</operator><call><name>getTitle</name><argument_list>()</argument_list></call> <operator>+</operator> <literal type="string">" has been borrowed by the customer: "</literal> <operator>+</operator> <call><name><name>Customer</name><operator>.</operator><name>retrieveCustomerObject</name></name><argument_list>(<argument><expr><name>libraryCard</name></expr></argument>)</argument_list></call><operator>.</operator><call><name>getName</name><argument_list>()</argument_list></call> <operator>+</operator> <literal type="string">" (Customer ID: "</literal> <operator>+</operator> <name>libraryCard</name> <operator>+</operator><literal type="string">")"</literal></expr></argument>)</argument_list></call></expr>;</expr_stmt>
+				<expr_stmt><expr><call><name><name>System</name><operator>.</operator><name>out</name><operator>.</operator><name>println</name></name><argument_list>(<argument><expr><literal type="string">"Book should be returned: "</literal> <operator>+</operator> <call><name><name>Books</name><operator>.</operator><name>returnDate</name></name><argument_list>(<argument><expr><name>bookId</name></expr></argument>)</argument_list></call></expr></argument>)</argument_list></call></expr>;</expr_stmt>
+				<expr_stmt><expr><call><name><name>Books</name><operator>.</operator><name>addBorrowedBook</name></name><argument_list>(<argument><expr><name>bookId</name></expr></argument>)</argument_list></call></expr>;</expr_stmt>
+				}</block></then>
+				<else>else <block>{
+					<expr_stmt><expr><call><name><name>System</name><operator>.</operator><name>out</name><operator>.</operator><name>println</name></name><argument_list>(<argument><expr><literal type="string">"Book is currently borrowed"</literal></expr></argument>)</argument_list></call></expr>;</expr_stmt>
+				}</block></else></if>
+			}</block></then> 
+			<else>else <block>{
+				<expr_stmt><expr><call><name><name>System</name><operator>.</operator><name>out</name><operator>.</operator><name>println</name></name><argument_list>(<argument><expr><literal type="string">"Book not found"</literal></expr></argument>)</argument_list></call></expr>;</expr_stmt>
+			}</block></else></if>
+		}</block></then>  <else>else <block>{
+			<expr_stmt><expr><call><name><name>System</name><operator>.</operator><name>out</name><operator>.</operator><name>println</name></name><argument_list>(<argument><expr><literal type="string">"Customer not found"</literal></expr></argument>)</argument_list></call></expr>;</expr_stmt>
+
+		}</block></else></if>
+	}</block></function>
+	
+	<function><specifier>public</specifier> <type><name>void</name></type> <name>returnBook</name><parameter_list>()</parameter_list> <block>{
+		<expr_stmt><expr><call><name><name>System</name><operator>.</operator><name>out</name><operator>.</operator><name>println</name></name><argument_list>(<argument><expr><literal type="string">"What's the customers libary ID?"</literal></expr></argument>)</argument_list></call></expr>;</expr_stmt>
+		<decl_stmt><decl><type><name>int</name></type> <name>libraryCard</name> <init>= <expr><call><name><name>input</name><operator>.</operator><name>nextInt</name></name><argument_list>()</argument_list></call></expr></init></decl>;</decl_stmt>
+		
+		<expr_stmt><expr><call><name><name>System</name><operator>.</operator><name>out</name><operator>.</operator><name>println</name></name><argument_list>(<argument><expr><literal type="string">"What's the ID of the book you want to return?"</literal></expr></argument>)</argument_list></call></expr>;</expr_stmt>
+		<decl_stmt><decl><type><name>int</name></type> <name>bookId</name> <init>= <expr><call><name><name>input</name><operator>.</operator><name>nextInt</name></name><argument_list>()</argument_list></call></expr></init></decl>;</decl_stmt>
+		<expr_stmt><expr><call><name><name>input</name><operator>.</operator><name>nextLine</name></name><argument_list>()</argument_list></call></expr>;</expr_stmt>
+		<decl_stmt><decl><type><name>int</name></type> <name>lateDays</name> <init>= <expr><call><name><name>Books</name><operator>.</operator><name>returnBorrowedBook</name></name><argument_list>(<argument><expr><name>bookId</name></expr></argument>)</argument_list></call></expr></init></decl>;</decl_stmt>
+		<if>if <condition>(<expr><name>lateDays</name> <operator>&gt;</operator> <literal type="number">0</literal></expr>)</condition><then> <block>{
+			<expr_stmt><expr><call><name><name>Customer</name><operator>.</operator><name>retrieveCustomerObject</name></name><argument_list>(<argument><expr><name>libraryCard</name></expr></argument>)</argument_list></call><operator>.</operator><call><name>ChargeCustomer</name><argument_list>(<argument><expr><call><name><name>Books</name><operator>.</operator><name>returnBorrowedBook</name></name><argument_list>(<argument><expr><name>bookId</name></expr></argument>)</argument_list></call></expr></argument>)</argument_list></call></expr>;</expr_stmt>
+			<expr_stmt><expr><call><name><name>System</name><operator>.</operator><name>out</name><operator>.</operator><name>println</name></name><argument_list>(<argument><expr><literal type="string">"The book was returned "</literal> <operator>+</operator> <name>lateDays</name> <operator>+</operator> <literal type="string">" days after due date."</literal></expr></argument>)</argument_list></call></expr>;</expr_stmt>
+			<expr_stmt><expr><call><name><name>System</name><operator>.</operator><name>out</name><operator>.</operator><name>println</name></name><argument_list>(<argument><expr><literal type="string">"The customer will have to pay: "</literal> <operator>+</operator> <call><name><name>Customer</name><operator>.</operator><name>retrieveCustomerObject</name></name><argument_list>(<argument><expr><name>libraryCard</name></expr></argument>)</argument_list></call><operator>.</operator><call><name>getDebit</name><argument_list>()</argument_list></call> <operator>+</operator> <literal type="string">" SEK fee."</literal></expr></argument>)</argument_list></call></expr>;</expr_stmt>
+		}</block></then></if>
+		
+		<decl_stmt><decl><type><name>Books</name></type> <name>bookInfo</name> <init>= <expr><call><name><name>Books</name><operator>.</operator><name>retrieveBookObject</name></name><argument_list>(<argument><expr><name>bookId</name></expr></argument>)</argument_list></call></expr></init></decl>;</decl_stmt>
+		<expr_stmt><expr><call><name><name>System</name><operator>.</operator><name>out</name><operator>.</operator><name>println</name></name><argument_list>(<argument><expr><literal type="string">"(Book ID: "</literal> <operator>+</operator> <name>bookId</name> <operator>+</operator> <literal type="string">") "</literal> <operator>+</operator> <call><name><name>bookInfo</name><operator>.</operator><name>getTitle</name></name><argument_list>()</argument_list></call> <operator>+</operator> <literal type="string">", by "</literal> <operator>+</operator> <call><name><name>bookInfo</name><operator>.</operator><name>getAuthor</name></name><argument_list>()</argument_list></call> <operator>+</operator> <literal type="string">" has been returned to the library."</literal></expr></argument>)</argument_list></call></expr>;</expr_stmt>
+	}</block></function>
+
+
+
+	<function><specifier>public</specifier> <specifier>static</specifier> <type><name>void</name></type> <name>main</name><parameter_list>(<parameter><decl><type><name><name>String</name><index>[]</index></name></type> <name>args</name></decl></parameter>)</parameter_list> <block>{
+		<decl_stmt><decl><type><name>Main</name></type> <name>program</name> <init>= <expr><operator>new</operator> <call><name>Main</name><argument_list>()</argument_list></call></expr></init></decl>;</decl_stmt>
+		<expr_stmt><expr><call><name><name>program</name><operator>.</operator><name>run</name></name><argument_list>()</argument_list></call></expr>;</expr_stmt>
+	}</block></function>
+
+}</block></class>
+</unit>
+
+<unit revision="0.9.5" language="Java" filename="library-system-master/Libary.java" hash="969a5af01453b84894d7a4766ef4bb1bdd6a6786"><package>package <name>Libary</name>;</package>
+
+<import>import <name><name>java</name><operator>.</operator><name>util</name><operator>.</operator><name>ArrayList</name></name>;</import>
+<import>import <name><name>java</name><operator>.</operator><name>util</name><operator>.</operator><name>Collections</name></name>;</import>
+<import>import <name><name>java</name><operator>.</operator><name>util</name><operator>.</operator><name>Comparator</name></name>;</import>
+<import>import <name><name>java</name><operator>.</operator><name>util</name><operator>.</operator><name>Date</name></name>;</import>
+
+
+<import>import <name><name>java</name><operator>.</operator><name>text</name><operator>.</operator><name>*</name></name>;</import>
+
+<class><specifier>public</specifier> class <name>Libary</name> <block>{
+	<decl_stmt><decl><type><name><name>ArrayList</name><argument_list type="generic">&lt;<argument><name>Customer</name></argument>&gt;</argument_list></name></type> <name>customers</name></decl>;</decl_stmt>
+	<decl_stmt><decl><type><name><name>ArrayList</name><argument_list type="generic">&lt;<argument><name>Books</name></argument>&gt;</argument_list></name></type> <name>books</name></decl>;</decl_stmt>
+	<decl_stmt><decl><specifier>private</specifier> <type><specifier>final</specifier> <name>int</name></type> <name>DAYS</name> <init>= <expr><literal type="number">1000</literal> <operator>*</operator> <literal type="number">60</literal> <operator>*</operator> <literal type="number">60</literal> <operator>*</operator> <literal type="number">24</literal></expr></init></decl>;</decl_stmt> 
+	
+
+	<constructor><specifier>public</specifier> <name>Libary</name><parameter_list>()</parameter_list> <block>{
+
+		<expr_stmt><expr><name><name>this</name><operator>.</operator><name>customers</name></name> <operator>=</operator> <operator>new</operator> <call><name><name>ArrayList</name><argument_list type="generic">&lt;<argument><name>Customer</name></argument>&gt;</argument_list></name><argument_list>()</argument_list></call></expr>;</expr_stmt>
+		<expr_stmt><expr><name><name>this</name><operator>.</operator><name>books</name></name> <operator>=</operator> <operator>new</operator> <call><name><name>ArrayList</name><argument_list type="generic">&lt;<argument><name>Books</name></argument>&gt;</argument_list></name><argument_list>()</argument_list></call></expr>;</expr_stmt>
+
+	}</block></constructor>
+
+	<function><specifier>public</specifier> <type><name>void</name></type> <name>addCustomer</name><parameter_list>(<parameter><decl><type><name>String</name></type> <name>name</name></decl></parameter>, <parameter><decl><type><name>String</name></type> <name>phoneNumber</name></decl></parameter>, <parameter><decl><type><name>String</name></type> <name>streetName</name></decl></parameter>, <parameter><decl><type><name>int</name></type> <name>streetNum</name></decl></parameter>, <parameter><decl><type><name>int</name></type> <name>zipCode</name></decl></parameter>, <parameter><decl><type><name>String</name></type> <name>city</name></decl></parameter>,
+			<parameter><decl><type><name>String</name></type> <name>country</name></decl></parameter>)</parameter_list> <block>{
+
+		<decl_stmt><decl><type><name>Customer</name></type> <name>cus</name> <init>= <expr><operator>new</operator> <call><name>Customer</name><argument_list>(<argument><expr><name>name</name></expr></argument>, <argument><expr><name>phoneNumber</name></expr></argument>, <argument><expr><name>streetName</name></expr></argument>, <argument><expr><name>streetNum</name></expr></argument>, <argument><expr><name>zipCode</name></expr></argument>, <argument><expr><name>city</name></expr></argument>, <argument><expr><name>country</name></expr></argument>)</argument_list></call></expr></init></decl>;</decl_stmt>
+
+		<expr_stmt><expr><call><name><name>this</name><operator>.</operator><name>customers</name><operator>.</operator><name>add</name></name><argument_list>(<argument><expr><name>cus</name></expr></argument>)</argument_list></call></expr>;</expr_stmt>
+		<expr_stmt><expr><call><name><name>System</name><operator>.</operator><name>out</name><operator>.</operator><name>println</name></name><argument_list>(<argument><expr><call><name><name>cus</name><operator>.</operator><name>toString</name></name><argument_list>()</argument_list></call></expr></argument>)</argument_list></call></expr>;</expr_stmt>
+
+	}</block></function>
+
+	<function><specifier>public</specifier> <type><name>void</name></type> <name>addBook</name><parameter_list>(<parameter><decl><type><name>String</name></type> <name>title</name></decl></parameter>, <parameter><decl><type><name>String</name></type> <name>author</name></decl></parameter>, <parameter><decl><type><name>String</name></type> <name>genre</name></decl></parameter>, <parameter><decl><type><name>String</name></type> <name>publisher</name></decl></parameter>, <parameter><decl><type><name>char</name></type> <name>shelf</name></decl></parameter>)</parameter_list> <block>{
+		<decl_stmt><decl><type><name>Books</name></type> <name>book</name> <init>= <expr><operator>new</operator> <call><name>Books</name><argument_list>(<argument><expr><name>title</name></expr></argument>, <argument><expr><name>author</name></expr></argument>, <argument><expr><name>genre</name></expr></argument>, <argument><expr><name>publisher</name></expr></argument>, <argument><expr><name>shelf</name></expr></argument>)</argument_list></call></expr></init></decl>;</decl_stmt>
+		<expr_stmt><expr><call><name><name>this</name><operator>.</operator><name>books</name><operator>.</operator><name>add</name></name><argument_list>(<argument><expr><name>book</name></expr></argument>)</argument_list></call></expr>;</expr_stmt>
+		<expr_stmt><expr><call><name><name>System</name><operator>.</operator><name>out</name><operator>.</operator><name>println</name></name><argument_list>(<argument><expr><call><name><name>book</name><operator>.</operator><name>toString</name></name><argument_list>()</argument_list></call></expr></argument>)</argument_list></call></expr>;</expr_stmt>
+	}</block></function>
+
+	<function><specifier>public</specifier> <type><name>void</name></type> <name>retrieveBookList</name><parameter_list>()</parameter_list> <block>{
+		<expr_stmt><expr><call><name>sortByAuthor</name><argument_list>()</argument_list></call></expr>;</expr_stmt> 
+		<expr_stmt><expr><call><name><name>System</name><operator>.</operator><name>out</name><operator>.</operator><name>println</name></name><argument_list>(<argument><expr><literal type="string">"\n"</literal> <operator>+</operator> <literal type="string">"Currently there are: "</literal> <operator>+</operator> <call><name><name>books</name><operator>.</operator><name>size</name></name><argument_list>()</argument_list></call> <operator>+</operator> <literal type="string">" books in the library."</literal></expr></argument>)</argument_list></call></expr>;</expr_stmt>
+		<for>for <control>(<init><decl><type><name>int</name></type> <name>i</name> <init>= <expr><literal type="number">0</literal></expr></init></decl>;</init> <condition><expr><name>i</name> <operator>&lt;</operator> <call><name><name>books</name><operator>.</operator><name>size</name></name><argument_list>()</argument_list></call></expr>;</condition> <incr><expr><name>i</name><operator>++</operator></expr></incr>)</control> <block>{
+			<expr_stmt><expr><call><name><name>System</name><operator>.</operator><name>out</name><operator>.</operator><name>println</name></name><argument_list>(<argument><expr><literal type="string">"(Book ID: "</literal><operator>+</operator> <call><name><name>books</name><operator>.</operator><name>get</name></name><argument_list>(<argument><expr><name>i</name></expr></argument>)</argument_list></call><operator>.</operator><call><name>getBookId</name><argument_list>()</argument_list></call> <operator>+</operator><literal type="string">")"</literal> <operator>+</operator> <literal type="string">" "</literal> <operator>+</operator> <call><name><name>books</name><operator>.</operator><name>get</name></name><argument_list>(<argument><expr><name>i</name></expr></argument>)</argument_list></call><operator>.</operator><call><name>getTitle</name><argument_list>()</argument_list></call> <operator>+</operator> <literal type="string">", by "</literal> <operator>+</operator> <call><name><name>books</name><operator>.</operator><name>get</name></name><argument_list>(<argument><expr><name>i</name></expr></argument>)</argument_list></call><operator>.</operator><call><name>getAuthor</name><argument_list>()</argument_list></call></expr></argument>)</argument_list></call></expr>;</expr_stmt>
+			<expr_stmt><expr><call><name><name>System</name><operator>.</operator><name>out</name><operator>.</operator><name>println</name></name><argument_list>(<argument><expr><literal type="string">"Status: "</literal> <operator>+</operator> <call><name><name>books</name><operator>.</operator><name>get</name></name><argument_list>(<argument><expr><name>i</name></expr></argument>)</argument_list></call><operator>.</operator><call><name>getStatus</name><argument_list>()</argument_list></call> <operator>+</operator> <literal type="string">"\n"</literal></expr></argument>)</argument_list></call></expr>;</expr_stmt>
+			
+		}</block></for>
+	}</block></function>
+	
+<function><specifier>public</specifier> <type><name>void</name></type> <name>retrieveDelayedBookList</name><parameter_list>()</parameter_list> <block>{
+	<decl_stmt><decl><type><name>Date</name></type> <name>date</name> <init>= <expr><operator>new</operator> <call><name>Date</name><argument_list>()</argument_list></call></expr></init></decl>;</decl_stmt>
+	 
+	<expr_stmt><expr><call><name><name>date</name><operator>.</operator><name>setTime</name></name><argument_list>(<argument><expr><call><name><name>date</name><operator>.</operator><name>getTime</name></name><argument_list>()</argument_list></call> <operator>+</operator> <operator>(</operator><literal type="number">15</literal> <operator>*</operator> <name>DAYS</name><operator>)</operator></expr></argument>)</argument_list></call></expr>;</expr_stmt>
+		
+		<for>for <control>(<init><decl><type><name>int</name></type> <name>i</name> <init>= <expr><literal type="number">0</literal></expr></init></decl>;</init> <condition><expr><name>i</name> <operator>&lt;</operator> <call><name><name>books</name><operator>.</operator><name>size</name></name><argument_list>()</argument_list></call></expr>;</condition> <incr><expr><name>i</name><operator>++</operator></expr></incr>)</control> <block>{
+			<if>if<condition>(<expr><operator>(</operator><operator>(</operator><call><name><name>date</name><operator>.</operator><name>getTime</name></name><argument_list>()</argument_list></call> <operator>/</operator> <name>DAYS</name><operator>)</operator> <operator>-</operator> <call><name><name>books</name><operator>.</operator><name>get</name></name><argument_list>(<argument><expr><name>i</name></expr></argument>)</argument_list></call><operator>.</operator><call><name>getBorrowDate</name><argument_list>()</argument_list></call> <operator>&gt;</operator> <literal type="number">14</literal> <operator>&amp;&amp;</operator> <call><name><name>books</name><operator>.</operator><name>get</name></name><argument_list>(<argument><expr><name>i</name></expr></argument>)</argument_list></call><operator>.</operator><call><name>getStatus</name><argument_list>()</argument_list></call> <operator>==</operator> <literal type="string">"Borrowed"</literal><operator>)</operator></expr>)</condition><then> <block>{ <comment type="line">// Takes current date and subtract it by the date user borrowed book (also checks if book is borrowed)</comment>
+				<decl_stmt><decl><type><name>long</name></type> <name>amountOfDays</name> <init>= <expr><operator>(</operator><call><name><name>date</name><operator>.</operator><name>getTime</name></name><argument_list>()</argument_list></call> <operator>/</operator> <name>DAYS</name><operator>)</operator> <operator>-</operator> <operator>(</operator><call><name><name>books</name><operator>.</operator><name>get</name></name><argument_list>(<argument><expr><name>i</name></expr></argument>)</argument_list></call><operator>.</operator><call><name>getBorrowDate</name><argument_list>()</argument_list></call> <operator>+</operator> <literal type="number">14</literal><operator>)</operator></expr></init></decl>;</decl_stmt> <comment type="line">// Returns how many day it is late (counts after 14+)</comment>
+				<expr_stmt><expr><call><name><name>System</name><operator>.</operator><name>out</name><operator>.</operator><name>println</name></name><argument_list>(<argument><expr><literal type="string">"(Book ID: "</literal><operator>+</operator> <call><name><name>books</name><operator>.</operator><name>get</name></name><argument_list>(<argument><expr><name>i</name></expr></argument>)</argument_list></call><operator>.</operator><call><name>getBookId</name><argument_list>()</argument_list></call> <operator>+</operator><literal type="string">")"</literal> <operator>+</operator> <literal type="string">" "</literal> <operator>+</operator> <call><name><name>books</name><operator>.</operator><name>get</name></name><argument_list>(<argument><expr><name>i</name></expr></argument>)</argument_list></call><operator>.</operator><call><name>getTitle</name><argument_list>()</argument_list></call> <operator>+</operator> <literal type="string">", by "</literal> <operator>+</operator> <call><name><name>books</name><operator>.</operator><name>get</name></name><argument_list>(<argument><expr><name>i</name></expr></argument>)</argument_list></call><operator>.</operator><call><name>getAuthor</name><argument_list>()</argument_list></call> <operator>+</operator> <literal type="string">" is late by "</literal> <operator>+</operator> <name>amountOfDays</name> <operator>+</operator> <literal type="string">" days"</literal></expr></argument>)</argument_list></call></expr>;</expr_stmt>
+			}</block></then> <else>else  <block>{
+				<expr_stmt><expr><call><name><name>System</name><operator>.</operator><name>out</name><operator>.</operator><name>println</name></name><argument_list>(<argument><expr><literal type="string">"There is no delayed books."</literal></expr></argument>)</argument_list></call></expr>;</expr_stmt>
+				<break>break;</break>
+			}</block></else></if>
+				
+			
+		}</block></for> 
+	}</block></function>
+
+
+
+
+	<function><specifier>public</specifier> <type><name>void</name></type> <name>retrieveCustomerHistory</name><parameter_list>(<parameter><decl><type><name>int</name></type> <name>libraryCard</name></decl></parameter>)</parameter_list> <block>{
+
+		<if>if <condition>(<expr><call><name>checkCustomerId</name><argument_list>(<argument><expr><name>libraryCard</name></expr></argument>)</argument_list></call> <operator>==</operator> <literal type="boolean">true</literal></expr>)</condition><then> <block>{
+			<decl_stmt><decl><type><name>String</name></type> <name>info</name> <init>= <expr><call><name>retrieveCustomerObject</name><argument_list>(<argument><expr><name>libraryCard</name></expr></argument>)</argument_list></call><operator>.</operator><call><name>customerInformation</name><argument_list>()</argument_list></call></expr></init></decl>;</decl_stmt>
+			
+			<for>for <control>(<init><decl><type><name>int</name></type> <name>i</name> <init>= <expr><literal type="number">0</literal></expr></init></decl>;</init> <condition><expr><name>i</name> <operator>&lt;</operator> <call><name>retrieveCustomerObject</name><argument_list>(<argument><expr><name>libraryCard</name></expr></argument>)</argument_list></call><operator>.</operator><call><name><name>loanedBooks</name><operator>.</operator><name>size</name></name><argument_list>()</argument_list></call></expr>;</condition> <incr><expr><name>i</name><operator>++</operator></expr></incr>)</control> 
+			<block>{
+				
+			<expr_stmt><expr><name>info</name> <operator>+=</operator> <call><name>retrieveCustomerObject</name><argument_list>(<argument><expr><name>libraryCard</name></expr></argument>)</argument_list></call><operator>.</operator><call><name><name>loanedBooks</name><operator>.</operator><name>get</name></name><argument_list>(<argument><expr><name>i</name></expr></argument>)</argument_list></call><operator>.</operator><call><name>getTitle</name><argument_list>()</argument_list></call> <operator>+</operator> <literal type="string">", by "</literal> <operator>+</operator> <call><name>retrieveCustomerObject</name><argument_list>(<argument><expr><name>libraryCard</name></expr></argument>)</argument_list></call><operator>.</operator><call><name><name>loanedBooks</name><operator>.</operator><name>get</name></name><argument_list>(<argument><expr><name>i</name></expr></argument>)</argument_list></call><operator>.</operator><call><name>getAuthor</name><argument_list>()</argument_list></call> <operator>+</operator><literal type="string">"\n"</literal></expr>;</expr_stmt>
+			
+			}</block></for>
+			<expr_stmt><expr><call><name><name>System</name><operator>.</operator><name>out</name><operator>.</operator><name>println</name></name><argument_list>(<argument><expr><name>info</name></expr></argument>)</argument_list></call></expr>;</expr_stmt>
+		}</block></then>
+		
+
+		<else>else <block>{
+			<expr_stmt><expr><call><name><name>System</name><operator>.</operator><name>out</name><operator>.</operator><name>println</name></name><argument_list>(<argument><expr><literal type="string">"Customer not found."</literal></expr></argument>)</argument_list></call></expr>;</expr_stmt>
+
+		}</block></else></if>
+	}</block></function>
+
+	
+	
+
+	<function><specifier>public</specifier> <type><name>void</name></type> <name>addBorrowedBook</name><parameter_list>(<parameter><decl><type><name>int</name></type> <name>bookId</name></decl></parameter>)</parameter_list> <block>{
+
+		<expr_stmt><expr><call><name><name>books</name><operator>.</operator><name>get</name></name><argument_list>(<argument><expr><call><name>bookIndex</name><argument_list>(<argument><expr><name>bookId</name></expr></argument>)</argument_list></call></expr></argument>)</argument_list></call><operator>.</operator><call><name>addCounter</name><argument_list>()</argument_list></call></expr>;</expr_stmt>
+		<expr_stmt><expr><call><name><name>books</name><operator>.</operator><name>get</name></name><argument_list>(<argument><expr><call><name>bookIndex</name><argument_list>(<argument><expr><name>bookId</name></expr></argument>)</argument_list></call></expr></argument>)</argument_list></call><operator>.</operator><call><name>setStatus</name><argument_list>(<argument><expr><literal type="string">"Borrowed"</literal></expr></argument>)</argument_list></call></expr>;</expr_stmt><empty_stmt>;</empty_stmt>
+
+	}</block></function>
+	
+	<function><specifier>public</specifier> <type><name>int</name></type> <name>returnBorrowedBook</name><parameter_list>(<parameter><decl><type><name>int</name></type> <name>bookId</name></decl></parameter>)</parameter_list> <block>{
+		<decl_stmt><decl><type><name>Date</name></type> <name>date</name> <init>= <expr><operator>new</operator> <call><name>Date</name><argument_list>()</argument_list></call></expr></init></decl>;</decl_stmt>
+		<decl_stmt><decl><type><name>int</name></type> <name>lateDays</name> <init>= <expr><literal type="number">0</literal></expr></init></decl>;</decl_stmt>
+		<comment type="line">// if((date.getTime() / DAYS) - (retrieveBookObject(bookId).getBorrowDate()) &gt; 14) {</comment>
+		<if>if<condition>(<expr><literal type="number">17522</literal> <operator>-</operator> <operator>(</operator><call><name>retrieveBookObject</name><argument_list>(<argument><expr><name>bookId</name></expr></argument>)</argument_list></call><operator>.</operator><call><name>getBorrowDate</name><argument_list>()</argument_list></call><operator>)</operator> <operator>&gt;</operator> <literal type="number">14</literal></expr>)</condition><then> <block>{
+			<expr_stmt><expr><name>lateDays</name> <operator>=</operator> <call>(<name>int</name>) <argument_list>(<argument><expr><literal type="number">17524</literal> <operator>-</operator> <operator>(</operator><call><name>retrieveBookObject</name><argument_list>(<argument><expr><name>bookId</name></expr></argument>)</argument_list></call><operator>.</operator><call><name>getBorrowDate</name><argument_list>()</argument_list></call> <operator>+</operator> <literal type="number">14</literal><operator>)</operator></expr></argument>)</argument_list></call></expr>;</expr_stmt>
+			
+		}</block></then></if>
+		<expr_stmt><expr><call><name>retrieveBookObject</name><argument_list>(<argument><expr><name>bookId</name></expr></argument>)</argument_list></call><operator>.</operator><call><name>setStatus</name><argument_list>(<argument><expr><literal type="string">"Available"</literal></expr></argument>)</argument_list></call></expr>;</expr_stmt>
+		<return>return <expr><name>lateDays</name></expr>;</return>
+		
+	}</block></function>
+	
+	<function><specifier>public</specifier> <type><name>String</name></type> <name>returnDate</name><parameter_list>(<parameter><decl><type><name>int</name></type> <name>bookId</name></decl></parameter>)</parameter_list> <block>{
+		<decl_stmt><decl><type><name>Date</name></type> <name>date</name> <init>= <expr><operator>new</operator> <call><name>Date</name><argument_list>()</argument_list></call></expr></init></decl>;</decl_stmt>
+		<expr_stmt><expr><call><name><name>date</name><operator>.</operator><name>setTime</name></name><argument_list>(<argument><expr><call><name><name>date</name><operator>.</operator><name>getTime</name></name><argument_list>()</argument_list></call> <operator>+</operator> <operator>(</operator><literal type="number">14</literal> <operator>*</operator> <name>DAYS</name><operator>)</operator></expr></argument>)</argument_list></call></expr>;</expr_stmt> <comment type="line">// Takes today's date and adds 14 days to it (to specifiy return date)</comment>
+		<decl_stmt><decl><type><name>SimpleDateFormat</name></type> <name>sdf</name> <init>= <expr><operator>new</operator> <call><name>SimpleDateFormat</name><argument_list>(<argument><expr><literal type="string">"yyyy-MM-dd "</literal></expr></argument>)</argument_list></call></expr></init></decl>;</decl_stmt> <comment type="line">// Converts the output to "YEAR-MONTH-DAY" format</comment>
+		<return>return <expr><call><name><name>sdf</name><operator>.</operator><name>format</name></name><argument_list>(<argument><expr><name>date</name></expr></argument>)</argument_list></call></expr>;</return>
+	}</block></function>
+	
+	<function><specifier>public</specifier> <type><name>void</name></type> <name>bookStatistics</name><parameter_list>()</parameter_list> <block>{
+		<expr_stmt><expr><call><name>sortByPopularity</name><argument_list>()</argument_list></call></expr>;</expr_stmt>
+		<expr_stmt><expr><call><name><name>System</name><operator>.</operator><name>out</name><operator>.</operator><name>println</name></name><argument_list>(<argument><expr><literal type="string">"List of the three most borrowed books in the library"</literal></expr></argument>)</argument_list></call></expr>;</expr_stmt>
+		<for>for <control>(<init><decl><type><name>int</name></type> <name>i</name> <init>= <expr><literal type="number">0</literal></expr></init></decl>;</init> <condition><expr><name>i</name> <operator>&lt;</operator> <literal type="number">3</literal></expr>;</condition> <incr><expr><name>i</name><operator>++</operator></expr></incr>)</control> <block>{
+			<expr_stmt><expr><call><name><name>System</name><operator>.</operator><name>out</name><operator>.</operator><name>println</name></name><argument_list>(<argument><expr><call><name><name>books</name><operator>.</operator><name>get</name></name><argument_list>(<argument><expr><name>i</name></expr></argument>)</argument_list></call><operator>.</operator><call><name>getTitle</name><argument_list>()</argument_list></call> <operator>+</operator> <literal type="string">" has been borrowed out: "</literal> <operator>+</operator> <call><name><name>books</name><operator>.</operator><name>get</name></name><argument_list>(<argument><expr><name>i</name></expr></argument>)</argument_list></call><operator>.</operator><call><name>getCounter</name><argument_list>()</argument_list></call> <operator>+</operator> <literal type="string">" times"</literal></expr></argument>)</argument_list></call></expr>;</expr_stmt>
+		}</block></for>
+	}</block></function>
+	
+	<function><specifier>public</specifier> <type><name>void</name></type> <name>sortByAuthor</name><parameter_list>()</parameter_list> <block>{
+
+		<expr_stmt><expr><call><name><name>Collections</name><operator>.</operator><name>sort</name></name><argument_list>(<argument><expr><name>books</name></expr></argument>, <argument><expr><operator>new</operator> <class><super><name><name>Comparator</name><argument_list type="generic">&lt;<argument><name>Books</name></argument>&gt;</argument_list></name></super><argument_list>()</argument_list> <block>{
+			<function><specifier>public</specifier> <type><name>int</name></type> <name>compare</name><parameter_list>(<parameter><decl><type><name>Books</name></type> <name>book1</name></decl></parameter>, <parameter><decl><type><name>Books</name></type> <name>book2</name></decl></parameter>)</parameter_list> <block>{
+
+				<decl_stmt><decl><type><name>int</name></type> <name>comparasion</name> <init>= <expr><literal type="number">0</literal></expr></init></decl>;</decl_stmt>
+				<expr_stmt><expr><name>comparasion</name> <operator>=</operator> <call><name><name>book1</name><operator>.</operator><name>getAuthor</name></name><argument_list>()</argument_list></call><operator>.</operator><call><name>compareTo</name><argument_list>(<argument><expr><call><name><name>book2</name><operator>.</operator><name>getAuthor</name></name><argument_list>()</argument_list></call></expr></argument>)</argument_list></call></expr>;</expr_stmt>
+				
+				<return>return <expr><name>comparasion</name></expr>;</return>
+
+			}</block></function>
+		}</block></class></expr></argument>)</argument_list></call></expr>;</expr_stmt>
+
+		
+	}</block></function>
+	
+	<function><specifier>public</specifier> <type><name>void</name></type> <name>sortByPopularity</name><parameter_list>()</parameter_list> <block>{
+
+		<expr_stmt><expr><call><name><name>Collections</name><operator>.</operator><name>sort</name></name><argument_list>(<argument><expr><name>books</name></expr></argument>, <argument><expr><operator>new</operator> <class><super><name><name>Comparator</name><argument_list type="generic">&lt;<argument><name>Books</name></argument>&gt;</argument_list></name></super><argument_list>()</argument_list> <block>{
+			<function><specifier>public</specifier> <type><name>int</name></type> <name>compare</name><parameter_list>(<parameter><decl><type><name>Books</name></type> <name>book1</name></decl></parameter>, <parameter><decl><type><name>Books</name></type> <name>book2</name></decl></parameter>)</parameter_list> <block>{
+
+				
+				<decl_stmt><decl><type><name>int</name></type> <name>comparasion</name> <init>= <expr><literal type="number">0</literal></expr></init></decl>;</decl_stmt> 
+					<expr_stmt><expr><name>comparasion</name> <operator>=</operator> <call><name><name>Integer</name><operator>.</operator><name>compare</name></name><argument_list>(<argument><expr><call><name><name>book2</name><operator>.</operator><name>getCounter</name></name><argument_list>()</argument_list></call></expr></argument>, <argument><expr><call><name><name>book1</name><operator>.</operator><name>getCounter</name></name><argument_list>()</argument_list></call></expr></argument>)</argument_list></call></expr>;</expr_stmt>
+				
+				<return>return <expr><name>comparasion</name></expr>;</return>
+
+			}</block></function>
+		}</block></class></expr></argument>)</argument_list></call></expr>;</expr_stmt>
+	}</block></function>
+	
+	<function><specifier>public</specifier> <type><name>Books</name></type> <name>retrieveBookObject</name><parameter_list>(<parameter><decl><type><name>int</name></type> <name>bookId</name></decl></parameter>)</parameter_list> <block>{
+		<decl_stmt><decl><type><name>Books</name></type> <name>found</name> <init>= <expr><call><name><name>books</name><operator>.</operator><name>get</name></name><argument_list>(<argument><expr><call><name>bookIndex</name><argument_list>(<argument><expr><name>bookId</name></expr></argument>)</argument_list></call></expr></argument>)</argument_list></call></expr></init></decl>;</decl_stmt>
+		<return>return <expr><name>found</name></expr>;</return>
+
+	}</block></function>
+	
+	
+
+	<function><specifier>public</specifier> <type><name>Customer</name></type> <name>retrieveCustomerObject</name><parameter_list>(<parameter><decl><type><name>int</name></type> <name>libraryCard</name></decl></parameter>)</parameter_list> <block>{
+		
+			<decl_stmt><decl><type><name>Customer</name></type> <name>found</name> <init>= <expr><call><name><name>customers</name><operator>.</operator><name>get</name></name><argument_list>(<argument><expr><call><name>customerIndex</name><argument_list>(<argument><expr><name>libraryCard</name></expr></argument>)</argument_list></call></expr></argument>)</argument_list></call></expr></init></decl>;</decl_stmt>
+			<return>return <expr><name>found</name></expr>;</return>
+	}</block></function>
+
+	<function><specifier>public</specifier> <type><name>boolean</name></type> <name>checkCustomerId</name><parameter_list>(<parameter><decl><type><name>int</name></type> <name>libaryCard</name></decl></parameter>)</parameter_list> <block>{
+		<decl_stmt><decl><type><name>boolean</name></type> <name>check</name> <init>= <expr><literal type="boolean">false</literal></expr></init></decl>;</decl_stmt>
+		<for>for <control>(<init><decl><type><name>int</name></type> <name>i</name> <init>= <expr><literal type="number">0</literal></expr></init></decl>;</init> <condition><expr><name>i</name> <operator>&lt;</operator> <call><name><name>customers</name><operator>.</operator><name>size</name></name><argument_list>()</argument_list></call></expr>;</condition> <incr><expr><name>i</name><operator>++</operator></expr></incr>)</control> <block>{
+
+			<if>if <condition>(<expr><call><name><name>customers</name><operator>.</operator><name>get</name></name><argument_list>(<argument><expr><name>i</name></expr></argument>)</argument_list></call><operator>.</operator><call><name>getLibaryCard</name><argument_list>()</argument_list></call> <operator>==</operator> <name>libaryCard</name></expr>)</condition><then> <block>{
+				<expr_stmt><expr><name>check</name> <operator>=</operator> <literal type="boolean">true</literal></expr>;</expr_stmt>
+
+			}</block></then></if>
+
+		}</block></for>
+		<return>return <expr><name>check</name></expr>;</return>
+	}</block></function>
+
+	<function><specifier>public</specifier> <type><name>int</name></type> <name>customerIndex</name><parameter_list>(<parameter><decl><type><name>int</name></type> <name>libaryCard</name></decl></parameter>)</parameter_list> <block>{
+
+		<for>for <control>(<init><decl><type><name>int</name></type> <name>i</name> <init>= <expr><literal type="number">0</literal></expr></init></decl>;</init> <condition><expr><name>i</name> <operator>&lt;</operator> <call><name><name>customers</name><operator>.</operator><name>size</name></name><argument_list>()</argument_list></call></expr>;</condition> <incr><expr><name>i</name><operator>++</operator></expr></incr>)</control> <block>{
+
+			<if>if <condition>(<expr><call><name><name>customers</name><operator>.</operator><name>get</name></name><argument_list>(<argument><expr><name>i</name></expr></argument>)</argument_list></call><operator>.</operator><call><name>getLibaryCard</name><argument_list>()</argument_list></call> <operator>==</operator> <name>libaryCard</name></expr>)</condition><then> <block>{
+				<return>return <expr><name>i</name></expr>;</return>
+
+			}</block></then></if>
+
+		}</block></for>
+		<return>return <expr><operator>-</operator><literal type="number">1</literal></expr>;</return>
+	}</block></function>
+
+	<function><specifier>public</specifier> <type><name>boolean</name></type> <name>checkbookId</name><parameter_list>(<parameter><decl><type><name>int</name></type> <name>bookId</name></decl></parameter>)</parameter_list> <block>{
+		<decl_stmt><decl><type><name>boolean</name></type> <name>check</name> <init>= <expr><literal type="boolean">false</literal></expr></init></decl>;</decl_stmt>
+		<for>for <control>(<init><decl><type><name>int</name></type> <name>i</name> <init>= <expr><literal type="number">0</literal></expr></init></decl>;</init> <condition><expr><name>i</name> <operator>&lt;</operator> <call><name><name>books</name><operator>.</operator><name>size</name></name><argument_list>()</argument_list></call></expr>;</condition> <incr><expr><name>i</name><operator>++</operator></expr></incr>)</control> <block>{
+
+			<if>if <condition>(<expr><call><name><name>books</name><operator>.</operator><name>get</name></name><argument_list>(<argument><expr><name>i</name></expr></argument>)</argument_list></call><operator>.</operator><call><name>getId</name><argument_list>()</argument_list></call> <operator>==</operator> <name>bookId</name></expr>)</condition><then> <block>{
+				<expr_stmt><expr><name>check</name> <operator>=</operator> <literal type="boolean">true</literal></expr>;</expr_stmt>
+
+			}</block></then></if>
+
+		}</block></for>
+		<return>return <expr><name>check</name></expr>;</return>
+	}</block></function>
+
+	<function><specifier>public</specifier> <type><name>int</name></type> <name>bookIndex</name><parameter_list>(<parameter><decl><type><name>int</name></type> <name>bookId</name></decl></parameter>)</parameter_list> <block>{
+
+		<for>for <control>(<init><decl><type><name>int</name></type> <name>i</name> <init>= <expr><literal type="number">0</literal></expr></init></decl>;</init> <condition><expr><name>i</name> <operator>&lt;</operator> <call><name><name>books</name><operator>.</operator><name>size</name></name><argument_list>()</argument_list></call></expr>;</condition> <incr><expr><name>i</name><operator>++</operator></expr></incr>)</control> <block>{
+
+			<if>if <condition>(<expr><call><name><name>books</name><operator>.</operator><name>get</name></name><argument_list>(<argument><expr><name>i</name></expr></argument>)</argument_list></call><operator>.</operator><call><name>getId</name><argument_list>()</argument_list></call> <operator>==</operator> <name>bookId</name></expr>)</condition><then> <block>{
+				<return>return <expr><name>i</name></expr>;</return>
+
+			}</block></then></if>
+
+		}</block></for>
+		<return>return <expr><operator>-</operator><literal type="number">1</literal></expr>;</return>
+	}</block></function>
+	
+	
+	
+	<function><specifier>public</specifier> <type><name>int</name></type> <name>customerBookIndex</name><parameter_list>(<parameter><decl><type><name>int</name></type> <name>libraryCard</name></decl></parameter>, <parameter><decl><type><name>int</name></type> <name>bookId</name></decl></parameter>)</parameter_list> <block>{
+
+		<for>for <control>(<init><decl><type><name>int</name></type> <name>i</name> <init>= <expr><literal type="number">0</literal></expr></init></decl>;</init> <condition><expr><name>i</name> <operator>&lt;</operator> <call><name>retrieveCustomerObject</name><argument_list>(<argument><expr><name>libraryCard</name></expr></argument>)</argument_list></call><operator>.</operator><call><name><name>loanedBooks</name><operator>.</operator><name>size</name></name><argument_list>()</argument_list></call></expr>;</condition> <incr><expr><name>i</name><operator>++</operator></expr></incr>)</control> <block>{
+
+			<if>if <condition>(<expr><call><name>retrieveCustomerObject</name><argument_list>(<argument><expr><name>libraryCard</name></expr></argument>)</argument_list></call><operator>.</operator><call><name><name>loanedBooks</name><operator>.</operator><name>get</name></name><argument_list>(<argument><expr><name>i</name></expr></argument>)</argument_list></call><operator>.</operator><call><name>getId</name><argument_list>()</argument_list></call> <operator>==</operator> <name>bookId</name></expr>)</condition><then> <block>{
+				<return>return <expr><name>i</name></expr>;</return>
+
+			}</block></then></if>
+
+		}</block></for>
+		<return>return <expr><operator>-</operator><literal type="number">1</literal></expr>;</return>
+	}</block></function>
+}</block></class>
+</unit>
+
+</unit>
