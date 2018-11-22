@@ -32,7 +32,7 @@ var app = new Vue({
             let Repo = {
                 url: repoUrl
             };
-            axios.post('/api/repos', Repo).then((response) => {
+            axios.post('/api/gitrepository', Repo).then((response) => {
                 return Repo;
             }).catch((error) => {
                 console.log(error);
