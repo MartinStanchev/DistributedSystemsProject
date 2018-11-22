@@ -5,12 +5,13 @@
   "engines": {
     "node": "10.7.0"
   },
+  "private": true,
   "main": "server/app.js",
   "scripts": {
+    "postinstall": "browserify -t vueify -e client/GitUML.js -o client/build/GitUMLBuild.js",
     "start": "node ./server/app.js",
     "test": "test"
   },
-  "private": true,
   "repository": {
     "type": "git",
     "url": "git+https://github.com/MartinStanchev/DistributedSystemsProject.git"
@@ -22,6 +23,7 @@
   },
   "homepage": "https://github.com/MartinStanchev/DistributedSystemsProject#readme",
   "dependencies": {
+    "axios": "^0.18.0",
     "child_process": "^1.0.2",
     "crypto": "^1.0.1",
     "eslint": "^5.9.0",
@@ -29,6 +31,12 @@
     "mongoose": "^5.3.10",
     "morgan": "^1.9.1",
     "nodegit": "^0.23.0",
-    "simple-git": "^1.107.0"
+    "shelljs": "^0.8.3",
+    "simple-git": "^1.107.0",
+    "vue": "^2.5.17",
+    "vue-router": "^3.0.1"
+  },
+  "devDependencies": {
+    "vueify": "^9.4.1"
   }
 }
