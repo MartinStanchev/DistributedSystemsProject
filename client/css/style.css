@@ -2,11 +2,16 @@
 	margin-top: 60px;
 }
 
+html {
+  overflow-y:auto;
+}
+
 html, body {
   width: 100%;
   height: 100%;
   overflow: scroll;
-    overflow-x: hidden;
+  overflow-x:hidden;
+  overflow-y:auto;
 }
 
 body {
@@ -35,11 +40,16 @@ body {
   text-align: center;
 }
 
-::-webkit-scrollbar {
-    width: 0px;  /* remove scrollbar space */
-    background: transparent;  /* optional: just make scrollbar invisible */
-}
 /* optional: show position indicator in red */
 ::-webkit-scrollbar-thumb {
     background: #F39C12;
 }
+
+
+/* Is this a previous fix for the scrollbars? Do we need this anymore? 
+::-webkit-scrollbar {
+  width: 0px; /* remove scrollbar space */ /*
+  background: transparent;  /* optional: just make scrollbar invisible */ /*
+}
+
+*/
