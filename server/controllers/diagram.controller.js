@@ -12,14 +12,24 @@ var path = require('path');
 
 //Get all diagrams
 router.get('/', function(req, res, next) {
-    DiagramSchema.find(function(err,DiagramSchema){
+    DiagramSchema.find(function(err,Diagram){
         if (err) { return next(err); }
-        res.json({"data" : DiagramSchema})
+        res.json({"data" : Diagram})
         res.status(200);
     });
 });
 
 router.post('/', function(req, res, next) {
+    var Diagram = new DiagramSchema({	
+        GitRepo :  req.body.GitRepo,	
+        Classes : req.body.Classes,	
+        classExtends : req.body.classExtends,	
+        classConecteds : req.body.classConecteds	
+    });	
+    Diagram.save(function(err) {	
+    if (err) {	
+      return next(err);	
+    }
 
 	Git.Clone(Diagram.GitRepo, repoPath+Diagram.GitRepo.slice(19).replace(/\//g, "_"))
     .then(function(repository) {
@@ -32,7 +42,7 @@ router.post('/', function(req, res, next) {
         res.status(500).json({"Failure message: ": "Git hook received but new project files couldnt be synced"});
     });
 });
-   
+});
 
 router.get('/prosses', function(req, res, next) {
     var value=  script.readXML();
@@ -42,7 +52,7 @@ router.get('/prosses', function(req, res, next) {
 
 
 router.get('/:id', function(req, res, next) {
-    Diagram.findById(req.params.id, function(err, repo) {
+    DiagramSchema.findById(req.params.id, function(err, repo) {
         if (err) { return next(err); }
         if (Diagram == null) {
             return res.status(404).json({"message": "Repo not found"});
