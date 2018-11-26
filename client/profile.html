@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<meta http-equiv="X-UA-Compatible" content="ie=edge">
+	<link rel="stylesheet" href="css/bootstrap.css">
+	<link rel="stylesheet" href="css/style.css">
+	<title>Profile page</title>
+	
+</head>
+
+<body>
+	<div id="profile">
+		<div id="container">
+			<div class="row">
+				<div class="col-sm-4"></div>
+				<div class="col-sm-4">
+					<div class="card bg-secondary text-white">
+						<div class="card-body text-center"> <img class="w-25 rounded-circle" :src="user.avatar_url" alt="github image">
+							<h5 class="card-title"><br>Welcome <br> {{user.login}}</h5>
+							<div class="row">
+								<h6 class="col-sm-4 card-text">{{diagrams.length}} <br>Total Repos</h6>
+								<h6 class="col-sm-4 card-text">{{user.public_repos}} <br>Public Repos</h6>
+								<h6 class="col-sm-4 card-text">{{user.followers}} <br>Followers</h6>	
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="col-sm-4"></div>
+			</div>
+			<div class="row">
+				<div class="col-sm-6 offset-sm-3">
+				<ul>
+					<li v-for="diagram in diagrams" class="media border p-5 mt-5 mb-5 bg-secondary text-white">
+						<div class="media-body">
+							<p>Repository name: {{diagram.name}}</p>
+							<p v-if="!diagram.description == ''">Repository description: {{diagram.description}}</p> 
+							<p>Repository owner: {{diagram.owner.login}}</p>
+							<a v-bind:href="diagram.html_url" target="_blank">Github repository link</a>
+							<br>
+							<button type="button" class="btn btn-warning float-right" @click="addRepo(diagram.html_url)">Create Diagram</button>
+						</div>
+					</li>
+				</ul>
+			</div>
+				</div>
+		</div>
+	</div>
+</body>
+	
+<script src="https://cdn.jsdelivr.net/npm/vue"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
+<script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+<script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+<script src="scripts/profile.js"></script>
+<script src="scripts/main.js"></script>
+	
+
+</html>

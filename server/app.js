@@ -4,10 +4,19 @@ var mongoose = require('mongoose');
 var morgan = require('morgan');
 var path = require('path');
 
-
 // Variables
-var mongoURI = process.env.MONGODB_URI || 'mongodb://localhost:27017/distrubutedsystemsproject'; // Not Implemented yet !
+var mongoURI = process.env.MONGODB_URI || 'mongodb://admin:admin123@ds115094.mlab.com:15094/gituml';
 var port = process.env.PORT || 3000;
+
+// Connect to MongoDB
+mongoose.connect(mongoURI, { useNewUrlParser: true }, function(err) {
+    if (err) {
+        console.error(`Failed to connect to MongoDB with URI: ${mongoURI}`);
+        console.error(err.stack);
+        process.exit(1);
+    }
+    console.log(`Connected to MongoDB with URI: ${mongoURI}`);
+});
 
 // Create Express app
 var app = express();
@@ -48,3 +57,4 @@ app.listen(port, function(err) {
 });
 
 module.exports = app;
+
