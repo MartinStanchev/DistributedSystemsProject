@@ -2,7 +2,7 @@ var fs = require('fs');
 var DiagramSchema = require('../models/Diagram');
 var admZip = require("adm-zip");
 var xmlEmcoder = require('./xmlEncoder');
-
+var shell = require("shelljs");
 var classNames = [];
 var classExtends = [];
 var classConecteds = [];
@@ -14,7 +14,7 @@ module.exports = {
         classExtends = [];
         classConecteds = [];
         var excist;
-        var readMe = fs.readFileSync("/DistributedSystemsProject/resources/javaProject.xml", 'utf8');
+        var readMe = fs.readFileSync(shell.pwd() + "/resources/javaProject.xml", 'utf8');
     
         if(readMe.includes(".java")){
             var arrayOfLines = readMe.split("\n"); 
@@ -124,10 +124,16 @@ module.exports = {
     },
     convertZip : function(path){
         var zip = new admZip();
-        zip.addLocalFolder("/DistributedSystemsProject/resources/" + path);
-        zip.writeZip("/DistributedSystemsProject/resources/" + path + ".zip");
-        console.log("zip file created");
-        xmlEmcoder.saveXML(path);
+        console.log("asd");
+        // zip.addLocalFolder("/DistributedSystemsProject/resources/" + path);
+        //console.log("qwe");
+       // zip.writeZip("/DistributedSystemsProject/resources/" + path + ".zip");
+    //    var folder_path = "/DistributedSystemsProject/resources/" + path;
+    //     shell.exec('zip -r /resources/javaProject.zip ' + folder_path);
+    //     console.log("zip file created");
+        if(xmlEmcoder.saveXML(path) == 1) {
+            this.readXML('resources/javaProject.xml');
+        }
         
     }
 };
