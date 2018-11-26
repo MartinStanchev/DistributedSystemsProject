@@ -8,7 +8,6 @@
   "private": true,
   "main": "server/app.js",
   "scripts": {
-    "postinstall": "browserify -t vueify -e client/GitUML.js -o client/build/GitUMLBuild.js",
     "start": "node ./server/app.js",
     "test": "test"
   },
