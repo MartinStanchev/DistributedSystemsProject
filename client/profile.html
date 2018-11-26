@@ -21,7 +21,7 @@
 						<div class="card-body text-center"> <img class="w-25 rounded-circle" :src="user.avatar_url" alt="github image">
 							<h5 class="card-title"><br>Welcome <br> {{user.login}}</h5>
 							<div class="row">
-								<h6 class="col-sm-4 card-text">{{repos.length}} <br>Total Repos</h6>
+								<h6 class="col-sm-4 card-text">{{diagrams.length}} <br>Total Repos</h6>
 								<h6 class="col-sm-4 card-text">{{user.public_repos}} <br>Public Repos</h6>
 								<h6 class="col-sm-4 card-text">{{user.followers}} <br>Followers</h6>	
 							</div>
@@ -33,14 +33,14 @@
 			<div class="row">
 				<div class="col-sm-6 offset-sm-3">
 				<ul>
-					<li v-for="repo in repos" class="media border p-5 mt-5 mb-5 bg-secondary text-white">
+					<li v-for="diagram in diagrams" class="media border p-5 mt-5 mb-5 bg-secondary text-white">
 						<div class="media-body">
-							<p>Repository name: {{repo.name}}</p>
-							<p v-if="!repo.description == ''">Repository description: {{repo.description}}</p> 
-							<p>Repository owner: {{repo.owner.login}}</p>
-							<a v-bind:href="repo.html_url" target="_blank">Github repository link</a>
+							<p>Repository name: {{diagram.name}}</p>
+							<p v-if="!diagram.description == ''">Repository description: {{diagram.description}}</p> 
+							<p>Repository owner: {{diagram.owner.login}}</p>
+							<a v-bind:href="diagram.html_url" target="_blank">Github repository link</a>
 							<br>
-							<button type="button" class="btn btn-warning float-right" @click="addRepo(repo.html_url)">Create Diagram</button>
+							<button type="button" class="btn btn-warning float-right" @click="addRepo(diagram.html_url)">Create Diagram</button>
 						</div>
 					</li>
 				</ul>
@@ -55,7 +55,7 @@
 <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
 <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
 <script src="scripts/profile.js"></script>
-<script src='scripts/main.js'></script>
+<script src="scripts/main.js"></script>
 	
 
 </html>
