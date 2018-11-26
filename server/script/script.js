@@ -1,11 +1,14 @@
 var fs = require('fs');
 var DiagramSchema = require('../models/Diagram');
+var admZip = require("adm-zip");
+var xmlEmcoder = require('./xmlEncoder');
+
 var classNames = [];
 var classExtends = [];
 var classConecteds = [];
 
 module.exports = {
-    readXML : function(){
+    readXML : function(GitRepo){
         classNames = [];
         classNames = [];
         classExtends = [];
@@ -99,13 +102,14 @@ module.exports = {
                 }
             }
         }
-        this.SaveDiagram();
+        console.log("data generated from the xml");
+        this.SaveDiagram(GitRepo);
  
         return [classNames,classExtends,classConecteds];
     },
-    SaveDiagram : function(){
+    SaveDiagram : function(GitRepo){
             var Diagram = new DiagramSchema({
-                GitRepo :  "", //TODO: needs to be fixed base on the git repo
+                GitRepo :  GitRepo,
                 Classes : classNames,
                 classExtends : classExtends,
                 classConecteds : classConecteds
@@ -114,7 +118,16 @@ module.exports = {
             if (err) {
               return next(err);
             }
-              return (Diagram);
+                console.log("data saved to database");
+                return (Diagram);
             });
+    },
+    convertZip : function(path){
+        var zip = new admZip();
+        zip.addLocalFolder("/DistributedSystemsProject/resources/" + path);
+        zip.writeZip("/DistributedSystemsProject/resources/" + path + ".zip");
+        console.log("zip file created");
+        xmlEmcoder.saveXML(path);
+        
     }
 };
