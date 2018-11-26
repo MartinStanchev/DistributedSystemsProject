@@ -1,6 +1,8 @@
 // On page create
 document.addEventListener('DOMContentLoaded', function () {
-
+  
+        // Remove dual scrollbars
+        $('html').css('overflow', 'hidden');
         // Load particles (particles div tag)
         if(document.getElementById('particles') !== null) {
           particleground(document.getElementById('particles'), {
