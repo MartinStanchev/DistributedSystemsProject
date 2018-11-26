@@ -122,6 +122,7 @@ module.exports = {
                 return (Diagram);
             });
     },
+    
     convertZip : function(path){
         var zip = new admZip();
         zip.addLocalFolder("/DistributedSystemsProject/resources/" + path);
