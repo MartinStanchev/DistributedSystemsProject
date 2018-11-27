@@ -1,76 +1,89 @@
 
-   var nodedata = [
-    {
-      key: 1,
-      name: "BankAccount",
-      properties: [
-        { name: "owner", type: "String", visibility: "public" },
-        { name: "balance", type: "Currency", visibility: "public", default: "0" }
-      ],
-      methods: [
-        { name: "deposit", parameters: [{ name: "amount", type: "Currency" }], visibility: "public" },
-        { name: "withdraw", parameters: [{ name: "amount", type: "Currency" }], visibility: "public" }
-      ]
-    },
-    {
-      key: 11,
-      name: "Person",
-      properties: [
-        { name: "name", type: "String", visibility: "public" },
-        { name: "birth", type: "Date", visibility: "protected" }
-      ],
-      methods: [
-        { name: "getCurrentAge", type: "int", visibility: "public" }
-      ]
-    },
-    {
-      key: 12,
-      name: "Student",
-      properties: [
-        { name: "classes", type: "List<Course>", visibility: "public" }
-      ],
-      methods: [
-        { name: "attend", parameters: [{ name: "class", type: "Course" }], visibility: "private" },
-        { name: "sleep", visibility: "private" }
-      ]
-    },
-    {
-      key: 13,
-      name: "Professor",
-      properties: [
-        { name: "classes", type: "List<Course>", visibility: "public" }
-      ],
-      methods: [
-        { name: "teach", parameters: [{ name: "class", type: "Course" }], visibility: "private" }
-      ]
-    },
-    {
-      key: 14,
-      name: "Course",
-      properties: [
-        { name: "name", type: "String", visibility: "public" },
-        { name: "description", type: "String", visibility: "public" },
-        { name: "professor", type: "Professor", visibility: "public" },
-        { name: "location", type: "String", visibility: "public" },
-        { name: "times", type: "List<Time>", visibility: "public" },
-        { name: "prerequisites", type: "List<Course>", visibility: "public" },
-        { name: "students", type: "List<Student>", visibility: "public" }
-      ]
-    }
-  ];
+  //  var nodedata = [
+  //   {
+  //     key: 1,
+  //     name: "BankAccount",
+  //     properties: [
+  //       { name: "owner", type: "String", visibility: "public" },
+  //       { name: "balance", type: "Currency", visibility: "public", default: "0" }
+  //     ],
+  //     methods: [
+  //       { name: "deposit", parameters: [{ name: "amount", type: "Currency" }], visibility: "public" },
+  //       { name: "withdraw", parameters: [{ name: "amount", type: "Currency" }], visibility: "public" }
+  //     ]
+  //   },
+  //   {
+  //     key: 11,
+  //     name: "Person",
+  //     properties: [
+  //       { name: "name", type: "String", visibility: "public" },
+  //       { name: "birth", type: "Date", visibility: "protected" }
+  //     ],
+  //     methods: [
+  //       { name: "getCurrentAge", type: "int", visibility: "public" }
+  //     ]
+  //   },
+  //   {
+  //     key: 12,
+  //     name: "Student",
+  //     properties: [
+  //       { name: "classes", type: "List<Course>", visibility: "public" }
+  //     ],
+  //     methods: [
+  //       { name: "attend", parameters: [{ name: "class", type: "Course" }], visibility: "private" },
+  //       { name: "sleep", visibility: "private" }
+  //     ]
+  //   },
+  //   {
+  //     key: 13,
+  //     name: "Professor",
+  //     properties: [
+  //       { name: "classes", type: "List<Course>", visibility: "public" }
+  //     ],
+  //     methods: [
+  //       { name: "teach", parameters: [{ name: "class", type: "Course" }], visibility: "private" }
+  //     ]
+  //   },
+  //   {
+  //     key: 14,
+  //     name: "Course",
+  //     properties: [
+  //       { name: "name", type: "String", visibility: "public" },
+  //       { name: "description", type: "String", visibility: "public" },
+  //       { name: "professor", type: "Professor", visibility: "public" },
+  //       { name: "location", type: "String", visibility: "public" },
+  //       { name: "times", type: "List<Time>", visibility: "public" },
+  //       { name: "prerequisites", type: "List<Course>", visibility: "public" },
+  //       { name: "students", type: "List<Student>", visibility: "public" }
+  //     ]
+  //   }
+  // ];
   var linkdata = [
-    { from: 12, to: 11, relationship: "generalization" },
-    { from: 13, to: 11, relationship: "generalization" },
-    { from: 14, to: 13, relationship: "aggregation" }
+    //{ from: -4, to: -5, relationship: "generalization" },
+    // { from: 13, to: 11, relationship: "generalization" },
+    // { from: 14, to: 13, relationship: "aggregation" }
   ];
 
 
 var app = new Vue({
     el: '#uml'
     , data: {
+      nodedata:[],
+      di : [],
+      Classes:[],
+      SuperClass:'',
+      classExtends:[],
+      linkdata:[]
+    
+  
+
+  
+      // node :[],
+        
       
-    },
-        methods: {
+    }
+        ,methods: {
+
               init:function(){
                   var $ = go.GraphObject.make;
           myDiagram =
@@ -216,7 +229,7 @@ var app = new Vue({
           function convertToArrow(r) {
             switch (r) {
               case "generalization": return "Triangle";
-              case "aggregation": return "StretchedDiamond";
+              case "aggregation": return "Stretched";
               default: return "";
             }
           }
@@ -234,14 +247,58 @@ var app = new Vue({
             {
               copiesArrays: true,
               copiesArrayObjects: true,
-              nodeDataArray: nodedata,
+              nodeDataArray: this.nodedata,
+    
               linkDataArray: linkdata
             });
               },
+           
              
         },
-        mounted() {
-          this.init();
-        }
+        mounted(){
+          axios.get('/api/diagrams')
+          .then((response) => {
+            this.di= response.data.data;
+             // get the response from the data base and loop through its length,
+             for(var j =0 ; j<response.data.data.length;j++){
+             for(var i= 0; i<response.data.data[j].Classes.length;i++){
+             var data = {
+              key: response.data.data[j].Classes[i],
+              subclass:response.data.data[j].classExtends[0].SubClass,
+              superclass:response.data.data[j].classExtends[0].SuperClass,
+              mainClass:response.data.data[j].classConecteds[0].MainClass,
+              usedClass:response.data.data[j].classConecteds[0].UsedClass,
+               link: { from: response.data.data[j].classExtends[0].SubClass, to:response.data.data[j].classExtends[0].SuperClass, relationship: "generalization" },
+               classConecteds :{from :response.data.data[j].classConecteds[0].MainClass ,to:response.data.data[j].classConecteds[0].UsedClass,relationship:"aggegation"},
+                name: response.data.data[j].Classes[i],
+                  properties: [
+                    { name: "classes", type: "List<Course>", visibility: "public" }
+                  ],
+              
+             }
+                myDiagram.model.addNodeData(data);
+             }
+            }
+             
+             // defines the extends relathioship between the classes depending on linkdata  
+            for(var a=0; a<this.nodedata.length;a++ ){
+              if(this.nodedata[a].name==this.nodedata[a].subclass  ){
+                myDiagram.model.addLinkData(this.nodedata[a].link);
+              }
+            }
+            // defines the Conecteds classes
+            for(var b=0; b<this.nodedata.length;b++ ){
+              if(this.nodedata[b].name==this.nodedata[b].usedClass ){
+            myDiagram.model.addLinkData(this.nodedata[b].classConecteds);
+              }
+            }
 
-})
+        }).catch((error) => {
+            console.log(error);
+        });
+
+        this.init();
+        },
+       
+
+});

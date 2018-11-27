@@ -10,6 +10,11 @@ var Git = require("nodegit");
 var path = require('path');
 
 
+
+
+
+
+
 //Get all diagrams
 router.get('/', function(req, res, next) {
     DiagramSchema.find(function(err,Diagram){
@@ -18,6 +23,7 @@ router.get('/', function(req, res, next) {
         res.status(200);
     });
 });
+
 
 router.post('/', function(req, res, next) {
     var Diagram = new DiagramSchema({	
