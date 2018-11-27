@@ -132,7 +132,7 @@ module.exports = {
     //     shell.exec('zip -r /resources/javaProject.zip ' + folder_path);
     //     console.log("zip file created");
         if(xmlEmcoder.saveXML(path) == 1) {
-            this.readXML(path);
+            this.readXML('resources/javaProject.xml');
         }
         
     }

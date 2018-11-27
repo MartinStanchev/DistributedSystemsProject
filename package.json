@@ -32,7 +32,7 @@
     "folder-zip": "0.0.5",
     "jszip": "^3.1.5",
     "loader": "^2.1.1",
-    "mongoose": "^5.3.10",
+    "mongoose": "^5.3.14",
     "morgan": "^1.9.1",
     "nodegit": "^0.23.0",
     "shelljs": "^0.8.3",
