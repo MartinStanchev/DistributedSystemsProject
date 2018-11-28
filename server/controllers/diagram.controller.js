@@ -26,27 +26,11 @@ router.get('/', function(req, res, next) {
 
 
 router.post('/', function(req, res, next) {
-    var Diagram = new DiagramSchema({	
-        GitRepo :  req.body.GitRepo,	
-        Classes : req.body.Classes,	
-        classExtends : req.body.classExtends,	
-        classConecteds : req.body.classConecteds	
-    });	
-    Diagram.save(function(err) {	
-    if (err) {	
-      return next(err);	
-    }
-
-	Git.Clone(Diagram.GitRepo, repoPath+Diagram.GitRepo.slice(19).replace(/\//g, "_"))
+	Git.Clone(req.body.GitRepo, repoPath+req.body.GitRepo.slice(19).replace(/\//g, "_"))
     .then(function(repository) {
-        path = Diagram.GitRepo.slice(19).replace(/\//g, "_");
-        console.log("Successfully cloned to: " + path);
+        path = req.body.GitRepo.slice(19).replace(/\//g, "_");
         script.convertZip(path);
-    res.status(200).json({"Sucess message: ": "Git hook received and new project files are syncronizing"});
-    }).catch(function(err) { 
-        console.log(err);
-        res.status(500).json({"Failure message: ": "Git hook received but new project files couldnt be synced"});
-    });
+      console.log("Successfully cloned to: " + Diagram.GitRepo);
 });
 });
 

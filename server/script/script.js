@@ -108,29 +108,22 @@ module.exports = {
         return [classNames,classExtends,classConecteds];
     },
     SaveDiagram : function(GitRepo){
-            var Diagram = new DiagramSchema({
-                GitRepo :  GitRepo,
-                Classes : classNames,
-                classExtends : classExtends,
-                classConecteds : classConecteds
-            });
-            Diagram.save(function(err) {
-            if (err) {
-              return next(err);
-            }
-                console.log("data saved to database");
-                return (Diagram);
-            });
+        var Diagram = new DiagramSchema({
+            GitRepo :  GitRepo,
+            Classes : classNames,
+            classExtends : classExtends,
+            classConecteds : classConecteds
+        });
+        Diagram.save(function(err) {
+        if (err) {
+          return next(err);
+        }
+            console.log("data saved to database");
+            return (Diagram);
+        });
     },
     convertZip : function(path){
-        var zip = new admZip();
-        console.log("asd");
-        // zip.addLocalFolder("/DistributedSystemsProject/resources/" + path);
-        //console.log("qwe");
-       // zip.writeZip("/DistributedSystemsProject/resources/" + path + ".zip");
-    //    var folder_path = "/DistributedSystemsProject/resources/" + path;
-    //     shell.exec('zip -r /resources/javaProject.zip ' + folder_path);
-    //     console.log("zip file created");
+       console.log("covertZip file funcation called");
         if(xmlEmcoder.saveXML(path) == 1) {
             this.readXML('resources/javaProject.xml');
         }
