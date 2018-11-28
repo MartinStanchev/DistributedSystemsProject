@@ -125,7 +125,7 @@ module.exports = {
     convertZip : function(path){
        console.log("covertZip file funcation called");
         if(xmlEmcoder.saveXML(path) == 1) {
-            this.readXML(path);
+            this.readXML('resources/javaProject.xml');
         }
         
     }
