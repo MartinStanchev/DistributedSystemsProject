@@ -27,22 +27,23 @@ router.get('/', function(req, res, next) {
 
 router.post('/', function(req, res, next) {
     var Diagram = new DiagramSchema({	
-        GitRepo :  req.body.GitRepo,	
-        Classes : req.body.Classes,	
-        classExtends : req.body.classExtends,	
-        classConecteds : req.body.classConecteds	
+        GitRepo :  req.body.GitRepo	
     });	
-    Diagram.save(function(err) {	
-    if (err) {	
-      return next(err);	
-    }
+
 
 	Git.Clone(Diagram.GitRepo, repoPath+Diagram.GitRepo.slice(19).replace(/\//g, "_"))
     .then(function(repository) {
         path = Diagram.GitRepo.slice(19).replace(/\//g, "_");
-        console.log("Successfully cloned to: " + Diagram.GitRepo);
-        script.convertZip(path);
-    res.status(200).json({"Sucess message: ": "Git hook received and new project files are syncronizing"});
+      var res = script.convertZip(path);
+      Diagram.Classes = res.Classes;
+      Diagram.classExtends = res.classExtends;
+      Diagram.classConecteds = res.classConecteds;
+      console.log("Successfully cloned to: " + Diagram.GitRepo);
+    Diagram.save(function(err) {	
+        if (err) {	
+          return next(err);	
+        }
+        res.status(200).json({"Sucess message: ": "Git hook received and new project files are syncronizing"});
     }).catch(function(err) { 
         console.log(err);
         res.status(500).json({"Failure message: ": "Git hook received but new project files couldnt be synced"});
