@@ -108,23 +108,24 @@ module.exports = {
         return [classNames,classExtends,classConecteds];
     },
     SaveDiagram : function(GitRepo){
-        var Diagram;
-        DiagramSchema.find(GitRepo, function(err, repo) {
-            if (repo == null) {
-                return res.status(404).json({"message": "Repo not found"});
-            }
-            Diagram = repo;
-            Diagram.Classes = classNames;
-            Diagram.classExtends = classExtends;
-            Diagram.classConecteds = classConecteds;
+        var Diagram = new DiagramSchema({
+            GitRepo :  GitRepo,
+            Classes : classNames,
+            classExtends : classExtends,
+            classConecteds : classConecteds
         });
-        //return Diagram;
+        Diagram.save(function(err) {
+        if (err) {
+          return next(err);
+        }
+            console.log("data saved to database");
+            return (Diagram);
+        });
     },
     convertZip : function(path){
-        var zip = new admZip();
-        console.log("covertZip file funcation called");
+       console.log("covertZip file funcation called");
         if(xmlEmcoder.saveXML(path) == 1) {
-           return this.readXML(path);
+            this.readXML(path);
         }
         
     }
