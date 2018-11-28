@@ -108,17 +108,12 @@ module.exports = {
         return [classNames,classExtends,classConecteds];
     },
     SaveDiagram : function(GitRepo){
-        var Diagram;
-        DiagramSchema.find(GitRepo, function(err, repo) {
-            if (err) { return next(err); }
-            if (repo == null) {
-                return res.status(404).json({"message": "Repo not found"});
-            }
-            Diagram = repo;
-            Diagram.Classes = classNames;
-            Diagram.classExtends = classExtends;
-            Diagram.classConecteds = classConecteds;
-        });
+            var Diagram = new DiagramSchema({
+                GitRepo :  GitRepo,
+                Classes : classNames,
+                classExtends : classExtends,
+                classConecteds : classConecteds
+            });
             Diagram.save(function(err) {
             if (err) {
               return next(err);
@@ -129,9 +124,15 @@ module.exports = {
     },
     convertZip : function(path){
         var zip = new admZip();
-        console.log("covertZip file funcation called");
+        console.log("asd");
+        // zip.addLocalFolder("/DistributedSystemsProject/resources/" + path);
+        //console.log("qwe");
+       // zip.writeZip("/DistributedSystemsProject/resources/" + path + ".zip");
+    //    var folder_path = "/DistributedSystemsProject/resources/" + path;
+    //     shell.exec('zip -r /resources/javaProject.zip ' + folder_path);
+    //     console.log("zip file created");
         if(xmlEmcoder.saveXML(path) == 1) {
-            this.readXML(path);
+            this.readXML('resources/javaProject.xml');
         }
         
     }

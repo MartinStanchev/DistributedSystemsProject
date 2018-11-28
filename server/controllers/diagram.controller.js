@@ -40,7 +40,7 @@ router.post('/', function(req, res, next) {
 	Git.Clone(Diagram.GitRepo, repoPath+Diagram.GitRepo.slice(19).replace(/\//g, "_"))
     .then(function(repository) {
         path = Diagram.GitRepo.slice(19).replace(/\//g, "_");
-        console.log("Successfully cloned to: " + Diagram.GitRepo);
+        console.log("Successfully cloned to: " + path);
         script.convertZip(path);
     res.status(200).json({"Sucess message: ": "Git hook received and new project files are syncronizing"});
     }).catch(function(err) { 
