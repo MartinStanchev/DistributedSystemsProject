@@ -3,15 +3,15 @@ var DiagramSchema = require('../models/Diagram');
 var admZip = require("adm-zip");
 var xmlEmcoder = require('./xmlEncoder');
 var shell = require("shelljs");
-var classNames = [];
-var classExtends = [];
-var classConecteds = [];
+var classNames;
+var ClassExtends;
+var classConecteds;
 
 module.exports = {
     readXML : function(GitRepo){
         classNames = [];
         classNames = [];
-        classExtends = [];
+        ClassExtends = [];
         classConecteds = [];
         var excist;
         var readMe = fs.readFileSync(shell.pwd() + "/resources/javaProject.xml", 'utf8');
@@ -23,12 +23,16 @@ module.exports = {
             //Check for classes and extensions
             for(var i = 0;i < arrayOfLines.length;i++){
                 var line = arrayOfLines[i];
-                if(line.includes("<class><specifier>public</specifier>")){
+                var classFound = false;
+
+                if(line.includes("<class><specifier>public</specifier>") ){
                     var firstIndex;
                     var lastIndex;
+                    classFound = false;
                     for(var j = 0 ; j < line.length ; j++){
-                        if(line.substring(0,j) === "<class><specifier>public</specifier> class <name>"){
-                            firstIndex = j;
+                        
+                        if(line.substring(j,j+12) === "class <name>"){
+                            firstIndex = j+12;
                         }
                         if(line.substring(firstIndex,j).includes("</name>") ){
                             lastIndex = j-7;
@@ -38,25 +42,27 @@ module.exports = {
                     
                     var className = line.substring(firstIndex,lastIndex);
                     currentClassName = className;
+                    classFound = true;
                     classNames.push(className);
                 }
-                if(line.includes("extends")){
+                if(line.includes("extends") && classFound === true)  {
                     var firstExtendsIndex;
                     var lastExtendsIndex;
-                    for(var j = lastIndex ; j < line.length ; j++){
-                        if(line.substring(lastIndex,j) === "</name> <super><extends>extends <name>"){
-                            firstExtendsIndex = j;
+                    var firstFound = false;
+                    for(var j = 0 ; j < line.length ; j++){
+                        if(line.substring(j,j+14) === "extends <name>"){
+                            firstExtendsIndex = j+14;
+                            firstFound = true;
                         }
-                        if(line.substring(firstExtendsIndex,j).includes("</name></extends>")){
-                            lastExtendsIndex = j-17;
+                        if(line.substring(firstExtendsIndex,j).includes("</name>") && firstFound === true){
+                            lastExtendsIndex = j-7;
                             break;
                         }
                     }
-                    var classExtend = {subClass: currentClassName  ,  superClass: line.substring(firstExtendsIndex,lastExtendsIndex)};
-                    classExtends.push(classExtend);
-                    }
+                    var classExtend = {SubClass: currentClassName  ,  SuperClass: line.substring(firstExtendsIndex,lastExtendsIndex)};
+                    ClassExtends.push(classExtend);
+                }
             }
-
             //Check for connection between classes 
             for(var i = 0;i < arrayOfLines.length;i++){
                 var line = arrayOfLines[i];
@@ -65,8 +71,8 @@ module.exports = {
                     var firstIndex;
                     var lastIndex;
                     for(var j = 0 ; j < line.length ; j++){
-                        if(line.substring(0,j) === "<class><specifier>public</specifier> class <name>"){
-                            firstIndex = j;
+                        if(line.substring(j,j+12) === "class <name>"){
+                            firstIndex = j+12;
                         }
                         if(line.substring(firstIndex,j).includes("</name>") ){
                             lastIndex = j-7;
@@ -105,13 +111,12 @@ module.exports = {
         console.log("data generated from the xml");
         this.SaveDiagram(GitRepo);
  
-        return [classNames,classExtends,classConecteds];
     },
     SaveDiagram : function(GitRepo){
         var Diagram = new DiagramSchema({
             GitRepo :  GitRepo,
             Classes : classNames,
-            classExtends : classExtends,
+            classExtends : ClassExtends,
             classConecteds : classConecteds
         });
         Diagram.save(function(err) {
@@ -125,7 +130,7 @@ module.exports = {
     convertZip : function(path){
        console.log("covertZip file funcation called");
         if(xmlEmcoder.saveXML(path) == 1) {
-            this.readXML('resources/javaProject.xml');
+            this.readXML(path);
         }
         
     }
