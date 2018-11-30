@@ -3,6 +3,9 @@ var linkdata = [
   // { from: 13, to: 11, relationship: "generalization" },
   // { from: 14, to: 13, relationship: "aggregation" }
 ];
+var url_string = window.location.href ;
+var url = new URL(url_string);
+var repo = url.searchParams.get("repo");
 
 var app = new Vue({
   el: "#uml",
@@ -18,16 +21,23 @@ var app = new Vue({
     // node :[],
   },
   methods: {
+    
     getUmlData: function(){
       axios
         .get("/api/diagram/" + repo)
         .then(response => {
-          this.id = response.data.data[1]._id;
-          console.log(this.id);
-          this.di = response.data.data;
-          console.log(response.data.data[1].classExtends[1].SubClass);
+          this.id = response.data.data[0]._id;
+          this.di = response.data.data[0]._id;
+
+         // this.nodedata = response.data.data[0].Classes;
+       //   linkdata = response.data.data[0].classConecteds;
+
+       myDiagram.model.addNodeData(response.data.data[0].Classes);
+       myDiagram.model.addLinkData(response.data.data[0].classConecteds);
+
+
           // get the response from the data base and loop through its length,
-          for (var j = 0; j < response.data.data.length; j++) {
+          /*for (var j = 0; j < response.data.data.length; j++) {
             for (var i = 0; i < response.data.data[j].Classes.length; i++) {
               var data = {
                 key: response.data.data[j].Classes[i],
@@ -67,7 +77,7 @@ var app = new Vue({
               };
               myDiagram.model.addLinkData(link);
             }
-          }
+          }*/
         })
 
         .catch(error => {
@@ -338,9 +348,14 @@ var app = new Vue({
         }
       });
     }
-  },
-  mounted() {
+  },/*
+  beforemount() {
     this.getUmlData();
+  },*/
+  mounted(){
+
+    this.getUmlData();
+
     this.init();
   }
 });

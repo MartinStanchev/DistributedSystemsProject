@@ -4,14 +4,11 @@ var xmlEmcoder = require('./xmlEncoder');
 var shell = require("shelljs");
 var repoPath = "resources/"
 var classNames;
-var ClassExtends;
 var classConecteds;
 
 module.exports = {
     readXML : function(GitRepo){
         classNames = [];
-        classNames = [];
-        ClassExtends = [];
         classConecteds = [];
         var excist;
         var readMe = fs.readFileSync(shell.pwd() + "/resources/javaProject.xml", 'utf8');
@@ -42,8 +39,11 @@ module.exports = {
                     
                     var className = line.substring(firstIndex,lastIndex);
                     currentClassName = className;
+                    var pushedclass = { key : className , name : className , 
+                        properties : [{ name : "classes", type : "List<Course>" , visibility : "public"}] };
+
                     classFound = true;
-                    classNames.push(className);
+                    classNames.push(pushedclass);
                 }
                 if(line.includes("extends") && classFound === true)  {
                     var firstExtendsIndex;
@@ -59,8 +59,8 @@ module.exports = {
                             break;
                         }
                     }
-                    var classExtend = {SubClass: currentClassName  ,  SuperClass: line.substring(firstExtendsIndex,lastExtendsIndex)};
-                    ClassExtends.push(classExtend);
+                    var classExtend = {from : line.substring(firstExtendsIndex,lastExtendsIndex) , to : currentClassName , relationship: "aggegation"};
+                    classConecteds.push(classExtend);
                 }
             }
             //Check for connection between classes 
@@ -83,22 +83,23 @@ module.exports = {
                     current = className;
                 }
                 for(var j = 0; j < classNames.length ; j++){
-                    if(line.includes(classNames[j])){
-                        if(current != classNames[j]){
-                            var classConected = {MainClass:current , UsedClass:classNames[j]};
+                    if(line.includes(classNames[j].name)){
+                        if(current != classNames[j].name){
+                            var classConected = {from : current , to : classNames[j].name , relationship : "generalization"};
     
-                            if(classConecteds.length < 1 && classConected.MainClass != null){
+                            if(classConecteds.length < 1 && classConected.from != null){
                                 classConecteds.push(classConected);
                             }
                             else{
                                 excist = false;
                                 for(var k = 0; k < classConecteds.length; k++){
-                                    if(((classConecteds[k].MainClass === classConected.MainClass) && (classConecteds[k].UsedClass === classConected.UsedClass)) || ((classConecteds[k].MainClass === classConected.UsedClass) && (classConecteds[k].UsedClass === classConected.MainClass))){
+                                    if(((classConecteds[k].from === classConected.from) && (classConecteds[k].to === classConected.to)) || 
+                                    ((classConecteds[k].from === classConected.to) && (classConecteds[k].to === classConected.from))){
                                         excist = true;
                                         break;
                                     }
                                 }
-                                if(excist === false && classConected.MainClass != null){
+                                if(excist === false && classConected.from != null){
                                     classConecteds.push(classConected);
                                     break;
                                 }
@@ -110,19 +111,19 @@ module.exports = {
         }
         console.log("data generated from the xml");
         return this.SaveDiagram(GitRepo);
- 
     },
     SaveDiagram : function(GitRepo){
         var Diagram = new DiagramSchema({
             GitRepo :  GitRepo,
             Classes : classNames,
-            classExtends : ClassExtends,
             classConecteds : classConecteds
         });
         Diagram.save(function(err) {
         if (err) {
-          return next(err);
+            console.log("couldnt save data to database" + err)
+          return (err);
         }
+                          
             console.log("data saved to database");
             return (Diagram);
         });

@@ -36,7 +36,8 @@ router.get('/diagram/:id', function(req, res, next) {
             Git.Clone(RepoPath, repoPath+path)
             .then(function(repository) {
                 console.log("Successfully cloned to: " + Diagram.GitRepo);
-                return res.status(201).json({"data" : script.convertZip(req.params.id)});
+                var returnedDiagram = script.convertZip(req.params.id);
+                return res.status(201).json({"data" : returnedDiagram});
             });
         }
         res.status(200).json({"data" : repo});
