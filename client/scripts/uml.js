@@ -275,11 +275,13 @@ var app = new Vue({
     }
   },
   mounted() {
+    var url_string = window.location.href ;
+    var url = new URL(url_string);
+    var repo = url.searchParams.get("repo");
+
     axios
-      .get("/api/diagrams")
-      .then(response => {
+      .get("/api/diagram/" + repo).then(response => {
         this.di = response.data.data;
-        console.log(response.data.data[1].classExtends[1].SubClass);
         // get the response from the data base and loop through its length,
         for (var j = 0; j < response.data.data.length; j++) {
           for (var i = 0; i < response.data.data[j].Classes.length; i++) {
