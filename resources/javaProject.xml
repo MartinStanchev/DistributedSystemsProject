@@ -1,544 +1,703 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <unit xmlns="http://www.srcML.org/srcML/src" revision="0.9.5">
 
-<unit revision="0.9.5" language="Java" filename="home/george/DistributedSystemsProject/resources/Georgesarkis_GoogleHashCode/src/Car.java" hash="e63bf2ea47e4c03f10f9a7f0b512639a9ce6a299">
-<class><specifier>public</specifier> class <name>Car</name> <block>{
+<unit revision="0.9.5" language="Java" filename="home/george/DistributedSystemsProject/resources/Georgesarkis_Address-Book-GUI/src/dit042/Random.java" hash="96a546da9565a59d2f9c117176d387e36de9b927"><package>package <name>dit042</name>;</package>
 
-	<decl_stmt><decl><specifier>private</specifier> <type><name>Point</name></type> <name>position</name></decl>;</decl_stmt>
-	<decl_stmt><decl><specifier>private</specifier> <type><name>int</name></type> <name>availableTurn</name></decl>;</decl_stmt>
-	<decl_stmt><decl><specifier>private</specifier> <type><name>Ride</name></type> <name>currentRide</name></decl>;</decl_stmt>
-	
-	<constructor><specifier>public</specifier> <name>Car</name><parameter_list>(<parameter><decl><type><name>Point</name></type> <name>position</name></decl></parameter>, <parameter><decl><type><name>int</name></type> <name>availableTurn</name></decl></parameter>, <parameter><decl><type><name>Ride</name></type> <name>currentRide</name></decl></parameter>)</parameter_list> <block>{
-		<expr_stmt><expr><call><name>super</name><argument_list>()</argument_list></call></expr>;</expr_stmt>
-		<expr_stmt><expr><call><name><name>this</name><operator>.</operator><name>setCurrentRide</name></name><argument_list>(<argument><expr><name>currentRide</name></expr></argument>)</argument_list></call></expr>;</expr_stmt>
-		<expr_stmt><expr><name><name>this</name><operator>.</operator><name>position</name></name> <operator>=</operator> <name>position</name></expr>;</expr_stmt>
-		<expr_stmt><expr><name><name>this</name><operator>.</operator><name>availableTurn</name></name> <operator>=</operator> <name>availableTurn</name></expr>;</expr_stmt>
-	}</block></constructor>
-	
-	<constructor><specifier>public</specifier> <name>Car</name><parameter_list>()</parameter_list> <block>{
-		<expr_stmt><expr><call><name><name>this</name><operator>.</operator><name>position</name><operator>.</operator><name>setX</name></name><argument_list>(<argument><expr><literal type="number">0</literal></expr></argument>)</argument_list></call></expr>;</expr_stmt>
-		<expr_stmt><expr><call><name><name>this</name><operator>.</operator><name>position</name><operator>.</operator><name>setY</name></name><argument_list>(<argument><expr><literal type="number">0</literal></expr></argument>)</argument_list></call></expr>;</expr_stmt>
-		<expr_stmt><expr><name><name>this</name><operator>.</operator><name>availableTurn</name></name> <operator>=</operator> <literal type="number">0</literal></expr>;</expr_stmt>
-	}</block></constructor>
-	
-	<function><specifier>public</specifier> <type><name>Point</name></type> <name>getPosition</name><parameter_list>()</parameter_list> <block>{
-		<return>return <expr><name>position</name></expr>;</return>
-	}</block></function>
-	<function><specifier>public</specifier> <type><name>void</name></type> <name>setPosition</name><parameter_list>(<parameter><decl><type><name>Point</name></type> <name>position</name></decl></parameter>)</parameter_list> <block>{
-		<expr_stmt><expr><name><name>this</name><operator>.</operator><name>position</name></name> <operator>=</operator> <name>position</name></expr>;</expr_stmt>
-	}</block></function>
-	<function><specifier>public</specifier> <type><name>int</name></type> <name>getAvailableTurn</name><parameter_list>()</parameter_list> <block>{
-		<return>return <expr><name>availableTurn</name></expr>;</return>
-	}</block></function>
-	<function><specifier>public</specifier> <type><name>void</name></type> <name>setAvailableTurn</name><parameter_list>(<parameter><decl><type><name>int</name></type> <name>availableTurn</name></decl></parameter>)</parameter_list> <block>{
-		<expr_stmt><expr><name><name>this</name><operator>.</operator><name>availableTurn</name></name> <operator>=</operator> <name>availableTurn</name></expr>;</expr_stmt>
-	}</block></function>
+<comment type="block" format="javadoc">/**
+ *  Seventies style random generating functions.
+ *  @author Cezar Ionescu &lt;cezar@chalmers.se&gt;
+ *  @version 0.1
+ *  @since 2014-08-28
+ */</comment>
+<class><specifier>public</specifier> class <name>Random</name> <block>{
+    <comment type="block" format="javadoc">/**
+     *  The java.util.Random number generator that does all the work.
+     */</comment>
+    <decl_stmt><decl><specifier>private</specifier> <specifier>static</specifier> <type><name><name>java</name><operator>.</operator><name>util</name><operator>.</operator><name>Random</name></name></type> <name>rand</name> <init>= <expr><operator>new</operator> <call><name><name>java</name><operator>.</operator><name>util</name><operator>.</operator><name>Random</name></name><argument_list>()</argument_list></call></expr></init></decl>;</decl_stmt>
 
-	<function><specifier>public</specifier> <type><name>Ride</name></type> <name>getCurrentRide</name><parameter_list>()</parameter_list> <block>{
-		<return>return <expr><name>currentRide</name></expr>;</return>
-	}</block></function>
+    <comment type="block" format="javadoc">/**
+     *  Generates a random byte from a uniform distribution.
+     */</comment>
+    <function><specifier>public</specifier> <specifier>static</specifier> <type><name>byte</name></type> <name>randomByte</name><parameter_list>()</parameter_list> <block>{
+        <return>return <expr><operator>(</operator><name>byte</name><operator>)</operator> <call><name><name>rand</name><operator>.</operator><name>nextInt</name></name><argument_list>(<argument><expr><literal type="number">256</literal></expr></argument>)</argument_list></call></expr>;</return>
+    }</block></function>
 
-	<function><specifier>public</specifier> <type><name>void</name></type> <name>setCurrentRide</name><parameter_list>(<parameter><decl><type><name>Ride</name></type> <name>currentRide</name></decl></parameter>)</parameter_list> <block>{
-		<expr_stmt><expr><name><name>this</name><operator>.</operator><name>currentRide</name></name> <operator>=</operator> <name>currentRide</name></expr>;</expr_stmt>
-	}</block></function>
-	
-	
+    <comment type="block" format="javadoc">/**
+     *  Generates a random ASCII char from a uniform distribution.
+     */</comment>
+    <function><specifier>public</specifier> <specifier>static</specifier> <type><name>char</name></type> <name>randomChar</name><parameter_list>()</parameter_list> <block>{
+        <return>return <expr><operator>(</operator><name>char</name><operator>)</operator> <call><name><name>rand</name><operator>.</operator><name>nextInt</name></name><argument_list>(<argument><expr><literal type="number">256</literal></expr></argument>)</argument_list></call></expr>;</return>
+    }</block></function>
+
+    <comment type="block" format="javadoc">/**
+     *  Generates a random short from a uniform distribution.
+     */</comment>
+    <function><specifier>public</specifier> <specifier>static</specifier> <type><name>short</name></type> <name>randomShort</name><parameter_list>()</parameter_list> <block>{
+        <return>return <expr><operator>(</operator><name>short</name><operator>)</operator> <call><name><name>rand</name><operator>.</operator><name>nextInt</name></name><argument_list>(<argument><expr><literal type="number">65536</literal></expr></argument>)</argument_list></call></expr>;</return>
+    }</block></function>
+
+    <comment type="block" format="javadoc">/**
+     *  Generates a random int from a uniform distribution.
+     */</comment>
+    <function><specifier>public</specifier> <specifier>static</specifier> <type><name>int</name></type> <name>randomInt</name><parameter_list>()</parameter_list> <block>{
+        <return>return <expr><call><name><name>rand</name><operator>.</operator><name>nextInt</name></name><argument_list>()</argument_list></call></expr>;</return>
+    }</block></function>
+
+
+    <comment type="block" format="javadoc">/**
+     *  Generates one of n possible results (0, 1, ..., n-1) from a uniform distribution.
+     *  @parameter n the number of results generated
+     */</comment>
+    <function><specifier>public</specifier> <specifier>static</specifier> <type><name>int</name></type> <name>randomInt</name><parameter_list>(<parameter><decl><type><name>int</name></type> <name>n</name></decl></parameter>)</parameter_list> <block>{
+        <return>return <expr><call><name><name>rand</name><operator>.</operator><name>nextInt</name></name><argument_list>(<argument><expr><name>n</name></expr></argument>)</argument_list></call></expr>;</return>
+    }</block></function>
+
+    <comment type="block" format="javadoc">/**
+     *  Generates a random long from a uniform distribution.
+     */</comment>
+    <function><specifier>public</specifier> <specifier>static</specifier> <type><name>long</name></type> <name>randomLong</name><parameter_list>()</parameter_list> <block>{
+        <return>return <expr><call><name><name>rand</name><operator>.</operator><name>nextLong</name></name><argument_list>()</argument_list></call></expr>;</return>
+    }</block></function>
+
+    <comment type="block" format="javadoc">/**
+     *  Generates a random float from a uniform distribution.
+     */</comment>
+    <function><specifier>public</specifier> <specifier>static</specifier> <type><name>float</name></type> <name>randomFloat</name><parameter_list>()</parameter_list> <block>{
+        <return>return <expr><call><name><name>rand</name><operator>.</operator><name>nextFloat</name></name><argument_list>()</argument_list></call></expr>;</return>
+    }</block></function>
+
+    <comment type="block" format="javadoc">/**
+     *  Generates a random double from a uniform distribution.
+     */</comment>
+    <function><specifier>public</specifier> <specifier>static</specifier> <type><name>double</name></type> <name>randomDouble</name><parameter_list>()</parameter_list> <block>{
+        <return>return <expr><call><name><name>rand</name><operator>.</operator><name>nextDouble</name></name><argument_list>()</argument_list></call></expr>;</return>
+    }</block></function>
+
+    <comment type="block" format="javadoc">/**
+     *  Generates a random double from a uniform distribution.
+     */</comment>
+    <function><specifier>public</specifier> <specifier>static</specifier> <type><name>double</name></type> <name>randomNormal</name><parameter_list>()</parameter_list> <block>{
+        <return>return <expr><call><name><name>rand</name><operator>.</operator><name>nextGaussian</name></name><argument_list>()</argument_list></call></expr>;</return>
+    }</block></function>
+
+    <comment type="block" format="javadoc">/**
+     *  Generates a random boolean from a uniform distribution.
+     */</comment>
+    <function><specifier>public</specifier> <specifier>static</specifier> <type><name>boolean</name></type> <name>randomBoolean</name><parameter_list>()</parameter_list> <block>{
+        <return>return <expr><call><name><name>rand</name><operator>.</operator><name>nextBoolean</name></name><argument_list>()</argument_list></call></expr>;</return>
+    }</block></function>
 }</block></class>
-
 </unit>
 
-<unit revision="0.9.5" language="Java" filename="home/george/DistributedSystemsProject/resources/Georgesarkis_GoogleHashCode/src/LengthCounter.java" hash="f978e013ce44fca4a1d7edd30224d7464731df74"><package>package <name>hashcode</name>;</package>
+<unit revision="0.9.5" language="Java" filename="home/george/DistributedSystemsProject/resources/Georgesarkis_Address-Book-GUI/src/UI/AddressBookRunner.java" hash="cb2982dde988d9ffdcf62ae9e1aabab1b37a355d"><package>package <name>UI</name>;</package>
+	
+<import>import <name><name>java</name><operator>.</operator><name>io</name><operator>.</operator><name>IOException</name></name>;</import>
 
-<class><specifier>public</specifier> class <name>LengthCounter</name> <block>{
-	<function><specifier>public</specifier> <type><name>int</name></type> <name>distence</name><parameter_list>(<parameter><decl><type><name>int</name></type> <name>startx</name></decl></parameter>, <parameter><decl><type><name>int</name></type> <name>starty</name></decl></parameter>, <parameter><decl><type><name>int</name></type> <name>endx</name></decl></parameter> , <parameter><decl><type><name>int</name></type> <name>endy</name></decl></parameter>)</parameter_list> <block>{
-		<decl_stmt><decl><type><name>int</name></type> <name>length</name> <init>= <expr><literal type="number">0</literal></expr></init></decl>;</decl_stmt>
-		<decl_stmt><decl><type><name>int</name></type> <name>x</name> <init>= <expr><call><name><name>Math</name><operator>.</operator><name>abs</name></name><argument_list>(<argument><expr><name>startx</name> <operator>-</operator> <name>endx</name></expr></argument>)</argument_list></call></expr></init></decl>;</decl_stmt>
-		<decl_stmt><decl><type><name>int</name></type> <name>y</name> <init>= <expr><call><name><name>Math</name><operator>.</operator><name>abs</name></name><argument_list>(<argument><expr><name>starty</name> <operator>-</operator> <name>endy</name></expr></argument>)</argument_list></call></expr></init></decl>;</decl_stmt>
-		<expr_stmt><expr><name>length</name> <operator>=</operator> <name>x</name><operator>+</operator><name>y</name></expr>;</expr_stmt>
-		<return>return <expr><name>length</name></expr>;</return>
+<import>import <name><name>javafx</name><operator>.</operator><name>application</name><operator>.</operator><name>Application</name></name>;</import>
+<import>import <name><name>javafx</name><operator>.</operator><name>fxml</name><operator>.</operator><name>FXMLLoader</name></name>;</import>
+<import>import <name><name>javafx</name><operator>.</operator><name>stage</name><operator>.</operator><name>Stage</name></name>;</import>
+<import>import <name><name>javafx</name><operator>.</operator><name>scene</name><operator>.</operator><name>Parent</name></name>;</import>
+<import>import <name><name>javafx</name><operator>.</operator><name>scene</name><operator>.</operator><name>Scene</name></name>;</import>
+<import>import <name><name>javafx</name><operator>.</operator><name>scene</name><operator>.</operator><name>layout</name><operator>.</operator><name>BorderPane</name></name>;</import>
+
+
+<class><specifier>public</specifier> class <name>AddressBookRunner</name> <super><extends>extends <name>Application</name></extends></super> <block>{
+	<function><annotation>@<name>Override</name></annotation>
+	<specifier>public</specifier> <type><name>void</name></type> <name>start</name><parameter_list>(<parameter><decl><type><name>Stage</name></type> <name>primaryStage</name></decl></parameter>)</parameter_list> <block>{
+		<decl_stmt><decl><type><name>Parent</name></type> <name>root</name> <init>= <expr><literal type="null">null</literal></expr></init></decl>;</decl_stmt>
+		<try>try <block>{
+			<expr_stmt><expr><name>root</name> <operator>=</operator> <call><name><name>FXMLLoader</name><operator>.</operator><name>load</name></name><argument_list>(<argument><expr><call><name>getClass</name><argument_list>()</argument_list></call><operator>.</operator><call><name>getResource</name><argument_list>(<argument><expr><literal type="string">"firstsceen.fxml"</literal></expr></argument>)</argument_list></call></expr></argument>)</argument_list></call></expr>;</expr_stmt>
+			<decl_stmt><decl><type><name>Scene</name></type> <name>scene</name> <init>= <expr><operator>new</operator> <call><name>Scene</name><argument_list>(<argument><expr><name>root</name></expr></argument>)</argument_list></call></expr></init></decl>;</decl_stmt>
+	        <expr_stmt><expr><call><name><name>primaryStage</name><operator>.</operator><name>setScene</name></name><argument_list>(<argument><expr><name>scene</name></expr></argument>)</argument_list></call></expr>;</expr_stmt>
+	        <expr_stmt><expr><call><name><name>primaryStage</name><operator>.</operator><name>show</name></name><argument_list>()</argument_list></call></expr>;</expr_stmt>
+		}</block> <catch>catch <parameter_list>(<parameter><decl><type><name>IOException</name></type> <name>e</name></decl></parameter>)</parameter_list> <block>{
+			<expr_stmt><expr><call><name><name>e</name><operator>.</operator><name>printStackTrace</name></name><argument_list>()</argument_list></call></expr>;</expr_stmt>
+		}</block></catch></try>
 	}</block></function>
 }</block></class>
 </unit>
 
-<unit revision="0.9.5" language="Java" filename="home/george/DistributedSystemsProject/resources/Georgesarkis_GoogleHashCode/src/Main.java" hash="dbb79d7cbcc59ee6e33c6cba2e70d2578f084f36"><import>import <name><name>java</name><operator>.</operator><name>util</name><operator>.</operator><name>ArrayList</name></name>;</import>
+<unit revision="0.9.5" language="Java" filename="home/george/DistributedSystemsProject/resources/Georgesarkis_Address-Book-GUI/src/UI/consultUI.java" hash="acfe0c8e68d379a5a3e01a39268e1b23a0dd2fda"><package>package <name>UI</name>;</package>
+
+<import>import <name><name>Functions</name><operator>.</operator><name>*</name></name>;</import>
+<import>import static <name><name>dit042</name><operator>.</operator><name>SimpleIO</name><operator>.</operator><name>*</name></name>;</import>
+
+<class><specifier>public</specifier> class <name>consultUI</name> <block>{
+	<decl_stmt><decl><specifier>private</specifier> <type><name>functions</name></type> <name>function</name></decl>;</decl_stmt>
+	
+	<constructor><specifier>public</specifier> <name>consultUI</name><parameter_list>()</parameter_list> <block>{
+		<expr_stmt><expr><name><name>this</name><operator>.</operator><name>function</name></name> <operator>=</operator> <operator>new</operator> <call><name>functions</name><argument_list>()</argument_list></call></expr>;</expr_stmt>
+	}</block></constructor>
+	
+	<function><specifier>public</specifier> <specifier>static</specifier> <type><name>void</name></type> <name>main</name><parameter_list>(<parameter><decl><type><name><name>String</name><index>[]</index></name></type> <name>args</name></decl></parameter>)</parameter_list><block>{
+		<decl_stmt><decl><type><name>consultUI</name></type> <name>program</name> <init>= <expr><operator>new</operator> <call><name>consultUI</name><argument_list>()</argument_list></call></expr></init></decl>;</decl_stmt>
+		<expr_stmt><expr><call><name><name>program</name><operator>.</operator><name>run</name></name><argument_list>()</argument_list></call></expr>;</expr_stmt>
+	}</block></function>
+	
+	<function><specifier>public</specifier> <type><name>void</name></type> <name>run</name><parameter_list>()</parameter_list> <block>{
+		<decl_stmt><decl><type><name>int</name></type> <name>ans</name></decl> ;</decl_stmt>
+		<decl_stmt><decl><type><specifier>final</specifier> <name>int</name></type> <name>ADDUSER</name> <init>= <expr><literal type="number">1</literal></expr></init></decl>;</decl_stmt>
+		<decl_stmt><decl><type><specifier>final</specifier> <name>int</name></type> <name>SHOWUSER</name> <init>= <expr><literal type="number">2</literal></expr></init></decl>;</decl_stmt>
+		<decl_stmt><decl><type><specifier>final</specifier> <name>int</name></type> <name>DELETEUSER</name> <init>= <expr><literal type="number">3</literal></expr></init></decl>;</decl_stmt>
+		<decl_stmt><decl><type><specifier>final</specifier> <name>int</name></type> <name>EXIT</name> <init>= <expr><literal type="number">4</literal></expr></init></decl>;</decl_stmt>
+		<expr_stmt><expr><call><name>println</name><argument_list>(<argument><expr><literal type="string">"welcome to telefonebook"</literal></expr></argument>)</argument_list></call></expr>;</expr_stmt>
+			<do>do <block>{
+				
+				<expr_stmt><expr><call><name>println</name><argument_list>(<argument><expr><literal type="string">"to add new number press 1"</literal></expr></argument>)</argument_list></call></expr>;</expr_stmt>
+				<expr_stmt><expr><call><name>println</name><argument_list>(<argument><expr><literal type="string">"to see available numbers press 2"</literal></expr></argument>)</argument_list></call></expr>;</expr_stmt>
+				<expr_stmt><expr><call><name>println</name><argument_list>(<argument><expr><literal type="string">"to delete number press 3"</literal></expr></argument>)</argument_list></call></expr>;</expr_stmt>
+				<expr_stmt><expr><call><name>println</name><argument_list>(<argument><expr><literal type="string">"to exit press 4"</literal></expr></argument>)</argument_list></call></expr>;</expr_stmt>
+				<expr_stmt><expr><name>ans</name> <operator>=</operator> <call><name>readInt</name><argument_list>()</argument_list></call></expr>;</expr_stmt>
+				
+				<switch>switch <condition>(<expr><name>ans</name></expr>)</condition> <block>{
+					<case>case <expr><name>ADDUSER</name></expr>:</case>
+						<expr_stmt><expr><call><name>println</name><argument_list>(<argument><expr><literal type="string">"enter the firstName"</literal></expr></argument>)</argument_list></call></expr>;</expr_stmt>
+						<decl_stmt><decl><type><name>String</name></type> <name>first</name> <init>= <expr><call><name>readString</name><argument_list>()</argument_list></call></expr></init></decl>;</decl_stmt>
+						<expr_stmt><expr><call><name>println</name><argument_list>(<argument><expr><literal type="string">"enter the last name"</literal></expr></argument>)</argument_list></call></expr>;</expr_stmt>
+						<decl_stmt><decl><type><name>String</name></type> <name>last</name> <init>= <expr><call><name>readString</name><argument_list>()</argument_list></call></expr></init></decl>;</decl_stmt>
+						<expr_stmt><expr><call><name>println</name><argument_list>(<argument><expr><literal type="string">"enter the phone number"</literal></expr></argument>)</argument_list></call></expr>;</expr_stmt>
+						<decl_stmt><decl><type><name>int</name></type> <name>tel</name> <init>= <expr><call><name>readInt</name><argument_list>()</argument_list></call></expr></init></decl>;</decl_stmt>
+						<try>try <block>{
+							<expr_stmt><expr><call><name><name>function</name><operator>.</operator><name>addUser</name></name><argument_list>(<argument><expr><name>first</name></expr></argument>, <argument><expr><name>last</name></expr></argument>, <argument><expr><name>tel</name></expr></argument>)</argument_list></call></expr>;</expr_stmt>
+						}</block> <catch>catch <parameter_list>(<parameter><decl><type><name>Exception</name></type> <name>e</name></decl></parameter>)</parameter_list> <block>{
+							<expr_stmt><expr><call><name><name>e</name><operator>.</operator><name>printStackTrace</name></name><argument_list>()</argument_list></call></expr>;</expr_stmt>
+						}</block></catch></try>
+						<break>break;</break>
+						
+					<case>case <expr><name>SHOWUSER</name></expr>:</case>
+						<expr_stmt><expr><call><name>println</name><argument_list>(<argument><expr><call><name><name>function</name><operator>.</operator><name>printAllUsers</name></name><argument_list>()</argument_list></call></expr></argument>)</argument_list></call></expr>;</expr_stmt>
+						<break>break;</break>
+					<case>case <expr><name>DELETEUSER</name></expr>:</case>
+						<expr_stmt><expr><call><name>println</name><argument_list>(<argument><expr><literal type="string">"enter the first name"</literal></expr></argument>)</argument_list></call></expr>;</expr_stmt>
+						<decl_stmt><decl><type><name>String</name></type> <name>firstname</name> <init>= <expr><call><name>readString</name><argument_list>()</argument_list></call></expr></init></decl>;</decl_stmt>
+						<expr_stmt><expr><call><name>println</name><argument_list>(<argument><expr><literal type="string">"enter the last name"</literal></expr></argument>)</argument_list></call></expr>;</expr_stmt>
+						<decl_stmt><decl><type><name>String</name></type> <name>lastname</name> <init>= <expr><call><name>readString</name><argument_list>()</argument_list></call></expr></init></decl>;</decl_stmt>
+						<try>try <block>{
+							<expr_stmt><expr><call><name><name>function</name><operator>.</operator><name>deleteUser</name></name><argument_list>(<argument><expr><name>firstname</name></expr></argument>, <argument><expr><name>lastname</name></expr></argument>)</argument_list></call></expr>;</expr_stmt>
+						}</block> <catch>catch <parameter_list>(<parameter><decl><type><name>Exception</name></type> <name>e</name></decl></parameter>)</parameter_list> <block>{
+							<expr_stmt><expr><call><name><name>e</name><operator>.</operator><name>printStackTrace</name></name><argument_list>()</argument_list></call></expr>;</expr_stmt>
+						}</block></catch></try>
+						<break>break;</break>
+						
+					<case>case <expr><name>EXIT</name></expr>:</case>
+						<break>break;</break>
+					}</block></switch>
+			}</block>
+		while<condition>(<expr><name>ans</name> <operator>!=</operator> <name>EXIT</name></expr>)</condition>;</do><block>{
+			<expr_stmt><expr><call><name>println</name><argument_list>(<argument><expr><literal type="string">"Goodbye"</literal></expr></argument>)</argument_list></call></expr>;</expr_stmt>
+			}</block>
+	}</block></function>
+}</block></class>
+</unit>
+
+<unit revision="0.9.5" language="Java" filename="home/george/DistributedSystemsProject/resources/Georgesarkis_Address-Book-GUI/src/Classes/user.java" hash="49d374a21290e944c895b1381451c83ad515d3b3"><package>package <name>Classes</name>;</package>
+
+<class><specifier>public</specifier> class <name>user</name> <block>{
+
+	<decl_stmt><decl><specifier>private</specifier> <type><name>String</name></type> <name>firstName</name></decl>;</decl_stmt>
+	<decl_stmt><decl><specifier>private</specifier> <type><name>String</name></type> <name>lastName</name></decl>;</decl_stmt>
+	<decl_stmt><decl><specifier>private</specifier> <type><name>int</name></type> <name>tel</name></decl>;</decl_stmt>
+	
+	<constructor><specifier>public</specifier> <name>user</name><parameter_list>(<parameter><decl><type><name>String</name></type> <name>firstName</name></decl></parameter> , <parameter><decl><type><name>String</name></type> <name>lastName</name></decl></parameter>, <parameter><decl><type><name>int</name></type> <name>tel</name></decl></parameter>)</parameter_list> <block>{
+		<expr_stmt><expr><name><name>this</name><operator>.</operator><name>firstName</name></name><operator>=</operator> <name>firstName</name></expr>;</expr_stmt>
+		<expr_stmt><expr><name><name>this</name><operator>.</operator><name>lastName</name></name> <operator>=</operator> <name>lastName</name></expr>;</expr_stmt>
+		<expr_stmt><expr><name><name>this</name><operator>.</operator><name>tel</name></name> <operator>=</operator> <name>tel</name></expr>;</expr_stmt>
+		
+	}</block></constructor>
+	<function><specifier>public</specifier> <type><name>String</name></type> <name>getFirstName</name><parameter_list>()</parameter_list> <block>{
+		<return>return <expr><name><name>this</name><operator>.</operator><name>firstName</name></name></expr>;</return>
+	}</block></function>
+	<function><specifier>public</specifier> <type><name>String</name></type> <name>getLastName</name><parameter_list>()</parameter_list> <block>{
+		<return>return <expr><name><name>this</name><operator>.</operator><name>lastName</name></name></expr>;</return>
+	}</block></function>
+	<function><specifier>public</specifier> <type><name>int</name></type> <name>getTel</name><parameter_list>()</parameter_list> <block>{
+		<return>return <expr><name><name>this</name><operator>.</operator><name>tel</name></name></expr>;</return>
+	}</block></function>
+	<function><specifier>public</specifier> <type><name>void</name></type> <name>setFirstName</name><parameter_list>(<parameter><decl><type><name>String</name></type> <name>FirstName</name></decl></parameter>)</parameter_list> <block>{
+		<expr_stmt><expr><name><name>this</name><operator>.</operator><name>firstName</name></name> <operator>=</operator> <name>FirstName</name></expr>;</expr_stmt>
+	}</block></function>
+	<function><specifier>public</specifier> <type><name>void</name></type> <name>setLastName</name><parameter_list>(<parameter><decl><type><name>String</name></type> <name>lastName</name></decl></parameter>)</parameter_list> <block>{
+		<expr_stmt><expr><name><name>this</name><operator>.</operator><name>lastName</name></name> <operator>=</operator> <name>lastName</name></expr>;</expr_stmt>
+	}</block></function>
+	<function><specifier>public</specifier> <type><name>void</name></type> <name>setTel</name><parameter_list>(<parameter><decl><type><name>int</name></type> <name>tel</name></decl></parameter>)</parameter_list> <block>{
+		<expr_stmt><expr><name><name>this</name><operator>.</operator><name>tel</name></name> <operator>=</operator> <name>tel</name></expr>;</expr_stmt>
+	}</block></function>
+	<function><specifier>public</specifier> <type><name>String</name></type> <name>toString</name><parameter_list>()</parameter_list> <block>{
+		<return>return <expr><name><name>this</name><operator>.</operator><name>firstName</name></name> <operator>+</operator> <literal type="string">" "</literal> <operator>+</operator> <name><name>this</name><operator>.</operator><name>lastName</name></name> <operator>+</operator> <literal type="string">" "</literal> <operator>+</operator> <name><name>this</name><operator>.</operator><name>tel</name></name> <operator>+</operator> <call><name><name>System</name><operator>.</operator><name>lineSeparator</name></name><argument_list>()</argument_list></call></expr> ;</return>
+	}</block></function>
+}</block></class>
+</unit>
+
+<unit revision="0.9.5" language="Java" filename="home/george/DistributedSystemsProject/resources/Georgesarkis_Address-Book-GUI/src/UI/firstscreen.java" hash="a8324fe76e6877d5b93235719fdd31e75854ee31"><package>package <name>UI</name>;</package>
+
+<import>import <name><name>javafx</name><operator>.</operator><name>collections</name><operator>.</operator><name>FXCollections</name></name>;</import>
+<import>import <name><name>javafx</name><operator>.</operator><name>collections</name><operator>.</operator><name>ObservableList</name></name>;</import>
+<import>import <name><name>javafx</name><operator>.</operator><name>event</name><operator>.</operator><name>ActionEvent</name></name>;</import>
+<import>import <name><name>javafx</name><operator>.</operator><name>fxml</name><operator>.</operator><name>FXML</name></name>;</import>
+<import>import <name><name>javafx</name><operator>.</operator><name>fxml</name><operator>.</operator><name>FXMLLoader</name></name>;</import>
+<import>import <name><name>javafx</name><operator>.</operator><name>scene</name><operator>.</operator><name>Node</name></name>;</import>
+<import>import <name><name>javafx</name><operator>.</operator><name>scene</name><operator>.</operator><name>Scene</name></name>;</import>
+<import>import <name><name>javafx</name><operator>.</operator><name>scene</name><operator>.</operator><name>control</name><operator>.</operator><name>Alert</name></name>;</import>
+<import>import <name><name>javafx</name><operator>.</operator><name>scene</name><operator>.</operator><name>control</name><operator>.</operator><name>Alert</name><operator>.</operator><name>AlertType</name></name>;</import>
+<import>import <name><name>javafx</name><operator>.</operator><name>scene</name><operator>.</operator><name>control</name><operator>.</operator><name>Button</name></name>;</import>
+<import>import <name><name>javafx</name><operator>.</operator><name>scene</name><operator>.</operator><name>control</name><operator>.</operator><name>TableColumn</name></name>;</import>
+<import>import <name><name>javafx</name><operator>.</operator><name>scene</name><operator>.</operator><name>control</name><operator>.</operator><name>TableView</name></name>;</import>
+<import>import <name><name>javafx</name><operator>.</operator><name>scene</name><operator>.</operator><name>control</name><operator>.</operator><name>TextField</name></name>;</import>
+<import>import <name><name>javafx</name><operator>.</operator><name>scene</name><operator>.</operator><name>control</name><operator>.</operator><name>cell</name><operator>.</operator><name>PropertyValueFactory</name></name>;</import>
+<import>import <name><name>javafx</name><operator>.</operator><name>stage</name><operator>.</operator><name>Stage</name></name>;</import>
+<import>import <name><name>Functions</name><operator>.</operator><name>*</name></name>;</import>
+
+<import>import <name><name>java</name><operator>.</operator><name>io</name><operator>.</operator><name>IOException</name></name>;</import>
 <import>import <name><name>java</name><operator>.</operator><name>util</name><operator>.</operator><name>List</name></name>;</import>
 
-<class><specifier>public</specifier> class <name>Main</name> <block>{
-	<decl_stmt><decl><type><name>List</name></type> <name>listCars</name> <init>= <expr><operator>new</operator> <call><name>ArrayList</name><argument_list>()</argument_list></call></expr></init></decl>;</decl_stmt>
-	<decl_stmt><decl><type><name>List</name></type> <name>rids</name> <init>= <expr><operator>new</operator> <call><name>ArrayList</name><argument_list>()</argument_list></call></expr></init></decl>;</decl_stmt>
-	
+<import>import <name><name>com</name><operator>.</operator><name>sun</name><operator>.</operator><name>javafx</name><operator>.</operator><name>robot</name><operator>.</operator><name>impl</name><operator>.</operator><name>FXRobotHelper</name></name>;</import>
+
+<import>import <name><name>Classes</name><operator>.</operator><name>*</name></name>;</import>
+
+<class><specifier>public</specifier> class <name>firstscreen</name> <block>{
+	<decl_stmt><decl><type><name>functions</name></type> <name>function</name></decl>;</decl_stmt>
+	    <decl_stmt><decl><annotation>@<name>FXML</name></annotation>
+	    <specifier>private</specifier> <type><name>TableView</name></type> <name>table</name></decl>;</decl_stmt>
+
+	    <decl_stmt><decl><annotation>@<name>FXML</name></annotation>
+	    <specifier>private</specifier> <type><name>TableColumn</name></type> <name>firstNames</name></decl>;</decl_stmt>
+
+	    <decl_stmt><decl><annotation>@<name>FXML</name></annotation>
+	    <specifier>private</specifier> <type><name>TableColumn</name></type> <name>lastNames</name></decl>;</decl_stmt>
+
+	    <decl_stmt><decl><annotation>@<name>FXML</name></annotation>
+	    <specifier>private</specifier> <type><name>TableColumn</name></type> <name>numbers</name></decl>;</decl_stmt>
+
+	    <decl_stmt><decl><annotation>@<name>FXML</name></annotation>
+	    <specifier>private</specifier> <type><name>Button</name></type> <name>add</name></decl>;</decl_stmt>
+
+	    
+	    <decl_stmt><decl><annotation>@<name>FXML</name></annotation>
+	    <specifier>private</specifier> <type><name>Button</name></type> <name>exit</name></decl>;</decl_stmt>
+
+	    <decl_stmt><decl><annotation>@<name>FXML</name></annotation>
+	    <specifier>private</specifier> <type><name>TextField</name></type> <name>first</name></decl>;</decl_stmt>
+
+	    <decl_stmt><decl><annotation>@<name>FXML</name></annotation>
+	    <specifier>private</specifier> <type><name>TextField</name></type> <name>last</name></decl>;</decl_stmt>
+
+	    <decl_stmt><decl><annotation>@<name>FXML</name></annotation>
+	    <specifier>private</specifier> <type><name>TextField</name></type> <name>tel</name></decl>;</decl_stmt>
+
+	    <decl_stmt><decl><annotation>@<name>FXML</name></annotation>
+	    <specifier>private</specifier> <type><name>Button</name></type> <name>delete</name></decl>;</decl_stmt>
+
+	    <decl_stmt><decl><annotation>@<name>FXML</name></annotation>
+	    <specifier>private</specifier> <type><name>Button</name></type> <name>show</name></decl>;</decl_stmt>
+
+    <constructor><specifier>public</specifier> <name>firstscreen</name><parameter_list>()</parameter_list> <block>{
+    	<expr_stmt><expr><name><name>this</name><operator>.</operator><name>function</name></name> <operator>=</operator> <operator>new</operator> <call><name>functions</name><argument_list>()</argument_list></call></expr>;</expr_stmt>
+    	<expr_stmt><expr><call><name><name>function</name><operator>.</operator><name>readGson</name></name><argument_list>()</argument_list></call></expr>;</expr_stmt>
+    	
+    }</block></constructor>
+    
+    <function><specifier>public</specifier> <type><name>void</name></type> <name>add</name><parameter_list>()</parameter_list> <block>{
+    	<decl_stmt><decl><type><name>String</name></type> <name>firstName</name></decl> , <decl><type ref="prev"/><name>lastName</name></decl>;</decl_stmt>
+    	<decl_stmt><decl><type><name>int</name></type> <name>telnum</name></decl>;</decl_stmt>
+    	<expr_stmt><expr><name>firstName</name> <operator>=</operator> <call><name><name>first</name><operator>.</operator><name>getText</name></name><argument_list>()</argument_list></call></expr>;</expr_stmt>
+    	<expr_stmt><expr><name>lastName</name> <operator>=</operator> <call><name><name>last</name><operator>.</operator><name>getText</name></name><argument_list>()</argument_list></call></expr>;</expr_stmt>
+    	<expr_stmt><expr><name>telnum</name> <operator>=</operator> <call><name><name>Integer</name><operator>.</operator><name>parseInt</name></name><argument_list>(<argument><expr><call><name><name>tel</name><operator>.</operator><name>getText</name></name><argument_list>()</argument_list></call></expr></argument>)</argument_list></call></expr>;</expr_stmt>
+    	<try>try <block>{
+			<expr_stmt><expr><call><name><name>function</name><operator>.</operator><name>addUser</name></name><argument_list>(<argument><expr><name>firstName</name></expr></argument>, <argument><expr><name>lastName</name></expr></argument>, <argument><expr><name>telnum</name></expr></argument>)</argument_list></call></expr>;</expr_stmt>
+		}</block> <catch>catch <parameter_list>(<parameter><decl><type><name>Exception</name></type> <name>e</name></decl></parameter>)</parameter_list> <block>{
+			<decl_stmt><decl><type><name>Alert</name></type> <name>alert</name> <init>= <expr><operator>new</operator> <call><name>Alert</name><argument_list>(<argument><expr><name><name>AlertType</name><operator>.</operator><name>INFORMATION</name></name></expr></argument>)</argument_list></call></expr></init></decl>;</decl_stmt>
+			<expr_stmt><expr><call><name><name>alert</name><operator>.</operator><name>setTitle</name></name><argument_list>(<argument><expr><literal type="string">"ERROR"</literal></expr></argument>)</argument_list></call></expr>;</expr_stmt>
+			<expr_stmt><expr><call><name><name>alert</name><operator>.</operator><name>setHeaderText</name></name><argument_list>(<argument><expr><literal type="null">null</literal></expr></argument>)</argument_list></call></expr>;</expr_stmt>
+			<expr_stmt><expr><call><name><name>alert</name><operator>.</operator><name>setContentText</name></name><argument_list>(<argument><expr><literal type="string">"User is already registered!"</literal></expr></argument>)</argument_list></call></expr>;</expr_stmt>
+			<expr_stmt><expr><call><name><name>alert</name><operator>.</operator><name>showAndWait</name></name><argument_list>()</argument_list></call></expr>;</expr_stmt>
+			
+		}</block></catch></try>
+    	<expr_stmt><expr><call><name><name>first</name><operator>.</operator><name>clear</name></name><argument_list>()</argument_list></call></expr>;</expr_stmt>
+    	<expr_stmt><expr><call><name><name>last</name><operator>.</operator><name>clear</name></name><argument_list>()</argument_list></call></expr>;</expr_stmt>
+    	<expr_stmt><expr><call><name><name>tel</name><operator>.</operator><name>clear</name></name><argument_list>()</argument_list></call></expr>;</expr_stmt>
+    	<expr_stmt><expr><call><name>show</name><argument_list>()</argument_list></call></expr>;</expr_stmt>
+    }</block></function>
+    
+    <function><specifier>public</specifier> <type><name>void</name></type> <name>delete</name><parameter_list>()</parameter_list> <block>{
+    	<decl_stmt><decl><type><name>String</name></type> <name>firstName</name></decl> , <decl><type ref="prev"/><name>lastName</name></decl>;</decl_stmt>
+    	<expr_stmt><expr><name>firstName</name> <operator>=</operator> <call><name><name>first</name><operator>.</operator><name>getText</name></name><argument_list>()</argument_list></call></expr>;</expr_stmt>
+    	<expr_stmt><expr><name>lastName</name> <operator>=</operator> <call><name><name>last</name><operator>.</operator><name>getText</name></name><argument_list>()</argument_list></call></expr>;</expr_stmt>
+    	<try>try <block>{
+			<expr_stmt><expr><call><name><name>function</name><operator>.</operator><name>deleteUser</name></name><argument_list>(<argument><expr><name>firstName</name></expr></argument>, <argument><expr><name>lastName</name></expr></argument>)</argument_list></call></expr>;</expr_stmt>
+		}</block> <catch>catch <parameter_list>(<parameter><decl><type><name>Exception</name></type> <name>e</name></decl></parameter>)</parameter_list> <block>{
+			<decl_stmt><decl><type><name>Alert</name></type> <name>alert</name> <init>= <expr><operator>new</operator> <call><name>Alert</name><argument_list>(<argument><expr><name><name>AlertType</name><operator>.</operator><name>INFORMATION</name></name></expr></argument>)</argument_list></call></expr></init></decl>;</decl_stmt>
+			<expr_stmt><expr><call><name><name>alert</name><operator>.</operator><name>setTitle</name></name><argument_list>(<argument><expr><literal type="string">"ERROR"</literal></expr></argument>)</argument_list></call></expr>;</expr_stmt>
+			<expr_stmt><expr><call><name><name>alert</name><operator>.</operator><name>setHeaderText</name></name><argument_list>(<argument><expr><literal type="null">null</literal></expr></argument>)</argument_list></call></expr>;</expr_stmt>
+			<expr_stmt><expr><call><name><name>alert</name><operator>.</operator><name>setContentText</name></name><argument_list>(<argument><expr><literal type="string">"User doesn't excist!"</literal></expr></argument>)</argument_list></call></expr>;</expr_stmt>
+			<expr_stmt><expr><call><name><name>alert</name><operator>.</operator><name>showAndWait</name></name><argument_list>()</argument_list></call></expr>;</expr_stmt>
+			
+		}</block></catch></try>
+    	<expr_stmt><expr><call><name><name>first</name><operator>.</operator><name>clear</name></name><argument_list>()</argument_list></call></expr>;</expr_stmt>
+    	<expr_stmt><expr><call><name><name>last</name><operator>.</operator><name>clear</name></name><argument_list>()</argument_list></call></expr>;</expr_stmt>
+    	<expr_stmt><expr><call><name><name>tel</name><operator>.</operator><name>clear</name></name><argument_list>()</argument_list></call></expr>;</expr_stmt>
+    	<expr_stmt><expr><call><name>show</name><argument_list>()</argument_list></call></expr>;</expr_stmt>
+    }</block></function>
+    
+    <function><specifier>public</specifier> <type><name>void</name></type> <name>show</name><parameter_list>()</parameter_list> <block>{
+    	<decl_stmt><decl><type><name><name>List</name> <argument_list type="generic">&lt;<argument><name>user</name></argument>&gt;</argument_list></name></type> <name>userlist</name> <init>= <expr><name><name>function</name><operator>.</operator><name>userlist</name></name></expr></init></decl>;</decl_stmt>
+    	<decl_stmt><decl><type><name><name>ObservableList</name><argument_list type="generic">&lt;<argument><name>user</name></argument>&gt;</argument_list></name></type> <name>list</name> <init>= <expr><call><name><name>FXCollections</name><operator>.</operator><name>observableArrayList</name></name><argument_list>()</argument_list></call></expr></init></decl>;</decl_stmt>
+    	<expr_stmt><expr><call><name><name>firstNames</name><operator>.</operator><name>setCellValueFactory</name></name><argument_list>(<argument><expr><operator>new</operator> <call><name>PropertyValueFactory</name><argument_list>(<argument><expr><literal type="string">"firstName"</literal></expr></argument>)</argument_list></call></expr></argument>)</argument_list></call></expr>;</expr_stmt>
+    	<expr_stmt><expr><call><name><name>lastNames</name><operator>.</operator><name>setCellValueFactory</name></name><argument_list>(<argument><expr><operator>new</operator> <call><name>PropertyValueFactory</name><argument_list>(<argument><expr><literal type="string">"lastName"</literal></expr></argument>)</argument_list></call></expr></argument>)</argument_list></call></expr>;</expr_stmt>
+    	<expr_stmt><expr><call><name><name>numbers</name><operator>.</operator><name>setCellValueFactory</name></name><argument_list>(<argument><expr><operator>new</operator> <call><name>PropertyValueFactory</name><argument_list>(<argument><expr><literal type="string">"tel"</literal></expr></argument>)</argument_list></call></expr></argument>)</argument_list></call></expr>;</expr_stmt>
+    	
+		<for>for<control>(<init><decl><type><name>int</name></type> <name>i</name> <init>= <expr><literal type="number">0</literal></expr></init></decl>;</init> <condition><expr><name>i</name> <operator>&lt;</operator> <call><name><name>userlist</name><operator>.</operator><name>size</name></name><argument_list>()</argument_list></call></expr>;</condition><incr><expr><name>i</name><operator>++</operator></expr></incr>)</control> <block>{
+    		<expr_stmt><expr><call><name><name>list</name><operator>.</operator><name>add</name></name><argument_list>(<argument><expr><operator>new</operator> <call><name>user</name><argument_list>(<argument><expr><call><name><name>userlist</name><operator>.</operator><name>get</name></name><argument_list>(<argument><expr><name>i</name></expr></argument>)</argument_list></call><operator>.</operator><call><name>getFirstName</name><argument_list>()</argument_list></call></expr></argument>, <argument><expr><call><name><name>userlist</name><operator>.</operator><name>get</name></name><argument_list>(<argument><expr><name>i</name></expr></argument>)</argument_list></call><operator>.</operator><call><name>getLastName</name><argument_list>()</argument_list></call></expr></argument>,<argument><expr><call><name><name>userlist</name><operator>.</operator><name>get</name></name><argument_list>(<argument><expr><name>i</name></expr></argument>)</argument_list></call><operator>.</operator><call><name>getTel</name><argument_list>()</argument_list></call></expr></argument>)</argument_list></call></expr></argument>)</argument_list></call></expr>;</expr_stmt>
+    	}</block></for>
+    	<expr_stmt><expr><call><name><name>table</name><operator>.</operator><name>setItems</name></name><argument_list>(<argument><expr><name>list</name></expr></argument>)</argument_list></call></expr>;</expr_stmt>
+    }</block></function>
+    
+    <function><specifier>public</specifier> <type><name>void</name></type> <name>exit</name><parameter_list>(<parameter><decl><type><name>ActionEvent</name></type> <name>e</name></decl></parameter>)</parameter_list> <block>{
+    	<expr_stmt><expr><call><name><name>function</name><operator>.</operator><name>saveGson</name></name><argument_list>()</argument_list></call></expr>;</expr_stmt>
+        <decl_stmt><decl><type><specifier>final</specifier> <name>Node</name></type> <name>source</name> <init>= <expr><operator>(</operator><name>Node</name><operator>)</operator> <call><name><name>e</name><operator>.</operator><name>getSource</name></name><argument_list>()</argument_list></call></expr></init></decl>;</decl_stmt>
+        <decl_stmt><decl><type><specifier>final</specifier> <name>Stage</name></type> <name>stage</name> <init>= <expr><operator>(</operator><name>Stage</name><operator>)</operator> <call><name><name>source</name><operator>.</operator><name>getScene</name></name><argument_list>()</argument_list></call><operator>.</operator><call><name>getWindow</name><argument_list>()</argument_list></call></expr></init></decl>;</decl_stmt>
+        <expr_stmt><expr><call><name><name>stage</name><operator>.</operator><name>close</name></name><argument_list>()</argument_list></call></expr>;</expr_stmt>
+    }</block></function>
+    
 }</block></class>
 </unit>
 
-<unit revision="0.9.5" language="Java" filename="home/george/DistributedSystemsProject/resources/Georgesarkis_GoogleHashCode/src/MainDaniel.java" hash="b81d81af3f1958e79aab0ac905a1eb20c3c235e3">
-<class><specifier>public</specifier> class <name>MainDaniel</name> <block>{
+<unit revision="0.9.5" language="Java" filename="home/george/DistributedSystemsProject/resources/Georgesarkis_Address-Book-GUI/src/dit042/SimpleIO.java" hash="067ce871199712ab28972013b3809261b1303a10"><package>package <name>dit042</name>;</package>
 
-	<function><specifier>public</specifier> <specifier>static</specifier> <type><name>void</name></type> <name>main</name><parameter_list>(<parameter><decl><type><name><name>String</name><index>[]</index></name></type> <name>args</name></decl></parameter>)</parameter_list> <block>{
-		<comment type="line">// TODO Auto-generated method stub</comment>
-		
-	}</block></function>
+<import>import <name><name>java</name><operator>.</operator><name>util</name><operator>.</operator><name>Scanner</name></name>;</import>
+<import>import <name><name>java</name><operator>.</operator><name>util</name><operator>.</operator><name>Locale</name></name>;</import>
 
+<comment type="block" format="javadoc">/**
+ *  Seventies style standard IO.
+ *  @author Cezar Ionescu &lt;cezar@chalmers.se&gt;
+ *  @author Johannes Ekberg &lt;uppfinnarn@gmail.com&gt;
+ *  @author Musard Balliu
+ *  @version 0.4
+ *  @since 2015-09-01
+ */</comment>
+<comment type="line">// Fixes by Johannes Ekberg: closed scanners, removed useless scanner</comment>
+<comment type="line">// Closing scanners leads to errors for multiple reads.</comment>
+<comment type="line">// Musard: add method to read a String and a line from std input</comment>
+<comment type="line">// Musard: modified readChar and setLocale for double</comment>
+
+<class><specifier>public</specifier> class <name>SimpleIO</name> <block>{
+    <comment type="block" format="javadoc">/**
+     *  "Global" variable used for error checking.
+     *  Always check if the value is false after an input
+     *  operation, otherwise the result can be incorrect!
+     */</comment>
+    <decl_stmt><decl><specifier>public</specifier> <specifier>static</specifier> <type><name>boolean</name></type> <name>IOError</name> <init>= <expr><literal type="boolean">false</literal></expr></init></decl>;</decl_stmt>
+
+    <comment type="block" format="javadoc">/**
+     *  Generic print.
+     *  @param o object to print
+     */</comment>
+    <function><specifier>public</specifier> <specifier>static</specifier> <type><name>void</name></type> <name>print</name><parameter_list>(<parameter><decl><type><name>Object</name></type> <name>o</name></decl></parameter>)</parameter_list> <block>{
+        <expr_stmt><expr><call><name><name>System</name><operator>.</operator><name>out</name><operator>.</operator><name>print</name></name><argument_list>(<argument><expr><name>o</name></expr></argument>)</argument_list></call></expr>;</expr_stmt>
+        <expr_stmt><expr><name>IOError</name> <operator>=</operator> <literal type="boolean">false</literal></expr>;</expr_stmt>
+    }</block></function>
+
+    <comment type="block" format="javadoc">/**
+     *  Generic println.
+     *  @param o object to print
+     */</comment>
+    <function><specifier>public</specifier> <specifier>static</specifier> <type><name>void</name></type> <name>println</name><parameter_list>(<parameter><decl><type><name>Object</name></type> <name>o</name></decl></parameter>)</parameter_list> <block>{
+        <expr_stmt><expr><call><name><name>System</name><operator>.</operator><name>out</name><operator>.</operator><name>println</name></name><argument_list>(<argument><expr><name>o</name></expr></argument>)</argument_list></call></expr>;</expr_stmt>
+        <expr_stmt><expr><name>IOError</name> <operator>=</operator> <literal type="boolean">false</literal></expr>;</expr_stmt>
+    }</block></function>
+
+    <comment type="block" format="javadoc">/**
+     *  Reads next byte from standard input.
+     *  Sets IOResult in case of error.
+     *  @return next byte read from standard input.
+     */</comment>
+    <function><specifier>public</specifier> <specifier>static</specifier> <type><name>byte</name></type> <name>readByte</name><parameter_list>()</parameter_list> <block>{
+        <expr_stmt><expr><name>IOError</name> <operator>=</operator> <literal type="boolean">false</literal></expr>;</expr_stmt>
+        <decl_stmt><decl><type><name>Scanner</name></type> <name>scan</name> <init>= <expr><operator>new</operator> <call><name>Scanner</name><argument_list>(<argument><expr><name><name>System</name><operator>.</operator><name>in</name></name></expr></argument>)</argument_list></call></expr></init></decl>;</decl_stmt>
+        <decl_stmt><decl><type><name>byte</name></type> <name>result</name> <init>= <expr><literal type="number">0</literal></expr></init></decl>;</decl_stmt>
+
+        <try>try <block>{
+            <expr_stmt><expr><name>result</name> <operator>=</operator> <call><name><name>scan</name><operator>.</operator><name>nextByte</name></name><argument_list>()</argument_list></call></expr>;</expr_stmt>
+        }</block> <catch>catch <parameter_list>(<parameter><decl><type><name>Exception</name></type> <name>e</name></decl></parameter>)</parameter_list> <block>{
+            <expr_stmt><expr><name>IOError</name> <operator>=</operator> <literal type="boolean">true</literal></expr>;</expr_stmt>
+        }</block></catch></try>
+        
+        <return>return <expr><name>result</name></expr>;</return>
+    }</block></function>
+
+    <comment type="block" format="javadoc">/**
+     *  Reads next short from standard input.
+     *  Sets IOResult in case of error.
+     *  @return next short read from standard input.
+     */</comment>
+    <function><specifier>public</specifier> <specifier>static</specifier> <type><name>short</name></type> <name>readShort</name><parameter_list>()</parameter_list> <block>{
+        <expr_stmt><expr><name>IOError</name> <operator>=</operator> <literal type="boolean">false</literal></expr>;</expr_stmt>
+        <decl_stmt><decl><type><name>Scanner</name></type> <name>scan</name> <init>= <expr><operator>new</operator> <call><name>Scanner</name><argument_list>(<argument><expr><name><name>System</name><operator>.</operator><name>in</name></name></expr></argument>)</argument_list></call></expr></init></decl>;</decl_stmt>
+        <decl_stmt><decl><type><name>short</name></type> <name>result</name> <init>= <expr><literal type="number">0</literal></expr></init></decl>;</decl_stmt>
+
+        <try>try <block>{
+            <expr_stmt><expr><name>result</name> <operator>=</operator> <call><name><name>scan</name><operator>.</operator><name>nextShort</name></name><argument_list>()</argument_list></call></expr>;</expr_stmt>
+        }</block> <catch>catch <parameter_list>(<parameter><decl><type><name>Exception</name></type> <name>e</name></decl></parameter>)</parameter_list> <block>{
+            <expr_stmt><expr><name>IOError</name> <operator>=</operator> <literal type="boolean">true</literal></expr>;</expr_stmt>
+        }</block></catch></try>
+        
+        <return>return <expr><name>result</name></expr>;</return>
+    }</block></function>
+
+    <comment type="block" format="javadoc">/**
+     *  Reads next int from standard input.
+     *  Sets IOResult in case of error.
+     *  @return next int read from standard input.
+     */</comment>
+    <function><specifier>public</specifier> <specifier>static</specifier> <type><name>int</name></type> <name>readInt</name><parameter_list>()</parameter_list> <block>{
+        <expr_stmt><expr><name>IOError</name> <operator>=</operator> <literal type="boolean">false</literal></expr>;</expr_stmt>
+        <decl_stmt><decl><type><name>Scanner</name></type> <name>scan</name> <init>= <expr><operator>new</operator> <call><name>Scanner</name><argument_list>(<argument><expr><name><name>System</name><operator>.</operator><name>in</name></name></expr></argument>)</argument_list></call></expr></init></decl>;</decl_stmt>
+        <decl_stmt><decl><type><name>int</name></type> <name>result</name> <init>= <expr><literal type="number">0</literal></expr></init></decl>;</decl_stmt>
+
+        <try>try <block>{
+            <expr_stmt><expr><name>result</name> <operator>=</operator> <call><name><name>scan</name><operator>.</operator><name>nextInt</name></name><argument_list>()</argument_list></call></expr>;</expr_stmt>
+        }</block> <catch>catch <parameter_list>(<parameter><decl><type><name>Exception</name></type> <name>e</name></decl></parameter>)</parameter_list> <block>{
+            <expr_stmt><expr><name>IOError</name> <operator>=</operator> <literal type="boolean">true</literal></expr>;</expr_stmt>
+        }</block></catch></try>
+        
+        <return>return <expr><name>result</name></expr>;</return>
+    }</block></function>
+
+    <comment type="block" format="javadoc">/**
+     *  Reads next long from standard input.
+     *  Sets IOResult in case of error.
+     *  @return next long read from standard input.
+     */</comment>
+    <function><specifier>public</specifier> <specifier>static</specifier> <type><name>long</name></type> <name>readLong</name><parameter_list>()</parameter_list> <block>{
+        <expr_stmt><expr><name>IOError</name> <operator>=</operator> <literal type="boolean">false</literal></expr>;</expr_stmt>
+        <decl_stmt><decl><type><name>Scanner</name></type> <name>scan</name> <init>= <expr><operator>new</operator> <call><name>Scanner</name><argument_list>(<argument><expr><name><name>System</name><operator>.</operator><name>in</name></name></expr></argument>)</argument_list></call></expr></init></decl>;</decl_stmt>
+        <decl_stmt><decl><type><name>long</name></type> <name>result</name> <init>= <expr><literal type="number">0</literal></expr></init></decl>;</decl_stmt>
+
+        <try>try <block>{
+            <expr_stmt><expr><name>result</name> <operator>=</operator> <call><name><name>scan</name><operator>.</operator><name>nextLong</name></name><argument_list>()</argument_list></call></expr>;</expr_stmt>
+        }</block> <catch>catch <parameter_list>(<parameter><decl><type><name>Exception</name></type> <name>e</name></decl></parameter>)</parameter_list> <block>{
+            <expr_stmt><expr><name>IOError</name> <operator>=</operator> <literal type="boolean">true</literal></expr>;</expr_stmt>
+        }</block></catch></try>
+        
+        <return>return <expr><name>result</name></expr>;</return>
+    }</block></function>
+
+    <comment type="block" format="javadoc">/**
+     *  Reads next char from standard input.
+     *  Should perhaps set IOResult on EOF, but currently doesn't.
+     *  @return next char read from standard input.
+     */</comment>
+    <function><specifier>public</specifier> <specifier>static</specifier> <type><name>char</name></type> <name>readChar</name><parameter_list>()</parameter_list> <block>{
+        <expr_stmt><expr><name>IOError</name> <operator>=</operator> <literal type="boolean">false</literal></expr>;</expr_stmt>
+        <decl_stmt><decl><type><name>char</name></type> <name>result</name> <init>= <expr><literal type="number">0</literal></expr></init></decl>;</decl_stmt>
+        <decl_stmt><decl><type><name>Scanner</name></type> <name>scan</name> <init>= <expr><operator>new</operator> <call><name>Scanner</name><argument_list>(<argument><expr><name><name>System</name><operator>.</operator><name>in</name></name></expr></argument>)</argument_list></call></expr></init></decl>;</decl_stmt>
+
+        <try>try <block>{
+            <expr_stmt><expr><name>result</name> <operator>=</operator> <call><name><name>scan</name><operator>.</operator><name>nextLine</name></name><argument_list>()</argument_list></call><operator>.</operator><call><name>charAt</name><argument_list>(<argument><expr><literal type="number">0</literal></expr></argument>)</argument_list></call></expr>;</expr_stmt>
+        }</block> <catch>catch <parameter_list>(<parameter><decl><type><name>Exception</name></type> <name>e</name></decl></parameter>)</parameter_list> <block>{
+            <expr_stmt><expr><name>IOError</name> <operator>=</operator> <literal type="boolean">true</literal></expr>;</expr_stmt>
+        }</block></catch></try>
+
+        <return>return <expr><name>result</name></expr>;</return>
+    }</block></function>
+
+    <comment type="block" format="javadoc">/**
+     *  Reads next float from standard input.
+     *  Sets IOResult in case of error.
+     *  @return next float read from standard input.
+     */</comment>
+    <function><specifier>public</specifier> <specifier>static</specifier> <type><name>float</name></type> <name>readFloat</name><parameter_list>()</parameter_list> <block>{
+        <expr_stmt><expr><name>IOError</name> <operator>=</operator> <literal type="boolean">false</literal></expr>;</expr_stmt>
+        <decl_stmt><decl><type><name>Scanner</name></type> <name>scan</name> <init>= <expr><operator>new</operator> <call><name>Scanner</name><argument_list>(<argument><expr><name><name>System</name><operator>.</operator><name>in</name></name></expr></argument>)</argument_list></call></expr></init></decl>;</decl_stmt>
+        <expr_stmt><expr><call><name><name>scan</name><operator>.</operator><name>useLocale</name></name><argument_list>(<argument><expr><name><name>Locale</name><operator>.</operator><name>ENGLISH</name></name></expr></argument>)</argument_list></call></expr>;</expr_stmt>
+        <decl_stmt><decl><type><name>float</name></type> <name>result</name> <init>= <expr><literal type="number">0</literal></expr></init></decl>;</decl_stmt>
+
+        <try>try <block>{
+            <expr_stmt><expr><name>result</name> <operator>=</operator> <call><name><name>scan</name><operator>.</operator><name>nextFloat</name></name><argument_list>()</argument_list></call></expr>;</expr_stmt>
+        }</block> <catch>catch <parameter_list>(<parameter><decl><type><name>Exception</name></type> <name>e</name></decl></parameter>)</parameter_list> <block>{
+            <expr_stmt><expr><name>IOError</name> <operator>=</operator> <literal type="boolean">true</literal></expr>;</expr_stmt>
+        }</block></catch></try>
+        
+        <return>return <expr><name>result</name></expr>;</return>
+    }</block></function>
+
+    <comment type="block" format="javadoc">/**
+     *  Reads next double from standard input.
+     *  Sets IOResult in case of error.
+     *  @return next double read from standard input.
+     */</comment>
+    <function><specifier>public</specifier> <specifier>static</specifier> <type><name>double</name></type> <name>readDouble</name><parameter_list>()</parameter_list> <block>{
+        <expr_stmt><expr><name>IOError</name> <operator>=</operator> <literal type="boolean">false</literal></expr>;</expr_stmt>
+        <decl_stmt><decl><type><name>Scanner</name></type> <name>scan</name> <init>= <expr><operator>new</operator> <call><name>Scanner</name><argument_list>(<argument><expr><name><name>System</name><operator>.</operator><name>in</name></name></expr></argument>)</argument_list></call></expr></init></decl>;</decl_stmt>
+        <expr_stmt><expr><call><name><name>scan</name><operator>.</operator><name>useLocale</name></name><argument_list>(<argument><expr><name><name>Locale</name><operator>.</operator><name>ENGLISH</name></name></expr></argument>)</argument_list></call></expr>;</expr_stmt>
+        <decl_stmt><decl><type><name>double</name></type> <name>result</name> <init>= <expr><literal type="number">0</literal></expr></init></decl>;</decl_stmt>
+
+        <try>try <block>{
+
+            <expr_stmt><expr><name>result</name> <operator>=</operator> <call><name><name>scan</name><operator>.</operator><name>nextDouble</name></name><argument_list>()</argument_list></call></expr>;</expr_stmt>
+        }</block> <catch>catch <parameter_list>(<parameter><decl><type><name>Exception</name></type> <name>e</name></decl></parameter>)</parameter_list> <block>{
+            <expr_stmt><expr><name>IOError</name> <operator>=</operator> <literal type="boolean">true</literal></expr>;</expr_stmt>
+        }</block></catch></try>
+        
+        <return>return <expr><name>result</name></expr>;</return>
+    }</block></function>
+
+    <comment type="block" format="javadoc">/**
+     *  Reads next boolean from standard input.
+     *  Sets IOResult in case of error.
+     *  @return next boolean read from standard input.
+     */</comment>
+    <function><specifier>public</specifier> <specifier>static</specifier> <type><name>boolean</name></type> <name>readBoolean</name><parameter_list>()</parameter_list> <block>{
+        <expr_stmt><expr><name>IOError</name> <operator>=</operator> <literal type="boolean">false</literal></expr>;</expr_stmt>
+        <decl_stmt><decl><type><name>Scanner</name></type> <name>scan</name> <init>= <expr><operator>new</operator> <call><name>Scanner</name><argument_list>(<argument><expr><name><name>System</name><operator>.</operator><name>in</name></name></expr></argument>)</argument_list></call></expr></init></decl>;</decl_stmt>
+        <decl_stmt><decl><type><name>boolean</name></type> <name>result</name> <init>= <expr><literal type="boolean">false</literal></expr></init></decl>;</decl_stmt>
+
+        <try>try <block>{
+            <expr_stmt><expr><name>result</name> <operator>=</operator> <call><name><name>scan</name><operator>.</operator><name>nextBoolean</name></name><argument_list>()</argument_list></call></expr>;</expr_stmt>
+        }</block> <catch>catch <parameter_list>(<parameter><decl><type><name>Exception</name></type> <name>e</name></decl></parameter>)</parameter_list> <block>{
+            <expr_stmt><expr><name>IOError</name> <operator>=</operator> <literal type="boolean">true</literal></expr>;</expr_stmt>
+        }</block></catch></try>
+        
+        <return>return <expr><name>result</name></expr>;</return>
+    }</block></function>
+
+    <comment type="block" format="javadoc">/**
+     *  Reads next string from standard input.
+     *  Stops at the first empty space.
+     *  Sets IOResult in case of error.
+     *  @return next string read from standard input.
+     */</comment>
+    <function><specifier>public</specifier> <specifier>static</specifier> <type><name>String</name></type> <name>readString</name><parameter_list>()</parameter_list> <block>{
+        <expr_stmt><expr><name>IOError</name> <operator>=</operator> <literal type="boolean">false</literal></expr>;</expr_stmt>
+        <decl_stmt><decl><type><name>Scanner</name></type> <name>scan</name> <init>= <expr><operator>new</operator> <call><name>Scanner</name><argument_list>(<argument><expr><name><name>System</name><operator>.</operator><name>in</name></name></expr></argument>)</argument_list></call></expr></init></decl>;</decl_stmt>
+        <decl_stmt><decl><type><name>String</name></type> <name>result</name> <init>= <expr><literal type="string">""</literal></expr></init></decl>;</decl_stmt>
+
+        <try>try <block>{
+            <expr_stmt><expr><name>result</name> <operator>=</operator> <call><name><name>scan</name><operator>.</operator><name>next</name></name><argument_list>()</argument_list></call></expr>;</expr_stmt>
+        }</block> <catch>catch <parameter_list>(<parameter><decl><type><name>Exception</name></type> <name>e</name></decl></parameter>)</parameter_list> <block>{
+            <expr_stmt><expr><name>IOError</name> <operator>=</operator> <literal type="boolean">true</literal></expr>;</expr_stmt>
+        }</block></catch></try>
+        
+        <return>return <expr><name>result</name></expr>;</return>
+    }</block></function>
+    
+    <comment type="block" format="javadoc">/**
+     *  Reads next line from standard input, including empty spaces.
+     *  Sets IOResult in case of error.
+     *  @return next line read from standard input.
+     */</comment>
+    <function><specifier>public</specifier> <specifier>static</specifier> <type><name>String</name></type> <name>readLine</name><parameter_list>()</parameter_list> <block>{
+        <expr_stmt><expr><name>IOError</name> <operator>=</operator> <literal type="boolean">false</literal></expr>;</expr_stmt>
+        <decl_stmt><decl><type><name>Scanner</name></type> <name>scan</name> <init>= <expr><operator>new</operator> <call><name>Scanner</name><argument_list>(<argument><expr><name><name>System</name><operator>.</operator><name>in</name></name></expr></argument>)</argument_list></call></expr></init></decl>;</decl_stmt>
+        <decl_stmt><decl><type><name>String</name></type> <name>result</name> <init>= <expr><literal type="string">""</literal></expr></init></decl>;</decl_stmt>
+
+        <try>try <block>{
+            <expr_stmt><expr><name>result</name> <operator>=</operator> <call><name><name>scan</name><operator>.</operator><name>nextLine</name></name><argument_list>()</argument_list></call></expr>;</expr_stmt>
+        }</block> <catch>catch <parameter_list>(<parameter><decl><type><name>Exception</name></type> <name>e</name></decl></parameter>)</parameter_list> <block>{
+            <expr_stmt><expr><name>IOError</name> <operator>=</operator> <literal type="boolean">true</literal></expr>;</expr_stmt>
+        }</block></catch></try>
+        
+        <return>return <expr><name>result</name></expr>;</return>
+    }</block></function>    
+            
 }</block></class>
 </unit>
 
-<unit revision="0.9.5" language="Java" filename="home/george/DistributedSystemsProject/resources/Georgesarkis_GoogleHashCode/src/Point.java" hash="4e7b2193bcce5d0bbb01d21f74004104902eac13">
-<class><specifier>public</specifier> class <name>Point</name> <block>{
-	<decl_stmt><decl><specifier>private</specifier> <type><name>int</name></type> <name>x</name></decl>;</decl_stmt>
-	<decl_stmt><decl><specifier>private</specifier> <type><name>int</name></type> <name>y</name></decl>;</decl_stmt>
+<unit revision="0.9.5" language="Java" filename="home/george/DistributedSystemsProject/resources/Georgesarkis_Address-Book-GUI/src/Functions/functions.java" hash="017f6698449e9fa54b8961900dd333c48ce33f0e"><package>package <name>Functions</name>;</package>
+
+<import>import <name><name>java</name><operator>.</operator><name>io</name><operator>.</operator><name>File</name></name>;</import>
+<import>import <name><name>java</name><operator>.</operator><name>io</name><operator>.</operator><name>FileNotFoundException</name></name>;</import>
+<import>import <name><name>java</name><operator>.</operator><name>io</name><operator>.</operator><name>FileOutputStream</name></name>;</import>
+<import>import <name><name>java</name><operator>.</operator><name>io</name><operator>.</operator><name>FileWriter</name></name>;</import>
+<import>import <name><name>java</name><operator>.</operator><name>io</name><operator>.</operator><name>IOException</name></name>;</import>
+<import>import <name><name>java</name><operator>.</operator><name>io</name><operator>.</operator><name>Writer</name></name>;</import>
+<import>import <name><name>java</name><operator>.</operator><name>lang</name><operator>.</operator><name>reflect</name><operator>.</operator><name>Type</name></name>;</import>
+<import>import <name><name>java</name><operator>.</operator><name>util</name><operator>.</operator><name>ArrayList</name></name>;</import>
+<import>import <name><name>java</name><operator>.</operator><name>util</name><operator>.</operator><name>List</name></name>;</import>
+<import>import <name><name>java</name><operator>.</operator><name>util</name><operator>.</operator><name>Scanner</name></name>;</import>
+
+<import>import <name><name>com</name><operator>.</operator><name>google</name><operator>.</operator><name>gson</name><operator>.</operator><name>Gson</name></name>;</import>
+<import>import <name><name>com</name><operator>.</operator><name>google</name><operator>.</operator><name>gson</name><operator>.</operator><name>GsonBuilder</name></name>;</import>
+<import>import <name><name>com</name><operator>.</operator><name>google</name><operator>.</operator><name>gson</name><operator>.</operator><name>reflect</name><operator>.</operator><name>TypeToken</name></name>;</import>
+
+<import>import <name><name>Classes</name><operator>.</operator><name>*</name></name>;</import>
+
+<class><specifier>public</specifier> class <name>functions</name> <block>{
+	<decl_stmt><decl><specifier>public</specifier> <type><name><name>List</name> <argument_list type="generic">&lt;<argument><name>user</name></argument>&gt;</argument_list></name></type> <name>userlist</name></decl>;</decl_stmt>
+	<decl_stmt><decl><type><name>Gson</name></type> <name>objGson</name></decl> ;</decl_stmt>
 	
-	<constructor><specifier>public</specifier> <name>Point</name><parameter_list>()</parameter_list> <block>{
-		<expr_stmt><expr><name><name>this</name><operator>.</operator><name>x</name></name> <operator>=</operator> <literal type="number">0</literal></expr>;</expr_stmt>
-		<expr_stmt><expr><name><name>this</name><operator>.</operator><name>y</name></name> <operator>=</operator> <literal type="number">0</literal></expr>;</expr_stmt>
+	<constructor><specifier>public</specifier> <name>functions</name><parameter_list>()</parameter_list> <block>{
+		<expr_stmt><expr><name><name>this</name><operator>.</operator><name>userlist</name></name> <operator>=</operator> <operator>new</operator> <call><name><name>ArrayList</name><argument_list type="generic">&lt;&gt;</argument_list></name><argument_list>()</argument_list></call></expr>;</expr_stmt>
+		<expr_stmt><expr><name>objGson</name> <operator>=</operator> <operator>new</operator> <call><name>GsonBuilder</name><argument_list>()</argument_list></call><operator>.</operator><call><name>create</name><argument_list>()</argument_list></call></expr>;</expr_stmt>
 	}</block></constructor>
 	
-	<constructor><specifier>public</specifier> <name>Point</name><parameter_list>(<parameter><decl><type><name>int</name></type> <name>x</name></decl></parameter>, <parameter><decl><type><name>int</name></type> <name>y</name></decl></parameter>)</parameter_list> <block>{
-		<expr_stmt><expr><name><name>this</name><operator>.</operator><name>x</name></name> <operator>=</operator> <name>x</name></expr>;</expr_stmt>
-		<expr_stmt><expr><name><name>this</name><operator>.</operator><name>y</name></name> <operator>=</operator> <name>y</name></expr>;</expr_stmt>
-	}</block></constructor>
-	
-	<function><specifier>public</specifier> <type><name>int</name></type> <name>getX</name><parameter_list>()</parameter_list> <block>{
-		<return>return <expr><name>x</name></expr>;</return>
-	}</block></function>
-	<function><specifier>public</specifier> <type><name>void</name></type> <name>setX</name><parameter_list>(<parameter><decl><type><name>int</name></type> <name>x</name></decl></parameter>)</parameter_list> <block>{
-		<expr_stmt><expr><name><name>this</name><operator>.</operator><name>x</name></name> <operator>=</operator> <name>x</name></expr>;</expr_stmt>
-	}</block></function>
-	<function><specifier>public</specifier> <type><name>int</name></type> <name>getY</name><parameter_list>()</parameter_list> <block>{
-		<return>return <expr><name>y</name></expr>;</return>
-	}</block></function>
-	<function><specifier>public</specifier> <type><name>void</name></type> <name>setY</name><parameter_list>(<parameter><decl><type><name>int</name></type> <name>y</name></decl></parameter>)</parameter_list> <block>{
-		<expr_stmt><expr><name><name>this</name><operator>.</operator><name>y</name></name> <operator>=</operator> <name>y</name></expr>;</expr_stmt>
-	}</block></function>
-	
-	
-}</block></class>
-</unit>
-
-<unit revision="0.9.5" language="Java" filename="home/george/DistributedSystemsProject/resources/Georgesarkis_GoogleHashCode/src/HashCode.java" hash="9f93efb6e70eff1221f2f6befafe5606e066e673"><import>import <name><name>java</name><operator>.</operator><name>util</name><operator>.</operator><name>ArrayList</name></name>;</import>
-
-<class><specifier>public</specifier> class <name>HashCode</name> <block>{
-
-	<decl_stmt><decl><specifier>private</specifier> <specifier>static</specifier> <type><name>TheTown</name></type> <name>town</name> <init>= <expr><call><name><name>InputReader</name><operator>.</operator><name>fetch</name></name><argument_list>()</argument_list></call></expr></init></decl>;</decl_stmt>
-	<decl_stmt><decl><specifier>private</specifier> <specifier>static</specifier> <type><name><name>ArrayList</name><argument_list type="generic">&lt;<argument><name>Ride</name></argument>&gt;</argument_list></name></type> <name>rideList</name> <init>= <expr><call><name><name>town</name><operator>.</operator><name>getRideList</name></name><argument_list>()</argument_list></call></expr></init></decl>;</decl_stmt>
-	<decl_stmt><decl><specifier>private</specifier> <specifier>static</specifier> <type><name><name>ArrayList</name><argument_list type="generic">&lt;<argument><name>Car</name></argument>&gt;</argument_list></name></type> <name>carList</name> <init>= <expr><operator>new</operator> <call><name><name>ArrayList</name><argument_list type="generic">&lt;&gt;</argument_list></name><argument_list>(<argument><expr><call><name><name>town</name><operator>.</operator><name>getVehicles</name></name><argument_list>()</argument_list></call></expr></argument>)</argument_list></call></expr></init></decl>;</decl_stmt>
-	
-	
-	<function><specifier>public</specifier> <specifier>static</specifier> <type><name>void</name></type> <name>main</name><parameter_list>(<parameter><decl><type><name><name>String</name><index>[]</index></name></type> <name>args</name></decl></parameter>)</parameter_list> <block>{
-		<comment type="line">// TODO Auto-generated method stub</comment>
-		
-		<for>for <control>(<init><decl><type><name>int</name></type> <name>i</name> <init>= <expr><literal type="number">0</literal></expr></init></decl>;</init> <condition><expr><name>i</name> <operator>&lt;</operator> <call><name><name>town</name><operator>.</operator><name>getVehicles</name></name><argument_list>()</argument_list></call></expr>;</condition> <incr><expr><name>i</name><operator>++</operator></expr></incr>)</control> <block>{
-			<decl_stmt><decl><type><name>Car</name></type> <name>car</name> <init>= <expr><operator>new</operator> <call><name>Car</name><argument_list>()</argument_list></call></expr></init></decl>;</decl_stmt>
-			<expr_stmt><expr><call><name><name>carList</name><operator>.</operator><name>add</name></name><argument_list>(<argument><expr><name>car</name></expr></argument>)</argument_list></call></expr>;</expr_stmt>
-		}</block></for>
-		<for>for <control>(<init><decl><type><name>int</name></type> <name>i</name> <init>= <expr><literal type="number">0</literal></expr></init></decl>;</init> <condition><expr><name>i</name> <operator>&lt;</operator> <call><name><name>town</name><operator>.</operator><name>getSteps</name></name><argument_list>()</argument_list></call></expr>;</condition> <incr><expr><name>i</name><operator>++</operator></expr></incr>)</control> <block>{
-			<expr_stmt><expr><call><name>getAvailableCars</name><argument_list>(<argument><expr><name>i</name></expr></argument>)</argument_list></call></expr>;</expr_stmt>			
-		}</block></for>
-		<for>for<control>(<init><decl><type><name>int</name></type> <name>i</name><init>=<expr><literal type="number">0</literal></expr></init></decl>;</init> <condition><expr><name>i</name> <operator>&lt;</operator> <call><name><name>rideList</name><operator>.</operator><name>size</name></name><argument_list>()</argument_list></call></expr>;</condition> <incr><expr><name>i</name><operator>++</operator></expr></incr>)</control> <block>{
-			<expr_stmt><expr><call><name><name>System</name><operator>.</operator><name>out</name><operator>.</operator><name>println</name></name><argument_list>(<argument><expr><literal type="string">"["</literal> <operator>+</operator> <call><name><name>rideList</name><operator>.</operator><name>get</name></name><argument_list>(<argument><expr><name>i</name></expr></argument>)</argument_list></call><operator>.</operator><call><name>getStartX</name><argument_list>()</argument_list></call> <operator>+</operator> <literal type="string">","</literal> <operator>+</operator> <call><name><name>rideList</name><operator>.</operator><name>get</name></name><argument_list>(<argument><expr><name>i</name></expr></argument>)</argument_list></call><operator>.</operator><call><name>getStartY</name><argument_list>()</argument_list></call> <operator>+</operator> <literal type="string">"]"</literal></expr></argument> )</argument_list></call></expr>;</expr_stmt>
-		}</block></for>
-		
-		
-		
-	}</block></function>
-	
-	<function><specifier>public</specifier> <specifier>static</specifier> <type><name>int</name></type> <name>distanceBetween</name><parameter_list>(<parameter><decl><type><name>Point</name></type> <name>a</name></decl></parameter>, <parameter><decl><type><name>Point</name></type> <name>b</name></decl></parameter>)</parameter_list> <block>{
-		<return>return <expr><call><name><name>Math</name><operator>.</operator><name>abs</name></name><argument_list>(<argument><expr><call><name><name>a</name><operator>.</operator><name>getX</name></name><argument_list>()</argument_list></call> <operator>-</operator> <call><name><name>b</name><operator>.</operator><name>getX</name></name><argument_list>()</argument_list></call></expr></argument>)</argument_list></call> <operator>+</operator> <call><name><name>Math</name><operator>.</operator><name>abs</name></name><argument_list>(<argument><expr><call><name><name>a</name><operator>.</operator><name>getY</name></name><argument_list>()</argument_list></call> <operator>-</operator> <call><name><name>b</name><operator>.</operator><name>getY</name></name><argument_list>()</argument_list></call></expr></argument>)</argument_list></call></expr>;</return>
-	}</block></function>
-	
-	<function><specifier>public</specifier> <specifier>static</specifier> <type><name>void</name></type> <name>getAvailableCars</name><parameter_list>(<parameter><decl><type><name>int</name></type> <name>curr_turn</name></decl></parameter>)</parameter_list> <block>{
-		
-		<for>for <control>(<init><decl><type><name>int</name></type> <name>i</name> <init>= <expr><literal type="number">0</literal></expr></init></decl>;</init> <condition><expr><name>i</name> <operator>&lt;</operator> <call><name><name>carList</name><operator>.</operator><name>size</name></name><argument_list>()</argument_list></call></expr>;</condition> <incr><expr><name>i</name><operator>++</operator></expr></incr>)</control> <block>{
-			<decl_stmt><decl><type><name>Car</name></type> <name>car</name> <init>= <expr><call><name><name>carList</name><operator>.</operator><name>get</name></name><argument_list>(<argument><expr><name>i</name></expr></argument>)</argument_list></call></expr></init></decl>;</decl_stmt>
-			<if>if<condition>(<expr><call><name><name>car</name><operator>.</operator><name>getAvailableTurn</name></name><argument_list>()</argument_list></call> <operator>&lt;=</operator> <name>curr_turn</name></expr>)</condition><then> <block>{
-				<expr_stmt><expr><call><name>assignCars</name><argument_list>(<argument><expr><name>car</name></expr></argument> ,<argument><expr><name>curr_turn</name></expr></argument>)</argument_list></call></expr>;</expr_stmt>
+	<function><specifier>public</specifier> <type><name>user</name></type> <name>retriveUser</name><parameter_list>(<parameter><decl><type><name>String</name></type> <name>firstName</name></decl></parameter> , <parameter><decl><type><name>String</name></type> <name>lastName</name></decl></parameter>)</parameter_list> <block>{
+		<for>for<control>(<init><decl><type><name>int</name></type> <name>i</name> <init>= <expr><literal type="number">0</literal></expr></init></decl> ;</init> <condition><expr><name>i</name> <operator>&lt;</operator> <call><name><name>userlist</name><operator>.</operator><name>size</name></name><argument_list>()</argument_list></call></expr> ;</condition> <incr><expr><name>i</name><operator>++</operator></expr></incr>)</control> <block>{
+			<if>if<condition>(<expr><call><name><name>userlist</name><operator>.</operator><name>get</name></name><argument_list>(<argument><expr><name>i</name></expr></argument>)</argument_list></call><operator>.</operator><call><name>getFirstName</name><argument_list>()</argument_list></call><operator>.</operator><call><name>equals</name><argument_list>(<argument><expr><name>firstName</name></expr></argument>)</argument_list></call><operator>&amp;&amp;</operator> <call><name><name>userlist</name><operator>.</operator><name>get</name></name><argument_list>(<argument><expr><name>i</name></expr></argument>)</argument_list></call><operator>.</operator><call><name>getLastName</name><argument_list>()</argument_list></call><operator>.</operator><call><name>equals</name><argument_list>(<argument><expr><name>lastName</name></expr></argument>)</argument_list></call></expr>)</condition><then> <block>{
+				<return>return <expr><call><name><name>userlist</name><operator>.</operator><name>get</name></name><argument_list>(<argument><expr><name>i</name></expr></argument>)</argument_list></call></expr>;</return>
 			}</block></then></if>
 		}</block></for>
-		
-	}</block></function>
-
-	
-	<function><specifier>public</specifier> <specifier>static</specifier> <type><name>void</name></type> <name>assignCars</name><parameter_list>(<parameter><decl><type><name>Car</name></type> <name>car</name></decl></parameter>, <parameter><decl><type><name>int</name></type> <name>curr_turn</name></decl></parameter>)</parameter_list> <block>{
-		<decl_stmt><decl><type><name>int</name></type> <name>mostUrgent</name> <init>= <expr><name><name>Integer</name><operator>.</operator><name>MAX_VALUE</name></name></expr></init></decl>;</decl_stmt>
-		<decl_stmt><decl><type><name>int</name></type> <name>totalTime</name> <init>= <expr><literal type="number">0</literal></expr></init></decl>;</decl_stmt>
-		<decl_stmt><decl><type><name>Ride</name></type> <name>urgentRide</name> <init>= <expr><operator>new</operator> <call><name>Ride</name><argument_list>()</argument_list></call></expr></init></decl>;</decl_stmt>
-		<for>for <control>(<init><decl><type><name>int</name></type> <name>j</name> <init>= <expr><literal type="number">0</literal></expr></init></decl>;</init> <condition><expr><name>j</name> <operator>&lt;</operator> <call><name><name>rideList</name><operator>.</operator><name>size</name></name><argument_list>()</argument_list></call></expr>;</condition> <incr><expr><name>j</name><operator>++</operator></expr></incr>)</control> <block>{
-			<decl_stmt><decl><type><name>Ride</name></type> <name>ride</name> <init>= <expr><call><name><name>rideList</name><operator>.</operator><name>get</name></name><argument_list>(<argument><expr><name>j</name></expr></argument>)</argument_list></call></expr></init></decl>;</decl_stmt>
-			<decl_stmt><decl><type><name>int</name></type> <name>distanceToStart</name> <init>= <expr><call><name>distanceBetween</name><argument_list>(<argument><expr><call><name><name>car</name><operator>.</operator><name>getPosition</name></name><argument_list>()</argument_list></call></expr></argument>, <argument><expr><call><name><name>rideList</name><operator>.</operator><name>get</name></name><argument_list>(<argument><expr><name>j</name></expr></argument>)</argument_list></call><operator>.</operator><call><name>getStart</name><argument_list>()</argument_list></call></expr></argument>)</argument_list></call></expr></init></decl>;</decl_stmt>
-			<decl_stmt><decl><type><name>int</name></type> <name>waitTime</name> <init>= <expr><call><name><name>ride</name><operator>.</operator><name>getEarliestStart</name></name><argument_list>()</argument_list></call> <operator>-</operator> <name>curr_turn</name></expr></init></decl>;</decl_stmt>
-			
-			<expr_stmt><expr><name>totalTime</name> <operator>=</operator> <name>distanceToStart</name> <operator>+</operator> <call><name>distanceBetween</name><argument_list>(<argument><expr><call><name><name>ride</name><operator>.</operator><name>getStart</name></name><argument_list>()</argument_list></call></expr></argument>, <argument><expr><call><name><name>ride</name><operator>.</operator><name>getEnd</name></name><argument_list>()</argument_list></call></expr></argument>)</argument_list></call> <operator>+</operator> <name>waitTime</name></expr>;</expr_stmt>
-			
-			<decl_stmt><decl><type><name>int</name></type> <name>urgency</name> <init>= <expr><operator>(</operator> <call><name><name>ride</name><operator>.</operator><name>getLatestFinish</name></name><argument_list>()</argument_list></call> <operator>-</operator> <call><name><name>ride</name><operator>.</operator><name>getEarliestStart</name></name><argument_list>()</argument_list></call> <operator>)</operator> <operator>-</operator> <call><name>distanceBetween</name><argument_list>(<argument><expr><call><name><name>ride</name><operator>.</operator><name>getStart</name></name><argument_list>()</argument_list></call></expr></argument>, <argument><expr><call><name><name>ride</name><operator>.</operator><name>getEnd</name></name><argument_list>()</argument_list></call></expr></argument>)</argument_list></call> <operator>-</operator> <name>distanceToStart</name></expr></init></decl>;</decl_stmt>
-			<if>if<condition>(<expr><name>mostUrgent</name> <operator>&gt;</operator> <name>urgency</name> <operator>&amp;&amp;</operator> <name>urgency</name> <operator>&gt;</operator> <literal type="number">0</literal></expr>)</condition><then> <block>{
-				<expr_stmt><expr><name>mostUrgent</name> <operator>=</operator> <name>urgency</name></expr>;</expr_stmt>
-				<expr_stmt><expr><name>urgentRide</name> <operator>=</operator> <name>ride</name></expr>;</expr_stmt>
-		}</block></then></if>
-	}</block></for>
-		<expr_stmt><expr><call><name><name>car</name><operator>.</operator><name>setAvailableTurn</name></name><argument_list>(<argument><expr><name>totalTime</name> <operator>+</operator> <name>curr_turn</name></expr></argument>)</argument_list></call></expr>;</expr_stmt>
-		<expr_stmt><expr><call><name><name>car</name><operator>.</operator><name>setPosition</name></name><argument_list>(<argument><expr><call><name><name>urgentRide</name><operator>.</operator><name>getEnd</name></name><argument_list>()</argument_list></call></expr></argument>)</argument_list></call></expr>;</expr_stmt>
-		<expr_stmt><expr><call><name><name>System</name><operator>.</operator><name>out</name><operator>.</operator><name>println</name></name><argument_list>(<argument><expr><call><name><name>car</name><operator>.</operator><name>getAvailableTurn</name></name><argument_list>()</argument_list></call></expr></argument>)</argument_list></call></expr>;</expr_stmt>
-		<expr_stmt><expr><call><name><name>System</name><operator>.</operator><name>out</name><operator>.</operator><name>println</name></name><argument_list>(<argument><expr><call><name><name>car</name><operator>.</operator><name>getPosition</name></name><argument_list>()</argument_list></call><operator>.</operator><call><name>toString</name><argument_list>()</argument_list></call></expr></argument>)</argument_list></call></expr>;</expr_stmt>
-}</block></function> 
-	}</block></class>
-
-
-
-
-
-
-
-
-
-
-
-
-
-</unit>
-
-<unit revision="0.9.5" language="Java" filename="home/george/DistributedSystemsProject/resources/Georgesarkis_GoogleHashCode/GoogleHashCode-master/src/HashCode.java" hash="1f5c0be932220628d36ee91f8452fae1f7926aab">
-<class><specifier>public</specifier> class <name>HashCode</name> <block>{
-
-	<function><specifier>public</specifier> <specifier>static</specifier> <type><name>void</name></type> <name>main</name><parameter_list>(<parameter><decl><type><name><name>String</name><index>[]</index></name></type> <name>args</name></decl></parameter>)</parameter_list> <block>{
-		<comment type="line">// TODO Auto-generated method stub</comment>
-
-	}</block></function>
-
-}</block></class>
-</unit>
-
-<unit revision="0.9.5" language="Java" filename="home/george/DistributedSystemsProject/resources/Georgesarkis_GoogleHashCode/GoogleHashCode-master/src/MainDaniel.java" hash="b81d81af3f1958e79aab0ac905a1eb20c3c235e3">
-<class><specifier>public</specifier> class <name>MainDaniel</name> <block>{
-
-	<function><specifier>public</specifier> <specifier>static</specifier> <type><name>void</name></type> <name>main</name><parameter_list>(<parameter><decl><type><name><name>String</name><index>[]</index></name></type> <name>args</name></decl></parameter>)</parameter_list> <block>{
-		<comment type="line">// TODO Auto-generated method stub</comment>
-		
-	}</block></function>
-
-}</block></class>
-</unit>
-
-<unit revision="0.9.5" language="Java" filename="home/george/DistributedSystemsProject/resources/Georgesarkis_GoogleHashCode/src/Ride.java" hash="6a6c058481400d9c12a73db2f9bc579b3c061fd7">
-<class><specifier>public</specifier> class <name>Ride</name> <block>{
-	
-	<decl_stmt><decl><specifier>private</specifier> <type><name>Point</name></type> <name>start</name></decl>;</decl_stmt>
-	<decl_stmt><decl><specifier>private</specifier> <type><name>Point</name></type> <name>end</name></decl>;</decl_stmt>
-	<decl_stmt><decl><specifier>private</specifier> <type><name>int</name></type> <name>earliestStart</name></decl>;</decl_stmt>
-	<decl_stmt><decl><specifier>private</specifier> <type><name>int</name></type> <name>latestFinish</name></decl>;</decl_stmt>
-	<decl_stmt><decl><specifier>private</specifier> <type><name>int</name></type> <name>spareTime</name></decl>;</decl_stmt>
-	
-	
-	<constructor><specifier>public</specifier> <name>Ride</name><parameter_list>(<parameter><decl><type><name>int</name></type> <name>startX</name></decl></parameter>, <parameter><decl><type><name>int</name></type> <name>startY</name></decl></parameter>, <parameter><decl><type><name>int</name></type> <name>endX</name></decl></parameter>, <parameter><decl><type><name>int</name></type> <name>endY</name></decl></parameter>, <parameter><decl><type><name>int</name></type> <name>earliestStart</name></decl></parameter>, <parameter><decl><type><name>int</name></type> <name>latestFinish</name></decl></parameter>)</parameter_list> <block>{
-		<expr_stmt><expr><call><name>super</name><argument_list>()</argument_list></call></expr>;</expr_stmt>
-		<expr_stmt><expr><call><name><name>this</name><operator>.</operator><name>start</name><operator>.</operator><name>setX</name></name><argument_list>(<argument><expr><name>startX</name></expr></argument>)</argument_list></call></expr>;</expr_stmt>
-		<expr_stmt><expr><call><name><name>this</name><operator>.</operator><name>start</name><operator>.</operator><name>setY</name></name><argument_list>(<argument><expr><name>startY</name></expr></argument>)</argument_list></call></expr>;</expr_stmt>
-		<expr_stmt><expr><call><name><name>this</name><operator>.</operator><name>end</name><operator>.</operator><name>setX</name></name><argument_list>(<argument><expr><name>endX</name></expr></argument>)</argument_list></call></expr>;</expr_stmt>
-		<expr_stmt><expr><call><name><name>this</name><operator>.</operator><name>end</name><operator>.</operator><name>setY</name></name><argument_list>(<argument><expr><name>endY</name></expr></argument>)</argument_list></call></expr>;</expr_stmt>
-		<expr_stmt><expr><name><name>this</name><operator>.</operator><name>earliestStart</name></name> <operator>=</operator> <name>earliestStart</name></expr>;</expr_stmt>
-		<expr_stmt><expr><name><name>this</name><operator>.</operator><name>latestFinish</name></name> <operator>=</operator> <name>latestFinish</name></expr>;</expr_stmt>
-		<expr_stmt><expr><name><name>this</name><operator>.</operator><name>spareTime</name></name> <operator>=</operator> <name>latestFinish</name> <operator>-</operator> <name>earliestStart</name> <operator>-</operator> <call><name>distanceBetween</name><argument_list>(<argument><expr><name>start</name></expr></argument>, <argument><expr><name>end</name></expr></argument>)</argument_list></call></expr>;</expr_stmt>
-	}</block></constructor>
-
-	<constructor><specifier>public</specifier> <name>Ride</name><parameter_list>()</parameter_list> <block>{
-		
-	}</block></constructor>
-	<function><specifier>public</specifier> <type><name>Point</name></type> <name>getStart</name><parameter_list>()</parameter_list> <block>{
-		<return>return <expr><name><name>this</name><operator>.</operator><name>start</name></name></expr>;</return>
+		<return>return <expr><literal type="null">null</literal></expr>;</return>
 	}</block></function>
 	
-	<function><specifier>public</specifier> <type><name>Point</name></type> <name>getEnd</name><parameter_list>()</parameter_list> <block>{
-		<return>return <expr><name><name>this</name><operator>.</operator><name>end</name></name></expr>;</return>
-	}</block></function>
-
-	<function><specifier>public</specifier> <type><name>int</name></type> <name>distanceBetween</name><parameter_list>(<parameter><decl><type><name>Point</name></type> <name>a</name></decl></parameter>, <parameter><decl><type><name>Point</name></type> <name>b</name></decl></parameter>)</parameter_list> <block>{
-		<return>return <expr><call><name><name>Math</name><operator>.</operator><name>abs</name></name><argument_list>(<argument><expr><call><name><name>a</name><operator>.</operator><name>getX</name></name><argument_list>()</argument_list></call> <operator>-</operator> <call><name><name>b</name><operator>.</operator><name>getX</name></name><argument_list>()</argument_list></call></expr></argument>)</argument_list></call> <operator>+</operator> <call><name><name>Math</name><operator>.</operator><name>abs</name></name><argument_list>(<argument><expr><call><name><name>a</name><operator>.</operator><name>getY</name></name><argument_list>()</argument_list></call> <operator>-</operator> <call><name><name>b</name><operator>.</operator><name>getY</name></name><argument_list>()</argument_list></call></expr></argument>)</argument_list></call></expr>;</return>
-	}</block></function>
-	
-	<function><specifier>public</specifier> <type><name>int</name></type> <name>getStartX</name><parameter_list>()</parameter_list> <block>{
-		<return>return <expr><call><name><name>start</name><operator>.</operator><name>getX</name></name><argument_list>()</argument_list></call></expr>;</return>
-	}</block></function>
-
-
-	<function><specifier>public</specifier> <type><name>void</name></type> <name>setStartX</name><parameter_list>(<parameter><decl><type><name>int</name></type> <name>startX</name></decl></parameter>)</parameter_list> <block>{
-		<expr_stmt><expr><call><name><name>this</name><operator>.</operator><name>start</name><operator>.</operator><name>setX</name></name><argument_list>(<argument><expr><name>startX</name></expr></argument>)</argument_list></call></expr>;</expr_stmt>
-	}</block></function>
-
-
-	<function><specifier>public</specifier> <type><name>int</name></type> <name>getStartY</name><parameter_list>()</parameter_list> <block>{
-		<return>return <expr><call><name><name>start</name><operator>.</operator><name>getY</name></name><argument_list>()</argument_list></call></expr>;</return>
-	}</block></function>
-
-
-	<function><specifier>public</specifier> <type><name>void</name></type> <name>setStartY</name><parameter_list>(<parameter><decl><type><name>int</name></type> <name>startY</name></decl></parameter>)</parameter_list> <block>{
-		<expr_stmt><expr><call><name><name>this</name><operator>.</operator><name>start</name><operator>.</operator><name>setY</name></name><argument_list>(<argument><expr><name>startY</name></expr></argument>)</argument_list></call></expr>;</expr_stmt>
-	}</block></function>
-
-
-	<function><specifier>public</specifier> <type><name>int</name></type> <name>getEndX</name><parameter_list>()</parameter_list> <block>{
-		<return>return <expr><call><name><name>end</name><operator>.</operator><name>getX</name></name><argument_list>()</argument_list></call></expr>;</return>
-	}</block></function>
-
-
-	<function><specifier>public</specifier> <type><name>void</name></type> <name>setEndX</name><parameter_list>(<parameter><decl><type><name>int</name></type> <name>endX</name></decl></parameter>)</parameter_list> <block>{
-		<expr_stmt><expr><call><name><name>this</name><operator>.</operator><name>end</name><operator>.</operator><name>setX</name></name><argument_list>(<argument><expr><name>endX</name></expr></argument>)</argument_list></call></expr>;</expr_stmt>
-	}</block></function>
-
-
-	<function><specifier>public</specifier> <type><name>int</name></type> <name>getEndY</name><parameter_list>()</parameter_list> <block>{
-		<return>return <expr><call><name><name>end</name><operator>.</operator><name>getY</name></name><argument_list>()</argument_list></call></expr>;</return>
-	}</block></function>
-
-
-	<function><specifier>public</specifier> <type><name>void</name></type> <name>setEndY</name><parameter_list>(<parameter><decl><type><name>int</name></type> <name>endY</name></decl></parameter>)</parameter_list> <block>{
-		<expr_stmt><expr><call><name><name>this</name><operator>.</operator><name>end</name><operator>.</operator><name>setY</name></name><argument_list>(<argument><expr><name>endY</name></expr></argument>)</argument_list></call></expr>;</expr_stmt>
-	}</block></function>
-
-
-	<function><specifier>public</specifier> <type><name>int</name></type> <name>getEarliestStart</name><parameter_list>()</parameter_list> <block>{
-		<return>return <expr><name>earliestStart</name></expr>;</return>
-	}</block></function>
-
-
-	<function><specifier>public</specifier> <type><name>void</name></type> <name>setEarliestStart</name><parameter_list>(<parameter><decl><type><name>int</name></type> <name>earliestStart</name></decl></parameter>)</parameter_list> <block>{
-		<expr_stmt><expr><name><name>this</name><operator>.</operator><name>earliestStart</name></name> <operator>=</operator> <name>earliestStart</name></expr>;</expr_stmt>
-	}</block></function>
-
-
-	<function><specifier>public</specifier> <type><name>int</name></type> <name>getLatestFinish</name><parameter_list>()</parameter_list> <block>{
-		<return>return <expr><name>latestFinish</name></expr>;</return>
-	}</block></function>
-
-
-	<function><specifier>public</specifier> <type><name>void</name></type> <name>setLatestFinish</name><parameter_list>(<parameter><decl><type><name>int</name></type> <name>latestFinish</name></decl></parameter>)</parameter_list> <block>{
-		<expr_stmt><expr><name><name>this</name><operator>.</operator><name>latestFinish</name></name> <operator>=</operator> <name>latestFinish</name></expr>;</expr_stmt>
+	<function><specifier>public</specifier> <type><name>void</name></type> <name>addUser</name><parameter_list>(<parameter><decl><type><name>String</name></type> <name>firstName</name></decl></parameter> , <parameter><decl><type><name>String</name></type> <name>lastName</name></decl></parameter> , <parameter><decl><type><name>int</name></type> <name>tel</name></decl></parameter>)</parameter_list> <throws>throws <argument><expr><name>Exception</name></expr></argument></throws> <block>{
+		<decl_stmt><decl><type><name>user</name></type> <name>users</name> <init>= <expr><call><name>retriveUser</name><argument_list>(<argument><expr><name>firstName</name></expr></argument>, <argument><expr><name>lastName</name></expr></argument>)</argument_list></call></expr></init></decl>;</decl_stmt>
+		<if>if<condition>(<expr><name>users</name> <operator>==</operator> <literal type="null">null</literal></expr>)</condition><then> <block>{
+		<decl_stmt><decl><type><name>user</name></type> <name>newuser</name> <init>= <expr><operator>new</operator> <call><name>user</name> <argument_list>( <argument><expr><name>firstName</name></expr></argument> , <argument><expr><name>lastName</name></expr></argument> , <argument><expr><name>tel</name></expr></argument>)</argument_list></call></expr></init></decl>;</decl_stmt>
+		<expr_stmt><expr><call><name><name>userlist</name><operator>.</operator><name>add</name></name><argument_list>(<argument><expr><name>newuser</name></expr></argument>)</argument_list></call></expr>;</expr_stmt>
+		}</block></then>
+		<else>else <block>{
+			<throw>throw <expr><operator>new</operator> <call><name>Exception</name> <argument_list>(<argument><expr><literal type="string">"user is already exict"</literal></expr></argument>)</argument_list></call></expr>;</throw>
+		}</block></else></if>
 	}</block></function>
 	
+	<function><specifier>public</specifier> <type><name>void</name></type> <name>deleteUser</name><parameter_list>(<parameter><decl><type><name>String</name></type> <name>first</name></decl></parameter> , <parameter><decl><type><name>String</name></type> <name>last</name></decl></parameter>)</parameter_list> <throws>throws <argument><expr><name>Exception</name></expr></argument></throws> <block>{
+		<decl_stmt><decl><type><name>user</name></type> <name>users</name> <init>= <expr><call><name>retriveUser</name><argument_list>(<argument><expr><name>first</name></expr></argument>, <argument><expr><name>last</name></expr></argument>)</argument_list></call></expr></init></decl>;</decl_stmt>
+		<if>if<condition>(<expr><name>users</name> <operator>!=</operator> <literal type="null">null</literal></expr>)</condition><then> <block>{
+		<expr_stmt><expr><call><name><name>userlist</name><operator>.</operator><name>remove</name></name><argument_list>(<argument><expr><name>users</name></expr></argument>)</argument_list></call></expr>;</expr_stmt>
+		}</block></then>
+		<else>else <block>{
+			<throw>throw <expr><operator>new</operator> <call><name>Exception</name><argument_list>(<argument><expr><literal type="string">"user doesn't excist"</literal></expr></argument>)</argument_list></call></expr>;</throw>
+		}</block></else></if>
+	}</block></function>
 	
+	<function><specifier>public</specifier> <type><name>String</name></type> <name>printAllUsers</name><parameter_list>()</parameter_list> <block>{
+		<decl_stmt><decl><type><name>String</name></type> <name>all</name> <init>= <expr><literal type="string">""</literal></expr></init></decl>;</decl_stmt>
+		<for>for<control>(<init><decl><type><name>int</name></type> <name>i</name> <init>= <expr><literal type="number">0</literal></expr></init></decl>;</init> <condition><expr><name>i</name> <operator>&lt;</operator> <call><name><name>userlist</name><operator>.</operator><name>size</name></name><argument_list>()</argument_list></call></expr> ;</condition> <incr><expr><name>i</name><operator>++</operator></expr></incr>)</control> <block>{
+			<expr_stmt><expr><name>all</name> <operator>=</operator> <name>all</name> <operator>+</operator> <call><name><name>userlist</name><operator>.</operator><name>get</name></name><argument_list>(<argument><expr><name>i</name></expr></argument>)</argument_list></call><operator>.</operator><call><name>toString</name><argument_list>()</argument_list></call></expr>;</expr_stmt>
+		}</block></for>
+		<return>return <expr><name>all</name></expr>;</return>
+	}</block></function>
 	
+	<function><specifier>public</specifier> <type><name>void</name></type> <name>saveGson</name><parameter_list>()</parameter_list> <block>{
+		<try>try <block>{
+			<decl_stmt><decl><type><name>FileOutputStream</name></type> <name>file</name> <init>= <expr><operator>new</operator> <call><name>FileOutputStream</name><argument_list>(<argument><expr><literal type="string">"userlist.txt"</literal></expr></argument>)</argument_list></call></expr></init></decl>;</decl_stmt>
+			<decl_stmt><decl><type><name>String</name></type> <name>s</name> <init>= <expr><call><name><name>objGson</name><operator>.</operator><name>toJson</name></name><argument_list>(<argument><expr><name>userlist</name></expr></argument>)</argument_list></call></expr></init></decl>;</decl_stmt>
+			<decl_stmt><decl><type><name>Writer</name></type> <name>writer</name> <init>= <expr><operator>new</operator> <call><name>FileWriter</name><argument_list>(<argument><expr><literal type="string">"userlist.txt"</literal></expr></argument>)</argument_list></call></expr></init></decl>;</decl_stmt>
+			<expr_stmt><expr><call><name><name>writer</name><operator>.</operator><name>write</name></name><argument_list>(<argument><expr><name>s</name></expr></argument>)</argument_list></call></expr>;</expr_stmt>
+			<expr_stmt><expr><call><name><name>writer</name><operator>.</operator><name>close</name></name><argument_list>()</argument_list></call></expr>;</expr_stmt>
+			<expr_stmt><expr><call><name><name>file</name><operator>.</operator><name>close</name></name><argument_list>()</argument_list></call></expr>;</expr_stmt>
+		}</block> <catch>catch <parameter_list>(<parameter><decl><type><name>FileNotFoundException</name></type> <name>e</name></decl></parameter>)</parameter_list> <block>{
+			<expr_stmt><expr><call><name><name>e</name><operator>.</operator><name>printStackTrace</name></name><argument_list>()</argument_list></call></expr>;</expr_stmt>
+		}</block></catch><catch>catch <parameter_list>(<parameter><decl><type><name>IOException</name></type> <name>e</name></decl></parameter>)</parameter_list> <block>{
+			<expr_stmt><expr><call><name><name>e</name><operator>.</operator><name>printStackTrace</name></name><argument_list>()</argument_list></call></expr>;</expr_stmt>
+		}</block></catch></try>
+	}</block></function>
 
-}</block></class>
-
-</unit>
-
-<unit revision="0.9.5" language="Java" filename="home/george/DistributedSystemsProject/resources/Georgesarkis_GoogleHashCode/src/TheTown.java" hash="90875210c1a5b2ac3dd67ee1178bcdec3da131be"><import>import <name><name>java</name><operator>.</operator><name>util</name><operator>.</operator><name>ArrayList</name></name>;</import>
-
-<class><specifier>public</specifier> class <name>TheTown</name> <block>{
-
-	<decl_stmt><decl><specifier>private</specifier> <type><name>int</name></type> <name>rows</name></decl>;</decl_stmt>
-	<decl_stmt><decl><specifier>private</specifier> <type><name>int</name></type> <name>columns</name></decl>;</decl_stmt>
-	<decl_stmt><decl><specifier>private</specifier> <type><name>int</name></type> <name>vehicles</name></decl>;</decl_stmt>
-	<decl_stmt><decl><specifier>private</specifier> <type><name>int</name></type> <name>rides</name></decl>;</decl_stmt>
-	<decl_stmt><decl><specifier>private</specifier> <type><name>int</name></type> <name>bonus</name></decl>;</decl_stmt>
-	<decl_stmt><decl><specifier>private</specifier> <type><name>int</name></type> <name>steps</name></decl>;</decl_stmt>
-	<decl_stmt><decl><specifier>private</specifier> <type><name><name>ArrayList</name><argument_list type="generic">&lt;<argument><name>Ride</name></argument>&gt;</argument_list></name></type> <name>rideList</name></decl>;</decl_stmt>
-	<constructor><specifier>public</specifier> <name>TheTown</name><parameter_list>(<parameter><decl><type><name>int</name></type> <name>rows</name></decl></parameter>, <parameter><decl><type><name>int</name></type> <name>columns</name></decl></parameter>, <parameter><decl><type><name>int</name></type> <name>vehicles</name></decl></parameter>, <parameter><decl><type><name>int</name></type> <name>rides</name></decl></parameter>, <parameter><decl><type><name>int</name></type> <name>bonus</name></decl></parameter>, <parameter><decl><type><name>int</name></type> <name>steps</name></decl></parameter>, <parameter><decl><type><name><name>ArrayList</name><argument_list type="generic">&lt;<argument><name>Ride</name></argument>&gt;</argument_list></name></type> <name>rideList</name></decl></parameter>)</parameter_list> <block>{
-		<expr_stmt><expr><call><name>super</name><argument_list>()</argument_list></call></expr>;</expr_stmt>
-		<expr_stmt><expr><name><name>this</name><operator>.</operator><name>rows</name></name> <operator>=</operator> <name>rows</name></expr>;</expr_stmt>
-		<expr_stmt><expr><name><name>this</name><operator>.</operator><name>columns</name></name> <operator>=</operator> <name>columns</name></expr>;</expr_stmt>
-		<expr_stmt><expr><name><name>this</name><operator>.</operator><name>vehicles</name></name> <operator>=</operator> <name>vehicles</name></expr>;</expr_stmt>
-		<expr_stmt><expr><name><name>this</name><operator>.</operator><name>rides</name></name> <operator>=</operator> <name>rides</name></expr>;</expr_stmt>
-		<expr_stmt><expr><name><name>this</name><operator>.</operator><name>bonus</name></name> <operator>=</operator> <name>bonus</name></expr>;</expr_stmt>
-		<expr_stmt><expr><name><name>this</name><operator>.</operator><name>steps</name></name> <operator>=</operator> <name>steps</name></expr>;</expr_stmt>
-		<expr_stmt><expr><name><name>this</name><operator>.</operator><name>rideList</name></name> <operator>=</operator> <name>rideList</name></expr>;</expr_stmt>
-	}</block></constructor>
-	<function><specifier>public</specifier> <type><name>int</name></type> <name>getRows</name><parameter_list>()</parameter_list> <block>{
-		<return>return <expr><name>rows</name></expr>;</return>
-	}</block></function>
-	<function><specifier>public</specifier> <type><name>void</name></type> <name>setRows</name><parameter_list>(<parameter><decl><type><name>int</name></type> <name>rows</name></decl></parameter>)</parameter_list> <block>{
-		<expr_stmt><expr><name><name>this</name><operator>.</operator><name>rows</name></name> <operator>=</operator> <name>rows</name></expr>;</expr_stmt>
-	}</block></function>
-	<function><specifier>public</specifier> <type><name>int</name></type> <name>getColumns</name><parameter_list>()</parameter_list> <block>{
-		<return>return <expr><name>columns</name></expr>;</return>
-	}</block></function>
-	<function><specifier>public</specifier> <type><name>void</name></type> <name>setColumns</name><parameter_list>(<parameter><decl><type><name>int</name></type> <name>columns</name></decl></parameter>)</parameter_list> <block>{
-		<expr_stmt><expr><name><name>this</name><operator>.</operator><name>columns</name></name> <operator>=</operator> <name>columns</name></expr>;</expr_stmt>
-	}</block></function>
-	<function><specifier>public</specifier> <type><name>int</name></type> <name>getVehicles</name><parameter_list>()</parameter_list> <block>{
-		<return>return <expr><name>vehicles</name></expr>;</return>
-	}</block></function>
-	<function><specifier>public</specifier> <type><name>void</name></type> <name>setVehicles</name><parameter_list>(<parameter><decl><type><name>int</name></type> <name>vehicles</name></decl></parameter>)</parameter_list> <block>{
-		<expr_stmt><expr><name><name>this</name><operator>.</operator><name>vehicles</name></name> <operator>=</operator> <name>vehicles</name></expr>;</expr_stmt>
-	}</block></function>
-	<function><specifier>public</specifier> <type><name>int</name></type> <name>getRides</name><parameter_list>()</parameter_list> <block>{
-		<return>return <expr><name>rides</name></expr>;</return>
-	}</block></function>
-	<function><specifier>public</specifier> <type><name>void</name></type> <name>setRides</name><parameter_list>(<parameter><decl><type><name>int</name></type> <name>rides</name></decl></parameter>)</parameter_list> <block>{
-		<expr_stmt><expr><name><name>this</name><operator>.</operator><name>rides</name></name> <operator>=</operator> <name>rides</name></expr>;</expr_stmt>
-	}</block></function>
-	<function><specifier>public</specifier> <type><name>int</name></type> <name>getBonus</name><parameter_list>()</parameter_list> <block>{
-		<return>return <expr><name>bonus</name></expr>;</return>
-	}</block></function>
-	<function><specifier>public</specifier> <type><name>void</name></type> <name>setBonus</name><parameter_list>(<parameter><decl><type><name>int</name></type> <name>bonus</name></decl></parameter>)</parameter_list> <block>{
-		<expr_stmt><expr><name><name>this</name><operator>.</operator><name>bonus</name></name> <operator>=</operator> <name>bonus</name></expr>;</expr_stmt>
-	}</block></function>
-	<function><specifier>public</specifier> <type><name>int</name></type> <name>getSteps</name><parameter_list>()</parameter_list> <block>{
-		<return>return <expr><name>steps</name></expr>;</return>
-	}</block></function>
-	<function><specifier>public</specifier> <type><name>void</name></type> <name>setSteps</name><parameter_list>(<parameter><decl><type><name>int</name></type> <name>steps</name></decl></parameter>)</parameter_list> <block>{
-		<expr_stmt><expr><name><name>this</name><operator>.</operator><name>steps</name></name> <operator>=</operator> <name>steps</name></expr>;</expr_stmt>
-	}</block></function>
-	<function><specifier>public</specifier> <type><name><name>ArrayList</name><argument_list type="generic">&lt;<argument><name>Ride</name></argument>&gt;</argument_list></name></type> <name>getRideList</name><parameter_list>()</parameter_list> <block>{
-		<return>return <expr><name>rideList</name></expr>;</return>
-	}</block></function>
-	<function><specifier>public</specifier> <type><name>void</name></type> <name>setRideList</name><parameter_list>(<parameter><decl><type><name><name>ArrayList</name><argument_list type="generic">&lt;<argument><name>Ride</name></argument>&gt;</argument_list></name></type> <name>rideList</name></decl></parameter>)</parameter_list> <block>{
-		<expr_stmt><expr><name><name>this</name><operator>.</operator><name>rideList</name></name> <operator>=</operator> <name>rideList</name></expr>;</expr_stmt>
-	}</block></function>
-}</block></class>
-</unit>
-
-<unit revision="0.9.5" language="Java" filename="home/george/DistributedSystemsProject/resources/Georgesarkis_GoogleHashCode/GoogleHashCode-master/src/Point.java" hash="4e7b2193bcce5d0bbb01d21f74004104902eac13">
-<class><specifier>public</specifier> class <name>Point</name> <block>{
-	<decl_stmt><decl><specifier>private</specifier> <type><name>int</name></type> <name>x</name></decl>;</decl_stmt>
-	<decl_stmt><decl><specifier>private</specifier> <type><name>int</name></type> <name>y</name></decl>;</decl_stmt>
-	
-	<constructor><specifier>public</specifier> <name>Point</name><parameter_list>()</parameter_list> <block>{
-		<expr_stmt><expr><name><name>this</name><operator>.</operator><name>x</name></name> <operator>=</operator> <literal type="number">0</literal></expr>;</expr_stmt>
-		<expr_stmt><expr><name><name>this</name><operator>.</operator><name>y</name></name> <operator>=</operator> <literal type="number">0</literal></expr>;</expr_stmt>
-	}</block></constructor>
-	
-	<constructor><specifier>public</specifier> <name>Point</name><parameter_list>(<parameter><decl><type><name>int</name></type> <name>x</name></decl></parameter>, <parameter><decl><type><name>int</name></type> <name>y</name></decl></parameter>)</parameter_list> <block>{
-		<expr_stmt><expr><name><name>this</name><operator>.</operator><name>x</name></name> <operator>=</operator> <name>x</name></expr>;</expr_stmt>
-		<expr_stmt><expr><name><name>this</name><operator>.</operator><name>y</name></name> <operator>=</operator> <name>y</name></expr>;</expr_stmt>
-	}</block></constructor>
-	
-	<function><specifier>public</specifier> <type><name>int</name></type> <name>getX</name><parameter_list>()</parameter_list> <block>{
-		<return>return <expr><name>x</name></expr>;</return>
-	}</block></function>
-	<function><specifier>public</specifier> <type><name>void</name></type> <name>setX</name><parameter_list>(<parameter><decl><type><name>int</name></type> <name>x</name></decl></parameter>)</parameter_list> <block>{
-		<expr_stmt><expr><name><name>this</name><operator>.</operator><name>x</name></name> <operator>=</operator> <name>x</name></expr>;</expr_stmt>
-	}</block></function>
-	<function><specifier>public</specifier> <type><name>int</name></type> <name>getY</name><parameter_list>()</parameter_list> <block>{
-		<return>return <expr><name>y</name></expr>;</return>
-	}</block></function>
-	<function><specifier>public</specifier> <type><name>void</name></type> <name>setY</name><parameter_list>(<parameter><decl><type><name>int</name></type> <name>y</name></decl></parameter>)</parameter_list> <block>{
-		<expr_stmt><expr><name><name>this</name><operator>.</operator><name>y</name></name> <operator>=</operator> <name>y</name></expr>;</expr_stmt>
+	<function><specifier>public</specifier> <type><name>void</name></type> <name>readGson</name><parameter_list>()</parameter_list> <block>{
+		<decl_stmt><decl><type><name><name>List</name><argument_list type="generic">&lt;<argument><name>user</name></argument>&gt;</argument_list></name></type> <name>list</name> <init>= <expr><literal type="null">null</literal></expr></init></decl>;</decl_stmt>
+		<try>try <block>{
+			<decl_stmt><decl><type><name>File</name></type> <name>pointFile</name> <init>= <expr><operator>new</operator> <call><name>File</name><argument_list>(<argument><expr><literal type="string">"userlist.txt"</literal></expr></argument>)</argument_list></call></expr></init></decl>;</decl_stmt>
+			<decl_stmt><decl><type><name>Scanner</name></type> <name>pointReader</name> <init>= <expr><operator>new</operator> <call><name>Scanner</name><argument_list>(<argument><expr><name>pointFile</name></expr></argument>)</argument_list></call></expr></init></decl>;</decl_stmt>
+			<decl_stmt><decl><type><name>String</name></type> <name>gson</name> <init>= <expr><call><name><name>pointReader</name><operator>.</operator><name>nextLine</name></name><argument_list>()</argument_list></call></expr></init></decl>;</decl_stmt>
+			<decl_stmt><decl><type><name>Type</name></type> <name>listType</name> <init>= <expr><operator>new</operator> <class><super><name><name>TypeToken</name><argument_list type="generic">&lt;<argument><name><name>List</name><argument_list type="generic">&lt;<argument><name>user</name></argument>&gt;</argument_list></name></argument>&gt;</argument_list></name></super><argument_list>()</argument_list><block>{}</block></class><operator>.</operator><call><name>getType</name><argument_list>()</argument_list></call></expr></init></decl>;</decl_stmt>
+			<expr_stmt><expr><name>list</name> <operator>=</operator> <operator>(</operator><name><name>List</name><argument_list type="generic">&lt;<argument><name>user</name></argument>&gt;</argument_list></name><operator>)</operator> <operator>new</operator> <call><name>Gson</name><argument_list>()</argument_list></call><operator>.</operator><call><name>fromJson</name><argument_list>( <argument><expr><name>gson</name></expr></argument> , <argument><expr><name>listType</name></expr></argument>)</argument_list></call></expr>;</expr_stmt> <comment type="line">//objGson.fromJson(gson, listType);</comment>
+			<expr_stmt><expr><call><name><name>pointReader</name><operator>.</operator><name>close</name></name><argument_list>()</argument_list></call></expr>;</expr_stmt>
+		}</block><catch>catch<parameter_list>(<parameter><decl><type><name>FileNotFoundException</name></type> <name>fnf</name></decl></parameter>)</parameter_list> <block>{
+			<expr_stmt><expr><call><name><name>fnf</name><operator>.</operator><name>printStackTrace</name></name><argument_list>()</argument_list></call></expr>;</expr_stmt>
+		}</block></catch></try>
+		<expr_stmt><expr><name>userlist</name> <operator>=</operator> <name>list</name></expr>;</expr_stmt>
 	}</block></function>
 	
-	
-}</block></class>
-</unit>
-
-<unit revision="0.9.5" language="Java" filename="home/george/DistributedSystemsProject/resources/Georgesarkis_GoogleHashCode/src/InputReader.java" hash="11c07cd22403f56d90aba28ba5a612c476256f96"><import>import <name><name>java</name><operator>.</operator><name>io</name><operator>.</operator><name>BufferedReader</name></name>;</import>
-<import>import <name><name>java</name><operator>.</operator><name>io</name><operator>.</operator><name>File</name></name>;</import>
-<import>import <name><name>java</name><operator>.</operator><name>io</name><operator>.</operator><name>FileReader</name></name>;</import>
-<import>import <name><name>java</name><operator>.</operator><name>io</name><operator>.</operator><name>IOException</name></name>;</import>
-<import>import <name><name>java</name><operator>.</operator><name>nio</name><operator>.</operator><name>charset</name><operator>.</operator><name>Charset</name></name>;</import>
-<import>import <name><name>java</name><operator>.</operator><name>util</name><operator>.</operator><name>ArrayList</name></name>;</import>
-
-<class><specifier>public</specifier> class <name>InputReader</name> <block>{
-	
-		
-	<function><specifier>public</specifier> <specifier>static</specifier> <type><name>TheTown</name></type> <name>fetch</name><parameter_list>()</parameter_list> <block>{
-		<decl_stmt><decl><type><name>BufferedReader</name></type> <name>br</name> <init>= <expr><literal type="null">null</literal></expr></init></decl>;</decl_stmt>
-	    <decl_stmt><decl><type><name><name>ArrayList</name><argument_list type="generic">&lt;<argument><name>Ride</name></argument>&gt;</argument_list></name></type> <name>rideList</name> <init>= <expr><operator>new</operator> <call><name><name>ArrayList</name><argument_list type="generic">&lt;&gt;</argument_list></name><argument_list>()</argument_list></call></expr></init></decl>;</decl_stmt>
-	    <decl_stmt><decl><type><name>String</name></type> <name>line</name></decl>;</decl_stmt>
-		<decl_stmt><decl><type><name>String</name></type> <name>rows</name> <init>= <expr><literal type="string">""</literal></expr></init></decl>;</decl_stmt>
-		<decl_stmt><decl><type><name>String</name></type> <name>columns</name> <init>= <expr><literal type="string">""</literal></expr></init></decl>;</decl_stmt>
-		<decl_stmt><decl><type><name>String</name></type> <name>vehicles</name> <init>= <expr><literal type="string">""</literal></expr></init></decl>;</decl_stmt>
-		<decl_stmt><decl><type><name>String</name></type> <name>rides</name> <init>= <expr><literal type="string">""</literal></expr></init></decl>;</decl_stmt>
-		<decl_stmt><decl><type><name>String</name></type> <name>bonus</name> <init>= <expr><literal type="string">""</literal></expr></init></decl>;</decl_stmt>
-		<decl_stmt><decl><type><name>String</name></type> <name>steps</name> <init>= <expr><literal type="string">""</literal></expr></init></decl>;</decl_stmt>
-	    <try>try <block>{
-	        <expr_stmt><expr><name>br</name> <operator>=</operator> <operator>new</operator> <call><name>BufferedReader</name><argument_list>(<argument><expr><operator>new</operator> <call><name>FileReader</name><argument_list>(<argument><expr><literal type="string">"resources\\a_example.in"</literal></expr></argument>)</argument_list></call></expr></argument>)</argument_list></call></expr>;</expr_stmt>
-	
-	
-			
-	        <decl_stmt><decl><type><name>int</name></type> <name>lineCount</name> <init>= <expr><literal type="number">0</literal></expr></init></decl>;</decl_stmt>
-	        <while>while <condition>(<expr><operator>(</operator><name>line</name> <operator>=</operator> <call><name><name>br</name><operator>.</operator><name>readLine</name></name><argument_list>()</argument_list></call><operator>)</operator> <operator>!=</operator> <literal type="null">null</literal></expr>)</condition> <block>{
-	        		<expr_stmt><expr><name>lineCount</name><operator>++</operator></expr>;</expr_stmt>
-	        		<if>if<condition>(<expr><name>lineCount</name> <operator>==</operator> <literal type="number">1</literal></expr>)</condition><then> <block>{
-	        			<decl_stmt><decl><type><name>int</name></type> <name>counter</name> <init>= <expr><literal type="number">0</literal></expr></init></decl>;</decl_stmt>
-	        			<for>for<control>(<init><decl><type><name>int</name></type> <name>i</name> <init>= <expr><literal type="number">0</literal></expr></init></decl>;</init> <condition><expr><name>i</name> <operator>&lt;</operator> <call><name><name>line</name><operator>.</operator><name>length</name></name><argument_list>()</argument_list></call></expr>;</condition> <incr><expr><name>i</name><operator>++</operator></expr></incr>)</control> <block>{
-	        				<if>if<condition>(<expr><call><name><name>line</name><operator>.</operator><name>charAt</name></name><argument_list>(<argument><expr><name>i</name></expr></argument>)</argument_list></call> <operator>==</operator> <literal type="char">' '</literal></expr>)</condition><then> <block>{
-	        					<expr_stmt><expr><name>counter</name><operator>++</operator></expr>;</expr_stmt>
-	        				}</block></then></if>
-	        				<switch>switch<condition>(<expr><name>counter</name></expr>)</condition> <block>{
-		        				<case>case <expr><literal type="number">0</literal></expr>:</case>  <block>{ <comment type="line">// rows</comment>
-		        					<expr_stmt><expr><name>rows</name> <operator>+=</operator> <call><name><name>line</name><operator>.</operator><name>charAt</name></name><argument_list>(<argument><expr><name>i</name></expr></argument>)</argument_list></call></expr>;</expr_stmt>
-		        					<break>break;</break>
-		        				}</block>
-		        				<case>case <expr><literal type="number">1</literal></expr>:</case> <block>{
-		        					<expr_stmt><expr><name>columns</name> <operator>+=</operator> <call><name><name>line</name><operator>.</operator><name>charAt</name></name><argument_list>(<argument><expr><name>i</name></expr></argument>)</argument_list></call></expr>;</expr_stmt>
-		        					<break>break;</break>
-		        				}</block>
-		        				<case>case <expr><literal type="number">2</literal></expr>:</case> <block>{
-		        					<expr_stmt><expr><name>vehicles</name> <operator>+=</operator> <call><name><name>line</name><operator>.</operator><name>charAt</name></name><argument_list>(<argument><expr><name>i</name></expr></argument>)</argument_list></call></expr>;</expr_stmt>
-		        					<break>break;</break>
-		        				}</block>
-		        				<case>case <expr><literal type="number">3</literal></expr>:</case> <block>{
-		        					<expr_stmt><expr><name>rides</name> <operator>+=</operator> <call><name><name>line</name><operator>.</operator><name>charAt</name></name><argument_list>(<argument><expr><name>i</name></expr></argument>)</argument_list></call></expr>;</expr_stmt>
-		        					<break>break;</break>
-		        				}</block>
-		        				<case>case <expr><literal type="number">4</literal></expr>:</case> <block>{
-		        					<expr_stmt><expr><name>bonus</name> <operator>+=</operator> <call><name><name>line</name><operator>.</operator><name>charAt</name></name><argument_list>(<argument><expr><name>i</name></expr></argument>)</argument_list></call></expr>;</expr_stmt>
-		        					<break>break;</break>
-		        				}</block>
-		        				<case>case <expr><literal type="number">5</literal></expr>:</case> <block>{
-		        					<expr_stmt><expr><name>steps</name> <operator>+=</operator> <call><name><name>line</name><operator>.</operator><name>charAt</name></name><argument_list>(<argument><expr><name>i</name></expr></argument>)</argument_list></call></expr>;</expr_stmt>
-		        					<break>break;</break>
-		        				}</block>
-	        				}</block></switch>
-	       
-	        			}</block></for>
-	        			<expr_stmt><expr><call><name><name>System</name><operator>.</operator><name>out</name><operator>.</operator><name>println</name></name><argument_list>(<argument><expr><literal type="string">"Rows: "</literal> <operator>+</operator> <name>rows</name> <operator>+</operator> <literal type="string">"\nColumns: "</literal> <operator>+</operator> <name>columns</name> <operator>+</operator> <literal type="string">"\nVehicles: "</literal> <operator>+</operator> <name>vehicles</name> <operator>+</operator> <literal type="string">"\nRides: "</literal> <operator>+</operator> <name>rides</name> <operator>+</operator> <literal type="string">"\nBonus: "</literal> <operator>+</operator> <name>bonus</name> <operator>+</operator> <literal type="string">"\nSteps: "</literal> <operator>+</operator> <name>steps</name></expr></argument>)</argument_list></call></expr>;</expr_stmt>
-	        			
-	        		}</block></then>
-	        		<else>else <block>{ <comment type="line">// Rides</comment>
-	        			<comment type="line">// Rides</comment>
-	        			<decl_stmt><decl><type><name>String</name></type> <name>startX</name> <init>= <expr><literal type="string">""</literal></expr></init></decl>;</decl_stmt>
-	        			<decl_stmt><decl><type><name>String</name></type> <name>startY</name> <init>= <expr><literal type="string">""</literal></expr></init></decl>;</decl_stmt>
-	        			<decl_stmt><decl><type><name>String</name></type> <name>endX</name> <init>= <expr><literal type="string">""</literal></expr></init></decl>;</decl_stmt>
-	        			<decl_stmt><decl><type><name>String</name></type> <name>endY</name> <init>= <expr><literal type="string">""</literal></expr></init></decl>;</decl_stmt>
-	        			<decl_stmt><decl><type><name>String</name></type> <name>earliestStart</name> <init>= <expr><literal type="string">""</literal></expr></init></decl>;</decl_stmt>
-	        			<decl_stmt><decl><type><name>String</name></type> <name>latestFinish</name> <init>= <expr><literal type="string">""</literal></expr></init></decl>;</decl_stmt>
-	        			<decl_stmt><decl><type><name>int</name></type> <name>counter</name> <init>= <expr><literal type="number">0</literal></expr></init></decl>;</decl_stmt>
-	        			<for>for<control>(<init><decl><type><name>int</name></type> <name>i</name> <init>= <expr><literal type="number">0</literal></expr></init></decl>;</init> <condition><expr><name>i</name> <operator>&lt;</operator> <call><name><name>line</name><operator>.</operator><name>length</name></name><argument_list>()</argument_list></call></expr>;</condition> <incr><expr><name>i</name><operator>++</operator></expr></incr>)</control> <block>{
-	        				<if>if<condition>(<expr><call><name><name>line</name><operator>.</operator><name>charAt</name></name><argument_list>(<argument><expr><name>i</name></expr></argument>)</argument_list></call> <operator>==</operator> <literal type="char">' '</literal></expr>)</condition><then> <block>{
-	        					<expr_stmt><expr><name>counter</name><operator>++</operator></expr>;</expr_stmt>
-	        				}</block></then></if>
-	        				<switch>switch<condition>(<expr><name>counter</name></expr>)</condition> <block>{
-		        				<case>case <expr><literal type="number">0</literal></expr>:</case>  <block>{ <comment type="line">// rows</comment>
-		        					<expr_stmt><expr><name>startX</name> <operator>+=</operator> <call><name><name>line</name><operator>.</operator><name>charAt</name></name><argument_list>(<argument><expr><name>i</name></expr></argument>)</argument_list></call></expr>;</expr_stmt>
-		        					<break>break;</break>
-		        				}</block>
-		        				<case>case <expr><literal type="number">1</literal></expr>:</case> <block>{
-		        					<expr_stmt><expr><name>startY</name> <operator>+=</operator> <call><name><name>line</name><operator>.</operator><name>charAt</name></name><argument_list>(<argument><expr><name>i</name></expr></argument>)</argument_list></call></expr>;</expr_stmt>
-		        					<break>break;</break>
-		        				}</block>
-		        				<case>case <expr><literal type="number">2</literal></expr>:</case> <block>{
-		        					<expr_stmt><expr><name>endX</name> <operator>+=</operator> <call><name><name>line</name><operator>.</operator><name>charAt</name></name><argument_list>(<argument><expr><name>i</name></expr></argument>)</argument_list></call></expr>;</expr_stmt>
-		        					<break>break;</break>
-		        				}</block>
-		        				<case>case <expr><literal type="number">3</literal></expr>:</case> <block>{
-		        					<expr_stmt><expr><name>endY</name> <operator>+=</operator> <call><name><name>line</name><operator>.</operator><name>charAt</name></name><argument_list>(<argument><expr><name>i</name></expr></argument>)</argument_list></call></expr>;</expr_stmt>
-		        					<break>break;</break>
-		        				}</block>
-		        				<case>case <expr><literal type="number">4</literal></expr>:</case> <block>{
-		        					<expr_stmt><expr><name>earliestStart</name> <operator>+=</operator> <call><name><name>line</name><operator>.</operator><name>charAt</name></name><argument_list>(<argument><expr><name>i</name></expr></argument>)</argument_list></call></expr>;</expr_stmt>
-		        					<break>break;</break>
-		        				}</block>
-		        				<case>case <expr><literal type="number">5</literal></expr>:</case> <block>{
-		        					<expr_stmt><expr><name>latestFinish</name> <operator>+=</operator> <call><name><name>line</name><operator>.</operator><name>charAt</name></name><argument_list>(<argument><expr><name>i</name></expr></argument>)</argument_list></call></expr>;</expr_stmt>
-		        					<break>break;</break>
-		        				}</block>
-	        				}</block></switch>
-	        		}</block></for>
-	    	        <decl_stmt><decl><type><name>Ride</name></type> <name>ride</name> <init>= <expr><operator>new</operator> <call><name>Ride</name><argument_list>(<argument><expr><call><name><name>Integer</name><operator>.</operator><name>parseInt</name></name><argument_list>(<argument><expr><call><name><name>startX</name><operator>.</operator><name>trim</name></name><argument_list>()</argument_list></call></expr></argument>)</argument_list></call></expr></argument>, <argument><expr><call><name><name>Integer</name><operator>.</operator><name>parseInt</name></name><argument_list>(<argument><expr><call><name><name>startY</name><operator>.</operator><name>trim</name></name><argument_list>()</argument_list></call></expr></argument>)</argument_list></call></expr></argument>, <argument><expr><call><name><name>Integer</name><operator>.</operator><name>parseInt</name></name><argument_list>(<argument><expr><call><name><name>endX</name><operator>.</operator><name>trim</name></name><argument_list>()</argument_list></call></expr></argument>)</argument_list></call></expr></argument>, <argument><expr><call><name><name>Integer</name><operator>.</operator><name>parseInt</name></name><argument_list>(<argument><expr><call><name><name>endY</name><operator>.</operator><name>trim</name></name><argument_list>()</argument_list></call></expr></argument>)</argument_list></call></expr></argument>, <argument><expr><call><name><name>Integer</name><operator>.</operator><name>parseInt</name></name><argument_list>(<argument><expr><call><name><name>earliestStart</name><operator>.</operator><name>trim</name></name><argument_list>()</argument_list></call></expr></argument>)</argument_list></call></expr></argument>, <argument><expr><call><name><name>Integer</name><operator>.</operator><name>parseInt</name></name><argument_list>(<argument><expr><call><name><name>latestFinish</name><operator>.</operator><name>trim</name></name><argument_list>()</argument_list></call></expr></argument>)</argument_list></call></expr></argument>)</argument_list></call></expr></init></decl>;</decl_stmt>
-	    	        <expr_stmt><expr><call><name><name>rideList</name><operator>.</operator><name>add</name></name><argument_list>(<argument><expr><name>ride</name></expr></argument>)</argument_list></call></expr>;</expr_stmt>
-	        	}</block></else></if>
-	        }</block></while>
-	       
-	    }</block> <catch>catch <parameter_list>(<parameter><decl><type><name>IOException</name></type> <name>e</name></decl></parameter>)</parameter_list> <block>{ <expr_stmt><expr><call><name><name>e</name><operator>.</operator><name>printStackTrace</name></name><argument_list>()</argument_list></call></expr>;</expr_stmt> }</block></catch> 
-	    
-	    
-	    <finally>finally <block>{
-	        <try>try <block>{
-	            <if>if <condition>(<expr><name>br</name> <operator>!=</operator> <literal type="null">null</literal></expr>)</condition><then> <block>{
-	                <expr_stmt><expr><call><name><name>br</name><operator>.</operator><name>close</name></name><argument_list>()</argument_list></call></expr>;</expr_stmt>
-	            }</block></then></if>
-	        }</block> <catch>catch <parameter_list>(<parameter><decl><type><name>IOException</name></type> <name>ex</name></decl></parameter>)</parameter_list> <block>{ <expr_stmt><expr><call><name><name>ex</name><operator>.</operator><name>printStackTrace</name></name><argument_list>()</argument_list></call></expr>;</expr_stmt> }</block></catch></try>
-		  }</block></finally></try>
-	    <decl_stmt><decl><type><name>TheTown</name></type> <name>town</name> <init>= <expr><operator>new</operator> <call><name>TheTown</name><argument_list>(<argument><expr><call><name><name>Integer</name><operator>.</operator><name>parseInt</name></name><argument_list>(<argument><expr><call><name><name>rows</name><operator>.</operator><name>trim</name></name><argument_list>()</argument_list></call></expr></argument>)</argument_list></call></expr></argument>, <argument><expr><call><name><name>Integer</name><operator>.</operator><name>parseInt</name></name><argument_list>(<argument><expr><call><name><name>columns</name><operator>.</operator><name>trim</name></name><argument_list>()</argument_list></call></expr></argument>)</argument_list></call></expr></argument>, <argument><expr><call><name><name>Integer</name><operator>.</operator><name>parseInt</name></name><argument_list>(<argument><expr><call><name><name>vehicles</name><operator>.</operator><name>trim</name></name><argument_list>()</argument_list></call></expr></argument>)</argument_list></call></expr></argument>, <argument><expr><call><name><name>Integer</name><operator>.</operator><name>parseInt</name></name><argument_list>(<argument><expr><call><name><name>rides</name><operator>.</operator><name>trim</name></name><argument_list>()</argument_list></call></expr></argument>)</argument_list></call></expr></argument>, <argument><expr><call><name><name>Integer</name><operator>.</operator><name>parseInt</name></name><argument_list>(<argument><expr><call><name><name>bonus</name><operator>.</operator><name>trim</name></name><argument_list>()</argument_list></call></expr></argument>)</argument_list></call></expr></argument>, <argument><expr><call><name><name>Integer</name><operator>.</operator><name>parseInt</name></name><argument_list>(<argument><expr><call><name><name>steps</name><operator>.</operator><name>trim</name></name><argument_list>()</argument_list></call></expr></argument>)</argument_list></call></expr></argument>, <argument><expr><name>rideList</name></expr></argument>)</argument_list></call></expr></init></decl>;</decl_stmt>
-		<return>return <expr><name>town</name></expr>;</return>
-		}</block></function>
 }</block></class>
 </unit>
 

@@ -29,11 +29,11 @@ var app = new Vue({
           this.id = response.data.data[0]._id;
           this.di = response.data.data[0]._id;
 
-         // this.nodedata = response.data.data[0].Classes;
-       //   linkdata = response.data.data[0].classConecteds;
+          // this.nodedata = response.data.data[0].Classes;
+          // linkdata = response.data.data[0].classConecteds;
 
-       myDiagram.model.addNodeData(response.data.data[0].Classes);
-       myDiagram.model.addLinkData(response.data.data[0].classConecteds);
+          myDiagram.model.addNodeData(response.data.data[0].Classes);
+          myDiagram.model.addLinkData(response.data.data[0].classConecteds);
 
 
           // get the response from the data base and loop through its length,

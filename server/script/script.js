@@ -59,7 +59,7 @@ module.exports = {
                             break;
                         }
                     }
-                    var classExtend = {from : line.substring(firstExtendsIndex,lastExtendsIndex) , to : currentClassName , relationship: "aggegation"};
+                    var classExtend = {from : line.substring(firstExtendsIndex,lastExtendsIndex) , to : currentClassName , relationship: "aggregation"};
                     classConecteds.push(classExtend);
                 }
             }
