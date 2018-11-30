@@ -29,6 +29,7 @@ var app = new Vue({
         }
         , addRepo: function (repoUrl) {
             console.log(repoUrl)
+            window.location.href = "/uml.html?repo=" + repoUrl.slice(19).replace(/\//g, "_");  
             let Diagram = {
                 GitRepo: repoUrl
             };

@@ -1,8 +1,8 @@
 var fs = require('fs');
 var DiagramSchema = require('../models/Diagram');
-var admZip = require("adm-zip");
 var xmlEmcoder = require('./xmlEncoder');
 var shell = require("shelljs");
+var repoPath = "resources/"
 var classNames;
 var ClassExtends;
 var classConecteds;
@@ -109,7 +109,7 @@ module.exports = {
             }
         }
         console.log("data generated from the xml");
-        this.SaveDiagram(GitRepo);
+        return this.SaveDiagram(GitRepo);
  
     },
     SaveDiagram : function(GitRepo){
@@ -130,7 +130,7 @@ module.exports = {
     convertZip : function(path){
        console.log("covertZip file funcation called");
         if(xmlEmcoder.saveXML(path) == 1) {
-            this.readXML(path);
+            return this.readXML(path);
         }
         
     }

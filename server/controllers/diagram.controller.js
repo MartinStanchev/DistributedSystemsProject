@@ -9,14 +9,8 @@ var repoPath = "resources/"
 var Git = require("nodegit");
 var path = require('path');
 
-
-
-
-
-
-
 //Get all diagrams
-router.get('/', function(req, res, next) {
+router.get('/diagrams', function(req, res, next) {
     DiagramSchema.find(function(err,Diagram){
         if (err) { return next(err); }
         res.json({"data" : Diagram})
@@ -25,29 +19,27 @@ router.get('/', function(req, res, next) {
 });
 
 
-router.post('/', function(req, res, next) {
+router.post('/diagrams', function(req, res, next) {
 	Git.Clone(req.body.GitRepo, repoPath+req.body.GitRepo.slice(19).replace(/\//g, "_"))
     .then(function(repository) {
         path = req.body.GitRepo.slice(19).replace(/\//g, "_");
-        script.convertZip(path);
+        res.status.json(script.convertZip(path));
       console.log("Successfully cloned to: " + Diagram.GitRepo);
-});
-});
-
-router.get('/prosses', function(req, res, next) {
-    var value=  script.readXML();
-    res.json({"data" : value})
-    res.status(200);
+    });
 });
 
-
-router.get('/:id', function(req, res, next) {
-    DiagramSchema.findById(req.params.id, function(err, repo) {
+router.get('/diagram/:id', function(req, res, next) {
+    DiagramSchema.find({GitRepo: req.params.id}, function(err, repo) {
         if (err) { return next(err); }
-        if (Diagram == null) {
-            return res.status(404).json({"message": "Repo not found"});
+        if (repo == null) {
+            var RepoPath = "https://github.com/" + path.replace("_",/\//g);
+            Git.Clone(RepoPath, repoPath+path)
+            .then(function(repository) {
+                console.log("Successfully cloned to: " + Diagram.GitRepo);
+                return res.status(201).json({"data" : script.convertZip(req.params.id)});
+            });
         }
-        res.status(200).json(repo);
+        res.status(200).json({"data" : repo});
     });
 });
 

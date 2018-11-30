@@ -20,7 +20,7 @@ var app = new Vue({
   methods: {
     getUmlData: function(){
       axios
-        .get("/api/diagrams")
+        .get("/api/diagram/" + repo)
         .then(response => {
           this.id = response.data.data[1]._id;
           console.log(this.id);
