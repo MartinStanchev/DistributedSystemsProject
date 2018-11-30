@@ -50,6 +50,24 @@ router.get('/:id', function(req, res, next) {
         res.status(200).json(repo);
     });
 });
+
+router.patch('/:id', function(req, res, next){
+    var id = req.params.id;
+    DiagramSchema.findById(id, function(err, diagram){
+        if(err) return next(err);
+        if(diagram == null){
+            return res.status(404).json({"message": "Diagram not found"});
+        }
+        diagram.GitRepo = (req.body.GitRepo || diagram.GitRepo);
+        diagram.Classes.type = (req.body.Classes.type || diagram.Classes.type);
+        diagram.classExtends.SubClass = (req.body.classExtends.SubClass || diagram.classExtends.SubClass);
+        diagram.classExtends.SuperClass = (req.body.classExtends.SuperClass || diagram.classExtends.SuperClass);
+        diagram.classConecteds.MainClass = (req.body.classConecteds.MainClass || diagram.classConecteds.MainClass);
+        diagram.classConecteds.UsedClass = (req.body.classConecteds.UsedClass || diagram.classConecteds.UsedClass);
+        diagram.save();
+        res.status(200).json(diagram);
+    })
+})
 //// Github listener
 ////router.post('/', function(req, res, next) {
 //    // Encrypt local secret - NOT USED YET !
@@ -67,7 +85,7 @@ router.get('/:id', function(req, res, next) {
 //    .then(function(repository) {
 //        console.log("Successfully cloned to: " + repoPath);
 //    res.status(200).json({"Sucess message: ": "Git hook received and new project files are syncronizing"});
-//    }).catch(function(err) { 
+//    }).catch(function(err) {
 //        console.log(err);
 //        res.status(500).json({"Failure message: ": "Git hook received but new project files couldnt be synced"});
 //    });;
