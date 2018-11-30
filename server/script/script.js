@@ -14,7 +14,7 @@ module.exports = {
         ClassExtends = [];
         classConecteds = [];
         var excist;
-        var readMe = fs.readFileSync(shell.pwd() + "/resources/javaProject.xml", 'utf8');
+        var readMe = fs.readFileSync(shell.pwd() + "/resources/" + GitRepo + ".xml", 'utf8');
     
         if(readMe.includes(".java")){
             var arrayOfLines = readMe.split("\n"); 
@@ -112,6 +112,11 @@ module.exports = {
         this.SaveDiagram(GitRepo);
  
     },
+    cleanUpFiles : function (pathToFolder) {
+        shell.echo('deleting files... \n' + shell.ls('-A', shell.pwd() + '/resources/'));
+        shell.rm('-rf', shell.pwd() + '/resources/' + pathToFolder);
+        shell.rm(shell.pwd() + '/resources/' + pathToFolder + ".xml");
+    },
     SaveDiagram : function(GitRepo){
         var Diagram = new DiagramSchema({
             GitRepo :  GitRepo,
@@ -126,6 +131,7 @@ module.exports = {
             console.log("data saved to database");
             return (Diagram);
         });
+        this.cleanUpFiles(GitRepo);
     },
     convertZip : function(path){
        console.log("covertZip file funcation called");
@@ -134,4 +140,5 @@ module.exports = {
         }
         
     }
+    
 };
