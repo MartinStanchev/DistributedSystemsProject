@@ -1,6 +1,34 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <unit xmlns="http://www.srcML.org/srcML/src" revision="0.9.5">
 
+<unit revision="0.9.5" language="Java" filename="home/george/DistributedSystemsProject/resources/Georgesarkis_Address-Book-GUI/src/UI/AddressBookRunner.java" hash="cb2982dde988d9ffdcf62ae9e1aabab1b37a355d"><package>package <name>UI</name>;</package>
+	
+<import>import <name><name>java</name><operator>.</operator><name>io</name><operator>.</operator><name>IOException</name></name>;</import>
+
+<import>import <name><name>javafx</name><operator>.</operator><name>application</name><operator>.</operator><name>Application</name></name>;</import>
+<import>import <name><name>javafx</name><operator>.</operator><name>fxml</name><operator>.</operator><name>FXMLLoader</name></name>;</import>
+<import>import <name><name>javafx</name><operator>.</operator><name>stage</name><operator>.</operator><name>Stage</name></name>;</import>
+<import>import <name><name>javafx</name><operator>.</operator><name>scene</name><operator>.</operator><name>Parent</name></name>;</import>
+<import>import <name><name>javafx</name><operator>.</operator><name>scene</name><operator>.</operator><name>Scene</name></name>;</import>
+<import>import <name><name>javafx</name><operator>.</operator><name>scene</name><operator>.</operator><name>layout</name><operator>.</operator><name>BorderPane</name></name>;</import>
+
+
+<class><specifier>public</specifier> class <name>AddressBookRunner</name> <super><extends>extends <name>Application</name></extends></super> <block>{
+	<function><annotation>@<name>Override</name></annotation>
+	<specifier>public</specifier> <type><name>void</name></type> <name>start</name><parameter_list>(<parameter><decl><type><name>Stage</name></type> <name>primaryStage</name></decl></parameter>)</parameter_list> <block>{
+		<decl_stmt><decl><type><name>Parent</name></type> <name>root</name> <init>= <expr><literal type="null">null</literal></expr></init></decl>;</decl_stmt>
+		<try>try <block>{
+			<expr_stmt><expr><name>root</name> <operator>=</operator> <call><name><name>FXMLLoader</name><operator>.</operator><name>load</name></name><argument_list>(<argument><expr><call><name>getClass</name><argument_list>()</argument_list></call><operator>.</operator><call><name>getResource</name><argument_list>(<argument><expr><literal type="string">"firstsceen.fxml"</literal></expr></argument>)</argument_list></call></expr></argument>)</argument_list></call></expr>;</expr_stmt>
+			<decl_stmt><decl><type><name>Scene</name></type> <name>scene</name> <init>= <expr><operator>new</operator> <call><name>Scene</name><argument_list>(<argument><expr><name>root</name></expr></argument>)</argument_list></call></expr></init></decl>;</decl_stmt>
+	        <expr_stmt><expr><call><name><name>primaryStage</name><operator>.</operator><name>setScene</name></name><argument_list>(<argument><expr><name>scene</name></expr></argument>)</argument_list></call></expr>;</expr_stmt>
+	        <expr_stmt><expr><call><name><name>primaryStage</name><operator>.</operator><name>show</name></name><argument_list>()</argument_list></call></expr>;</expr_stmt>
+		}</block> <catch>catch <parameter_list>(<parameter><decl><type><name>IOException</name></type> <name>e</name></decl></parameter>)</parameter_list> <block>{
+			<expr_stmt><expr><call><name><name>e</name><operator>.</operator><name>printStackTrace</name></name><argument_list>()</argument_list></call></expr>;</expr_stmt>
+		}</block></catch></try>
+	}</block></function>
+}</block></class>
+</unit>
+
 <unit revision="0.9.5" language="Java" filename="home/george/DistributedSystemsProject/resources/Georgesarkis_Address-Book-GUI/src/dit042/Random.java" hash="96a546da9565a59d2f9c117176d387e36de9b927"><package>package <name>dit042</name>;</package>
 
 <comment type="block" format="javadoc">/**
@@ -86,34 +114,6 @@
     <function><specifier>public</specifier> <specifier>static</specifier> <type><name>boolean</name></type> <name>randomBoolean</name><parameter_list>()</parameter_list> <block>{
         <return>return <expr><call><name><name>rand</name><operator>.</operator><name>nextBoolean</name></name><argument_list>()</argument_list></call></expr>;</return>
     }</block></function>
-}</block></class>
-</unit>
-
-<unit revision="0.9.5" language="Java" filename="home/george/DistributedSystemsProject/resources/Georgesarkis_Address-Book-GUI/src/UI/AddressBookRunner.java" hash="cb2982dde988d9ffdcf62ae9e1aabab1b37a355d"><package>package <name>UI</name>;</package>
-	
-<import>import <name><name>java</name><operator>.</operator><name>io</name><operator>.</operator><name>IOException</name></name>;</import>
-
-<import>import <name><name>javafx</name><operator>.</operator><name>application</name><operator>.</operator><name>Application</name></name>;</import>
-<import>import <name><name>javafx</name><operator>.</operator><name>fxml</name><operator>.</operator><name>FXMLLoader</name></name>;</import>
-<import>import <name><name>javafx</name><operator>.</operator><name>stage</name><operator>.</operator><name>Stage</name></name>;</import>
-<import>import <name><name>javafx</name><operator>.</operator><name>scene</name><operator>.</operator><name>Parent</name></name>;</import>
-<import>import <name><name>javafx</name><operator>.</operator><name>scene</name><operator>.</operator><name>Scene</name></name>;</import>
-<import>import <name><name>javafx</name><operator>.</operator><name>scene</name><operator>.</operator><name>layout</name><operator>.</operator><name>BorderPane</name></name>;</import>
-
-
-<class><specifier>public</specifier> class <name>AddressBookRunner</name> <super><extends>extends <name>Application</name></extends></super> <block>{
-	<function><annotation>@<name>Override</name></annotation>
-	<specifier>public</specifier> <type><name>void</name></type> <name>start</name><parameter_list>(<parameter><decl><type><name>Stage</name></type> <name>primaryStage</name></decl></parameter>)</parameter_list> <block>{
-		<decl_stmt><decl><type><name>Parent</name></type> <name>root</name> <init>= <expr><literal type="null">null</literal></expr></init></decl>;</decl_stmt>
-		<try>try <block>{
-			<expr_stmt><expr><name>root</name> <operator>=</operator> <call><name><name>FXMLLoader</name><operator>.</operator><name>load</name></name><argument_list>(<argument><expr><call><name>getClass</name><argument_list>()</argument_list></call><operator>.</operator><call><name>getResource</name><argument_list>(<argument><expr><literal type="string">"firstsceen.fxml"</literal></expr></argument>)</argument_list></call></expr></argument>)</argument_list></call></expr>;</expr_stmt>
-			<decl_stmt><decl><type><name>Scene</name></type> <name>scene</name> <init>= <expr><operator>new</operator> <call><name>Scene</name><argument_list>(<argument><expr><name>root</name></expr></argument>)</argument_list></call></expr></init></decl>;</decl_stmt>
-	        <expr_stmt><expr><call><name><name>primaryStage</name><operator>.</operator><name>setScene</name></name><argument_list>(<argument><expr><name>scene</name></expr></argument>)</argument_list></call></expr>;</expr_stmt>
-	        <expr_stmt><expr><call><name><name>primaryStage</name><operator>.</operator><name>show</name></name><argument_list>()</argument_list></call></expr>;</expr_stmt>
-		}</block> <catch>catch <parameter_list>(<parameter><decl><type><name>IOException</name></type> <name>e</name></decl></parameter>)</parameter_list> <block>{
-			<expr_stmt><expr><call><name><name>e</name><operator>.</operator><name>printStackTrace</name></name><argument_list>()</argument_list></call></expr>;</expr_stmt>
-		}</block></catch></try>
-	}</block></function>
 }</block></class>
 </unit>
 
@@ -225,6 +225,105 @@
 	<function><specifier>public</specifier> <type><name>String</name></type> <name>toString</name><parameter_list>()</parameter_list> <block>{
 		<return>return <expr><name><name>this</name><operator>.</operator><name>firstName</name></name> <operator>+</operator> <literal type="string">" "</literal> <operator>+</operator> <name><name>this</name><operator>.</operator><name>lastName</name></name> <operator>+</operator> <literal type="string">" "</literal> <operator>+</operator> <name><name>this</name><operator>.</operator><name>tel</name></name> <operator>+</operator> <call><name><name>System</name><operator>.</operator><name>lineSeparator</name></name><argument_list>()</argument_list></call></expr> ;</return>
 	}</block></function>
+}</block></class>
+</unit>
+
+<unit revision="0.9.5" language="Java" filename="home/george/DistributedSystemsProject/resources/Georgesarkis_Address-Book-GUI/src/Functions/functions.java" hash="017f6698449e9fa54b8961900dd333c48ce33f0e"><package>package <name>Functions</name>;</package>
+
+<import>import <name><name>java</name><operator>.</operator><name>io</name><operator>.</operator><name>File</name></name>;</import>
+<import>import <name><name>java</name><operator>.</operator><name>io</name><operator>.</operator><name>FileNotFoundException</name></name>;</import>
+<import>import <name><name>java</name><operator>.</operator><name>io</name><operator>.</operator><name>FileOutputStream</name></name>;</import>
+<import>import <name><name>java</name><operator>.</operator><name>io</name><operator>.</operator><name>FileWriter</name></name>;</import>
+<import>import <name><name>java</name><operator>.</operator><name>io</name><operator>.</operator><name>IOException</name></name>;</import>
+<import>import <name><name>java</name><operator>.</operator><name>io</name><operator>.</operator><name>Writer</name></name>;</import>
+<import>import <name><name>java</name><operator>.</operator><name>lang</name><operator>.</operator><name>reflect</name><operator>.</operator><name>Type</name></name>;</import>
+<import>import <name><name>java</name><operator>.</operator><name>util</name><operator>.</operator><name>ArrayList</name></name>;</import>
+<import>import <name><name>java</name><operator>.</operator><name>util</name><operator>.</operator><name>List</name></name>;</import>
+<import>import <name><name>java</name><operator>.</operator><name>util</name><operator>.</operator><name>Scanner</name></name>;</import>
+
+<import>import <name><name>com</name><operator>.</operator><name>google</name><operator>.</operator><name>gson</name><operator>.</operator><name>Gson</name></name>;</import>
+<import>import <name><name>com</name><operator>.</operator><name>google</name><operator>.</operator><name>gson</name><operator>.</operator><name>GsonBuilder</name></name>;</import>
+<import>import <name><name>com</name><operator>.</operator><name>google</name><operator>.</operator><name>gson</name><operator>.</operator><name>reflect</name><operator>.</operator><name>TypeToken</name></name>;</import>
+
+<import>import <name><name>Classes</name><operator>.</operator><name>*</name></name>;</import>
+
+<class><specifier>public</specifier> class <name>functions</name> <block>{
+	<decl_stmt><decl><specifier>public</specifier> <type><name><name>List</name> <argument_list type="generic">&lt;<argument><name>user</name></argument>&gt;</argument_list></name></type> <name>userlist</name></decl>;</decl_stmt>
+	<decl_stmt><decl><type><name>Gson</name></type> <name>objGson</name></decl> ;</decl_stmt>
+	
+	<constructor><specifier>public</specifier> <name>functions</name><parameter_list>()</parameter_list> <block>{
+		<expr_stmt><expr><name><name>this</name><operator>.</operator><name>userlist</name></name> <operator>=</operator> <operator>new</operator> <call><name><name>ArrayList</name><argument_list type="generic">&lt;&gt;</argument_list></name><argument_list>()</argument_list></call></expr>;</expr_stmt>
+		<expr_stmt><expr><name>objGson</name> <operator>=</operator> <operator>new</operator> <call><name>GsonBuilder</name><argument_list>()</argument_list></call><operator>.</operator><call><name>create</name><argument_list>()</argument_list></call></expr>;</expr_stmt>
+	}</block></constructor>
+	
+	<function><specifier>public</specifier> <type><name>user</name></type> <name>retriveUser</name><parameter_list>(<parameter><decl><type><name>String</name></type> <name>firstName</name></decl></parameter> , <parameter><decl><type><name>String</name></type> <name>lastName</name></decl></parameter>)</parameter_list> <block>{
+		<for>for<control>(<init><decl><type><name>int</name></type> <name>i</name> <init>= <expr><literal type="number">0</literal></expr></init></decl> ;</init> <condition><expr><name>i</name> <operator>&lt;</operator> <call><name><name>userlist</name><operator>.</operator><name>size</name></name><argument_list>()</argument_list></call></expr> ;</condition> <incr><expr><name>i</name><operator>++</operator></expr></incr>)</control> <block>{
+			<if>if<condition>(<expr><call><name><name>userlist</name><operator>.</operator><name>get</name></name><argument_list>(<argument><expr><name>i</name></expr></argument>)</argument_list></call><operator>.</operator><call><name>getFirstName</name><argument_list>()</argument_list></call><operator>.</operator><call><name>equals</name><argument_list>(<argument><expr><name>firstName</name></expr></argument>)</argument_list></call><operator>&amp;&amp;</operator> <call><name><name>userlist</name><operator>.</operator><name>get</name></name><argument_list>(<argument><expr><name>i</name></expr></argument>)</argument_list></call><operator>.</operator><call><name>getLastName</name><argument_list>()</argument_list></call><operator>.</operator><call><name>equals</name><argument_list>(<argument><expr><name>lastName</name></expr></argument>)</argument_list></call></expr>)</condition><then> <block>{
+				<return>return <expr><call><name><name>userlist</name><operator>.</operator><name>get</name></name><argument_list>(<argument><expr><name>i</name></expr></argument>)</argument_list></call></expr>;</return>
+			}</block></then></if>
+		}</block></for>
+		<return>return <expr><literal type="null">null</literal></expr>;</return>
+	}</block></function>
+	
+	<function><specifier>public</specifier> <type><name>void</name></type> <name>addUser</name><parameter_list>(<parameter><decl><type><name>String</name></type> <name>firstName</name></decl></parameter> , <parameter><decl><type><name>String</name></type> <name>lastName</name></decl></parameter> , <parameter><decl><type><name>int</name></type> <name>tel</name></decl></parameter>)</parameter_list> <throws>throws <argument><expr><name>Exception</name></expr></argument></throws> <block>{
+		<decl_stmt><decl><type><name>user</name></type> <name>users</name> <init>= <expr><call><name>retriveUser</name><argument_list>(<argument><expr><name>firstName</name></expr></argument>, <argument><expr><name>lastName</name></expr></argument>)</argument_list></call></expr></init></decl>;</decl_stmt>
+		<if>if<condition>(<expr><name>users</name> <operator>==</operator> <literal type="null">null</literal></expr>)</condition><then> <block>{
+		<decl_stmt><decl><type><name>user</name></type> <name>newuser</name> <init>= <expr><operator>new</operator> <call><name>user</name> <argument_list>( <argument><expr><name>firstName</name></expr></argument> , <argument><expr><name>lastName</name></expr></argument> , <argument><expr><name>tel</name></expr></argument>)</argument_list></call></expr></init></decl>;</decl_stmt>
+		<expr_stmt><expr><call><name><name>userlist</name><operator>.</operator><name>add</name></name><argument_list>(<argument><expr><name>newuser</name></expr></argument>)</argument_list></call></expr>;</expr_stmt>
+		}</block></then>
+		<else>else <block>{
+			<throw>throw <expr><operator>new</operator> <call><name>Exception</name> <argument_list>(<argument><expr><literal type="string">"user is already exict"</literal></expr></argument>)</argument_list></call></expr>;</throw>
+		}</block></else></if>
+	}</block></function>
+	
+	<function><specifier>public</specifier> <type><name>void</name></type> <name>deleteUser</name><parameter_list>(<parameter><decl><type><name>String</name></type> <name>first</name></decl></parameter> , <parameter><decl><type><name>String</name></type> <name>last</name></decl></parameter>)</parameter_list> <throws>throws <argument><expr><name>Exception</name></expr></argument></throws> <block>{
+		<decl_stmt><decl><type><name>user</name></type> <name>users</name> <init>= <expr><call><name>retriveUser</name><argument_list>(<argument><expr><name>first</name></expr></argument>, <argument><expr><name>last</name></expr></argument>)</argument_list></call></expr></init></decl>;</decl_stmt>
+		<if>if<condition>(<expr><name>users</name> <operator>!=</operator> <literal type="null">null</literal></expr>)</condition><then> <block>{
+		<expr_stmt><expr><call><name><name>userlist</name><operator>.</operator><name>remove</name></name><argument_list>(<argument><expr><name>users</name></expr></argument>)</argument_list></call></expr>;</expr_stmt>
+		}</block></then>
+		<else>else <block>{
+			<throw>throw <expr><operator>new</operator> <call><name>Exception</name><argument_list>(<argument><expr><literal type="string">"user doesn't excist"</literal></expr></argument>)</argument_list></call></expr>;</throw>
+		}</block></else></if>
+	}</block></function>
+	
+	<function><specifier>public</specifier> <type><name>String</name></type> <name>printAllUsers</name><parameter_list>()</parameter_list> <block>{
+		<decl_stmt><decl><type><name>String</name></type> <name>all</name> <init>= <expr><literal type="string">""</literal></expr></init></decl>;</decl_stmt>
+		<for>for<control>(<init><decl><type><name>int</name></type> <name>i</name> <init>= <expr><literal type="number">0</literal></expr></init></decl>;</init> <condition><expr><name>i</name> <operator>&lt;</operator> <call><name><name>userlist</name><operator>.</operator><name>size</name></name><argument_list>()</argument_list></call></expr> ;</condition> <incr><expr><name>i</name><operator>++</operator></expr></incr>)</control> <block>{
+			<expr_stmt><expr><name>all</name> <operator>=</operator> <name>all</name> <operator>+</operator> <call><name><name>userlist</name><operator>.</operator><name>get</name></name><argument_list>(<argument><expr><name>i</name></expr></argument>)</argument_list></call><operator>.</operator><call><name>toString</name><argument_list>()</argument_list></call></expr>;</expr_stmt>
+		}</block></for>
+		<return>return <expr><name>all</name></expr>;</return>
+	}</block></function>
+	
+	<function><specifier>public</specifier> <type><name>void</name></type> <name>saveGson</name><parameter_list>()</parameter_list> <block>{
+		<try>try <block>{
+			<decl_stmt><decl><type><name>FileOutputStream</name></type> <name>file</name> <init>= <expr><operator>new</operator> <call><name>FileOutputStream</name><argument_list>(<argument><expr><literal type="string">"userlist.txt"</literal></expr></argument>)</argument_list></call></expr></init></decl>;</decl_stmt>
+			<decl_stmt><decl><type><name>String</name></type> <name>s</name> <init>= <expr><call><name><name>objGson</name><operator>.</operator><name>toJson</name></name><argument_list>(<argument><expr><name>userlist</name></expr></argument>)</argument_list></call></expr></init></decl>;</decl_stmt>
+			<decl_stmt><decl><type><name>Writer</name></type> <name>writer</name> <init>= <expr><operator>new</operator> <call><name>FileWriter</name><argument_list>(<argument><expr><literal type="string">"userlist.txt"</literal></expr></argument>)</argument_list></call></expr></init></decl>;</decl_stmt>
+			<expr_stmt><expr><call><name><name>writer</name><operator>.</operator><name>write</name></name><argument_list>(<argument><expr><name>s</name></expr></argument>)</argument_list></call></expr>;</expr_stmt>
+			<expr_stmt><expr><call><name><name>writer</name><operator>.</operator><name>close</name></name><argument_list>()</argument_list></call></expr>;</expr_stmt>
+			<expr_stmt><expr><call><name><name>file</name><operator>.</operator><name>close</name></name><argument_list>()</argument_list></call></expr>;</expr_stmt>
+		}</block> <catch>catch <parameter_list>(<parameter><decl><type><name>FileNotFoundException</name></type> <name>e</name></decl></parameter>)</parameter_list> <block>{
+			<expr_stmt><expr><call><name><name>e</name><operator>.</operator><name>printStackTrace</name></name><argument_list>()</argument_list></call></expr>;</expr_stmt>
+		}</block></catch><catch>catch <parameter_list>(<parameter><decl><type><name>IOException</name></type> <name>e</name></decl></parameter>)</parameter_list> <block>{
+			<expr_stmt><expr><call><name><name>e</name><operator>.</operator><name>printStackTrace</name></name><argument_list>()</argument_list></call></expr>;</expr_stmt>
+		}</block></catch></try>
+	}</block></function>
+
+	<function><specifier>public</specifier> <type><name>void</name></type> <name>readGson</name><parameter_list>()</parameter_list> <block>{
+		<decl_stmt><decl><type><name><name>List</name><argument_list type="generic">&lt;<argument><name>user</name></argument>&gt;</argument_list></name></type> <name>list</name> <init>= <expr><literal type="null">null</literal></expr></init></decl>;</decl_stmt>
+		<try>try <block>{
+			<decl_stmt><decl><type><name>File</name></type> <name>pointFile</name> <init>= <expr><operator>new</operator> <call><name>File</name><argument_list>(<argument><expr><literal type="string">"userlist.txt"</literal></expr></argument>)</argument_list></call></expr></init></decl>;</decl_stmt>
+			<decl_stmt><decl><type><name>Scanner</name></type> <name>pointReader</name> <init>= <expr><operator>new</operator> <call><name>Scanner</name><argument_list>(<argument><expr><name>pointFile</name></expr></argument>)</argument_list></call></expr></init></decl>;</decl_stmt>
+			<decl_stmt><decl><type><name>String</name></type> <name>gson</name> <init>= <expr><call><name><name>pointReader</name><operator>.</operator><name>nextLine</name></name><argument_list>()</argument_list></call></expr></init></decl>;</decl_stmt>
+			<decl_stmt><decl><type><name>Type</name></type> <name>listType</name> <init>= <expr><operator>new</operator> <class><super><name><name>TypeToken</name><argument_list type="generic">&lt;<argument><name><name>List</name><argument_list type="generic">&lt;<argument><name>user</name></argument>&gt;</argument_list></name></argument>&gt;</argument_list></name></super><argument_list>()</argument_list><block>{}</block></class><operator>.</operator><call><name>getType</name><argument_list>()</argument_list></call></expr></init></decl>;</decl_stmt>
+			<expr_stmt><expr><name>list</name> <operator>=</operator> <operator>(</operator><name><name>List</name><argument_list type="generic">&lt;<argument><name>user</name></argument>&gt;</argument_list></name><operator>)</operator> <operator>new</operator> <call><name>Gson</name><argument_list>()</argument_list></call><operator>.</operator><call><name>fromJson</name><argument_list>( <argument><expr><name>gson</name></expr></argument> , <argument><expr><name>listType</name></expr></argument>)</argument_list></call></expr>;</expr_stmt> <comment type="line">//objGson.fromJson(gson, listType);</comment>
+			<expr_stmt><expr><call><name><name>pointReader</name><operator>.</operator><name>close</name></name><argument_list>()</argument_list></call></expr>;</expr_stmt>
+		}</block><catch>catch<parameter_list>(<parameter><decl><type><name>FileNotFoundException</name></type> <name>fnf</name></decl></parameter>)</parameter_list> <block>{
+			<expr_stmt><expr><call><name><name>fnf</name><operator>.</operator><name>printStackTrace</name></name><argument_list>()</argument_list></call></expr>;</expr_stmt>
+		}</block></catch></try>
+		<expr_stmt><expr><name>userlist</name> <operator>=</operator> <name>list</name></expr>;</expr_stmt>
+	}</block></function>
+	
 }</block></class>
 </unit>
 
@@ -599,105 +698,6 @@
         <return>return <expr><name>result</name></expr>;</return>
     }</block></function>    
             
-}</block></class>
-</unit>
-
-<unit revision="0.9.5" language="Java" filename="home/george/DistributedSystemsProject/resources/Georgesarkis_Address-Book-GUI/src/Functions/functions.java" hash="017f6698449e9fa54b8961900dd333c48ce33f0e"><package>package <name>Functions</name>;</package>
-
-<import>import <name><name>java</name><operator>.</operator><name>io</name><operator>.</operator><name>File</name></name>;</import>
-<import>import <name><name>java</name><operator>.</operator><name>io</name><operator>.</operator><name>FileNotFoundException</name></name>;</import>
-<import>import <name><name>java</name><operator>.</operator><name>io</name><operator>.</operator><name>FileOutputStream</name></name>;</import>
-<import>import <name><name>java</name><operator>.</operator><name>io</name><operator>.</operator><name>FileWriter</name></name>;</import>
-<import>import <name><name>java</name><operator>.</operator><name>io</name><operator>.</operator><name>IOException</name></name>;</import>
-<import>import <name><name>java</name><operator>.</operator><name>io</name><operator>.</operator><name>Writer</name></name>;</import>
-<import>import <name><name>java</name><operator>.</operator><name>lang</name><operator>.</operator><name>reflect</name><operator>.</operator><name>Type</name></name>;</import>
-<import>import <name><name>java</name><operator>.</operator><name>util</name><operator>.</operator><name>ArrayList</name></name>;</import>
-<import>import <name><name>java</name><operator>.</operator><name>util</name><operator>.</operator><name>List</name></name>;</import>
-<import>import <name><name>java</name><operator>.</operator><name>util</name><operator>.</operator><name>Scanner</name></name>;</import>
-
-<import>import <name><name>com</name><operator>.</operator><name>google</name><operator>.</operator><name>gson</name><operator>.</operator><name>Gson</name></name>;</import>
-<import>import <name><name>com</name><operator>.</operator><name>google</name><operator>.</operator><name>gson</name><operator>.</operator><name>GsonBuilder</name></name>;</import>
-<import>import <name><name>com</name><operator>.</operator><name>google</name><operator>.</operator><name>gson</name><operator>.</operator><name>reflect</name><operator>.</operator><name>TypeToken</name></name>;</import>
-
-<import>import <name><name>Classes</name><operator>.</operator><name>*</name></name>;</import>
-
-<class><specifier>public</specifier> class <name>functions</name> <block>{
-	<decl_stmt><decl><specifier>public</specifier> <type><name><name>List</name> <argument_list type="generic">&lt;<argument><name>user</name></argument>&gt;</argument_list></name></type> <name>userlist</name></decl>;</decl_stmt>
-	<decl_stmt><decl><type><name>Gson</name></type> <name>objGson</name></decl> ;</decl_stmt>
-	
-	<constructor><specifier>public</specifier> <name>functions</name><parameter_list>()</parameter_list> <block>{
-		<expr_stmt><expr><name><name>this</name><operator>.</operator><name>userlist</name></name> <operator>=</operator> <operator>new</operator> <call><name><name>ArrayList</name><argument_list type="generic">&lt;&gt;</argument_list></name><argument_list>()</argument_list></call></expr>;</expr_stmt>
-		<expr_stmt><expr><name>objGson</name> <operator>=</operator> <operator>new</operator> <call><name>GsonBuilder</name><argument_list>()</argument_list></call><operator>.</operator><call><name>create</name><argument_list>()</argument_list></call></expr>;</expr_stmt>
-	}</block></constructor>
-	
-	<function><specifier>public</specifier> <type><name>user</name></type> <name>retriveUser</name><parameter_list>(<parameter><decl><type><name>String</name></type> <name>firstName</name></decl></parameter> , <parameter><decl><type><name>String</name></type> <name>lastName</name></decl></parameter>)</parameter_list> <block>{
-		<for>for<control>(<init><decl><type><name>int</name></type> <name>i</name> <init>= <expr><literal type="number">0</literal></expr></init></decl> ;</init> <condition><expr><name>i</name> <operator>&lt;</operator> <call><name><name>userlist</name><operator>.</operator><name>size</name></name><argument_list>()</argument_list></call></expr> ;</condition> <incr><expr><name>i</name><operator>++</operator></expr></incr>)</control> <block>{
-			<if>if<condition>(<expr><call><name><name>userlist</name><operator>.</operator><name>get</name></name><argument_list>(<argument><expr><name>i</name></expr></argument>)</argument_list></call><operator>.</operator><call><name>getFirstName</name><argument_list>()</argument_list></call><operator>.</operator><call><name>equals</name><argument_list>(<argument><expr><name>firstName</name></expr></argument>)</argument_list></call><operator>&amp;&amp;</operator> <call><name><name>userlist</name><operator>.</operator><name>get</name></name><argument_list>(<argument><expr><name>i</name></expr></argument>)</argument_list></call><operator>.</operator><call><name>getLastName</name><argument_list>()</argument_list></call><operator>.</operator><call><name>equals</name><argument_list>(<argument><expr><name>lastName</name></expr></argument>)</argument_list></call></expr>)</condition><then> <block>{
-				<return>return <expr><call><name><name>userlist</name><operator>.</operator><name>get</name></name><argument_list>(<argument><expr><name>i</name></expr></argument>)</argument_list></call></expr>;</return>
-			}</block></then></if>
-		}</block></for>
-		<return>return <expr><literal type="null">null</literal></expr>;</return>
-	}</block></function>
-	
-	<function><specifier>public</specifier> <type><name>void</name></type> <name>addUser</name><parameter_list>(<parameter><decl><type><name>String</name></type> <name>firstName</name></decl></parameter> , <parameter><decl><type><name>String</name></type> <name>lastName</name></decl></parameter> , <parameter><decl><type><name>int</name></type> <name>tel</name></decl></parameter>)</parameter_list> <throws>throws <argument><expr><name>Exception</name></expr></argument></throws> <block>{
-		<decl_stmt><decl><type><name>user</name></type> <name>users</name> <init>= <expr><call><name>retriveUser</name><argument_list>(<argument><expr><name>firstName</name></expr></argument>, <argument><expr><name>lastName</name></expr></argument>)</argument_list></call></expr></init></decl>;</decl_stmt>
-		<if>if<condition>(<expr><name>users</name> <operator>==</operator> <literal type="null">null</literal></expr>)</condition><then> <block>{
-		<decl_stmt><decl><type><name>user</name></type> <name>newuser</name> <init>= <expr><operator>new</operator> <call><name>user</name> <argument_list>( <argument><expr><name>firstName</name></expr></argument> , <argument><expr><name>lastName</name></expr></argument> , <argument><expr><name>tel</name></expr></argument>)</argument_list></call></expr></init></decl>;</decl_stmt>
-		<expr_stmt><expr><call><name><name>userlist</name><operator>.</operator><name>add</name></name><argument_list>(<argument><expr><name>newuser</name></expr></argument>)</argument_list></call></expr>;</expr_stmt>
-		}</block></then>
-		<else>else <block>{
-			<throw>throw <expr><operator>new</operator> <call><name>Exception</name> <argument_list>(<argument><expr><literal type="string">"user is already exict"</literal></expr></argument>)</argument_list></call></expr>;</throw>
-		}</block></else></if>
-	}</block></function>
-	
-	<function><specifier>public</specifier> <type><name>void</name></type> <name>deleteUser</name><parameter_list>(<parameter><decl><type><name>String</name></type> <name>first</name></decl></parameter> , <parameter><decl><type><name>String</name></type> <name>last</name></decl></parameter>)</parameter_list> <throws>throws <argument><expr><name>Exception</name></expr></argument></throws> <block>{
-		<decl_stmt><decl><type><name>user</name></type> <name>users</name> <init>= <expr><call><name>retriveUser</name><argument_list>(<argument><expr><name>first</name></expr></argument>, <argument><expr><name>last</name></expr></argument>)</argument_list></call></expr></init></decl>;</decl_stmt>
-		<if>if<condition>(<expr><name>users</name> <operator>!=</operator> <literal type="null">null</literal></expr>)</condition><then> <block>{
-		<expr_stmt><expr><call><name><name>userlist</name><operator>.</operator><name>remove</name></name><argument_list>(<argument><expr><name>users</name></expr></argument>)</argument_list></call></expr>;</expr_stmt>
-		}</block></then>
-		<else>else <block>{
-			<throw>throw <expr><operator>new</operator> <call><name>Exception</name><argument_list>(<argument><expr><literal type="string">"user doesn't excist"</literal></expr></argument>)</argument_list></call></expr>;</throw>
-		}</block></else></if>
-	}</block></function>
-	
-	<function><specifier>public</specifier> <type><name>String</name></type> <name>printAllUsers</name><parameter_list>()</parameter_list> <block>{
-		<decl_stmt><decl><type><name>String</name></type> <name>all</name> <init>= <expr><literal type="string">""</literal></expr></init></decl>;</decl_stmt>
-		<for>for<control>(<init><decl><type><name>int</name></type> <name>i</name> <init>= <expr><literal type="number">0</literal></expr></init></decl>;</init> <condition><expr><name>i</name> <operator>&lt;</operator> <call><name><name>userlist</name><operator>.</operator><name>size</name></name><argument_list>()</argument_list></call></expr> ;</condition> <incr><expr><name>i</name><operator>++</operator></expr></incr>)</control> <block>{
-			<expr_stmt><expr><name>all</name> <operator>=</operator> <name>all</name> <operator>+</operator> <call><name><name>userlist</name><operator>.</operator><name>get</name></name><argument_list>(<argument><expr><name>i</name></expr></argument>)</argument_list></call><operator>.</operator><call><name>toString</name><argument_list>()</argument_list></call></expr>;</expr_stmt>
-		}</block></for>
-		<return>return <expr><name>all</name></expr>;</return>
-	}</block></function>
-	
-	<function><specifier>public</specifier> <type><name>void</name></type> <name>saveGson</name><parameter_list>()</parameter_list> <block>{
-		<try>try <block>{
-			<decl_stmt><decl><type><name>FileOutputStream</name></type> <name>file</name> <init>= <expr><operator>new</operator> <call><name>FileOutputStream</name><argument_list>(<argument><expr><literal type="string">"userlist.txt"</literal></expr></argument>)</argument_list></call></expr></init></decl>;</decl_stmt>
-			<decl_stmt><decl><type><name>String</name></type> <name>s</name> <init>= <expr><call><name><name>objGson</name><operator>.</operator><name>toJson</name></name><argument_list>(<argument><expr><name>userlist</name></expr></argument>)</argument_list></call></expr></init></decl>;</decl_stmt>
-			<decl_stmt><decl><type><name>Writer</name></type> <name>writer</name> <init>= <expr><operator>new</operator> <call><name>FileWriter</name><argument_list>(<argument><expr><literal type="string">"userlist.txt"</literal></expr></argument>)</argument_list></call></expr></init></decl>;</decl_stmt>
-			<expr_stmt><expr><call><name><name>writer</name><operator>.</operator><name>write</name></name><argument_list>(<argument><expr><name>s</name></expr></argument>)</argument_list></call></expr>;</expr_stmt>
-			<expr_stmt><expr><call><name><name>writer</name><operator>.</operator><name>close</name></name><argument_list>()</argument_list></call></expr>;</expr_stmt>
-			<expr_stmt><expr><call><name><name>file</name><operator>.</operator><name>close</name></name><argument_list>()</argument_list></call></expr>;</expr_stmt>
-		}</block> <catch>catch <parameter_list>(<parameter><decl><type><name>FileNotFoundException</name></type> <name>e</name></decl></parameter>)</parameter_list> <block>{
-			<expr_stmt><expr><call><name><name>e</name><operator>.</operator><name>printStackTrace</name></name><argument_list>()</argument_list></call></expr>;</expr_stmt>
-		}</block></catch><catch>catch <parameter_list>(<parameter><decl><type><name>IOException</name></type> <name>e</name></decl></parameter>)</parameter_list> <block>{
-			<expr_stmt><expr><call><name><name>e</name><operator>.</operator><name>printStackTrace</name></name><argument_list>()</argument_list></call></expr>;</expr_stmt>
-		}</block></catch></try>
-	}</block></function>
-
-	<function><specifier>public</specifier> <type><name>void</name></type> <name>readGson</name><parameter_list>()</parameter_list> <block>{
-		<decl_stmt><decl><type><name><name>List</name><argument_list type="generic">&lt;<argument><name>user</name></argument>&gt;</argument_list></name></type> <name>list</name> <init>= <expr><literal type="null">null</literal></expr></init></decl>;</decl_stmt>
-		<try>try <block>{
-			<decl_stmt><decl><type><name>File</name></type> <name>pointFile</name> <init>= <expr><operator>new</operator> <call><name>File</name><argument_list>(<argument><expr><literal type="string">"userlist.txt"</literal></expr></argument>)</argument_list></call></expr></init></decl>;</decl_stmt>
-			<decl_stmt><decl><type><name>Scanner</name></type> <name>pointReader</name> <init>= <expr><operator>new</operator> <call><name>Scanner</name><argument_list>(<argument><expr><name>pointFile</name></expr></argument>)</argument_list></call></expr></init></decl>;</decl_stmt>
-			<decl_stmt><decl><type><name>String</name></type> <name>gson</name> <init>= <expr><call><name><name>pointReader</name><operator>.</operator><name>nextLine</name></name><argument_list>()</argument_list></call></expr></init></decl>;</decl_stmt>
-			<decl_stmt><decl><type><name>Type</name></type> <name>listType</name> <init>= <expr><operator>new</operator> <class><super><name><name>TypeToken</name><argument_list type="generic">&lt;<argument><name><name>List</name><argument_list type="generic">&lt;<argument><name>user</name></argument>&gt;</argument_list></name></argument>&gt;</argument_list></name></super><argument_list>()</argument_list><block>{}</block></class><operator>.</operator><call><name>getType</name><argument_list>()</argument_list></call></expr></init></decl>;</decl_stmt>
-			<expr_stmt><expr><name>list</name> <operator>=</operator> <operator>(</operator><name><name>List</name><argument_list type="generic">&lt;<argument><name>user</name></argument>&gt;</argument_list></name><operator>)</operator> <operator>new</operator> <call><name>Gson</name><argument_list>()</argument_list></call><operator>.</operator><call><name>fromJson</name><argument_list>( <argument><expr><name>gson</name></expr></argument> , <argument><expr><name>listType</name></expr></argument>)</argument_list></call></expr>;</expr_stmt> <comment type="line">//objGson.fromJson(gson, listType);</comment>
-			<expr_stmt><expr><call><name><name>pointReader</name><operator>.</operator><name>close</name></name><argument_list>()</argument_list></call></expr>;</expr_stmt>
-		}</block><catch>catch<parameter_list>(<parameter><decl><type><name>FileNotFoundException</name></type> <name>fnf</name></decl></parameter>)</parameter_list> <block>{
-			<expr_stmt><expr><call><name><name>fnf</name><operator>.</operator><name>printStackTrace</name></name><argument_list>()</argument_list></call></expr>;</expr_stmt>
-		}</block></catch></try>
-		<expr_stmt><expr><name>userlist</name> <operator>=</operator> <name>list</name></expr>;</expr_stmt>
-	}</block></function>
-	
 }</block></class>
 </unit>
 

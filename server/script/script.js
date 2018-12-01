@@ -59,7 +59,7 @@ module.exports = {
                             break;
                         }
                     }
-                    var classExtend = {from : line.substring(firstExtendsIndex,lastExtendsIndex) , to : currentClassName , relationship: "aggregation"};
+                    var classExtend = {from : line.substring(firstExtendsIndex,lastExtendsIndex) , to : currentClassName , relationship: "generalization"};
                     classConecteds.push(classExtend);
                 }
             }
@@ -85,7 +85,7 @@ module.exports = {
                 for(var j = 0; j < classNames.length ; j++){
                     if(line.includes(classNames[j].name)){
                         if(current != classNames[j].name){
-                            var classConected = {from : current , to : classNames[j].name , relationship : "generalization"};
+                            var classConected = {from : current , to : classNames[j].name , relationship : "aggegation"};
     
                             if(classConecteds.length < 1 && classConected.from != null){
                                 classConecteds.push(classConected);
