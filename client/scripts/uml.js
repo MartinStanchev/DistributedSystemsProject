@@ -3,83 +3,45 @@ var linkdata = [
   // { from: 13, to: 11, relationship: "generalization" },
   // { from: 14, to: 13, relationship: "aggregation" }
 ];
-var url_string = window.location.href ;
+var url_string = window.location.href;
 var url = new URL(url_string);
 var repo = url.searchParams.get("repo");
-
 var app = new Vue({
   el: "#uml",
   data: {
-    id:"",
+    id: "",
     nodedata: [],
     di: [],
     Classes: [],
     SuperClass: "",
     classExtends: [],
     linkdata: []
-
-    // node :[],
   },
   methods: {
-    
-    getUmlData: function(){
+    getUmlData: function() {
       axios
-        .get("/api/diagram/" + repo)
+        .get("api/diagram/" + repo)
         .then(response => {
-          this.id = response.data.data[0]._id;
-          this.di = response.data.data[0]._id;
-
-          // this.nodedata = response.data.data[0].Classes;
-          // linkdata = response.data.data[0].classConecteds;
-
-          myDiagram.model.addNodeData(response.data.data[0].Classes);
-          myDiagram.model.addLinkData(response.data.data[0].classConecteds);
-
-
           // get the response from the data base and loop through its length,
-          /*for (var j = 0; j < response.data.data.length; j++) {
+          for (var j = 0; j < response.data.data.length; j++) {
             for (var i = 0; i < response.data.data[j].Classes.length; i++) {
-              var data = {
-                key: response.data.data[j].Classes[i],
-                name: response.data.data[j].Classes[i],
-                properties: [
-                  { name: "classes", type: "List<Course>", visibility: "public" }
-                ]
-              };
-              myDiagram.model.addNodeData(data);
+              myDiagram.model.addNodeData(response.data.data[j].Classes[i]);
             }
           }
 
-          // defines extends links
-          for (var k = 0; k < response.data.data.length; k++) {
-            for (var e = 0; e < response.data.data[k].classExtends.length; e++) {
-              var link = {
-                from: response.data.data[k].classExtends[e].SubClass,
-                to: response.data.data[k].classExtends[e].SuperClass,
-
-                relationship: "generalization"
-              };
-              myDiagram.model.addLinkData(link);
-            }
-          }
-
-          // defines conecteds classes
+          // // defines conecteds classes
           for (var a = 0; a < response.data.data.length; a++) {
             for (
               var b = 0;
               b < response.data.data[a].classConecteds.length;
               b++
             ) {
-              var link = {
-                from: response.data.data[a].classConecteds[b].MainClass,
-                to: response.data.data[a].classConecteds[b].UsedClass,
-                relationship: "aggegation"
-              };
-              myDiagram.model.addLinkData(link);
+              myDiagram.model.addLinkData(
+                response.data.data[a].classConecteds[b]
+              );
             }
-          }*/
+          }
         })
-
         .catch(error => {
           console.log(error);
         });
@@ -343,17 +305,16 @@ var app = new Vue({
         if (e.isTransactionFinished) {
           var json = e.model.toJson();
           // Show the model data to the console after changing the diagram.
-          console.log(JSON.stringify(JSON.parse(json),null,2));
+          console.log(JSON.stringify(JSON.parse(json), null, 2));
           // add the patch request to save the changes to database
         }
       });
     }
-  },/*
+  } /*
   beforemount() {
     this.getUmlData();
-  },*/
-  mounted(){
-
+  },*/,
+  mounted() {
     this.getUmlData();
 
     this.init();
