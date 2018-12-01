@@ -18,29 +18,46 @@ var app = new Vue({
     linkdata: []
   },
   methods: {
+    hideModal : function () {
+      $("#myModal").removeClass("in");
+      $(".modal-backdrop").remove();
+      $('body').removeClass('modal-open');
+      $('body').css('padding-right', '');
+      $("#myModal").hide();
+    },
     getUmlData: function() {
       axios
         .get("api/diagram/" + repo)
         .then(response => {
-          // get the response from the data base and loop through its length,
-          for (var j = 0; j < response.data.data.length; j++) {
-            for (var i = 0; i < response.data.data[j].Classes.length; i++) {
-              myDiagram.model.addNodeData(response.data.data[j].Classes[i]);
-            }
+          if(response.data.data.length  === 0){
+            this.getUmlData();
           }
+          if(response.data.data.length > 0){
+            console.log("hide the wiating dialog");
+            waitingDialog.hide();
+            this.hideModal();
 
-          // // defines conecteds classes
-          for (var a = 0; a < response.data.data.length; a++) {
-            for (
-              var b = 0;
-              b < response.data.data[a].classConecteds.length;
-              b++
-            ) {
-              myDiagram.model.addLinkData(
-                response.data.data[a].classConecteds[b]
-              );
+            // get the response from the data base and loop through its length,
+            for (var j = 0; j < response.data.data.length; j++) {
+              for (var i = 0; i < response.data.data[j].Classes.length; i++) {
+                myDiagram.model.addNodeData(response.data.data[j].Classes[i]);
+              }
+            }
+
+            // // defines conecteds classes
+            for (var a = 0; a < response.data.data.length; a++) {
+              for (
+                var b = 0;
+                b < response.data.data[a].classConecteds.length;
+                b++
+              ) {
+                myDiagram.model.addLinkData(
+                  response.data.data[a].classConecteds[b]
+                );
+              }
             }
           }
+          
         })
         .catch(error => {
           console.log(error);
@@ -58,7 +75,7 @@ var app = new Vue({
           setsPortSpot: false, // keep Spot.AllSides for link connection spot
           setsChildPortSpot: false, // keep Spot.AllSides
           // nodes not connected by "generalization" links are laid out horizontally
-          arrangement: go.TreeLayout.ArrangementHorizontal
+          arrangement: go.TreeLayout.ArrangementVertical,
         })
       });
       // show visibility or access as a single character at the beginning of each property or method
@@ -274,7 +291,7 @@ var app = new Vue({
           case "generalization":
             return "Triangle";
           case "aggregation":
-            return "Stretched";
+            return "StretchedDiamond";
           default:
             return "";
         }
@@ -310,13 +327,10 @@ var app = new Vue({
         }
       });
     }
-  } /*
-  beforemount() {
-    this.getUmlData();
-  },*/,
+  },
   mounted() {
+    waitingDialog.show();
     this.getUmlData();
-
     this.init();
   }
 });
