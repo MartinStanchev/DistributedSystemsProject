@@ -75,7 +75,7 @@ var app = new Vue({
           setsPortSpot: false, // keep Spot.AllSides for link connection spot
           setsChildPortSpot: false, // keep Spot.AllSides
           // nodes not connected by "generalization" links are laid out horizontally
-          arrangement: go.TreeLayout.ArrangementVertical,
+          arrangement: go.TreeLayout.ArrangementHorizontal,
         })
       });
       // show visibility or access as a single character at the beginning of each property or method
