@@ -14,7 +14,65 @@ html, body {
   overflow-y: auto;
 
 }
+/* Container needed to position the button. Adjust the width as needed */
+.container {
+  position: relative;
+  width: 50%;
+}
+header-1 {
+  background-color: black;
+  /*Opacity start*/
+  -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=50)";
+  filter: alpha(opacity=80);
+  -moz-opacity: 0.80;
+  -khtml-opacity: 0.8;
+  opacity: 0.8;
+  /*Opacity end*/
+  color: white;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 150px;
+  padding: 0;
+  margin: 0;
+}
+#header #header-content {
+  margin: 10px;
+}
+/* Make the image responsive */
+.container img {
+  width: 100%;
+  height: auto;
+}
+.logoutLblPos{
 
+  position:fixed;
+  right:10px;
+  top:5px;
+}
+/* Style the button and place it in the middle of the container/image */
+.container-btn {
+    position: absolute;
+    top: 10%;
+    left: 85%;
+    transform: translate(-50%, -50%);
+    -ms-transform: translate(-50%, -50%);
+    background-color: #555;
+    color: white;
+    font-size: 16px;
+    padding: 12px 24px;
+    border: none;
+    cursor: pointer;
+    border-radius: 5px;
+    text-align: center;
+}
+
+
+
+.container .btn:hover {
+  background-color: black;
+}
 body {
 
   font-family: 'Montserrat', sans-serif;
@@ -23,7 +81,10 @@ body {
   -webkit-font-smoothing: antialiased;
 	background: linear-gradient( rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5) ), url('images/bg-main.jpg');
     background-size: cover;
-    
+}  
+
+.nav-item {
+padding-right: 30px;
 }
 
 #particles {

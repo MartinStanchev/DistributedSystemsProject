@@ -27,7 +27,7 @@ var app = new Vue({
     },
     getUmlData: function() {
       axios
-        .get("api/diagram/" + repo)
+        .get(api/diagram/Georgesarkis_DIT042-ObjectOrientedProgramming)
         .then(response => {
           if(response.data.data.length  === 0){
             this.getUmlData();
