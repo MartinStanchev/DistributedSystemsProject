@@ -33,6 +33,7 @@ router.get('/diagram/:id', function(req, res, next) {
     DiagramSchema.find({GitRepo: link}, function(err, repo) {
         if (err) { return next(err); }
         if (repo.length == 0) {
+            console.log(repo);
             var RepoPath = "https://github.com/" + link.replace("_",/\//g);
             Git.Clone(RepoPath, repoPath+path).then(function(repository) {
                 var returnedDiagram = script.convertZip(link);

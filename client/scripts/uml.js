@@ -18,21 +18,21 @@ var app = new Vue({
     linkdata: []
   },
   methods: {
-    hideModal: function() {
+    hideModal : function () {
       $("#myModal").removeClass("in");
       $(".modal-backdrop").remove();
-      $("body").removeClass("modal-open");
-      $("body").css("padding-right", "");
+      $('body').removeClass('modal-open');
+      $('body').css('padding-right', '');
       $("#myModal").hide();
     },
     getUmlData: function() {
       axios
-        .get("api/diagram" + repo)
+        .get("api/diagram/" + repo)
         .then(response => {
-          if (response.data.data.length === 0) {
+          if(response.data.data.length  === 0){
             this.getUmlData();
           }
-          if (response.data.data.length > 0) {
+          if(response.data.data.length > 0){
             console.log("hide the wiating dialog");
             waitingDialog.hide();
             this.hideModal();
@@ -57,6 +57,7 @@ var app = new Vue({
               }
             }
           }
+          
         })
         .catch(error => {
           console.log(error);
@@ -74,7 +75,7 @@ var app = new Vue({
           setsPortSpot: false, // keep Spot.AllSides for link connection spot
           setsChildPortSpot: false, // keep Spot.AllSides
           // nodes not connected by "generalization" links are laid out horizontally
-          arrangement: go.TreeLayout.ArrangementVertical
+          arrangement: go.TreeLayout.ArrangementHorizontal,
         })
       });
       // show visibility or access as a single character at the beginning of each property or method

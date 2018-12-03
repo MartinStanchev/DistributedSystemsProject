@@ -5,7 +5,7 @@ var morgan = require('morgan');
 var path = require('path');
 
 // Variables
-var mongoURI = process.env.MONGODB_URI || 'mongodb://admin:admin123@ds115094.mlab.com:15094/gituml';
+var mongoURI = process.env.MONGODB_URI || 'mongodb://admin123:admin123@ds151292.mlab.com:51292/testdatabase';
 var port = process.env.PORT || 3000;
 
 // Connect to MongoDB
