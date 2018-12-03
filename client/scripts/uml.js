@@ -27,7 +27,7 @@ var app = new Vue({
     },
     getUmlData: function() {
       axios
-        .get("api/diagram/Georgesarkis_assig6" + repo)
+        .get("api/diagram/Georgesarkis_assig6")
         .then(response => {
           //if(response.data.data.length  === 0){
           //  this.getUmlData();
