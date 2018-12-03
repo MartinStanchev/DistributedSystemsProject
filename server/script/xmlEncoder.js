@@ -8,7 +8,7 @@ module.exports = {
         if(shell.ls('-A', res_dir)) {
             shell.echo(shell.ls('-A', res_dir));
             shell.echo('dir exists');
-            if(shell.exec( srcml + res_dir + '/' + path +' -o ' + res_dir + '/javaProject.xml').code !== 0) {
+            if(shell.exec( srcml + res_dir + '/' + path +' -o ' + res_dir + '/' + path +'.xml').code !== 0) {
                 shell.echo('Error: srcml command failed.');
                 shell.exit(1);
             }
