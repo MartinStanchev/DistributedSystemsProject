@@ -70,6 +70,7 @@ module.exports = {
             }
         console.log("data generated from the xml");
         return this.SaveDiagram(GitRepo);
+        }
     },
     FindClass: function(line){
         var firstIndex;
