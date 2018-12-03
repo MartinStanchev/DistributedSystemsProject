@@ -3,8 +3,8 @@ var script= require('./script');
 
 module.exports = {
     saveXML : function(path){    
-        var res_dir = shell.pwd() + '/resources';
-        var srcml = shell.pwd() + '/srcML/bin/srcml ';
+        var res_dir = __dirname + '/../../resources';
+        var srcml = __dirname + '/../../srcML/bin/srcml ';
         if(shell.ls('-A', res_dir)) {
             shell.echo(shell.ls('-A', res_dir));
             shell.echo('dir exists');
