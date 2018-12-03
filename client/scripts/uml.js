@@ -29,9 +29,6 @@ var app = new Vue({
       axios
         .get("api/diagram/" + repo)
         .then(response => {
-          if (response.data.data.length === 0) {
-            this.getUmlData();
-          }
           if (response.data.data.length > 0) {
             console.log("hide the wiating dialog");
             waitingDialog.hide();
@@ -324,24 +321,24 @@ var app = new Vue({
         nodeDataArray: this.nodedata,
         linkDataArray: linkdata
       });
-      myDiagram.addModelChangedListener(function(e) {
-        if (e.isTransactionFinished) {
-          // Show the model data to the console after changing the diagram.
-          // add the patch request to save the changes to database
-          axios
-          .patch('/api/diagram/' + repo, {
-            Classes : e.model.nodeDataArray,
-            classConecteds : e.model.linkDataArray
-          })
-          .then(response=>{
-            console.log("data is succefuly updated "+  response.status)
-          })
-          .catch(err=>{
-            console.log(err);
-          })
-
-        }
-      });
+        myDiagram.addModelChangedListener(function(e) {
+          if (e.isTransactionFinished) {
+            // Show the model data to the console after changing the diagram.
+            // add the patch request to save the changes to database
+            axios
+            .patch('/api/diagram/' + repo, {
+              Classes : e.model.nodeDataArray,
+              classConecteds : e.model.linkDataArray
+            })
+            .then(response=>{
+              console.log("data is succefuly updated "+  response.status)
+            })
+            .catch(err=>{
+              console.log(err);
+            })
+  
+          }
+        });
     }
   },
   mounted() {

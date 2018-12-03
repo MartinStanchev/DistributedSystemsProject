@@ -20,26 +20,25 @@ router.get('/diagrams', function (req, res, next) {
 
 
 router.post('/diagrams', function (req, res, next) {
-    Git.Clone(req.body.GitRepo, repoPath + req.body.GitRepo.slice(19).replace(/\//g, "_"))
-        .then(function (repository) {
+    DiagramSchema.find({ GitRepo: req.body.GitRepo.slice(19).replace(/\//g, "_") }, function (err, diagram) {
+        if (err) return next(err);
+        if (diagram == null || diagram == [] || diagram.length == 0) {    
+            Git.Clone(req.body.GitRepo, repoPath + req.body.GitRepo.slice(19).replace(/\//g, "_"))
+            .then(function (repository) {
             path = req.body.GitRepo.slice(19).replace(/\//g, "_");
-            res.status.json(script.convertZip(path));
+            res.status(201).json(script.convertZip(path));
             console.log("Successfully cloned to: " + Diagram.GitRepo);
-        });
+        });}
+        res.status(200);
+
+    });
+
 });
 
 router.get('/diagram/:id', function (req, res, next) {
     var link = req.params.id;
     DiagramSchema.find({ GitRepo: link }, function (err, repo) {
         if (err) { return next(err); }
-        if (repo.length == 0) {
-            console.log(repo);
-            var RepoPath = "https://github.com/" + link.replace("_", /\//g);
-            Git.Clone(RepoPath, repoPath + path).then(function (repository) {
-                var returnedDiagram = script.convertZip(link);
-                return res.status(201).json({ "data": returnedDiagram });
-            });
-        }
         res.status(200).json({ "data": repo });
     });
 });
@@ -51,10 +50,12 @@ router.patch('/diagram/:id', function (req, res, next) {
         if (diagram == null) {
             return res.status(404).json({ "message": "Diagram not found" });
         }
-       diagram[0].Classes = (req.body.Classes|| diagram[0].Classes);
-       diagram[0].classConecteds = (req.body.classConecteds || diagram[0].classConecteds);
-       diagram[0].save();
-       res.status(200).json({"data" : diagram[0]});
+        if(diagram.length != 0){
+            diagram[0].Classes = (req.body.Classes|| diagram[0].Classes);
+            diagram[0].classConecteds = (req.body.classConecteds || diagram[0].classConecteds);
+            diagram[0].save();
+            res.status(200).json({"data" : diagram[0]});  
+        }
     });
 });
 
