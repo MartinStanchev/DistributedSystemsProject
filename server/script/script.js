@@ -11,8 +11,9 @@ module.exports = {
         classNames = [];
         classConecteds = [];
         var excist;
+        console.log('in readxml now');
         var readMe = fs.readFileSync(shell.pwd() + "/resources/" + GitRepo + ".xml", 'utf8');
-    
+        console.log('in readxml nowasd');
         if(readMe.includes(".java")){
             var arrayOfLines = readMe.split("\n"); 
             var currentClassName;
@@ -272,9 +273,9 @@ module.exports = {
         }
     },
     cleanUpFiles : function (pathToFolder) {
-        shell.echo('deleting files... \n' + shell.ls('-A', shell.pwd() + '/resources/'));
-        shell.rm('-rf', shell.pwd() + '/resources/' + pathToFolder);
-        shell.rm(shell.pwd() + '/resources/' + pathToFolder + ".xml");
+        shell.echo('deleting files... \n' + shell.ls('-A', __dirname + '/../../resources/'));
+        shell.rm('-rf', __dirname + '/../../resources/' + pathToFolder);
+        shell.rm(__dirname + '/../../resources/' + pathToFolder + ".xml");
     },
     SaveDiagram : function(GitRepo){
         var Diagram = new DiagramSchema({
