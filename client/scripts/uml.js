@@ -27,7 +27,7 @@ var app = new Vue({
     },
     getUmlData: function() {
       axios
-        .get("api/diagram/" + repo)
+        .get("api/diagram/Georgesarkis_assig6" + repo)
         .then(response => {
           //if(response.data.data.length  === 0){
           //  this.getUmlData();
@@ -324,6 +324,14 @@ var app = new Vue({
           // Show the model data to the console after changing the diagram.
           console.log(JSON.stringify(JSON.parse(json), null, 2));
           // add the patch request to save the changes to database
+          axios
+          .patch('/api/diagrams/Georgesarkis_assig6', json)
+          .then(response=>{
+            console.log("data is succefuly updated "+ response.status)
+          })
+          .catch(err=>{
+            console.log(err);
+          })
         }
       });
     }
