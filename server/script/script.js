@@ -1,17 +1,14 @@
 var fs = require('fs');
 var DiagramSchema = require('../models/Diagram');
-var admZip = require("adm-zip");
 var xmlEmcoder = require('./xmlEncoder');
 var shell = require("shelljs");
+var repoPath = "resources/"
 var classNames;
-var ClassExtends;
 var classConecteds;
 
 module.exports = {
     readXML : function(GitRepo){
         classNames = [];
-        classNames = [];
-        ClassExtends = [];
         classConecteds = [];
         var excist;
         var readMe = fs.readFileSync(shell.pwd() + "/resources/" + GitRepo + ".xml", 'utf8');
@@ -19,98 +16,259 @@ module.exports = {
         if(readMe.includes(".java")){
             var arrayOfLines = readMe.split("\n"); 
             var currentClassName;
-
-            //Check for classes and extensions
+            var pushedclass;
+            var localPropreties = [];
+            var localMethods = [];
+            var classFound = false;
+            var classFoundForConnection = false;
+            //Check for classes ,extensions , attributes and methods
             for(var i = 0;i < arrayOfLines.length;i++){
                 var line = arrayOfLines[i];
-                var classFound = false;
 
                 if(line.includes("<class><specifier>public</specifier>") ){
-                    var firstIndex;
-                    var lastIndex;
-                    classFound = false;
-                    for(var j = 0 ; j < line.length ; j++){
-                        
-                        if(line.substring(j,j+12) === "class <name>"){
-                            firstIndex = j+12;
-                        }
-                        if(line.substring(firstIndex,j).includes("</name>") ){
-                            lastIndex = j-7;
-                            break;
-                        }
-                    }
-                    
-                    var className = line.substring(firstIndex,lastIndex);
-                    currentClassName = className;
+                    currentClassName = this.FindClass(line);
+                    localPropreties = [];
+                    localMethods = [];
                     classFound = true;
-                    classNames.push(className);
                 }
                 if(line.includes("extends") && classFound === true)  {
-                    var firstExtendsIndex;
-                    var lastExtendsIndex;
-                    var firstFound = false;
-                    for(var j = 0 ; j < line.length ; j++){
-                        if(line.substring(j,j+14) === "extends <name>"){
-                            firstExtendsIndex = j+14;
-                            firstFound = true;
-                        }
-                        if(line.substring(firstExtendsIndex,j).includes("</name>") && firstFound === true){
-                            lastExtendsIndex = j-7;
+                    this.FindSuperClass(line,currentClassName);
+                }
+                if(line.includes("<decl_stmt><decl>") && classFound === true){
+                    var foundProprety = this.FindAttributes(line);
+                    var dublicate = false;
+                    for(var j = 0 ; j < localPropreties.length ; j++){
+                        if(localPropreties[j].name == foundProprety.name){
+                            dublicate = true;
                             break;
                         }
+                        
                     }
-                    var classExtend = {SubClass: currentClassName  ,  SuperClass: line.substring(firstExtendsIndex,lastExtendsIndex)};
-                    ClassExtends.push(classExtend);
+                    if(dublicate == false){
+                        localPropreties.push(this.FindAttributes(line));
+                    }
+                }
+                if(line.includes("<function>") && classFound === true){
+                    localMethods.push(this.FindMethod(line));
+                }
+                if(line.includes("</class>")){
+                    pushedclass = { key : currentClassName , name : currentClassName , properties : localPropreties , methods : localMethods};
+                    classFound = false;
+                    classNames.push(pushedclass);
                 }
             }
             //Check for connection between classes 
             for(var i = 0;i < arrayOfLines.length;i++){
                 var line = arrayOfLines[i];
-                var current;
                 if(line.includes("<class><specifier>public</specifier>")){
-                    var firstIndex;
-                    var lastIndex;
-                    for(var j = 0 ; j < line.length ; j++){
-                        if(line.substring(j,j+12) === "class <name>"){
-                            firstIndex = j+12;
-                        }
-                        if(line.substring(firstIndex,j).includes("</name>") ){
-                            lastIndex = j-7;
-                            break;
-                        }
-                    }
-                    var className = line.substring(firstIndex,lastIndex);
-                    current = className;
+                    currentClassName = this.FindClass(line);
+                    classFoundForConnection = true;
                 }
-                for(var j = 0; j < classNames.length ; j++){
-                    if(line.includes(classNames[j])){
-                        if(current != classNames[j]){
-                            var classConected = {MainClass:current , UsedClass:classNames[j]};
-    
-                            if(classConecteds.length < 1 && classConected.MainClass != null){
-                                classConecteds.push(classConected);
+                if(classFoundForConnection){
+                    this.FindClassConnection(line,currentClassName);
+                }
+            }
+        console.log("data generated from the xml");
+        return this.SaveDiagram(GitRepo);
+    },
+    FindClass: function(line){
+        var firstIndex;
+        var lastIndex;
+        for(var j = 0 ; j < line.length ; j++){
+            
+            if(line.substring(j,j+12) === "class <name>"){
+                firstIndex = j+12;
+            }
+            if(line.substring(firstIndex,j).includes("</name>") ){
+                lastIndex = j-7;
+                break;
+            }
+        }
+        
+        return line.substring(firstIndex,lastIndex);
+    },
+    FindSuperClass: function(line, currentClassName){
+        var firstExtendsIndex;
+        var lastExtendsIndex;
+        var firstFound = false;
+        for(var j = 0 ; j < line.length ; j++){
+            if(line.substring(j,j+14) === "extends <name>"){
+                firstExtendsIndex = j+14;
+                firstFound = true;
+            }
+            if(line.substring(firstExtendsIndex,j).includes("</name>") && firstFound === true){
+                lastExtendsIndex = j-7;
+                break;
+            }
+        }
+        var classExtend = {from : line.substring(firstExtendsIndex,lastExtendsIndex) ,
+                                 to : currentClassName , relationship: "generalization"};
+        classConecteds.push(classExtend);
+        return classExtend;
+    },
+    FindAttributes : function(line){
+        var firstVisibilityIndex;
+        var lastVisibilityIndex;
+        var firstTypeIndex;
+        var lastTypeIndex;
+        var firstNameIndex;
+        var lastNameIndex;
+        var specifierFound = false;
+        var firstSpecifierIndexFound = false;
+        var typeFound = false;
+        var firstTypeIndexFound = false;
+        var nameFound = false;
+        var firstNameIndexFound = false;
+        for(var j = 0; j < line.length ; j++){
+            if(line.substring(0,j).includes("<decl_stmt><decl><specifier>") && specifierFound == false && firstSpecifierIndexFound == false){
+                firstVisibilityIndex = j;
+                firstIndexFound = true;
+            }
+            if(line.substring(firstVisibilityIndex,j).includes("</specifier>") && specifierFound == false && firstSpecifierIndexFound == true ){
+                lastVisibilityIndex = j-12;
+                specifierFound = true;
+            }
+            if(line.substring(0,j).includes("<name>") && firstTypeIndexFound == false && typeFound == false){
+                firstTypeIndex = j;
+                firstTypeIndexFound = true;
+            }
+            if(line.substring(firstTypeIndex,j).includes("</name>") && firstTypeIndexFound == true && typeFound == false){
+                lastTypeIndex = j-7;
+                typeFound = true;
+            }
+            if(line.substring(0,j).includes("</name></type> <name>") && firstNameIndexFound == false && nameFound == false){
+                firstNameIndex = j;
+                firstNameIndexFound = true;
+            }
+            if(line.substring(firstNameIndex,j).includes("</name>") && firstNameIndexFound == true && nameFound == false){
+                lastNameIndex = j-7;
+                nameFound = true;
+                break;
+            }
+        }
+        var visibility1 ;
+        if(specifierFound == false){
+            visibility1 = "public";
+        }
+        else{
+            visibility1 = line.substring(firstVisibilityIndex,lastVisibilityIndex);
+        }
+        var type1 = line.substring(firstTypeIndex,lastTypeIndex);
+        var name1 = line.substring(firstNameIndex,lastNameIndex);
+        var ls = {name : name1 , type : type1 , visibility : visibility1};
+        return ls;
+    },
+    FindMethod : function(line){
+        var firstVisibilityIndex;
+        var lastVisibilityIndex;
+        var firstTypeIndex;
+        var lastTypeIndex;
+        var firstNameIndex;
+        var lastNameIndex;
+        var firstParNameIndex;
+        var lastParNameIndex;
+        var specifierFound = false;
+        var firstSpecifierIndexFound = false;
+        var typeFound = false;
+        var firstTypeIndexFound = false;
+        var nameFound = false;
+        var firstNameIndexFound = false;
+        var parNameFound = false;
+        var firstParNameIndexFound = false;
+        for(var j = 0; j < line.length ; j++){
+            if(line.substring(0,j).includes("<function><specifier>") && specifierFound == false && firstSpecifierIndexFound == false){
+                firstVisibilityIndex = j;
+                firstIndexFound = true;
+            }
+            if(line.substring(firstVisibilityIndex,j).includes("</specifier>") && specifierFound == false && firstSpecifierIndexFound == true ){
+                lastVisibilityIndex = j-12;
+                specifierFound = true;
+            }
+            if(line.substring(0,j).includes("<name>") && firstTypeIndexFound == false && typeFound == false){
+                firstTypeIndex = j;
+                firstTypeIndexFound = true;
+            }
+            if(line.substring(firstTypeIndex,j).includes("</name>") && firstTypeIndexFound == true && typeFound == false){
+                lastTypeIndex = j-7;
+                typeFound = true;
+            }
+            if(line.substring(0,j).includes("</name></type> <name>") && firstNameIndexFound == false && nameFound == false){
+                firstNameIndex = j;
+                firstNameIndexFound = true;
+            }
+            if(line.substring(firstNameIndex,j).includes("</name>") && firstNameIndexFound == true && nameFound == false){
+                lastNameIndex = j-7;
+                nameFound = true;
+            }
+            //this work i can find the type name of the parameter
+            /*if(line.substring(0,j).includes("<parameter><decl><type><name>") && firstParTypeIndexFound == false && parTypeFound == false){
+                firstParTypeIndex = j;
+                firstParTypeIndexFound = true;
+            }
+            if(line.substring(firstParTypeIndex,j).includes("</name></type>") && firstParTypeIndexFound == true && parTypeFound == false){
+                lastParTypeIndex = j- 14;
+                parTypeFound = true;
+            }
+            //this doesnt work when activated the system cant process any data
+            if(line.substring(lastParTypeIndex,j).includes("<name>") && firstParNameIndexFound == false && parName == false && parTypeFound == true){
+                firstParNameIndex = j;
+                firstParNameIndexFound = true;
+            }
+            if(line.substring(firstParNameIndex,j).includes("</name>") && firstParNameIndexFound == true && parName == false && parTypeFound == true){
+                lastParNameIndex = j- 7;
+                parName = true;
+            }*/
+        }
+        var visibility1 ;
+        if(specifierFound == false){
+            visibility1 = "public";
+        }
+        else{
+            visibility1 = line.substring(firstVisibilityIndex,lastVisibilityIndex);
+        }
+        var type1 = line.substring(firstTypeIndex,lastTypeIndex);
+        var name1 = line.substring(firstNameIndex,lastNameIndex);
+        /*if(parNameFound){
+            var parName = line.substring(firstParNameIndex, lastParNameIndex);
+            console.log(parName);
+            var parType = line.substring(firstParTypeIndex,lastParTypeIndex);
+            console.log(parType);
+        }*/
+        ls = {name: name1, type : type1 , visibility: visibility1 }
+
+        return ls;
+    },
+    FindClassConnection : function(line,current){
+        var excist;
+        for(var j = 0; j < classNames.length ; j++){
+            if(line.includes(classNames[j].name)){
+                if(current != classNames[j].name){
+                    if(line.includes("new")){
+                        var classConected = {from : current , to : classNames[j].name , relationship : "aggregation"};
+                    }else{
+                        var classConected = {from : current , to : classNames[j].name , relationship : ""};
+                    }
+
+                    if(classConecteds.length < 1 && classConected.from != null){
+                        classConecteds.push(classConected);
+                    }
+                    else{
+                        excist = false;
+                        for(var k = 0; k < classConecteds.length; k++){
+                            if(((classConecteds[k].from === classConected.from) && (classConecteds[k].to === classConected.to)) || 
+                            ((classConecteds[k].from === classConected.to) && (classConecteds[k].to === classConected.from))){
+                                excist = true;
+                                break;
                             }
-                            else{
-                                excist = false;
-                                for(var k = 0; k < classConecteds.length; k++){
-                                    if(((classConecteds[k].MainClass === classConected.MainClass) && (classConecteds[k].UsedClass === classConected.UsedClass)) || ((classConecteds[k].MainClass === classConected.UsedClass) && (classConecteds[k].UsedClass === classConected.MainClass))){
-                                        excist = true;
-                                        break;
-                                    }
-                                }
-                                if(excist === false && classConected.MainClass != null){
-                                    classConecteds.push(classConected);
-                                    break;
-                                }
-                            }
+                        }
+                        if(excist === false && classConected.from != null){
+                            classConecteds.push(classConected);
+                            break;
                         }
                     }
                 }
             }
         }
-        console.log("data generated from the xml");
-        this.SaveDiagram(GitRepo);
- 
     },
     cleanUpFiles : function (pathToFolder) {
         shell.echo('deleting files... \n' + shell.ls('-A', shell.pwd() + '/resources/'));
@@ -121,13 +279,14 @@ module.exports = {
         var Diagram = new DiagramSchema({
             GitRepo :  GitRepo,
             Classes : classNames,
-            classExtends : ClassExtends,
             classConecteds : classConecteds
         });
         Diagram.save(function(err) {
         if (err) {
-          return next(err);
+            console.log("couldnt save data to database" + err)
+          return (err);
         }
+                          
             console.log("data saved to database");
             return (Diagram);
         });
@@ -136,7 +295,7 @@ module.exports = {
     convertZip : function(path){
        console.log("covertZip file funcation called");
         if(xmlEmcoder.saveXML(path) == 1) {
-            this.readXML(path);
+            return this.readXML(path);
         }
         
     }
