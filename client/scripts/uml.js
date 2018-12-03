@@ -29,9 +29,9 @@ var app = new Vue({
       axios
         .get("api/diagram/" + repo)
         .then(response => {
-          if(response.data.data.length  === 0){
-            this.getUmlData();
-          }
+          //if(response.data.data.length  === 0){
+          //  this.getUmlData();
+          //}
           if(response.data.data.length > 0){
             console.log("hide the wiating dialog");
             waitingDialog.hide();
@@ -329,8 +329,13 @@ var app = new Vue({
     }
   },
   mounted() {
-    waitingDialog.show();
-    this.getUmlData();
+    waitingDialog.show('Loading', {dialogSize: 'sm', progressType: 'warning'});
+    setTimeout(function () {waitingDialog.hide();}, 2000);
+    //waitingDialog.show();
+    setTimeout(this.getUmlData(), 0);
+    //this.getUmlData();
     this.init();
+
+
   }
 });
