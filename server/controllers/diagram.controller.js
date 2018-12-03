@@ -44,60 +44,20 @@ router.get('/diagram/:id', function (req, res, next) {
     });
 });
 
-router.patch('/:id', function (req, res, next) {
+router.patch('/diagram/:id', function (req, res, next) {
     var link = req.params.id;
     DiagramSchema.find({ GitRepo: link }, function (err, diagram) {
         if (err) return next(err);
         if (diagram == null) {
             return res.status(404).json({ "message": "Diagram not found" });
         }
-        diagram.GitRepo = diagram.GitRepo;
-        for (var i = 0; i < req.body.nodeDataArray.length; i++) {
-            diagram.Classes[i].name = (req.body.nodeDataArray[i].name || diagram.Classes[i].name);
-            for (var j = 0; j < req.body.nodeDataArray[i].properties.length; j++) {
-                diagram.Classes[i].properties[j].name = (req.body.nodeDataArray[i].properties[j].name
-                    || diagram.Classes[i].properties[j].name);
-                diagram.Classes[i].properties[j].type = (req.body.nodeDataArray[i].properties[j].type
-                    || diagram.Classes[i].properties[j].type);
-                diagram.Classes[i].properties[j].visibility = (req.body.nodeDataArray[i].properties[j].visibility
-                    || diagram.Classes[i].properties[j].visibility);
-            }
-            for (var j = 0; j < req.body.nodeDataArray[i].methods.length; j++) {
-                diagram.Classes[i].methods[j].name = (req.body.nodeDataArray[i].methods[j].name
-                    || diagram.Classes[i].methods[j].name);
-                diagram.Classes[i].methods[j].type = (req.body.nodeDataArray[i].methods[j].type
-                    || diagram.Classes[i].methods[j].type);
-                for (var k = 0; k < req.body.nodeDataArray[i].methods.parameters.length; k++) {
-                    diagram.Classes[i].methods[j].parameters[k].name = (req.body.nodeDataArray[i].methods[j].parameters[k].name
-                        || diagram.Classes[i].methods[j].parameters[k].name);
-                    diagram.Classes[i].methods[j].parameters[k].type = (req.body.nodeDataArray[i].methods[j].parameters[k].type
-                        || diagram.Classes[i].methods[j].parameters[k].type);
-                }
-                diagram.Classes[i].methods[j].visibility = (req.body.nodeDataArray[i].methods[j].visibility
-                    || diagram.Classes[i].methods[j].visibility);
-            }
-        }
-        for (var i = 0; i < req.body.linkDataArray.length; i++){
-            diagram.classConecteds[i].from = diagram.classConecteds[i].from;
-            diagram.classConecteds[i].to = diagram.classConecteds[i].to;
-            diagram.classConecteds[i].relationship = diagram.classConecteds[i].relationship;
-        }
-        //     GitRepo : { type: String, unique: true},
-        // Classes : [{key : String , name : String 
-        //     , properties : [{name : String, type : {type : String} , visibility : String }]
-        //     , methods:  [{name: String, type: {type : String}, parameters: [{ name: String, type: {type : String}  }], visibility: String  }]}],
-        // classConecteds : [{from: String , to : String , relationship : String}]
-        // diagram.GitRepo = (req.body.GitRepo || diagram.GitRepo);
-        // diagram.Classes.name = (req.body.Classes.name || diagram.Classes.name);
-        // diagram.Classes.properties.name = (req.body. || diagram.Classes.properties.name)
-        // diagram.classExtends.SubClass = (req.body.classExtends.SubClass || diagram.classExtends.SubClass);
-        // diagram.classExtends.SuperClass = (req.body.classExtends.SuperClass || diagram.classExtends.SuperClass);
-        // diagram.classConecteds.MainClass = (req.body.classConecteds.MainClass || diagram.classConecteds.MainClass);
-        // diagram.classConecteds.UsedClass = (req.body.classConecteds.UsedClass || diagram.classConecteds.UsedClass);
-        diagram.save();
-        res.status(200).json(diagram);
-    })
-})
+       diagram[0].Classes = (req.body.Classes|| diagram[0].Classes);
+       diagram[0].classConecteds = (req.body.classConecteds || diagram[0].classConecteds);
+       diagram[0].save();
+       res.status(200).json({"data" : diagram[0]});
+    });
+});
+
 //// Github listener
 ////router.post('/', function(req, res, next) {
 //    // Encrypt local secret - NOT USED YET !
