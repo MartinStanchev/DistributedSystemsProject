@@ -29,14 +29,15 @@ router.post('/diagrams', function(req, res, next) {
 });
 
 router.get('/diagram/:id', function(req, res, next) {
-    DiagramSchema.find({GitRepo: req.params.id}, function(err, repo) {
+    var link = req.params.id;
+    DiagramSchema.find({GitRepo: link}, function(err, repo) {
         if (err) { return next(err); }
-        if (repo == null) {
-            var RepoPath = "https://github.com/" + path.replace("_",/\//g);
-            Git.Clone(RepoPath, repoPath+path)
-            .then(function(repository) {
-                console.log("Successfully cloned to: " + Diagram.GitRepo);
-                return res.status(201).json({"data" : script.convertZip(req.params.id)});
+        if (repo.length == 0) {
+            console.log(repo);
+            var RepoPath = "https://github.com/" + link.replace("_",/\//g);
+            Git.Clone(RepoPath, repoPath+path).then(function(repository) {
+                var returnedDiagram = script.convertZip(link);
+                return res.status(201).json({"data" : returnedDiagram});
             });
         }
         res.status(200).json({"data" : repo});

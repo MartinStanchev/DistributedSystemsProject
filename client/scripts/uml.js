@@ -3,73 +3,62 @@ var linkdata = [
   // { from: 13, to: 11, relationship: "generalization" },
   // { from: 14, to: 13, relationship: "aggregation" }
 ];
-
+var url_string = window.location.href;
+var url = new URL(url_string);
+var repo = url.searchParams.get("repo");
 var app = new Vue({
   el: "#uml",
   data: {
-    id:"",
+    id: "",
     nodedata: [],
     di: [],
     Classes: [],
     SuperClass: "",
     classExtends: [],
     linkdata: []
-
-    // node :[],
   },
   methods: {
-    getUmlData: function(){
+    hideModal : function () {
+      $("#myModal").removeClass("in");
+      $(".modal-backdrop").remove();
+      $('body').removeClass('modal-open');
+      $('body').css('padding-right', '');
+      $("#myModal").hide();
+    },
+    getUmlData: function() {
       axios
-        .get("/api/diagram/" + repo)
+        .get("api/diagram/" + repo)
         .then(response => {
-          this.id = response.data.data[1]._id;
-          console.log(this.id);
-          this.di = response.data.data;
-          console.log(response.data.data[1].classExtends[1].SubClass);
-          // get the response from the data base and loop through its length,
-          for (var j = 0; j < response.data.data.length; j++) {
-            for (var i = 0; i < response.data.data[j].Classes.length; i++) {
-              var data = {
-                key: response.data.data[j].Classes[i],
-                name: response.data.data[j].Classes[i],
-                properties: [
-                  { name: "classes", type: "List<Course>", visibility: "public" }
-                ]
-              };
-              myDiagram.model.addNodeData(data);
+          if(response.data.data.length  === 0){
+            this.getUmlData();
+          }
+          if(response.data.data.length > 0){
+            console.log("hide the wiating dialog");
+            waitingDialog.hide();
+            this.hideModal();
+
+            // get the response from the data base and loop through its length,
+            for (var j = 0; j < response.data.data.length; j++) {
+              for (var i = 0; i < response.data.data[j].Classes.length; i++) {
+                myDiagram.model.addNodeData(response.data.data[j].Classes[i]);
+              }
+            }
+
+            // // defines conecteds classes
+            for (var a = 0; a < response.data.data.length; a++) {
+              for (
+                var b = 0;
+                b < response.data.data[a].classConecteds.length;
+                b++
+              ) {
+                myDiagram.model.addLinkData(
+                  response.data.data[a].classConecteds[b]
+                );
+              }
             }
           }
-
-          // defines extends links
-          for (var k = 0; k < response.data.data.length; k++) {
-            for (var e = 0; e < response.data.data[k].classExtends.length; e++) {
-              var link = {
-                from: response.data.data[k].classExtends[e].SubClass,
-                to: response.data.data[k].classExtends[e].SuperClass,
-
-                relationship: "generalization"
-              };
-              myDiagram.model.addLinkData(link);
-            }
-          }
-
-          // defines conecteds classes
-          for (var a = 0; a < response.data.data.length; a++) {
-            for (
-              var b = 0;
-              b < response.data.data[a].classConecteds.length;
-              b++
-            ) {
-              var link = {
-                from: response.data.data[a].classConecteds[b].MainClass,
-                to: response.data.data[a].classConecteds[b].UsedClass,
-                relationship: "aggegation"
-              };
-              myDiagram.model.addLinkData(link);
-            }
-          }
+          
         })
-
         .catch(error => {
           console.log(error);
         });
@@ -86,7 +75,7 @@ var app = new Vue({
           setsPortSpot: false, // keep Spot.AllSides for link connection spot
           setsChildPortSpot: false, // keep Spot.AllSides
           // nodes not connected by "generalization" links are laid out horizontally
-          arrangement: go.TreeLayout.ArrangementHorizontal
+          arrangement: go.TreeLayout.ArrangementHorizontal,
         })
       });
       // show visibility or access as a single character at the beginning of each property or method
@@ -302,7 +291,7 @@ var app = new Vue({
           case "generalization":
             return "Triangle";
           case "aggregation":
-            return "Stretched";
+            return "StretchedDiamond";
           default:
             return "";
         }
@@ -333,13 +322,14 @@ var app = new Vue({
         if (e.isTransactionFinished) {
           var json = e.model.toJson();
           // Show the model data to the console after changing the diagram.
-          console.log(JSON.stringify(JSON.parse(json),null,2));
+          console.log(JSON.stringify(JSON.parse(json), null, 2));
           // add the patch request to save the changes to database
         }
       });
     }
   },
   mounted() {
+    waitingDialog.show();
     this.getUmlData();
     this.init();
   }
