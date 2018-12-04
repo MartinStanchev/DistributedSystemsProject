@@ -18,21 +18,18 @@ var app = new Vue({
     linkdata: []
   },
   methods: {
-    hideModal : function () {
+    hideModal: function() {
       $("#myModal").removeClass("in");
       $(".modal-backdrop").remove();
-      $('body').removeClass('modal-open');
-      $('body').css('padding-right', '');
+      $("body").removeClass("modal-open");
+      $("body").css("padding-right", "");
       $("#myModal").hide();
     },
     getUmlData: function() {
       axios
         .get("api/diagram/" + repo)
         .then(response => {
-          //if(response.data.data.length  === 0){
-          //  this.getUmlData();
-          //}
-          if(response.data.data.length > 0){
+          if (response.data.data.length > 0) {
             console.log("hide the wiating dialog");
             waitingDialog.hide();
             this.hideModal();
@@ -40,7 +37,14 @@ var app = new Vue({
             // get the response from the data base and loop through its length,
             for (var j = 0; j < response.data.data.length; j++) {
               for (var i = 0; i < response.data.data[j].Classes.length; i++) {
-                myDiagram.model.addNodeData(response.data.data[j].Classes[i]);
+                var data = {
+                  key: response.data.data[j].Classes[i].name,
+                  name: response.data.data[j].Classes[i].name,
+                  id: response.data.data[j].Classes[i]._id,
+                  repoID: response.data.data[j]._id,
+                  properties: response.data.data[j].Classes[i].properties
+                };
+                myDiagram.model.addNodeData(data);
               }
             }
 
@@ -57,7 +61,6 @@ var app = new Vue({
               }
             }
           }
-          
         })
         .catch(error => {
           console.log(error);
@@ -75,7 +78,7 @@ var app = new Vue({
           setsPortSpot: false, // keep Spot.AllSides for link connection spot
           setsChildPortSpot: false, // keep Spot.AllSides
           // nodes not connected by "generalization" links are laid out horizontally
-          arrangement: go.TreeLayout.ArrangementHorizontal,
+          arrangement: go.TreeLayout.ArrangementHorizontal
         })
       });
       // show visibility or access as a single character at the beginning of each property or method
@@ -318,24 +321,37 @@ var app = new Vue({
         nodeDataArray: this.nodedata,
         linkDataArray: linkdata
       });
-      myDiagram.addModelChangedListener(function(e) {
-        if (e.isTransactionFinished) {
-          var json = e.model.toJson();
-          // Show the model data to the console after changing the diagram.
-          console.log(JSON.stringify(JSON.parse(json), null, 2));
-          // add the patch request to save the changes to database
-        }
-      });
+        myDiagram.addModelChangedListener(function(e) {
+          if (e.isTransactionFinished) {
+            // Show the model data to the console after changing the diagram.
+            // add the patch request to save the changes to database
+            axios
+            .patch('/api/diagram/' + repo, {
+              Classes : e.model.nodeDataArray,
+              classConecteds : e.model.linkDataArray
+            })
+            .then(response=>{
+              console.log("data is succefuly updated "+  response.status)
+            })
+            .catch(err=>{
+              console.log(err);
+            })
+  
+          }
+        });
     }
   },
   mounted() {
-    waitingDialog.show('Loading', {dialogSize: 'sm', progressType: 'warning'});
-    setTimeout(function () {waitingDialog.hide();}, 2000);
+    waitingDialog.show("Loading", {
+      dialogSize: "sm",
+      progressType: "warning"
+    });
+    setTimeout(function() {
+      waitingDialog.hide();
+    }, 2000);
     //waitingDialog.show();
     setTimeout(this.getUmlData(), 0);
     //this.getUmlData();
     this.init();
-
-
   }
 });
