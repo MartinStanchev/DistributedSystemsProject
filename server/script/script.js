@@ -46,11 +46,16 @@ module.exports = {
                         
                     }
                     if(dublicate == false){
-                        localPropreties.push(this.FindAttributes(line));
+                        if(foundProprety.name.length < 20 && foundProprety.type.length < 20 && foundProprety.visibility.length < 20){
+                            localPropreties.push(foundProprety);
+                        }
                     }
                 }
                 if(line.includes("<function>") && classFound === true){
-                    localMethods.push(this.FindMethod(line));
+                    var foundFuncation = this.FindMethod(line);
+                    if(foundFuncation.type.length < 20 && foundFuncation.name.length < 20 && foundFuncation.visibility.length < 20){
+                        localMethods.push(foundFuncation);
+                    }
                 }
                 if(line.includes("</class>")){
                     pushedclass = { key : currentClassName , name : currentClassName , properties : localPropreties , methods : localMethods};
