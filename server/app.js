@@ -3,11 +3,11 @@ var bodyParser = require('body-parser');
 var mongoose = require('mongoose');
 var morgan = require('morgan');
 var path = require('path');
-
+var script = require('./script/script');
 // Variables
 var mongoURI = process.env.MONGODB_URI || 'mongodb://admin:admin123@ds115094.mlab.com:15094/gituml';
 var port = process.env.PORT || 3000;
-
+/*
 // Connect to MongoDB
 mongoose.connect(mongoURI, { useNewUrlParser: true }, function(err) {
     if (err) {
@@ -17,7 +17,7 @@ mongoose.connect(mongoURI, { useNewUrlParser: true }, function(err) {
     }
     console.log(`Connected to MongoDB with URI: ${mongoURI}`);
 });
-
+*/
 // Create Express app
 var app = express();
 // Parse requests of content-type 'application/json'
@@ -28,11 +28,10 @@ app.use(morgan('dev'));
 var root = path.normalize(__dirname + '/..');
 app.use(express.static(path.join(root, 'client')));
 app.set('appPath', 'client');
-
 // Import routes
 app.use(require('./controllers/index'));
 
-
+script.FindIPs();
 
 // Error handler (must be registered last)
 var env = app.get('env');
@@ -57,4 +56,3 @@ app.listen(port, function(err) {
 });
 
 module.exports = app;
-

@@ -8,6 +8,8 @@ var secret = "topsecret"; // Not used - can be implemented later for security
 var repoPath = "resources/"
 var Git = require("nodegit");
 var path = require('path');
+var request = require('request');
+const axios = require("axios");
 
 //Get all diagrams
 router.get('/diagrams', function (req, res, next) {
@@ -35,7 +37,14 @@ router.post('/diagrams', function (req, res, next) {
 
 });
 
-router.get('/diagram/:id', function (req, res, next) {
+router.get('/diagrams/:id', function (req, res, next) {
+    var ips = script.FindIPs();
+    for(var i = 0 ; i < ips.length ; i++){
+       var response = router.get(ips[i] + 'diagram/:id');
+       if(response != null && response.length != 0){
+            res.status(200).json({"data" : repo});
+       }
+    }
     var link = req.params.id;
     DiagramSchema.find({ GitRepo: link }, function (err, repo) {
         if (err) { return next(err); }
@@ -58,6 +67,63 @@ router.patch('/diagram/:id', function (req, res, next) {
         }
     });
 });
+router.get('/diagram/:id', function (req, res, next) {
+    console.log("tring to to get request");
+    var link = req.params.id;
+    var ips = script.GetIPs();
+    console.log(ips);
+    console.log("tring to connect to other server");
+    for(var i = 0 ; i < ips.length ; i++){
+        var url = "http://" + ips[i] +":3000/api/diagram/" + link;
+       
+        var url = "http://" + ips[i] +":3000/api/diagram/" + link;
+        console.log("tring to connect to : " + ips[i]);
+        request(url, function(error , response , body){
+            console.log("body: " ,response);
+            if(response != undefined){
+                res.status(200).json(JSON.parse(response.body));
+            }
+        });
+    }
+        /* const getData = async url => {
+            try {
+              const response = await axios.get(url);
+              const data = response.data;
+              console.log(data);
+            } catch (error) {
+              console.log(error);
+            }
+          };
+         await getData(url);
+    }
+*/
+
+});   
+       /* 
+  
+       
+       
+       
+       
+       
+       
+       
+       for(var i = 0 ; i < ips.length ; i++){
+            var url = "http://" + ips[i] +":3000/api/diagram/" + link;
+
+            const getData = async url => {
+                try {
+                const response = await axios.get(url);
+                const data = response.data;
+                console.log(data);
+                return res.data.body;
+                } catch (error) {
+                console.log("error" + ips[i]);
+                }
+            };
+            getData(url);
+        }  */
+
 
 //// Github listener
 ////router.post('/', function(req, res, next) {

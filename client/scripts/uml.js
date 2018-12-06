@@ -26,13 +26,14 @@ var app = new Vue({
       $("#myModal").hide();
     },
     getUmlData: function() {
+      console.log("doing get request");
       axios
         .get("api/diagram/" + repo)
         .then(response => {
           if (response.data.data.length > 0) {
             console.log("hide the wiating dialog");
-            waitingDialog.hide();
-            this.hideModal();
+            //waitingDialog.hide();
+            //this.hideModal();
 
             // get the response from the data base and loop through its length,
             for (var j = 0; j < response.data.data.length; j++) {
@@ -350,8 +351,8 @@ var app = new Vue({
       waitingDialog.hide();
     }, 2000);
     //waitingDialog.show();
-    setTimeout(this.getUmlData(), 0);
-    //this.getUmlData();
+    //setTimeout(this.getUmlData(), 0);
+    this.getUmlData();
     this.init();
   }
 });

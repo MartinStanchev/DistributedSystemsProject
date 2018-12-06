@@ -3,8 +3,12 @@ var DiagramSchema = require('../models/Diagram');
 var xmlEmcoder = require('./xmlEncoder');
 var shell = require("shelljs");
 var repoPath = "resources/"
+var os = require('os');
+var ifaces = os.networkInterfaces();
 var classNames;
 var classConecteds;
+var IPs = [];
+
 
 module.exports = {
     readXML : function(GitRepo){
@@ -305,6 +309,72 @@ module.exports = {
             return this.readXML(path);
         }
         
+    },
+    FindIPs : function(){
+        var localIP = this.FindLocalIP();
+        var res_dir = __dirname + '/../../resources';
+        if(shell.ls('-A', res_dir)) {
+            shell.echo(shell.ls('-A', res_dir));
+            if(shell.exec( 'sudo nmap -sn '+ localIP + '/24 -oN ' + res_dir + '/ips').code != 0) {
+                shell.echo('Error: nmap command failed.');
+                shell.exit(1);
+            }
+            console.log("nmap created");
+            var readMe = fs.readFileSync(shell.pwd() + "/resources/ips" , 'utf8');
+            var arrayOfLines = readMe.split("\n"); 
+            for(var i = 1;i < arrayOfLines.length -1;i++){
+                var line = arrayOfLines[i];
+                if(line.includes('Nmap scan')){
+                    var first;
+                    var last;
+                    var found = false;
+                    for(var j = 0; j < line.length ; j++){
+                        if(line.substring(0,j).includes('192') && found == false){
+                            found = true;
+                            first = j-3;
+                        }
+                        
+                    }
+                    if(line.substring(line.length-1,line.length) == ')'){
+                        last = line.length -1;
+                    }
+                    else{
+                        last = line.length;
+                    }
+                    IPs.push(line.substring(first,last));
+                }
+
+            }
+        } else {
+        }
+    },
+    FindLocalIP : function(){
+        var localIP;
+        Object.keys(ifaces).forEach(function (ifname) {
+            var alias = 0;
+          
+            ifaces[ifname].forEach(function (iface) {
+              if ('IPv4' !== iface.family || iface.internal !== false) {
+                // skip over internal (i.e. 127.0.0.1) and non-ipv4 addresses
+                return;
+              }
+          
+              if (alias >= 1) {
+                // this single interface has multiple ipv4 addresses
+                console.log(ifname + ':' + alias, iface.address);
+              } else {
+                // this interface has only one ipv4 adress
+                console.log(ifname, iface.address);
+                localIP = iface.address;
+              }
+              ++alias;
+            });
+            
+          });
+          return localIP;
+    },
+    GetIPs : function(){
+        return IPs;
     }
     
 };
