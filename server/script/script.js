@@ -10,7 +10,6 @@ var classConecteds;
 var request = require('request');
 var IPs = [];
 
-
 module.exports = {
     readXML : function(GitRepo){
         classNames = [];
@@ -339,7 +338,6 @@ module.exports = {
                     }
                     ip = line.substring(first,last);
                     if(ip != localIP){
-                        console.log("checking this ip : " + ip);
                         this.FindActiveIP(ip);
                     }
                 }
@@ -372,22 +370,29 @@ module.exports = {
           });
           return localIP;
     },
-    FindActiveIP : function(ip){
-            var url = "http://" + ip +":3000/api/ip/" + ip;
-            request(url, function(error , response , body){
-                console.log(response);
-                if(response != undefined){
-                    if(response.ip != undefined){
-                        console.log("this ip is active : " + response.ip);
-                        IPs.push(response.ip);
+    FindActiveIP : function(ip){ 
+        var url = "http://" + ip +":3000/api/ip/" + this.FindLocalIP();
+        request(url, function(error , response , body){
+            if(response != undefined){
+                if(JSON.parse(response.body).ip!= undefined){
+                    console.log("this ip is active : " + JSON.parse(response.body).ip);
+                    for(var i = 0 ; i < IPs.length ; i++){
+                        if(!IPs.includes(JSON.parse(response.body).ip)){
+                            IPs.push(JSON.parse(response.body).ip);
+                        }
                     }
                 }
-            });
+            }
+        });
     },
     GetIPs : function(){
         return IPs;
     },
     SetIPs : function(ip){
-        IPs.push(ip);
+        for(var i = 0 ; i < IPs.length ; i++){
+            if(!IPs.includes(ip)){
+                IPs.push(ip);
+            }
+        }
     }
 };

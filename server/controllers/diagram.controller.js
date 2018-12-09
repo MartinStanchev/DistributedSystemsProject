@@ -23,8 +23,7 @@ router.get('/diagrams', function (req, res, next) {
 router.get('/ip/:id', function (req, res, next) {
     var ip = req.params.id;
     script.SetIPs(ip);
-    console.log("new ip added : " + ip);
-    res.status(200).json({"ip" : FindLocalIP()});
+    res.status(200).json({"ip" : script.FindLocalIP()});
 });
 
 router.post('/diagrams', function (req, res, next) {
