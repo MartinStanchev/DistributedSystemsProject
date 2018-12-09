@@ -67,6 +67,20 @@ var app = new Vue({
           console.log(error);
         });
     },
+    SaveDiagram : function(){
+      console.log("tring to do save request");
+      axios
+        .patch('/api/diagram/' + repo, {
+          Classes : e.model.nodeDataArray,
+          classConecteds : e.model.linkDataArray
+        })
+        .then(response=>{
+          console.log("data is succefuly updated "+  response.status)
+        })
+        .catch(err=>{
+          console.log(err);
+        })
+    },
     init: function() {
       var $ = go.GraphObject.make;
       myDiagram = $(go.Diagram, "myDiagramDiv", {
@@ -322,6 +336,27 @@ var app = new Vue({
         nodeDataArray: this.nodedata,
         linkDataArray: linkdata
       });
+
+    }
+  },
+  mounted() {
+    waitingDialog.show("Loading", {
+      dialogSize: "sm",
+      progressType: "warning"
+    });
+    setTimeout(function() {
+      waitingDialog.hide();
+    }, 2000);
+    //waitingDialog.show();
+    //setTimeout(this.getUmlData(), 0);
+    this.getUmlData();
+    this.init();
+    this.SaveDiagram();
+  }
+});
+
+
+/*
         myDiagram.addModelChangedListener(function(e) {
           if (e.isTransactionFinished) {
             // Show the model data to the console after changing the diagram.
@@ -340,19 +375,4 @@ var app = new Vue({
   
           }
         });
-    }
-  },
-  mounted() {
-    waitingDialog.show("Loading", {
-      dialogSize: "sm",
-      progressType: "warning"
-    });
-    setTimeout(function() {
-      waitingDialog.hide();
-    }, 2000);
-    //waitingDialog.show();
-    //setTimeout(this.getUmlData(), 0);
-    this.getUmlData();
-    this.init();
-  }
-});
+*/

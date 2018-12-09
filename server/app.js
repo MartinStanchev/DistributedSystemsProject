@@ -5,9 +5,9 @@ var morgan = require('morgan');
 var path = require('path');
 var script = require('./script/script');
 // Variables
-var mongoURI = process.env.MONGODB_URI || 'mongodb://admin:admin123@ds115094.mlab.com:15094/gituml';
+var mongoURI = process.env.MONGODB_URI || 'mongodb://admin:admin123@ds131373.mlab.com:31373/distrubutedsystemsproject';
 var port = process.env.PORT || 3000;
-/*
+
 // Connect to MongoDB
 mongoose.connect(mongoURI, { useNewUrlParser: true }, function(err) {
     if (err) {
@@ -17,7 +17,7 @@ mongoose.connect(mongoURI, { useNewUrlParser: true }, function(err) {
     }
     console.log(`Connected to MongoDB with URI: ${mongoURI}`);
 });
-*/
+
 // Create Express app
 var app = express();
 // Parse requests of content-type 'application/json'

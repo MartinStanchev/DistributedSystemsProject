@@ -9,7 +9,6 @@ var repoPath = "resources/"
 var Git = require("nodegit");
 var path = require('path');
 var request = require('request');
-const axios = require("axios");
 
 //Get all diagrams
 router.get('/diagrams', function (req, res, next) {
@@ -20,36 +19,44 @@ router.get('/diagrams', function (req, res, next) {
     });
 });
 
-
-router.post('/diagrams', function (req, res, next) {
-    DiagramSchema.find({ GitRepo: req.body.GitRepo.slice(19).replace(/\//g, "_") }, function (err, diagram) {
-        if (err) return next(err);
-        if (diagram == null || diagram == [] || diagram.length == 0) {    
-            Git.Clone(req.body.GitRepo, repoPath + req.body.GitRepo.slice(19).replace(/\//g, "_"))
-            .then(function (repository) {
-            path = req.body.GitRepo.slice(19).replace(/\//g, "_");
-            res.status(201).json(script.convertZip(path));
-            console.log("Successfully cloned to: " + Diagram.GitRepo);
-        });}
-        res.status(200);
-
-    });
-
+//to check availbe ips and to add new ip in the array
+router.get('/ip/:id', function (req, res, next) {
+    var ip = req.params.id;
+    script.SetIPs(ip);
+    console.log("new ip added : " + ip);
+    res.status(200).json({"ip" : FindLocalIP()});
 });
 
-router.get('/diagrams/:id', function (req, res, next) {
-    var ips = script.FindIPs();
+router.post('/diagrams', function (req, res, next) {
+    var link = req.body.GitRepo.slice(19).replace(/\//g, "_");
+    var ips = script.GetIPs();
+    var found = false;
     for(var i = 0 ; i < ips.length ; i++){
-       var response = router.get(ips[i] + 'diagram/:id');
-       if(response != null && response.length != 0){
-            res.status(200).json({"data" : repo});
-       }
+        var url = "http://" + ips[i] +":3000/api/diagram/" + link;
+        request(url, function(error , response , body){
+            if(response != undefined){
+                if(response.GitRepo != undefined){
+                    res.status(200);
+                    found = true;
+                    }
+            }
+        });
     }
-    var link = req.params.id;
-    DiagramSchema.find({ GitRepo: link }, function (err, repo) {
-        if (err) { return next(err); }
-        res.status(200).json({ "data": repo });
-    });
+        if(found == false){
+        DiagramSchema.find({ GitRepo: link }, function (err, diagram) {
+            if (err) return next(err);
+            if (diagram == null || diagram == [] || diagram.length == 0) {  
+                Git.Clone(req.body.GitRepo, repoPath + link)
+                .then(function (repository) {
+                path = link;
+                res.status(201).json(script.convertZip(path));
+                console.log("Successfully cloned to: " + Diagram.GitRepo);
+            });}
+            res.status(200);
+        }); 
+    }
+    else{
+    }
 });
 
 router.patch('/diagram/:id', function (req, res, next) {
@@ -67,63 +74,33 @@ router.patch('/diagram/:id', function (req, res, next) {
         }
     });
 });
+
 router.get('/diagram/:id', function (req, res, next) {
-    console.log("tring to to get request");
     var link = req.params.id;
     var ips = script.GetIPs();
-    console.log(ips);
-    console.log("tring to connect to other server");
+    var found = false;
     for(var i = 0 ; i < ips.length ; i++){
         var url = "http://" + ips[i] +":3000/api/diagram/" + link;
-       
-        var url = "http://" + ips[i] +":3000/api/diagram/" + link;
-        console.log("tring to connect to : " + ips[i]);
         request(url, function(error , response , body){
-            console.log("body: " ,response);
             if(response != undefined){
-                res.status(200).json(JSON.parse(response.body));
+                if(response.body != undefined){
+                    if(JSON.parse(response.body).data.length > 0){
+                        res.status(200).json(JSON.parse(response.body));
+                        found = true;
+                    }
+                }
             }
         });
     }
-        /* const getData = async url => {
-            try {
-              const response = await axios.get(url);
-              const data = response.data;
-              console.log(data);
-            } catch (error) {
-              console.log(error);
-            }
-          };
-         await getData(url);
-    }
-*/
-
+    setTimeout(function() {  
+        if(found == false){
+            DiagramSchema.find({ GitRepo: link }, function (err, repo) {
+                if (err) { return next(err); }
+                res.status(200).json({ "data": repo });
+            });
+        } 
+    }, 1000);
 });   
-       /* 
-  
-       
-       
-       
-       
-       
-       
-       
-       for(var i = 0 ; i < ips.length ; i++){
-            var url = "http://" + ips[i] +":3000/api/diagram/" + link;
-
-            const getData = async url => {
-                try {
-                const response = await axios.get(url);
-                const data = response.data;
-                console.log(data);
-                return res.data.body;
-                } catch (error) {
-                console.log("error" + ips[i]);
-                }
-            };
-            getData(url);
-        }  */
-
 
 //// Github listener
 ////router.post('/', function(req, res, next) {

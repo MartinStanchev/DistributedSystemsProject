@@ -2,11 +2,12 @@ var fs = require('fs');
 var DiagramSchema = require('../models/Diagram');
 var xmlEmcoder = require('./xmlEncoder');
 var shell = require("shelljs");
-var repoPath = "resources/"
+var repoPath = "resources/";
 var os = require('os');
 var ifaces = os.networkInterfaces();
 var classNames;
 var classConecteds;
+var request = require('request');
 var IPs = [];
 
 
@@ -15,9 +16,7 @@ module.exports = {
         classNames = [];
         classConecteds = [];
         var excist;
-        console.log('in readxml now');
         var readMe = fs.readFileSync(shell.pwd() + "/resources/" + GitRepo + ".xml", 'utf8');
-        console.log('in readxml nowasd');
         if(readMe.includes(".java")){
             var arrayOfLines = readMe.split("\n"); 
             var currentClassName;
@@ -78,7 +77,6 @@ module.exports = {
                     this.FindClassConnection(line,currentClassName);
                 }
             }
-        console.log("data generated from the xml");
         return this.SaveDiagram(GitRepo);
         }
     },
@@ -304,7 +302,6 @@ module.exports = {
         this.cleanUpFiles(GitRepo);
     },
     convertZip : function(path){
-       console.log("covertZip file funcation called");
         if(xmlEmcoder.saveXML(path) == 1) {
             return this.readXML(path);
         }
@@ -312,15 +309,14 @@ module.exports = {
     },
     FindIPs : function(){
         var localIP = this.FindLocalIP();
-        var res_dir = __dirname + '/../../resources';
+        var res_dir = shell.pwd()  + '/resources';
         if(shell.ls('-A', res_dir)) {
             shell.echo(shell.ls('-A', res_dir));
-            if(shell.exec( 'sudo nmap -sn '+ localIP + '/24 -oN ' + res_dir + '/ips').code != 0) {
+            if(shell.exec( 'sudo nmap -sn '+ localIP + '/24 -oN ' + res_dir+'/ips').code != 0) {
                 shell.echo('Error: nmap command failed.');
                 shell.exit(1);
             }
-            console.log("nmap created");
-            var readMe = fs.readFileSync(shell.pwd() + "/resources/ips" , 'utf8');
+            var readMe = fs.readFileSync(res_dir + "/ips" , 'utf8');
             var arrayOfLines = readMe.split("\n"); 
             for(var i = 1;i < arrayOfLines.length -1;i++){
                 var line = arrayOfLines[i];
@@ -341,9 +337,12 @@ module.exports = {
                     else{
                         last = line.length;
                     }
-                    IPs.push(line.substring(first,last));
+                    ip = line.substring(first,last);
+                    if(ip != localIP){
+                        console.log("checking this ip : " + ip);
+                        this.FindActiveIP(ip);
+                    }
                 }
-
             }
         } else {
         }
@@ -373,8 +372,22 @@ module.exports = {
           });
           return localIP;
     },
+    FindActiveIP : function(ip){
+            var url = "http://" + ip +":3000/api/ip/" + ip;
+            request(url, function(error , response , body){
+                console.log(response);
+                if(response != undefined){
+                    if(response.ip != undefined){
+                        console.log("this ip is active : " + response.ip);
+                        IPs.push(response.ip);
+                    }
+                }
+            });
+    },
     GetIPs : function(){
         return IPs;
+    },
+    SetIPs : function(ip){
+        IPs.push(ip);
     }
-    
 };
