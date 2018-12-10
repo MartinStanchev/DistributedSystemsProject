@@ -22,7 +22,7 @@ router.get('/diagrams', function (req, res, next) {
 router.post('/diagrams', function (req, res, next) {
     DiagramSchema.find({ GitRepo: req.body.GitRepo.slice(19).replace(/\//g, "_") }, function (err, diagram) {
         if (err) return next(err);
-        if (diagram == null || diagram == [] || diagram.length == 0) {    
+        if (diagram == null || diagram == [] || diagram.length == 0) {
             Git.Clone(req.body.GitRepo, repoPath + req.body.GitRepo.slice(19).replace(/\//g, "_"))
             .then(function (repository) {
             path = req.body.GitRepo.slice(19).replace(/\//g, "_");
@@ -53,8 +53,9 @@ router.patch('/diagram/:id', function (req, res, next) {
         if(diagram.length != 0){
             diagram[0].Classes = (req.body.Classes|| diagram[0].Classes);
             diagram[0].classConecteds = (req.body.classConecteds || diagram[0].classConecteds);
+            diagram[0].comments = (req.body.comments || diagram[0].comments);
             diagram[0].save();
-            res.status(200).json({"data" : diagram[0]});  
+            res.status(200).json({"data" : diagram[0]});
         }
     });
 });

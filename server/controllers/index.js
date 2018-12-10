@@ -3,11 +3,11 @@ var express = require('express');
 var router = express.Router()
 
 const axios = require('axios');
-// GITHUB id and secret to be able to make requests to their server 
+// GITHUB id and secret to be able to make requests to their server
 const clientID = "7dd8a843f0296846a576"
 const clientSecret = "b74f1731e4e177a72fbd9fafb43f6da18ac6e949"
 //For developing ONLY
-//const clientID = 'f14a59521bfa07c193ef' 
+//const clientID = 'f14a59521bfa07c193ef'
 //const clientSecret = 'bbd64cbf98fb58b99d4fad2ed8a0b85763121e41'
 
 router.get('/api', function(req, res) {
@@ -30,7 +30,7 @@ router.get('/oauth/redirect', (req, res) => {
 
 // Insert routes below
 router.use('/api', require('./diagram.controller'));
-router.use('/api/comments', require('./comment.controller'));
+// router.use('/api/comments', require('./comment.controller'));
 
 
 
