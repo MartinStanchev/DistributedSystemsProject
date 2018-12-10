@@ -27,7 +27,7 @@ var app = new Vue({
     },
     getUmlData: function() {
       axios
-        .get("api/diagram/" + repo)
+        .get("api/diagram/Georgesarkis_GoogleHashCode")
         .then(response => {
           if (response.data.data.length > 0) {
             console.log("hide the wiating dialog");
@@ -64,6 +64,20 @@ var app = new Vue({
         })
         .catch(error => {
           console.log(error);
+        });
+    },
+
+    saveChange: function(e) {
+      axios
+        .patch("/api/diagram/Georgesarkis_GoogleHashCode", {
+          Classes: myDiagram.model.nodeDataArray,
+          classConecteds: myDiagram.model.linkDataArray
+        })
+        .then(response => {
+          console.log("data is succefuly updated " + response.status);
+        })
+        .catch(err => {
+          console.log(err);
         });
     },
     init: function() {
@@ -321,24 +335,23 @@ var app = new Vue({
         nodeDataArray: this.nodedata,
         linkDataArray: linkdata
       });
-        myDiagram.addModelChangedListener(function(e) {
-          if (e.isTransactionFinished) {
-            // Show the model data to the console after changing the diagram.
-            // add the patch request to save the changes to database
-            axios
-            .patch('/api/diagram/' + repo, {
-              Classes : e.model.nodeDataArray,
-              classConecteds : e.model.linkDataArray
-            })
-            .then(response=>{
-              console.log("data is succefuly updated "+  response.status)
-            })
-            .catch(err=>{
-              console.log(err);
-            })
-  
-          }
-        });
+      // myDiagram.addModelChangedListener(function(e) {
+      //   if (e.isTransactionFinished) {
+      //     // Show the model data to the console after changing the diagram.
+      //     // add the patch request to save the changes to database
+      //     axios
+      //       .patch("/api/diagram/" + repo, {
+      //         Classes: e.model.nodeDataArray,
+      //         classConecteds: e.model.linkDataArray
+      //       })
+      //       .then(response => {
+      //         console.log("data is succefuly updated " + response.status);
+      //       })
+      //       .catch(err => {
+      //         console.log(err);
+      //       });
+      //   }
+      // });
     }
   },
   mounted() {

@@ -43,15 +43,24 @@
       <span class="glyphicon glyphicon-log-out"></span> Log out
     </a>
     <div class="center-screen">
-      <div class="row">       
+      <div class="row">
         <div id="intro">
           <div id="uml">
             <div>
-              <div class="DiagramBox"
+              <div
+                class="DiagramBox"
                 id="myDiagramDiv"
                 v-bind:model-data="nodedata"
                 style="border: solid 1px rgb(255, 255, 255); width:100%; height:540px"
               ></div>
+              <button
+                id="demo"
+                type="button"
+                class="btn btn-warning float-right"
+                @click="saveChange()"
+              >
+                save
+              </button>
             </div>
           </div>
         </div>
