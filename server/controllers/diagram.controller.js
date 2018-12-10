@@ -12,15 +12,15 @@ var request = require('request');
 var axios = require('axios');
 
 //Get all diagrams
-/*
-router.get('/diagrams', function (req, res, next) {
+
+router.get('/diagramsss', function (req, res, next) {
     DiagramSchema.find(function (err, Diagram) {
         if (err) { return next(err); }
         res.json({ "data": Diagram })
         res.status(200);
     });
 });
-*/
+
 //to check availbe ips and to add new ip in the array
 router.get('/ip/:id', function (req, res, next) {
     var ip = req.params.id;
@@ -34,6 +34,37 @@ router.post('/diagrams', function (req, res, next) {
     var link = req.body.GitRepo.slice(19).replace(/\//g, "_");
     var ips = script.GetIPs();
     var found = false;
+    var request = [];
+    for(var i = 0 ; i < ips.length ; i++){
+        request.push(axios.get("http://" + ips[i] +":3000/api/diagram/" + link));
+    }
+    axios.all(request).then(axios.spread((...args) => {
+        for (let i = 0; i < args.length; i++) {
+            if(args[i].data.data != ""){
+                res.status(200).json(args[i].data);
+                found = true;
+            }
+        }
+        if(found == false){
+            DiagramSchema.find({ GitRepo: link }, function (err, diagram) {
+                if (err) return next(err);
+                if (diagram == null || diagram == [] || diagram.length == 0 || diagram == "") {  
+                    Git.Clone(req.body.GitRepo, repoPath + link)
+                    .then(function (repository) {
+                    path = link;
+                    console.log("second response");
+                    res.status(201).json(script.convertZip(path));
+                    Console.log("Successfully cloned to: " + Diagram.GitRepo);
+                });}
+                else{             
+                    console.log("third response");
+                    res.status(200);
+                }
+            }); 
+        }
+    }));
+});   
+  /*
     for(var i = 0 ; i < ips.length ; i++){
         var url = "http://" + ips[i] +":3000/api/diagram/" + link;
         request(url, function(error , response , body){
@@ -70,7 +101,7 @@ router.post('/diagrams', function (req, res, next) {
         }
     }, 3000);
 });
-
+*/
 router.patch('/diagram/:id', function (req, res, next) {
     var link = req.params.id;
     DiagramSchema.find({ GitRepo: link }, function (err, diagram) {
@@ -93,62 +124,24 @@ router.get('/diagrams/:id', function (req, res, next) {
     var ips = script.GetIPs();
     var found = false;
     var request = [];
-    var myObject = [];
     for(var i = 0 ; i < ips.length ; i++){
         request.push(axios.get("http://" + ips[i] +":3000/api/diagram/" + link));
     }
     axios.all(request).then(axios.spread((...args) => {
         for (let i = 0; i < args.length; i++) {
-            console.log("args : " + args[i].data);
-            console.log("args" + args[i]);
-            myObject[args[i]] = args[i].data;
-
-            if(args[i].data != undefined){
-                if(args[i].data.body != undefined){
-                    console.log(JSON.parse(args[i].data.body).data);
-                    if(JSON.parse(args[i].data.body).data.length > 0){
-                        console.log(JSON.parse(args[i].data.body).data);
-                        console.log("fourt response");
-                        res.status(200).json(JSON.parse(args[i].data.body));
-                        found = true;
-                    }
-                }
+            if(args[i].data.data != ""){
+                res.status(200).json(args[i].data);
+                found = true;
             }
 
         }
         if(found == false){
             DiagramSchema.find({ GitRepo: link }, function (err, repo) {
                 if (err) { return next(err); }
-                console.log("fift response");
                 res.status(200).json({ "data": repo });
             });
         }
     }));
-
-    /*for(var i = 0 ; i < ips.length ; i++){
-        var url = "http://" + ips[i] +":3000/api/diagram/" + link;
-        request(url, function(error , response , body){
-            if(response != undefined){
-                if(response.body != undefined){
-                    console.log(JSON.parse(response.body).data);
-                    if(JSON.parse(response.body).data.length > 0){
-                        console.log(JSON.parse(response.body).data);
-                        console.log("fourt response");
-                        res.status(200).json(JSON.parse(response.body));
-                        found = true;
-                    }
-                }
-            }
-
-        });
-    }
-        if(found == false){
-            DiagramSchema.find({ GitRepo: link }, function (err, repo) {
-                if (err) { return next(err); }
-                console.log("fift response");
-                res.status(200).json({ "data": repo });
-            });
-        } */
 });   
 
 //local get
@@ -156,26 +149,10 @@ router.get('/diagram/:id', function (req, res, next) {
     var link = req.params.id;
     DiagramSchema.find({ GitRepo: link }, function (err, repo) {
         if (err) { return next(err); }
-        res.status(200).json({ "data": repo });
+        res.status(200).json({"data": repo});
     });
 });
 
-//local post
-router.post('/diagram', function (req, res, next) {
-    DiagramSchema.find({ GitRepo: req.body.GitRepo.slice(19).replace(/\//g, "_") }, function (err, diagram) {
-        if (err) return next(err);
-        if (diagram == null || diagram == [] || diagram.length == 0) {    
-            Git.Clone(req.body.GitRepo, repoPath + req.body.GitRepo.slice(19).replace(/\//g, "_"))
-            .then(function (repository) {
-            path = req.body.GitRepo.slice(19).replace(/\//g, "_");
-            res.status(201).json(script.convertZip(path));
-            console.log("Successfully cloned to: " + Diagram.GitRepo);
-        });}
-        res.status(200);
-
-    });
-
-});
 //// Github listener
 ////router.post('/', function(req, res, next) {
 //    // Encrypt local secret - NOT USED YET !

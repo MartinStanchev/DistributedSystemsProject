@@ -30,6 +30,7 @@ var app = new Vue({
       axios
         .get("api/diagrams/" + repo)
         .then(response => {
+          console.log("response :" + JSON.stringify(response.data));
           if (response.data.data.length > 0) {
             console.log("hide the wiating dialog");
             //waitingDialog.hide();
@@ -351,7 +352,6 @@ var app = new Vue({
     //setTimeout(this.getUmlData(), 0);
     this.getUmlData();
     this.init();
-    this.SaveDiagram();
   }
 });
 
