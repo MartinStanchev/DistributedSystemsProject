@@ -28,7 +28,7 @@ var app = new Vue({
     getUmlData: function() {
       console.log("doing get request");
       axios
-        .get("api/diagram/" + repo)
+        .get("api/diagrams/" + repo)
         .then(response => {
           if (response.data.data.length > 0) {
             console.log("hide the wiating dialog");

@@ -383,7 +383,6 @@ module.exports = {
                         for(var i = 0 ; i < IPs.length ; i++){
                             if(!IPs.includes(JSON.parse(response.body).ip)){
                                 IPs.push(JSON.parse(response.body).ip);
-    
                             }
                         }
                     }
