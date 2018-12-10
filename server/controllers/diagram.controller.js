@@ -11,6 +11,7 @@ var path = require('path');
 var request = require('request');
 
 //Get all diagrams
+/*
 router.get('/diagrams', function (req, res, next) {
     DiagramSchema.find(function (err, Diagram) {
         if (err) { return next(err); }
@@ -18,7 +19,7 @@ router.get('/diagrams', function (req, res, next) {
         res.status(200);
     });
 });
-
+*/
 //to check availbe ips and to add new ip in the array
 router.get('/ip/:id', function (req, res, next) {
     var ip = req.params.id;
