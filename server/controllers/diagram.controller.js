@@ -30,9 +30,7 @@ router.post('/diagrams', function (req, res, next) {
             console.log("Successfully cloned to: " + Diagram.GitRepo);
         });}
         res.status(200);
-
     });
-
 });
 
 router.get('/diagram/:id', function (req, res, next) {
