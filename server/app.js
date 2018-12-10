@@ -8,6 +8,8 @@ var script = require('./script/script');
 var mongoURI = process.env.MONGODB_URI || 'mongodb://admin:admin123@ds131373.mlab.com:31373/distrubutedsystemsproject';
 var port = process.env.PORT || 3000;
 
+script.FindIPs();
+
 // Connect to MongoDB
 mongoose.connect(mongoURI, { useNewUrlParser: true }, function(err) {
     if (err) {
@@ -30,8 +32,6 @@ app.use(express.static(path.join(root, 'client')));
 app.set('appPath', 'client');
 // Import routes
 app.use(require('./controllers/index'));
-
-script.FindIPs();
 
 // Error handler (must be registered last)
 var env = app.get('env');

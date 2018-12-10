@@ -23,7 +23,7 @@ router.get('/diagrams', function (req, res, next) {
 router.get('/ip/:id', function (req, res, next) {
     var ip = req.params.id;
     script.SetIPs(ip);
-    res.status(200).json({"ip" : script.FindLocalIP()});
+    res.status(200).json({"ip" : ip});
 });
 
 router.post('/diagrams', function (req, res, next) {
@@ -34,28 +34,37 @@ router.post('/diagrams', function (req, res, next) {
         var url = "http://" + ips[i] +":3000/api/diagram/" + link;
         request(url, function(error , response , body){
             if(response != undefined){
-                if(response.GitRepo != undefined){
-                    res.status(200);
-                    found = true;
+                if(response.body != undefined){
+                    if(JSON.parse(response.body).data.length > 0){
+                        console.log("first response");
+                        res.status(200);
+                        found = true;
                     }
+                }
             }
         });
     }
+    setTimeout(function() {  
         if(found == false){
-        DiagramSchema.find({ GitRepo: link }, function (err, diagram) {
-            if (err) return next(err);
-            if (diagram == null || diagram == [] || diagram.length == 0) {  
-                Git.Clone(req.body.GitRepo, repoPath + link)
-                .then(function (repository) {
-                path = link;
-                res.status(201).json(script.convertZip(path));
-                console.log("Successfully cloned to: " + Diagram.GitRepo);
-            });}
-            res.status(200);
-        }); 
-    }
-    else{
-    }
+            DiagramSchema.find({ GitRepo: link }, function (err, diagram) {
+                if (err) return next(err);
+                if (diagram == null || diagram == [] || diagram.length == 0) {  
+                    Git.Clone(req.body.GitRepo, repoPath + link)
+                    .then(function (repository) {
+                    path = link;
+                    console.log("second response");
+                    res.status(201).json(script.convertZip(path));
+                    Console.log("Successfully cloned to: " + Diagram.GitRepo);
+                });}
+                else{             
+                    console.log("third response");
+                    res.status(200);
+                }
+            }); 
+        }
+        else{
+        }
+    }, 3000);
 });
 
 router.patch('/diagram/:id', function (req, res, next) {
@@ -77,13 +86,17 @@ router.patch('/diagram/:id', function (req, res, next) {
 router.get('/diagram/:id', function (req, res, next) {
     var link = req.params.id;
     var ips = script.GetIPs();
+    console.log("ips : "+ ips);
     var found = false;
     for(var i = 0 ; i < ips.length ; i++){
         var url = "http://" + ips[i] +":3000/api/diagram/" + link;
         request(url, function(error , response , body){
             if(response != undefined){
                 if(response.body != undefined){
+                    console.log(JSON.parse(response.body).data);
                     if(JSON.parse(response.body).data.length > 0){
+                        console.log(JSON.parse(response.body).data);
+                        console.log("fourt response");
                         res.status(200).json(JSON.parse(response.body));
                         found = true;
                     }
@@ -95,10 +108,12 @@ router.get('/diagram/:id', function (req, res, next) {
         if(found == false){
             DiagramSchema.find({ GitRepo: link }, function (err, repo) {
                 if (err) { return next(err); }
+                console.log("fift response");
+
                 res.status(200).json({ "data": repo });
             });
         } 
-    }, 1000);
+    }, 3000);
 });   
 
 //// Github listener

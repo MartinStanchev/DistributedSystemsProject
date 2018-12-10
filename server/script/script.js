@@ -376,9 +376,15 @@ module.exports = {
             if(response != undefined){
                 if(JSON.parse(response.body).ip!= undefined){
                     console.log("this ip is active : " + JSON.parse(response.body).ip);
-                    for(var i = 0 ; i < IPs.length ; i++){
-                        if(!IPs.includes(JSON.parse(response.body).ip)){
-                            IPs.push(JSON.parse(response.body).ip);
+                    if(IPs.length == 0){
+                        IPs.push(JSON.parse(response.body).ip);
+                    }
+                    else{
+                        for(var i = 0 ; i < IPs.length ; i++){
+                            if(!IPs.includes(JSON.parse(response.body).ip)){
+                                IPs.push(JSON.parse(response.body).ip);
+    
+                            }
                         }
                     }
                 }
@@ -389,9 +395,14 @@ module.exports = {
         return IPs;
     },
     SetIPs : function(ip){
-        for(var i = 0 ; i < IPs.length ; i++){
-            if(!IPs.includes(ip)){
-                IPs.push(ip);
+        if(IPs.length == 0){
+            IPs.push(ip);
+        }
+        else{
+            for(var i = 0 ; i < IPs.length ; i++){
+                if(!IPs.includes(ip)){
+                    IPs.push(ip);
+                }
             }
         }
     }
