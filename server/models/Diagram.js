@@ -25,7 +25,9 @@ var DiagramSchema = new Schema({
     {
       userName: { type: String, require: true },
       comment: { type: String, require: true },
-      time: { type: Date, default: Date.now, required: true }
+		userImage: {type: String, require: true},
+      time: { type: Date, default: Date.now, required: true}
+	
     }
   ]
 });

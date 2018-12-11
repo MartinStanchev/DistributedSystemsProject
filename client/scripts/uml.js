@@ -17,6 +17,7 @@ var app = new Vue({
     classExtends: [],
     linkdata: [],
     comments: [],
+	user: [],
     comment_diagram: ""
   },
   methods: {
@@ -89,21 +90,35 @@ var app = new Vue({
           console.log(err);
         });
     },
+	  queryGitUser: function () {
+            const query = window.location.search.substring(1)
+            const token = query.split('access_token=')[1]
+            fetch('https://api.github.com/user', {
+                headers: {
+                    Authorization: 'token ' + token
+                }
+            }).then(res => res.json()).then(res => {
+                this.user = res;
+            })
+        }, 
     addComment: function() {
       let co = {
-        userName: "lk",
-        comment: this.comment_diagram
+        userName: this.user.login,
+        comment: this.comment_diagram,
+		userImage: this.user.avatar_url
       };
       axios
         .patch("/api/diagram/add/" + repo, co)
         .then(response => {
-          this.getUmlData();
+		  location.reload();
+//		  this.getUmlData();
           console.log(response);
         })
         .catch(error => {
           console.log(error);
         });
     },
+	 
 
     // saveComment: function(e) {
     //   axios
@@ -393,6 +408,7 @@ var app = new Vue({
       // });
     }
   },
+	
   mounted() {
     waitingDialog.show("Loading", {
       dialogSize: "sm",
@@ -404,6 +420,7 @@ var app = new Vue({
     //waitingDialog.show();
     setTimeout(this.getUmlData(), 0);
     //this.getUmlData();
+	  this.queryGitUser();
     this.init();
   }
 });
