@@ -52,22 +52,40 @@ router.get("/diagram/:id", function(req, res, next) {
 
 router.patch("/diagram/:id", function(req, res, next) {
   var link = req.params.id;
-  DiagramSchema.find({ GitRepo: link }, function(err, diagram) {
+  DiagramSchema.findOne({ GitRepo: link }, function(err, diagram) {
     if (err) return next(err);
     if (diagram == null) {
       return res.status(404).json({ message: "Diagram not found" });
     }
-    if (diagram.length != 0) {
-      diagram[0].Classes = req.body.Classes || diagram[0].Classes;
-      diagram[0].classConecteds =
-        req.body.classConecteds || diagram[0].classConecteds;
+      diagram.Classes = req.body.Classes || diagram.Classes;
+      diagram.classConecteds =
+        req.body.classConecteds || diagram.classConecteds;
       console.log(req.body.comments);
-      diagram[0].comments = req.body.comments || diagram[0].comments;
-      diagram[0].save();
-      res.status(200).json({ data: diagram[0] });
-    }
+      diagram.comments.push(req.body);
+      diagram.save();
+      res.status(200).json({ data: diagram});
   });
 });
+
+// router.patch('/:id', function(req, res, next) {
+//   var id = req.params.id;
+//   Product.findById(id, function(err, product) {
+//       if (err) { return next(err); }
+//       if (product == null) {
+//           return res.status(404).json({"message": "Product not found"});
+//       }
+//       product.color = (req.body.color || product.color);
+//       product.size = (req.body.size || product.size);
+//       product.material = (req.body.material || product.material);
+//       product.price = (req.body.price || product.price);
+//       product.productType = (req.body.productType || product.prodctType)
+//       product.sleeve = (req.body.sleeve || product.sleeve);
+//       product.model = (req.body.model || product.model);
+//       product.imgURL = (req.body.imgURL || product.imgURL);
+//       product.save();
+//       res.status(200).json(product);
+//   });
+// });
 
 //// Github listener
 ////router.post('/', function(req, res, next) {
