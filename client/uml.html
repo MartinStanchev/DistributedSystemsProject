@@ -47,7 +47,7 @@
 					<div class="actionBox">
 						<ul class="commentList">
 							<li v-for="comment in comments" class="p-3 mt-3 mb-3 bg-secondary text-white">
-								<div class="commenterImage"> <img :src="user.avatar_url" /> </div>
+								<div class="commenterImage"> <img :src="comment.userImage" /> </div>
 								
 								<div class="commentText">
 									<p class="">{{comment.comment}}</p>
