@@ -17,7 +17,7 @@ var app = new Vue({
     classExtends: [],
     linkdata: [],
     comments: [],
-	  comment_diagram: ""
+    comment_diagram: ""
   },
   methods: {
     hideModal: function() {
@@ -56,7 +56,7 @@ var app = new Vue({
               }
             }
 
-            // // defines conecteds classes
+            // defines conecteds classes
             for (var a = 0; a < response.data.data.length; a++) {
               for (
                 var b = 0;
@@ -77,26 +77,34 @@ var app = new Vue({
 
     saveChange: function(e) {
       axios
-        .patch("/api/diagram/"+repo, {
+        .patch("/api/diagram/" + repo, {
           Classes: myDiagram.model.nodeDataArray,
           classConecteds: myDiagram.model.linkDataArray
         })
         .then(response => {
+          this.getUmlData();
           console.log("data is succefuly updated " + response.status);
         })
         .catch(err => {
           console.log(err);
         });
     },
-	  addComment: function() {
-		  axios.patch("/api/diagram"+repo, {
-			  comments: {
-				  userName: "",
-				  comment: "",
-				  time: ""
-			  }
-		  })
-	  },
+    addComment: function() {
+      let co = {
+        userName: "lk",
+        comment: this.comment_diagram
+      };
+      axios
+        .patch("/api/diagram/add/" + repo, co)
+        .then(response => {
+          this.getUmlData();
+          console.log(response);
+        })
+        .catch(error => {
+          console.log(error);
+        });
+    },
+
     // saveComment: function(e) {
     //   axios
     //     .patch("/api/diagram/Georgesarkis_assig6", {
