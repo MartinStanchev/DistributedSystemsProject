@@ -15,7 +15,11 @@ var app = new Vue({
     Classes: [],
     SuperClass: "",
     classExtends: [],
-    linkdata: []
+    linkdata: [],
+    // time: "",
+    // userName: "",
+    // comment: ""
+    comments: []
   },
   methods: {
     hideModal: function() {
@@ -27,12 +31,18 @@ var app = new Vue({
     },
     getUmlData: function() {
       axios
-        .get("api/diagram/Georgesarkis_GoogleHashCode")
+        .get("api/diagram/Georgesarkis_assig6")
         .then(response => {
+          this.nodedata = response.data.data;
+
           if (response.data.data.length > 0) {
             console.log("hide the wiating dialog");
             waitingDialog.hide();
             this.hideModal();
+
+            for (var t = 0; t < response.data.data[0].comments.length; t++) {
+              this.comments.push(response.data.data[0].comments[t]);
+            }
 
             // get the response from the data base and loop through its length,
             for (var j = 0; j < response.data.data.length; j++) {
@@ -69,7 +79,7 @@ var app = new Vue({
 
     saveChange: function(e) {
       axios
-        .patch("/api/diagram/Georgesarkis_GoogleHashCode", {
+        .patch("/api/diagram/Georgesarkis_assig6", {
           Classes: myDiagram.model.nodeDataArray,
           classConecteds: myDiagram.model.linkDataArray
         })
@@ -80,6 +90,20 @@ var app = new Vue({
           console.log(err);
         });
     },
+    // saveComment: function(e) {
+    //   axios
+    //     .patch("/api/diagram/Georgesarkis_assig6", {
+    //       Classes: myDiagram.model.nodeDataArray,
+    //       classConecteds: myDiagram.model.linkDataArray
+    //     })
+    //     .then(response => {
+    //       console.log("data is succefuly updated " + response.status);
+    //     })
+    //     .catch(err => {
+    //       console.log(err);
+    //     });
+    // },
+
     init: function() {
       var $ = go.GraphObject.make;
       myDiagram = $(go.Diagram, "myDiagramDiv", {

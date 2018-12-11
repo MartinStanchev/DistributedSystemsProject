@@ -1,63 +1,72 @@
-var express = require('express');
+var express = require("express");
 var router = express.Router();
-var DiagramSchema = require('../models/Diagram');
-const script = require('./../script/script.js');
-const exec = require('child_process').exec;
-let crypto = require('crypto');
+var DiagramSchema = require("../models/Diagram");
+const script = require("./../script/script.js");
+const exec = require("child_process").exec;
+let crypto = require("crypto");
 var secret = "topsecret"; // Not used - can be implemented later for security
-var repoPath = "resources/"
+var repoPath = "resources/";
 var Git = require("nodegit");
-var path = require('path');
+var path = require("path");
 
 //Get all diagrams
-router.get('/diagrams', function (req, res, next) {
-    DiagramSchema.find(function (err, Diagram) {
-        if (err) { return next(err); }
-        res.json({ "data": Diagram })
-        res.status(200);
-    });
+router.get("/diagrams", function(req, res, next) {
+  DiagramSchema.find(function(err, Diagram) {
+    if (err) {
+      return next(err);
+    }
+    res.json({ data: Diagram });
+    res.status(200);
+  });
 });
 
-
-router.post('/diagrams', function (req, res, next) {
-    DiagramSchema.find({ GitRepo: req.body.GitRepo.slice(19).replace(/\//g, "_") }, function (err, diagram) {
-        if (err) return next(err);
-        if (diagram == null || diagram == [] || diagram.length == 0) {
-            Git.Clone(req.body.GitRepo, repoPath + req.body.GitRepo.slice(19).replace(/\//g, "_"))
-            .then(function (repository) {
-            path = req.body.GitRepo.slice(19).replace(/\//g, "_");
-            res.status(201).json(script.convertZip(path));
-            console.log("Successfully cloned to: " + Diagram.GitRepo);
-        });}
-        res.status(200);
-
-    });
-
+router.post("/diagrams", function(req, res, next) {
+  DiagramSchema.find(
+    { GitRepo: req.body.GitRepo.slice(19).replace(/\//g, "_") },
+    function(err, diagram) {
+      if (err) return next(err);
+      if (diagram == null || diagram == [] || diagram.length == 0) {
+        Git.Clone(
+          req.body.GitRepo,
+          repoPath + req.body.GitRepo.slice(19).replace(/\//g, "_")
+        ).then(function(repository) {
+          path = req.body.GitRepo.slice(19).replace(/\//g, "_");
+          res.status(201).json(script.convertZip(path));
+          console.log("Successfully cloned to: " + Diagram.GitRepo);
+        });
+      }
+      res.status(200);
+    }
+  );
 });
 
-router.get('/diagram/:id', function (req, res, next) {
-    var link = req.params.id;
-    DiagramSchema.find({ GitRepo: link }, function (err, repo) {
-        if (err) { return next(err); }
-        res.status(200).json({ "data": repo });
-    });
+router.get("/diagram/:id", function(req, res, next) {
+  var link = req.params.id;
+  DiagramSchema.find({ GitRepo: link }, function(err, repo) {
+    if (err) {
+      return next(err);
+    }
+    res.status(200).json({ data: repo });
+  });
 });
 
-router.patch('/diagram/:id', function (req, res, next) {
-    var link = req.params.id;
-    DiagramSchema.find({ GitRepo: link }, function (err, diagram) {
-        if (err) return next(err);
-        if (diagram == null) {
-            return res.status(404).json({ "message": "Diagram not found" });
-        }
-        if(diagram.length != 0){
-            diagram[0].Classes = (req.body.Classes|| diagram[0].Classes);
-            diagram[0].classConecteds = (req.body.classConecteds || diagram[0].classConecteds);
-            diagram[0].comments = (req.body.comments || diagram[0].comments);
-            diagram[0].save();
-            res.status(200).json({"data" : diagram[0]});
-        }
-    });
+router.patch("/diagram/:id", function(req, res, next) {
+  var link = req.params.id;
+  DiagramSchema.find({ GitRepo: link }, function(err, diagram) {
+    if (err) return next(err);
+    if (diagram == null) {
+      return res.status(404).json({ message: "Diagram not found" });
+    }
+    if (diagram.length != 0) {
+      diagram[0].Classes = req.body.Classes || diagram[0].Classes;
+      diagram[0].classConecteds =
+        req.body.classConecteds || diagram[0].classConecteds;
+      console.log(req.body.comments);
+      diagram[0].comments = req.body.comments || diagram[0].comments;
+      diagram[0].save();
+      res.status(200).json({ data: diagram[0] });
+    }
+  });
 });
 
 //// Github listener
