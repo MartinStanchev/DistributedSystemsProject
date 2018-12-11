@@ -8,6 +8,8 @@ var secret = "topsecret"; // Not used - can be implemented later for security
 var repoPath = "resources/"
 var Git = require("nodegit");
 var path = require('path');
+var connections = [];
+
 
 //Get all diagrams
 router.get('/diagrams', function (req, res, next) {
@@ -57,6 +59,12 @@ router.patch('/diagram/:id', function (req, res, next) {
             res.status(200).json({"data" : diagram[0]});  
         }
     });
+});
+
+router.get('/update', function(req, res, next) {
+    connections.push(res);
+    console.log('inupdate');
+
 });
 
 //// Github listener

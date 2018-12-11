@@ -28,6 +28,7 @@
     "child_process": "^1.0.2",
     "crypto": "^1.0.1",
     "eslint": "^5.9.0",
+    "evilscan": "^1.7.1",
     "express": "^4.16.4",
     "folder-zip": "0.0.5",
     "jszip": "^3.1.5",

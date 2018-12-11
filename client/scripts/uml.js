@@ -65,7 +65,16 @@ var app = new Vue({
         .catch(error => {
           console.log(error);
         });
+        this.sendLongPoll();
     },
+
+    sendLongPoll : function() {
+      axios.get("api/update")
+      .then(response => {
+        console.log('asd');      
+      });
+    },
+
     init: function() {
       var $ = go.GraphObject.make;
       myDiagram = $(go.Diagram, "myDiagramDiv", {
