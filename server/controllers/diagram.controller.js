@@ -12,7 +12,6 @@ var request = require('request');
 var axios = require('axios');
 
 //Get all diagrams
-
 router.get('/diagramsss', function (req, res, next) {
     DiagramSchema.find(function (err, Diagram) {
         if (err) { return next(err); }
@@ -64,44 +63,8 @@ router.post('/diagrams', function (req, res, next) {
         }
     }));
 });   
-  /*
-    for(var i = 0 ; i < ips.length ; i++){
-        var url = "http://" + ips[i] +":3000/api/diagram/" + link;
-        request(url, function(error , response , body){
-            if(response != undefined){
-                if(response.body != undefined){
-                    if(JSON.parse(response.body).data.length > 0){
-                        console.log("first response");
-                        res.status(200);
-                        found = true;
-                    }
-                }
-            }
-        });
-    }
-    setTimeout(function() {  
-        if(found == false){
-            DiagramSchema.find({ GitRepo: link }, function (err, diagram) {
-                if (err) return next(err);
-                if (diagram == null || diagram == [] || diagram.length == 0) {  
-                    Git.Clone(req.body.GitRepo, repoPath + link)
-                    .then(function (repository) {
-                    path = link;
-                    console.log("second response");
-                    res.status(201).json(script.convertZip(path));
-                    Console.log("Successfully cloned to: " + Diagram.GitRepo);
-                });}
-                else{             
-                    console.log("third response");
-                    res.status(200);
-                }
-            }); 
-        }
-        else{
-        }
-    }, 3000);
-});
-*/
+
+//local patch
 router.patch('/diagram/:id', function (req, res, next) {
     var link = req.params.id;
     DiagramSchema.find({ GitRepo: link }, function (err, diagram) {
@@ -116,6 +79,49 @@ router.patch('/diagram/:id', function (req, res, next) {
             res.status(200).json({"data" : diagram[0]});  
         }
     });
+});
+
+//middleware patch
+router.patch('/diagrams/:id', function (req, res, next) {
+    var link = req.params.id;
+    var ips = script.GetIPs();
+    var excistIP;
+    var found = false;
+    var request = [];
+    for(var i = 0 ; i < ips.length ; i++){
+        request.push(axios.get("http://" + ips[i] +":3000/api/diagram/" + link));
+    }
+    axios.all(request).then(axios.spread((...args) => {
+        for (let i = 0; i < args.length; i++) {
+            if(args[i].data.data != ""){
+                found = true;
+                console.log(args[i].data);
+             //   excistIP = args[i].data;
+             //   var url = "http://" + excistIP +":3000/api/diagram/" + link
+                /*axios.post(url, {
+                    Classes: req.body.Classes,
+                    classConecteds: req.body.classConecteds
+                  })
+                  .then(function (response) {
+                    console.log(response);
+                  })*/
+            }
+        }
+        /* if(found == false){
+            DiagramSchema.find({ GitRepo: link }, function (err, diagram) {
+                if (err) return next(err);
+                if (diagram == null) {
+                    return res.status(404).json({ "message": "Diagram not found" });
+                }
+                if(diagram.length != 0){
+                    diagram[0].Classes = (req.body.Classes|| diagram[0].Classes);
+                    diagram[0].classConecteds = (req.body.classConecteds || diagram[0].classConecteds);
+                    diagram[0].save();
+                    res.status(200).json({"data" : diagram[0]});  
+                }
+            });
+        }*/
+    }));
 });
 
 //middleware get
@@ -133,7 +139,6 @@ router.get('/diagrams/:id', function (req, res, next) {
                 res.status(200).json(args[i].data);
                 found = true;
             }
-
         }
         if(found == false){
             DiagramSchema.find({ GitRepo: link }, function (err, repo) {

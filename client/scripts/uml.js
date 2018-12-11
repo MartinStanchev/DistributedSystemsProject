@@ -71,7 +71,7 @@ var app = new Vue({
     SaveDiagram : function(){
       console.log("tring to do save request");
       axios
-        .patch('/api/diagram/' + repo, {
+        .patch('/api/diagrams/' + repo, {
           Classes : e.model.nodeDataArray,
           classConecteds : e.model.linkDataArray
         })
@@ -347,32 +347,10 @@ var app = new Vue({
     });
     setTimeout(function() {
       waitingDialog.hide();
-    }, 2000);
+    }, 5000);
     //waitingDialog.show();
     //setTimeout(this.getUmlData(), 0);
     this.getUmlData();
     this.init();
   }
 });
-
-
-/*
-        myDiagram.addModelChangedListener(function(e) {
-          if (e.isTransactionFinished) {
-            // Show the model data to the console after changing the diagram.
-            // add the patch request to save the changes to database
-            axios
-            .patch('/api/diagram/' + repo, {
-              Classes : e.model.nodeDataArray,
-              classConecteds : e.model.linkDataArray
-            })
-            .then(response=>{
-              console.log("data is succefuly updated "+  response.status)
-            })
-            .catch(err=>{
-              console.log(err);
-            })
-  
-          }
-        });
-*/

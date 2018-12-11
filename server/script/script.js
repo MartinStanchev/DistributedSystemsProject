@@ -391,6 +391,32 @@ module.exports = {
         });
     },
     GetIPs : function(){
+        //For fault tolorence
+        /*
+        var ActiveIPs = [];
+        for(var i = 0 ; i < IPs.length ; i++){
+            var url = "http://" + IPs[i] +":3000/api/ip/" + this.FindLocalIP();
+            request(url, function(error , response , body){
+                if(response != undefined){
+                    if(JSON.parse(response.body).ip != undefined){
+                        console.log("this ip is active : " + JSON.parse(response.body).ip);
+                        if(ActiveIPs.length == 0){
+                            ActiveIPs.push(JSON.parse(response.body).ip);
+                        }
+                        else{
+                            for(var i = 0 ; i < ActiveIPs.length ; i++){
+                                if(!ActiveIPs.includes(JSON.parse(response.body).ip)){
+                                    ActiveIPs.push(JSON.parse(response.body).ip);
+                                }
+                            }
+                        }
+                    }
+                }
+            });
+        }
+        console.log("acaliable ips : " + IPs);
+        console.log("active ips : " + ActiveIPs);
+        */
         return IPs;
     },
     SetIPs : function(ip){
