@@ -16,10 +16,8 @@ var app = new Vue({
     SuperClass: "",
     classExtends: [],
     linkdata: [],
-    // time: "",
-    // userName: "",
-    // comment: ""
-    comments: []
+    comments: [],
+	  comment_diagram: ""
   },
   methods: {
     hideModal: function() {
@@ -31,7 +29,7 @@ var app = new Vue({
     },
     getUmlData: function() {
       axios
-        .get("api/diagram/Georgesarkis_assig6")
+        .get("api/diagram/" + repo)
         .then(response => {
           this.nodedata = response.data.data;
 
@@ -79,7 +77,7 @@ var app = new Vue({
 
     saveChange: function(e) {
       axios
-        .patch("/api/diagram/Georgesarkis_assig6", {
+        .patch("/api/diagram/"+repo, {
           Classes: myDiagram.model.nodeDataArray,
           classConecteds: myDiagram.model.linkDataArray
         })
@@ -90,6 +88,15 @@ var app = new Vue({
           console.log(err);
         });
     },
+	  addComment: function() {
+		  axios.patch("/api/diagram"+repo, {
+			  comments: {
+				  userName: "",
+				  comment: "",
+				  time: ""
+			  }
+		  })
+	  },
     // saveComment: function(e) {
     //   axios
     //     .patch("/api/diagram/Georgesarkis_assig6", {

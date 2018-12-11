@@ -2,9 +2,6 @@
 	margin-top: 60px;
 }
 
-html {
-  overflow-y:auto;
-}
 
 html, body {
   width: 100%;
@@ -17,7 +14,7 @@ html, body {
 /* Container needed to position the button. Adjust the width as needed */
 .container {
   position: relative;
-  width: 50%;
+  width: 100%;
 }
 header-1 {
   background-color: black;
@@ -94,7 +91,7 @@ padding-right: 30px;
 }
 
 #intro {
-  position: absolute;
+	position: absolute;
   left: 0;
   top: 50%;
   padding: 0 20px;
@@ -105,6 +102,58 @@ padding-right: 30px;
 /* optional: show position indicator in red */
 ::-webkit-scrollbar-thumb {
     background: #F39C12;
+}
+
+@import url(//netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css);
+
+
+
+.detailBox {
+    border:1px solid #bbb;    
+}
+
+.commentBox {
+    padding:10px;
+    border-top:1px dotted #bbb;
+	
+}
+
+.commentList {
+    padding:0;
+    list-style:none;
+    overflow:auto;
+}
+.commentList li {
+    margin:0;
+    margin-top:10px;
+}
+.commentList li > div {
+    display:table-cell;
+}
+.commenterImage {
+    width:30px;
+   	margin-right:5px;
+    height:100%;
+    float:left;
+}
+.commenterImage img {
+    width:100%;
+    border-radius:50%;
+}
+.commentText p {
+    margin:0;
+	float: left;
+}
+
+.sub-text {
+    color:#aaa;
+    font-family:verdana;
+    font-size:11px;
+	float: left;
+}
+.actionBox {
+    border-top:1px dotted #bbb;
+   padding:10px;
 }
 
 
