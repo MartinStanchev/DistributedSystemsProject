@@ -29,6 +29,7 @@ var app = new Vue({
       $("#myModal").hide();
     },
     getUmlData: function() {
+      console.log('getuml');
       axios
         .get("api/diagram/" + repo)
         .then(response => {
@@ -134,7 +135,18 @@ var app = new Vue({
     //     });
     // },
 
+    sendLongPoll : function() {
+      var curr_repo = url.searchParams.get("repo");
+      axios.get("api/update/" + curr_repo)
+      .then(response => {
+        console.log('received long poll');      
+        this.getUmlData();
+        this.sendLongPoll();
+      });
+    },
+
     init: function() {
+      console.log('init');
       var $ = go.GraphObject.make;
       myDiagram = $(go.Diagram, "myDiagramDiv", {
         initialContentAlignment: go.Spot.Center,
@@ -422,5 +434,7 @@ var app = new Vue({
     //this.getUmlData();
 	  this.queryGitUser();
     this.init();
+    
+    this.sendLongPoll();
   }
 });

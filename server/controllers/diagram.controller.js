@@ -7,7 +7,9 @@ let crypto = require("crypto");
 var secret = "topsecret"; // Not used - can be implemented later for security
 var repoPath = "resources/";
 var Git = require("nodegit");
-var path = require("path");
+var path = require('path');
+var connections = [];
+var respondToPolls = false;
 
 //Get all diagrams
 router.get("/diagrams", function(req, res, next) {
@@ -81,6 +83,59 @@ router.patch("/diagram/add/:id", function(req, res, next) {
     diagram.save();
     res.status(200).json({ data: diagram });
   });
+
+router.patch('/diagram/:id', function (req, res, next) {
+    var link = req.params.id;
+    DiagramSchema.find({ GitRepo: link }, function (err, diagram) {
+        if (err) return next(err);
+        if (diagram == null) {
+            return res.status(404).json({ "message": "Diagram not found" });
+        }
+        if(diagram.length != 0){
+            diagram[0].Classes = (req.body.Classes|| diagram[0].Classes);
+            diagram[0].classConecteds = (req.body.classConecteds || diagram[0].classConecteds);
+            diagram[0].save();
+            res.status(200).json({"data" : diagram[0]});  
+        }
+    });
+        var resp;
+        for(var i = 0; i < connections.length; i++) {
+                resp = connections.pop();
+                DiagramSchema.find({ GitRepo: link }, function (err, repo) {
+                    if (err) { return next(err); }
+                    resp.status(200).json({ "data": repo });
+                    resp.end();
+                });
+        }
+    respondToPolls = true;
+});
+
+router.get('/update/:id', function(req, res, next) {
+    connections.push(res);
+    console.log('inupdate for: ' + req.body.id);
+    if(respondToPolls === true) {
+        respondToPolls = false;
+        var link = req.body.id;
+        console.log('responding: ' + connections.length);
+        // connections.forEach(function(resp) {
+        //     DiagramSchema.find({ GitRepo: link }, function (err, repo) {
+        //         if (err) { return next(err); }
+        //         resp.status(200).json({ "data": repo });
+        //         resp.end();
+        //     });
+        // });
+        // var resp;
+        // for(var i = 0; i < connections.length; i++) {
+        //     resp = connections.pop();
+        //     DiagramSchema.find({ GitRepo: link }, function (err, repo) {
+        //         if (err) { return next(err); }
+        //         resp.status(200).json({ "data": repo });
+        //         resp.end();
+        //     });
+        // }
+    }
+
+
 });
 
 //// Github listener
