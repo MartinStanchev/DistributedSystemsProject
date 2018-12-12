@@ -99,9 +99,10 @@ router.patch("/diagram/add/:id", function(req, res, next) {
     diagram.save();
     res.status(200).json({ data: diagram });
   });
-  
+});
+
 //local patch
-router.patch('/diagram/:id', function (req, res, next) {
+/*router.patch('/diagram/:id', function (req, res, next) {
     var link = req.params.id;
     DiagramSchema.find({ GitRepo: link }, function (err, diagram) {
         if (err) return next(err);
@@ -126,7 +127,7 @@ router.patch('/diagram/:id', function (req, res, next) {
         }
     respondToPolls = true;
 });
-
+*/
 router.get('/update/:id', function(req, res, next) {
     connections.push(res);
     console.log('inupdate for: ' + req.body.id);

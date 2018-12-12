@@ -82,7 +82,6 @@ var app = new Vue({
           classConecteds: myDiagram.model.linkDataArray
         })
         .then(response => {
-          this.getUmlData();
           console.log("data is succefuly updated " + response.status);
         })
         .catch(err => {
