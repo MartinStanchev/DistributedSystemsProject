@@ -8,6 +8,8 @@ var secret = "topsecret"; // Not used - can be implemented later for security
 var repoPath = "resources/";
 var Git = require("nodegit");
 var path = require('path');
+var request = require('request');
+var axios = require('axios');
 var connections = [];
 var respondToPolls = false;
 
@@ -22,35 +24,49 @@ router.get("/diagrams", function(req, res, next) {
   });
 });
 
-router.post("/diagrams", function(req, res, next) {
-  DiagramSchema.find(
-    { GitRepo: req.body.GitRepo.slice(19).replace(/\//g, "_") },
-    function(err, diagram) {
-      if (err) return next(err);
-      if (diagram == null || diagram == [] || diagram.length == 0) {
-        Git.Clone(
-          req.body.GitRepo,
-          repoPath + req.body.GitRepo.slice(19).replace(/\//g, "_")
-        ).then(function(repository) {
-          path = req.body.GitRepo.slice(19).replace(/\//g, "_");
-          res.status(201).json(script.convertZip(path));
-          console.log("Successfully cloned to: " + Diagram.GitRepo);
-        });
-      }
-      res.status(200);
-    }
-  );
+//to check availbe ips and to add new ip in the array
+router.get('/ip/:id', function (req, res, next) {
+    var ip = req.params.id;
+    var localip = script.FindLocalIP();
+    script.SetIPs(ip);
+    res.status(200).json({"ip" : localip});
 });
 
-router.get("/diagram/:id", function(req, res, next) {
-  var link = req.params.id;
-  DiagramSchema.find({ GitRepo: link }, function(err, repo) {
-    if (err) {
-      return next(err);
+//middleware post
+router.post('/diagrams', function (req, res, next) {
+    var link = req.body.GitRepo.slice(19).replace(/\//g, "_");
+    var ips = script.GetIPs();
+    var found = false;
+    var request = [];
+    for(var i = 0 ; i < ips.length ; i++){
+        request.push(axios.get("http://" + ips[i] +":3000/api/diagram/" + link));
     }
-    res.status(200).json({ data: repo });
-  });
-});
+    axios.all(request).then(axios.spread((...args) => {
+        for (let i = 0; i < args.length; i++) {
+            if(args[i].data.data != ""){
+                res.status(200).json(args[i].data);
+                found = true;
+            }
+        }
+        if(found == false){
+            DiagramSchema.find({ GitRepo: link }, function (err, diagram) {
+                if (err) return next(err);
+                if (diagram == null || diagram == [] || diagram.length == 0 || diagram == "") {  
+                    Git.Clone(req.body.GitRepo, repoPath + link)
+                    .then(function (repository) {
+                    path = link;
+                    console.log("second response");
+                    res.status(201).json(script.convertZip(path));
+                    Console.log("Successfully cloned to: " + Diagram.GitRepo);
+                });}
+                else{             
+                    console.log("third response");
+                    res.status(200);
+                }
+            }); 
+        }
+    }));
+});   
 
 // update classes
 router.patch("/diagram/:id", function(req, res, next) {
@@ -83,7 +99,8 @@ router.patch("/diagram/add/:id", function(req, res, next) {
     diagram.save();
     res.status(200).json({ data: diagram });
   });
-
+  
+//local patch
 router.patch('/diagram/:id', function (req, res, next) {
     var link = req.params.id;
     DiagramSchema.find({ GitRepo: link }, function (err, diagram) {
@@ -136,6 +153,83 @@ router.get('/update/:id', function(req, res, next) {
     }
 
 
+});
+
+//middleware patch
+router.patch('/diagrams/:id', function (req, res, next) {
+    var link = req.params.id;
+    var ips = script.GetIPs();
+    var excistIP;
+    var found = false;
+    var request = [];
+    for(var i = 0 ; i < ips.length ; i++){
+        request.push(axios.get("http://" + ips[i] +":3000/api/diagram/" + link));
+    }
+    axios.all(request).then(axios.spread((...args) => {
+        for (let i = 0; i < args.length; i++) {
+            if(args[i].data.data != ""){
+                found = true;
+                console.log(args[i].data);
+             //   excistIP = args[i].data;
+             //   var url = "http://" + excistIP +":3000/api/diagram/" + link
+                /*axios.post(url, {
+                    Classes: req.body.Classes,
+                    classConecteds: req.body.classConecteds
+                  })
+                  .then(function (response) {
+                    console.log(response);
+                  })*/
+            }
+        }
+        /* if(found == false){
+            DiagramSchema.find({ GitRepo: link }, function (err, diagram) {
+                if (err) return next(err);
+                if (diagram == null) {
+                    return res.status(404).json({ "message": "Diagram not found" });
+                }
+                if(diagram.length != 0){
+                    diagram[0].Classes = (req.body.Classes|| diagram[0].Classes);
+                    diagram[0].classConecteds = (req.body.classConecteds || diagram[0].classConecteds);
+                    diagram[0].save();
+                    res.status(200).json({"data" : diagram[0]});  
+                }
+            });
+        }*/
+    }));
+});
+
+//middleware get
+router.get('/diagrams/:id', function (req, res, next) {
+    var link = req.params.id;
+    var ips = script.GetIPs();
+    var found = false;
+    var request = [];
+    for(var i = 0 ; i < ips.length ; i++){
+        request.push(axios.get("http://" + ips[i] +":3000/api/diagram/" + link));
+    }
+    axios.all(request).then(axios.spread((...args) => {
+        for (let i = 0; i < args.length; i++) {
+            if(args[i].data.data != ""){
+                res.status(200).json(args[i].data);
+                found = true;
+            }
+        }
+        if(found == false){
+            DiagramSchema.find({ GitRepo: link }, function (err, repo) {
+                if (err) { return next(err); }
+                res.status(200).json({ "data": repo });
+            });
+        }
+    }));
+});   
+
+//local get
+router.get('/diagram/:id', function (req, res, next) {
+    var link = req.params.id;
+    DiagramSchema.find({ GitRepo: link }, function (err, repo) {
+        if (err) { return next(err); }
+        res.status(200).json({"data": repo});
+    });
 });
 
 //// Github listener

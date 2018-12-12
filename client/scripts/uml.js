@@ -31,14 +31,13 @@ var app = new Vue({
     getUmlData: function() {
       console.log('getuml');
       axios
-        .get("api/diagram/" + repo)
+        .get("api/diagrams/" + repo)
         .then(response => {
           this.nodedata = response.data.data;
-
           if (response.data.data.length > 0) {
             console.log("hide the wiating dialog");
-            waitingDialog.hide();
-            this.hideModal();
+            //waitingDialog.hide();
+            //this.hideModal();
 
             for (var t = 0; t < response.data.data[0].comments.length; t++) {
               this.comments.push(response.data.data[0].comments[t]);
@@ -76,7 +75,6 @@ var app = new Vue({
           console.log(error);
         });
     },
-
     saveChange: function(e) {
       axios
         .patch("/api/diagram/" + repo, {
@@ -144,7 +142,6 @@ var app = new Vue({
         this.sendLongPoll();
       });
     },
-
     init: function() {
       console.log('init');
       var $ = go.GraphObject.make;
@@ -428,11 +425,12 @@ var app = new Vue({
     });
     setTimeout(function() {
       waitingDialog.hide();
-    }, 2000);
+    }, 5000);
     //waitingDialog.show();
     setTimeout(this.getUmlData(), 0);
     //this.getUmlData();
 	  this.queryGitUser();
+
     this.init();
     
     this.sendLongPoll();
