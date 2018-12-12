@@ -9,7 +9,7 @@ var repoPath = "resources/"
 var Git = require("nodegit");
 var path = require('path');
 var connections = [];
-
+var respondToPolls = false;
 
 //Get all diagrams
 router.get('/diagrams', function (req, res, next) {
@@ -59,11 +59,43 @@ router.patch('/diagram/:id', function (req, res, next) {
             res.status(200).json({"data" : diagram[0]});  
         }
     });
+        var resp;
+        for(var i = 0; i < connections.length; i++) {
+                resp = connections.pop();
+                DiagramSchema.find({ GitRepo: link }, function (err, repo) {
+                    if (err) { return next(err); }
+                    resp.status(200).json({ "data": repo });
+                    resp.end();
+                });
+        }
+    respondToPolls = true;
 });
 
-router.get('/update', function(req, res, next) {
+router.get('/update/:id', function(req, res, next) {
     connections.push(res);
-    console.log('inupdate');
+    console.log('inupdate for: ' + req.body.id);
+    if(respondToPolls === true) {
+        respondToPolls = false;
+        var link = req.body.id;
+        console.log('responding: ' + connections.length);
+        // connections.forEach(function(resp) {
+        //     DiagramSchema.find({ GitRepo: link }, function (err, repo) {
+        //         if (err) { return next(err); }
+        //         resp.status(200).json({ "data": repo });
+        //         resp.end();
+        //     });
+        // });
+        // var resp;
+        // for(var i = 0; i < connections.length; i++) {
+        //     resp = connections.pop();
+        //     DiagramSchema.find({ GitRepo: link }, function (err, repo) {
+        //         if (err) { return next(err); }
+        //         resp.status(200).json({ "data": repo });
+        //         resp.end();
+        //     });
+        // }
+    }
+
 
 });
 

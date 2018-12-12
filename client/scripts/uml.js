@@ -26,6 +26,7 @@ var app = new Vue({
       $("#myModal").hide();
     },
     getUmlData: function() {
+      console.log('getuml');
       axios
         .get("api/diagram/" + repo)
         .then(response => {
@@ -65,17 +66,20 @@ var app = new Vue({
         .catch(error => {
           console.log(error);
         });
-        this.sendLongPoll();
     },
 
     sendLongPoll : function() {
-      axios.get("api/update")
+      var curr_repo = url.searchParams.get("repo");
+      axios.get("api/update/" + curr_repo)
       .then(response => {
-        console.log('asd');      
+        console.log('received long poll');      
+        this.getUmlData();
+        this.sendLongPoll();
       });
     },
 
     init: function() {
+      console.log('init');
       var $ = go.GraphObject.make;
       myDiagram = $(go.Diagram, "myDiagramDiv", {
         initialContentAlignment: go.Spot.Center,
@@ -362,5 +366,7 @@ var app = new Vue({
     setTimeout(this.getUmlData(), 0);
     //this.getUmlData();
     this.init();
+    
+    this.sendLongPoll();
   }
 });
