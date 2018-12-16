@@ -60,9 +60,11 @@ router.post('/diagrams', function (req, res, next) {
         if(found == false){
             DiagramSchema.find({ GitRepo: link }, function (err, diagram) {
                 if (err) return next(err);
-                if ((diagram == null || diagram == [] || diagram.length == 0 || diagram == "") || diagram[0].LatestPush > push_date) {
-                    if(diagram[0].LatestPush > push_date) {
+                if ((diagram == null || diagram == [] || diagram.length == 0 || diagram == "") || diagram[0].LatestPush < push_date) {
+                    if(diagram[0].LatestPush < push_date) {
                         console.log("Diagram found but a newer version is pushed, updating the database");
+                        DiagramSchema.find({ GitRepo: link }).remove().exec(); // Remove the entry in database
+
                     }  
                     Git.Clone(req.body.GitRepo, repoPath + link)
                     .then(function (repository) {
@@ -73,6 +75,7 @@ router.post('/diagrams', function (req, res, next) {
                 });}
                 else{
                     console.log("Found diagram in database that is the newest version.")
+                    console.log(diagram[0].LatestPush < push_date);
                     console.log("third response");
                     res.status(200);
                 }
