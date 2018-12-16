@@ -5,10 +5,11 @@ var morgan = require('morgan');
 var path = require('path');
 var script = require('./script/script');
 // Variables
-var mongoURI = process.env.MONGODB_URI || 'mongodb://admin:admin123@ds131373.mlab.com:31373/distrubutedsystemsproject';
+//var mongoURI = process.env.MONGODB_URI || 'mongodb://admin:admin123@ds131373.mlab.com:31373/distrubutedsystemsproject';
+var mongoURI = process.env.MONGODB_URI || 'mongodb://localhost:27017/distrubutedsystemsproject';
 var port = process.env.PORT || 3000;
 
-script.FindIPs();
+//script.FindIPs();
 
 // Connect to MongoDB
 mongoose.connect(mongoURI, { useNewUrlParser: true }, function(err) {

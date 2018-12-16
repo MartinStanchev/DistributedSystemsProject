@@ -11,7 +11,7 @@ var request = require('request');
 var IPs = [];
 
 module.exports = {
-    readXML : function(GitRepo){
+    readXML : function(GitRepo, push_date){
         classNames = [];
         classConecteds = [];
         var excist;
@@ -76,7 +76,7 @@ module.exports = {
                     this.FindClassConnection(line,currentClassName);
                 }
             }
-        return this.SaveDiagram(GitRepo);
+        return this.SaveDiagram(GitRepo, push_date);
         }
     },
     FindClass: function(line){
@@ -283,9 +283,10 @@ module.exports = {
         shell.rm('-rf', __dirname + '/../../resources/' + pathToFolder);
         shell.rm(__dirname + '/../../resources/' + pathToFolder + ".xml");
     },
-    SaveDiagram : function(GitRepo){
+    SaveDiagram : function(GitRepo, push_date){
         var Diagram = new DiagramSchema({
             GitRepo :  GitRepo,
+            LatestPush : push_date,
             Classes : classNames,
             classConecteds : classConecteds
         });
@@ -300,9 +301,9 @@ module.exports = {
         });
         this.cleanUpFiles(GitRepo);
     },
-    convertZip : function(path){
+    convertZip : function(path, push_date){
         if(xmlEmcoder.saveXML(path) == 1) {
-            return this.readXML(path);
+            return this.readXML(path, push_date);
         }
         
     },
@@ -311,7 +312,7 @@ module.exports = {
         var res_dir = shell.pwd()  + '/resources';
         if(shell.ls('-A', res_dir)) {
             shell.echo(shell.ls('-A', res_dir));
-            if(shell.exec( 'sudo nmap -sn '+ localIP + '/24 -oN ' + res_dir+'/ips').code != 0) {
+            if(shell.exec( 'nmap -sn '+ localIP + '/24 -oN ' + res_dir+'/ips').code != 0) {
                 shell.echo('Error: nmap command failed.');
                 shell.exit(1);
             }
