@@ -29,7 +29,7 @@ router.get('/oauth/redirect', (req, res) => {
 })
 
 // Insert routes below
-router.use('/api', require('./diagram.controller'));
+router.use('/api', require('./middleware'));
 // router.use('/api/comments', require('./comment.controller'));
 
 

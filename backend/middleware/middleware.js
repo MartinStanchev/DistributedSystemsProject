@@ -1,14 +1,11 @@
 var express = require("express");
 var router = express.Router();
 var DiagramSchema = require("../models/Diagram");
-const script = require("./../script/script.js");
-const exec = require("child_process").exec;
-let crypto = require("crypto");
-var secret = "topsecret"; // Not used - can be implemented later for security
+const script = require("../script/script.js");
+const nmap = require("../script/nmap.js");
 var repoPath = "resources/";
 var Git = require("nodegit");
 var path = require('path');
-var request = require('request');
 var axios = require('axios');
 var connections = [];
 var respondToPolls = false;
@@ -27,15 +24,15 @@ router.get("/diagrams", function(req, res, next) {
 //to check availbe ips and to add new ip in the array
 router.get('/ip/:id', function (req, res, next) {
     var ip = req.params.id;
-    var localip = script.FindLocalIP();
-    script.SetIPs(ip);
+    var localip = nmap.FindLocalIP();
+    nmap.SetIPs(ip);
     res.status(200).json({"ip" : localip});
 });
 
 //middleware post
 router.post('/diagrams', function (req, res, next) {
     var link = req.body.GitRepo.slice(19).replace(/\//g, "_");
-    var ips = script.GetIPs();
+    var ips = nmap.GetIPs();
     var found = false;
     var request = [];
     for(var i = 0 ; i < ips.length ; i++){
@@ -159,7 +156,7 @@ router.get('/update/:id', function(req, res, next) {
 //middleware patch
 router.patch('/diagrams/:id', function (req, res, next) {
     var link = req.params.id;
-    var ips = script.GetIPs();
+    var ips = nmap.GetIPs();
     var excistIP;
     var found = false;
     var request = [];
@@ -202,7 +199,7 @@ router.patch('/diagrams/:id', function (req, res, next) {
 //middleware get
 router.get('/diagrams/:id', function (req, res, next) {
     var link = req.params.id;
-    var ips = script.GetIPs();
+    var ips = nmap.GetIPs();
     var found = false;
     var request = [];
     for(var i = 0 ; i < ips.length ; i++){

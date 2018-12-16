@@ -3,12 +3,12 @@ var bodyParser = require('body-parser');
 var mongoose = require('mongoose');
 var morgan = require('morgan');
 var path = require('path');
-var script = require('./script/script');
+var nmap = require('./script/nmap.js');
 // Variables
 var mongoURI = process.env.MONGODB_URI || 'mongodb://admin:admin123@ds131373.mlab.com:31373/distrubutedsystemsproject';
 var port = process.env.PORT || 3000;
 
-script.FindIPs();
+nmap.FindIPs();
 
 // Connect to MongoDB
 mongoose.connect(mongoURI, { useNewUrlParser: true }, function(err) {
@@ -28,10 +28,10 @@ app.use(bodyParser.json());
 app.use(morgan('dev'));
 // Serve static assets (for frontend client)
 var root = path.normalize(__dirname + '/..');
-app.use(express.static(path.join(root, 'client')));
-app.set('appPath', 'client');
+app.use(express.static(path.join(root, 'frontend')));
+app.set('appPath', 'frontend');
 // Import routes
-app.use(require('./controllers/index'));
+app.use(require('./middleware/index'));
 
 // Error handler (must be registered last)
 var env = app.get('env');

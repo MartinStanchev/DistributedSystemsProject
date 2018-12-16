@@ -8,7 +8,7 @@
   "private": true,
   "main": "server/app.js",
   "scripts": {
-    "start": "node ./server/app.js",
+    "start": "node ./backend/app.js",
     "test": "test"
   },
   "repository": {
