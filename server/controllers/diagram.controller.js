@@ -61,11 +61,14 @@ router.post('/diagrams', function (req, res, next) {
             DiagramSchema.find({ GitRepo: link }, function (err, diagram) {
                 if (err) return next(err);
                 if ((diagram == null || diagram == [] || diagram.length == 0 || diagram == "") || diagram[0].LatestPush < push_date) {
-                    if(diagram[0].LatestPush < push_date) {
-                        console.log("Diagram found but a newer version is pushed, updating the database");
-                        DiagramSchema.find({ GitRepo: link }).remove().exec(); // Remove the entry in database
+                    if(typeof diagram[0] !== 'undefined'){
+                        if(diagram[0].LatestPush < push_date) {
+                            console.log("Diagram found but a newer version is pushed, updating the database");
+                            DiagramSchema.find({ GitRepo: link }).remove().exec(); // Remove the entry in database
 
-                    }  
+                        }  
+                    }
+
                     Git.Clone(req.body.GitRepo, repoPath + link)
                     .then(function (repository) {
                     path = link;
