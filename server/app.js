@@ -9,7 +9,7 @@ var script = require('./script/script');
 var mongoURI = process.env.MONGODB_URI || 'mongodb://localhost:27017/distrubutedsystemsproject';
 var port = process.env.PORT || 3000;
 
-//script.FindIPs();
+script.FindIPs();
 
 // Connect to MongoDB
 mongoose.connect(mongoURI, { useNewUrlParser: true }, function(err) {
