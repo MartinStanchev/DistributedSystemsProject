@@ -28,6 +28,14 @@ var app = new Vue({
       $("body").css("padding-right", "");
       $("#myModal").hide();
     },
+    getRepo: function() {
+      window.location.href = "/uml.html?repo=" + repo;
+    },
+    // uml1 for the uml old page
+    getRepoUml: function() {
+      window.location.href = "/NewUml.html?repo=" + repo;
+    },
+
     getUmlData: function() {
       console.log('getuml');
       axios

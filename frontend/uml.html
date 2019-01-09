@@ -1,17 +1,23 @@
 <!DOCTYPE html>
-<html>
 
+<html>
+	
 <head>
+	
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<meta http-equiv="X-UA-Compatible" content="ie=edge">
 	<title>GitUML</title>
-	<link href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous" />
+	<link href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN"
+	 crossorigin="anonymous" />
 	<link rel="stylesheet" href="css/bootstrap.css" />
 	<link rel="stylesheet" href="css/style.css" />
+	<link rel="stylesheet" href="css/uft.css" />
+
 	<link rel="stylesheet" href="css/bootstrap-social.css" />
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/gojs/1.8.33/go-debug.js"></script>
-	<script src="https://code.jquery.com/jquery-3.3.1.js" integrity="sha256-2Kok7MbOyxpgUVvAk/HJ2jigOSYS2auK4Pfzbm7uH60=" crossorigin="anonymous"></script>
+	<script src="https://code.jquery.com/jquery-3.3.1.js" integrity="sha256-2Kok7MbOyxpgUVvAk/HJ2jigOSYS2auK4Pfzbm7uH60="
+	 crossorigin="anonymous"></script>
 	<style>
 		.DiagramBox {
 			background-color: rgb(95, 95, 95);
@@ -26,47 +32,91 @@
 			text-align: center;
 			margin: 5px 6px;
 		}
+body { padding-top:60px; }
+.widget .panel-body { padding:10px; }
+.widget .list-group { margin-bottom: 0; }
+.widget .panel-title { display:inline }
+.widget .label-info { float: right; }
+.widget li.list-group-item {border-radius: 0;border: 0;border-top: 1px solid #ddd;}
+.widget li.list-group-item:hover { background-color: rgba(86,61,124,.1); }
+.widget .mic-info { color: #666666;font-size: 11px; }
+.widget .action { margin-top:5px; }
+.widget .comment-text { font-size: 12px; }
+.widget .btn-block { border-top-left-radius:0px;border-top-right-radius:0px; }
 	</style>
 </head>
 
 <body>
-	<div id="uml" style="margin-top: 60px;">
-		<a href="index.html" class="btn btn-warning"> <span class="glyphicon glyphicon-log-out"></span> Log out </a>
-		<div class="row">
-			<div class="col-sm-9 offset-sm-2">
-				<div class="DiagramBox" id="myDiagramDiv" v-bind:model-data="nodedata" style="border: solid 1px rgb(255, 255, 255); width: 100%; height:540px"></div>
-				<br>
-				<button id="demo" type="button" class="btn btn-warning float-right" @click="saveChange()"> Save changes </button>
-				<br> </div>
+
+
+<div id="uml" 
+style="margin-top: 60px;">
+
+	<div class="container">
+		<nav class="menu">
+			<ol>
+				<li class="menu-item"><a href="#0">select visualization </a>
+					<ol class="sub-menu">
+						<li class="menu-item"><a id="uml" href="#" @click="getRepo()">Uml</a></li>
+						<li class="menu-item"><a id="uml" href="#" @click="getRepoUml()">NewUml</a></li>
+					</ol>
+				</li>
+			</ol>
+		</nav>
+	</div>
+	<a href="index.html" class="btn btn-warning"> <span class="glyphicon glyphicon-log-out"></span> Log out </a>
+	<div class="row">
+		<div class="col-sm-9 offset-sm-2">
+			<div class="DiagramBox" id="myDiagramDiv" v-bind:model-data="nodedata" style="border: solid 1px rgb(255, 255, 255); width: 100%; height:540px"></div>
+			<br>
+			<button id="demo" type="button" class="btn btn-warning float-right" @click="saveChange()"> Save changes </button>
+			<br>
 		</div>
-		<div class="container"> </div>
+	</div>
+	<div class="container">
 		<br>
-		<div class="row">
-			<div class="col-sm-6 offset-sm-3">
-				<div class="detailBox">
-					<div class="actionBox">
-						<ul class="commentList">
-							<li v-for="comment in comments" class="p-3 mt-3 mb-3 bg-secondary text-white">
-								<div class="commenterImage"> <img :src="comment.userImage" /> </div>
-								
-								<div class="commentText">
-									<p class="">{{comment.comment}}</p>
-									<br> <span class="date sub-text">on {{comment.time}} - by {{comment.userName}}</span> </div>
-							</li>
-						</ul>
-						<form role="form">
-							<div class="form-group">
-								<textarea class="form-control" id="addComment" rows="2" placeholder="Comment about latest update..." v-model="comment_diagram" required></textarea>
-							</div>
-							<button type="button" class="btn btn-warning" @click="addComment()">Add comment</button>
-							<br>
-							<br>
-							<br> </form>
-					</div>
+
+		<div class="panel panel-default widget">
+			<div class="panel-heading">
+				<span class="glyphicon glyphicon-comment"></span>
+				<h3 class="panel-title">
+					Comments</h3>
+				<div class="panel-body">
+					<ul class="list-group">
+						<li v-for="comment in comments" class="list-group-item">
+							<div class="row">
+								<div class="col-xs-2 col-md-1">
+									<img :src="comment.userImage" class="img-circle img-responsive" alt="" /></div>
+								<div class="col-xs-10 col-md-11">
+									<div>
+										<div class="mic-info">
+											By: <a href="https://github.com"> by {{comment.userName}}</a> on {{comment.time}}
+										</div>
+									</div>
+									<div class="comment-text">
+										{{comment.comment}}
+
+									</div>
+
+						</li>
+					</ul>
+
+					<form role="form">
+						<div class="form-group">
+							<textarea class="form-control" id="addComment" rows="2" placeholder="Comment about latest update..." v-model="comment_diagram"
+							 required></textarea>
+						</div>
+						<button type="button" class="btn btn-warning" @click="addComment()">Add comment</button>
+						<br>
+						<br>
+						<br>
+					</form>
 				</div>
 			</div>
 		</div>
 	</div>
+</div>
+
 </body>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js"></script>
@@ -77,5 +127,8 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-waitingfor/1.2.7/bootstrap-waitingfor.js"></script>
 <script src="scripts/main.js"></script>
 <script src="scripts/uml.js"></script>
+
+
+
 
 </html>

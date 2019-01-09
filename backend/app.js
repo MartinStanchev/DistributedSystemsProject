@@ -8,7 +8,7 @@ var nmap = require('./script/nmap.js');
 var mongoURI = process.env.MONGODB_URI || 'mongodb://admin:admin123@ds131373.mlab.com:31373/distrubutedsystemsproject';
 var port = process.env.PORT || 3000;
 
-nmap.FindIPs();
+//nmap.FindIPs();
 
 // Connect to MongoDB
 mongoose.connect(mongoURI, { useNewUrlParser: true }, function(err) {
