@@ -156,6 +156,13 @@ padding-right: 30px;
    padding:10px;
 }
 
+.navbar-light .navbar-nav .nav-link {
+    color: #F39C12;
+}
+.navbar-light .navbar-text a {
+    color: #F39C12;
+}
+
 
 /* Is this a previous fix for the scrollbars? Do we need this anymore? 
 ::-webkit-scrollbar {
