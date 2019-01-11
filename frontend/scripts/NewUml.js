@@ -78,6 +78,12 @@ var app = new Vue({
     getRepoUml: function() {
       window.location.href = "/NewUml.html?repo=" + repo;
     },
+      
+      homePage: function() {
+        const query = window.location.search.substring(1)
+            const token = query.split('access_token=')[1]
+            window.location.href = "/profile.html?access_token="+token;  
+    },
     
     getUmlData: function() {
       axios

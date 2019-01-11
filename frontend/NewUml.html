@@ -47,20 +47,39 @@ body { padding-top:60px; }
  <body>
 
 
- 	<div id="new" style="margin-top: 60px;">
+ 	<div id="new">
+            <nav class="navbar navbar-expand-lg navbar-light bg-light" style="margin-top: -60px;">
+  <a class="navbar-brand" href="#">Logo</a>
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarText" aria-controls="navbarText" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+  <div class="collapse navbar-collapse" id="navbarText">
+    <ul class="navbar-nav mr-auto">
+      <li class="nav-item active">
+        <a class="nav-link" href="#" @click="homePage()">Home</a>
+      </li>
+     
+    </ul>
+    <span class="navbar-text">
+    
+        <a class="nav-link" href="index.html"><span class="glyphicon glyphicon-log-in"></span>Sign out</a>
+     
+    </span>
+  </div>
+</nav>
 			<div class="container">
 				<nav class="menu">
 					<ol>
-						<li class="menu-item"><a href="#0">select visualization </a>
+						<li class="menu-item"><a href="#0">Select visualization </a>
 							<ol class="sub-menu">
-								<li class="menu-item"><a id="uml" href="#" @click="getRepo()">Uml</a></li>
-								<li class="menu-item"><a id="uml" href="#" @click="getRepoUml()">NewUml</a></li>
+								<li class="menu-item"><a id="uml" href="#" @click="getRepo()">Class Diagram</a></li>
+								<li class="menu-item"><a id="uml" href="#" @click="getRepoUml()">Interactive Force</a></li>
 							</ol>
 						</li>
 					</ol>
 				</nav>
 			</div>
-		<a href="index.html" class="btn btn-warning"> <span class="glyphicon glyphicon-log-out"></span> Log out </a>
+		
 
  		<div class="row">
 			<div class="col-sm-9 offset-sm-2">
