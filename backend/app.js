@@ -25,14 +25,14 @@ var app = express();
 var http = require('http').Server(app);
 var io = require('socket.io')(http);
 
- io.on('connection', (socket) => {
+io.on('connection', function(socket){
     console.log('asd connected');
 });
 
- app.use(function(req, res, next) {
+app.use(function(req, res, next) {
     req.io = io;
     next();
-  });
+});
 
 // Parse requests of content-type 'application/json'
 app.use(bodyParser.json());

@@ -38,6 +38,7 @@
     "nodegit": "^0.23.0",
     "shelljs": "^0.8.3",
     "simple-git": "^1.107.0",
+    "socket.io": "^2.2.0",
     "vue": "^2.5.17",
     "vue-content-loader": "^0.2.1",
     "vue-router": "^3.0.1",

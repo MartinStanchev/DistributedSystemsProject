@@ -124,15 +124,6 @@ var app = new Vue({
           console.log(error);
         });
     },
-    refreshDiagram : function() {
-      myDiagram.clear();
-      this.getUmlData()
-    },
-
-     connectSocket: function() {
-      var socket = io();
-      socket.on('updateDiagram', this.refreshDiagram);
-    },
 
     // saveComment: function(e) {
     //   axios
@@ -422,10 +413,21 @@ var app = new Vue({
       //       });
       //   }
       // });
+    },
+     
+    refreshDiagram : function() {
+      myDiagram.clear();
+      this.getUmlData()
+    },
+
+     connectSocket: function() {
+      var socket = io();
+      socket.on('updateDiagram', this.refreshDiagram);
     }
   },
 	
   mounted() {
+    this.connectSocket();    
     waitingDialog.show("Loading", {
       dialogSize: "sm",
       progressType: "warning"
@@ -439,8 +441,7 @@ var app = new Vue({
 	  this.queryGitUser();
 
     this.init();
-    this.connectSocket();    
-
+    
     setTimeout(function() {
       if(myDiagram.model.nodeDataArray.length == 0 && myDiagram.model.linkDataArray.length == 0){
         this.getUmlData();
