@@ -140,6 +140,7 @@ var app = new Vue({
           console.log("data is succefuly updated " + response.status);
         })
         .catch(err => {
+          window.alert("Sorry! You dont have authorization to make changes.");
           console.log(err);
         });
     },
@@ -166,10 +167,10 @@ var app = new Vue({
         .patch("/api/diagram/add/" + repo, co)
         .then(response => {
           location.reload();
-          //		  this.getUmlData();
           console.log(response);
         })
         .catch(error => {
+          window.alert("Sorry! You dont have authorization to add a comment.");
           console.log(error);
         });
     },

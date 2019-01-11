@@ -73,6 +73,9 @@ router.patch("/diagram/:id", function(req, res, next) {
     if (diagram == null) {
       return res.status(404).json({ message: "Diagram not found" });
     }
+    if(diagram.length == 0){
+        return res.status(404).json({ message: "Diagram not found" });
+    }
     if (diagram.length != 0) {
       diagram[0].Classes = req.body.Classes || diagram[0].Classes;
       diagram[0].classConecteds =

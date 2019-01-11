@@ -90,6 +90,7 @@ var app = new Vue({
           console.log("data is succefuly updated " + response.status);
         })
         .catch(err => {
+          window.alert("Sorry! You dont have authorization to make changes.");
           console.log(err);
         });
     },
@@ -113,11 +114,11 @@ var app = new Vue({
       axios
         .patch("/api/diagram/add/" + repo, co)
         .then(response => {
-		  location.reload();
-//		  this.getUmlData();
+		      location.reload();
           console.log(response);
         })
         .catch(error => {
+          window.alert("Sorry! You dont have authorization to add a comment.");
           console.log(error);
         });
     },
@@ -452,6 +453,7 @@ var app = new Vue({
       }    }, 5000);
     setTimeout(function() {
       if(myDiagram.model.nodeDataArray.length == 0 && myDiagram.model.linkDataArray.length == 0){
+        'getUmlData()';   
       }
       else{
         waitingDialog.hide();
