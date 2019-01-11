@@ -78,7 +78,15 @@ var app = new Vue({
     getRepoUml: function() {
       window.location.href = "/NewUml.html?repo=" + repo;
     },
+    refreshDiagram : function() {
+      myDiagram.clear();
+      this.getUmlData()
+    },
 
+     connectSocket: function() {
+      var socket = io();
+      socket.on('updateDiagram', this.refreshDiagram);
+    },
     getUmlData: function() {
       axios
         .get("api/diagram/" + repo)
@@ -291,8 +299,20 @@ var app = new Vue({
     setTimeout(this.getUmlData(), 0);
     //this.getUmlData();
     this.queryGitUser();
-
+    this.connectSocket();
     //console.log(this.getRepo());
     this.init();
+
+    setTimeout(function() {
+      if(myDiagram.model.nodeDataArray.length == 0 && myDiagram.model.linkDataArray.length == 0){
+        this.getUmlData();
+      }
+    }, 10000);
+
+    setTimeout(function() {
+      if(myDiagram.model.nodeDataArray.length == 0 && myDiagram.model.linkDataArray.length == 0){
+        window.alert("One of the main node in the system is disabled or crashed! please enable it before refreshing the page.");
+      }
+    }, 20000);
   }
 });

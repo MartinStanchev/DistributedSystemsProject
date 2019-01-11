@@ -80,6 +80,7 @@ router.patch("/diagram/:id", function(req, res, next) {
       diagram[0].save();
       res.status(200).json({ data: diagram[0] });
     }
+    req.io.emit('updateDiagram' , 'test');
   });
 });
 
@@ -95,6 +96,7 @@ router.patch("/diagram/add/:id", function(req, res, next) {
     diagram.comments.push(req.body);
     diagram.save();
     res.status(200).json({ data: diagram });
+    req.io.emit('updateDiagram' , 'test');
   });
 });
 

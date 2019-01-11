@@ -8,7 +8,7 @@ var nmap = require('./script/nmap.js');
 var mongoURI = process.env.MONGODB_URI || 'mongodb://admin:admin123@ds131373.mlab.com:31373/distrubutedsystemsproject';
 var port = process.env.PORT || 3000;
 
-//nmap.FindIPs();
+nmap.FindIPs();
 
 // Connect to MongoDB
 mongoose.connect(mongoURI, { useNewUrlParser: true }, function(err) {
@@ -22,6 +22,18 @@ mongoose.connect(mongoURI, { useNewUrlParser: true }, function(err) {
 
 // Create Express app
 var app = express();
+var http = require('http').Server(app);
+var io = require('socket.io')(http);
+
+ io.on('connection', (socket) => {
+    console.log('asd connected');
+});
+
+ app.use(function(req, res, next) {
+    req.io = io;
+    next();
+  });
+
 // Parse requests of content-type 'application/json'
 app.use(bodyParser.json());
 // HTTP request logger
@@ -48,7 +60,7 @@ app.use(function(err, req, res, next) {
     res.json(err_res);
 });
 
-app.listen(port, function(err) {
+http.listen(port, function(err) {
     if (err) throw err;
     console.log(`Express server listening on port ${port}, in ${env} mode`);
     console.log(`Backend: http://localhost:${port}/api/`);

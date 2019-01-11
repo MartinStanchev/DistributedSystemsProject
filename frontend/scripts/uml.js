@@ -124,7 +124,15 @@ var app = new Vue({
           console.log(error);
         });
     },
-	 
+    refreshDiagram : function() {
+      myDiagram.clear();
+      this.getUmlData()
+    },
+
+     connectSocket: function() {
+      var socket = io();
+      socket.on('updateDiagram', this.refreshDiagram);
+    },
 
     // saveComment: function(e) {
     //   axios
@@ -140,15 +148,7 @@ var app = new Vue({
     //     });
     // },
 
-    sendLongPoll : function() {
-      var curr_repo = url.searchParams.get("repo");
-      axios.get("api/update/" + curr_repo)
-      .then(response => {
-        console.log('received long poll');      
-        this.getUmlData();
-        this.sendLongPoll();
-      });
-    },
+    
     init: function() {
       console.log('init');
       var $ = go.GraphObject.make;
@@ -439,8 +439,7 @@ var app = new Vue({
 	  this.queryGitUser();
 
     this.init();
-    
-    this.sendLongPoll();
+    this.connectSocket();    
 
     setTimeout(function() {
       if(myDiagram.model.nodeDataArray.length == 0 && myDiagram.model.linkDataArray.length == 0){
