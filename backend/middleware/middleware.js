@@ -103,33 +103,6 @@ router.patch("/diagram/add/:id", function(req, res, next) {
   });
 });
 
-//local patch
-/*router.patch('/diagram/:id', function (req, res, next) {
-    var link = req.params.id;
-    DiagramSchema.find({ GitRepo: link }, function (err, diagram) {
-        if (err) return next(err);
-        if (diagram == null) {
-            return res.status(404).json({ "message": "Diagram not found" });
-        }
-        if(diagram.length != 0){
-            diagram[0].Classes = (req.body.Classes|| diagram[0].Classes);
-            diagram[0].classConecteds = (req.body.classConecteds || diagram[0].classConecteds);
-            diagram[0].save();
-            res.status(200).json({"data" : diagram[0]});  
-        }
-    });
-        var resp;
-        for(var i = 0; i < connections.length; i++) {
-                resp = connections.pop();
-                DiagramSchema.find({ GitRepo: link }, function (err, repo) {
-                    if (err) { return next(err); }
-                    resp.status(200).json({ "data": repo });
-                    resp.end();
-                });
-        }
-    respondToPolls = true;
-});
-*/
 router.get('/update/:id', function(req, res, next) {
     connections.push(res);
     console.log('inupdate for: ' + req.body.id);
@@ -137,68 +110,9 @@ router.get('/update/:id', function(req, res, next) {
         respondToPolls = false;
         var link = req.body.id;
         console.log('responding: ' + connections.length);
-        // connections.forEach(function(resp) {
-        //     DiagramSchema.find({ GitRepo: link }, function (err, repo) {
-        //         if (err) { return next(err); }
-        //         resp.status(200).json({ "data": repo });
-        //         resp.end();
-        //     });
-        // });
-        // var resp;
-        // for(var i = 0; i < connections.length; i++) {
-        //     resp = connections.pop();
-        //     DiagramSchema.find({ GitRepo: link }, function (err, repo) {
-        //         if (err) { return next(err); }
-        //         resp.status(200).json({ "data": repo });
-        //         resp.end();
-        //     });
-        // }
     }
 
 
-});
-
-//middleware patch
-router.patch('/diagrams/:id', function (req, res, next) {
-    var link = req.params.id;
-    var ips = nmap.GetIPs();
-    var excistIP;
-    var found = false;
-    var request = [];
-    for(var i = 0 ; i < ips.length ; i++){
-        request.push(axios.get("http://" + ips[i] +":3000/api/diagram/" + link));
-    }
-    axios.all(request).then(axios.spread((...args) => {
-        for (let i = 0; i < args.length; i++) {
-            if(args[i].data.data != ""){
-                found = true;
-                console.log(args[i].data);
-             //   excistIP = args[i].data;
-             //   var url = "http://" + excistIP +":3000/api/diagram/" + link
-                /*axios.post(url, {
-                    Classes: req.body.Classes,
-                    classConecteds: req.body.classConecteds
-                  })
-                  .then(function (response) {
-                    console.log(response);
-                  })*/
-            }
-        }
-        /* if(found == false){
-            DiagramSchema.find({ GitRepo: link }, function (err, diagram) {
-                if (err) return next(err);
-                if (diagram == null) {
-                    return res.status(404).json({ "message": "Diagram not found" });
-                }
-                if(diagram.length != 0){
-                    diagram[0].Classes = (req.body.Classes|| diagram[0].Classes);
-                    diagram[0].classConecteds = (req.body.classConecteds || diagram[0].classConecteds);
-                    diagram[0].save();
-                    res.status(200).json({"data" : diagram[0]});  
-                }
-            });
-        }*/
-    }));
 });
 
 //middleware get
@@ -234,31 +148,5 @@ router.get('/diagram/:id', function (req, res, next) {
         res.status(200).json({"data": repo});
     });
 });
-
-//// Github listener
-////router.post('/', function(req, res, next) {
-//    // Encrypt local secret - NOT USED YET !
-//    let sig = crypto.createHmac('sha1', secret).update(req.headers['x-hub-signature'].toString()).digest('hex');
-//    // Validate local secret against github's secret - NOT USED YET !
-//    if (req.headers['x-hub-signature'] == sig) {
-//        console.log("Secret Match");
-//    }else {
-//        console.log("Wrong secret");
-//    }
-//
-//
-//    // Clone / Pull the new code
-//    Git.Clone("https://github.com/jansson215/TheDistrubutedProject", repoPath)
-//    .then(function(repository) {
-//        console.log("Successfully cloned to: " + repoPath);
-//    res.status(200).json({"Sucess message: ": "Git hook received and new project files are syncronizing"});
-//    }).catch(function(err) {
-//        console.log(err);
-//        res.status(500).json({"Failure message: ": "Git hook received but new project files couldnt be synced"});
-//    });;
-//
-//
-//    res.status(200).json({"Done: ": "Git hook received and new project files are syncronizing"});
-//});
 
 module.exports = router;
