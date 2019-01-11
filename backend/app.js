@@ -5,7 +5,7 @@ var morgan = require('morgan');
 var path = require('path');
 var nmap = require('./script/nmap.js');
 // Variables
-var mongoURI = process.env.MONGODB_URI || 'mongodb://admin:admin123@ds131373.mlab.com:31373/distrubutedsystemsproject';
+var mongoURI = process.env.MONGODB_URI || 'mongodb://admin:admin123@ds115094.mlab.com:15094/gituml';
 var port = process.env.PORT || 3000;
 
 nmap.FindIPs();

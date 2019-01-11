@@ -78,25 +78,14 @@ var app = new Vue({
     getRepoUml: function() {
       window.location.href = "/NewUml.html?repo=" + repo;
     },
-    refreshDiagram : function() {
-      myDiagram.clear();
-      this.getUmlData()
-    },
-
-     connectSocket: function() {
-      var socket = io();
-      socket.on('updateDiagram', this.refreshDiagram);
-    },
+    
     getUmlData: function() {
       axios
-        .get("api/diagram/" + repo)
+        .get("api/diagrams/" + repo)
         .then(response => {
           this.nodedata = response.data.data;
 
           if (response.data.data.length > 0) {
-            console.log("hide the wiating dialog");
-            waitingDialog.hide();
-            this.hideModal();
 
             for (var t = 0; t < response.data.data[0].comments.length; t++) {
               this.comments.push(response.data.data[0].comments[t]);
@@ -284,35 +273,73 @@ var app = new Vue({
         linkDataArray: this.linkdata
       });
       //myDiagram.model = new go.GraphLinksModel(nodeDataArray, linkDataArray);
+    },
+    refreshDiagram : function() {
+      myDiagram.clear();
+      this.getUmlData()
+    },
+
+     connectSocket: function() {
+      var socket = io();
+      socket.on('updateDiagram', this.refreshDiagram);
     }
   },
 
   mounted() {
+    this.connectSocket();
     waitingDialog.show("Loading", {
       dialogSize: "sm",
       progressType: "warning"
     });
-    setTimeout(function() {
-      waitingDialog.hide();
-    }, 2000);
-    //waitingDialog.show();
-    setTimeout(this.getUmlData(), 0);
-    //this.getUmlData();
+
+    this.getUmlData();
     this.queryGitUser();
-    this.connectSocket();
-    //console.log(this.getRepo());
     this.init();
 
     setTimeout(function() {
       if(myDiagram.model.nodeDataArray.length == 0 && myDiagram.model.linkDataArray.length == 0){
-        this.getUmlData();
       }
-    }, 10000);
-
+      else{
+        waitingDialog.hide();
+      }
+      }, 1000);
+    setTimeout(function() {
+      if(myDiagram.model.nodeDataArray.length == 0 && myDiagram.model.linkDataArray.length == 0){
+        'getUmlData()';
+      }
+      else{
+        waitingDialog.hide();
+      }    }, 2000);
+    setTimeout(function() {
+      if(myDiagram.model.nodeDataArray.length == 0 && myDiagram.model.linkDataArray.length == 0){    
+      }
+      else{
+        waitingDialog.hide();
+      }    }, 3000);
+    setTimeout(function() {
+      if(myDiagram.model.nodeDataArray.length == 0 && myDiagram.model.linkDataArray.length == 0){
+      }
+      else{
+        waitingDialog.hide();
+      }    }, 4000);
+    setTimeout(function() {
+      if(myDiagram.model.nodeDataArray.length == 0 && myDiagram.model.linkDataArray.length == 0){
+        'getUmlData()';      
+      }
+      else{
+        waitingDialog.hide();
+      }    }, 5000);
+    setTimeout(function() {
+      if(myDiagram.model.nodeDataArray.length == 0 && myDiagram.model.linkDataArray.length == 0){
+      }
+      else{
+        waitingDialog.hide();
+      }    }, 6000);
     setTimeout(function() {
       if(myDiagram.model.nodeDataArray.length == 0 && myDiagram.model.linkDataArray.length == 0){
         window.alert("One of the main node in the system is disabled or crashed! please enable it before refreshing the page.");
+        waitingDialog.hide();
       }
-    }, 20000);
+      }, 7000);
   }
 });
