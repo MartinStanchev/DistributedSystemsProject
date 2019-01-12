@@ -1,6 +1,6 @@
 @charset "utf8";
 
- /*                                        ! Responsive 3D Flip Menu Started Here ...
+/*                                        ! Responsive 3D Flip Menu Started Here ...
 =======================================================================================================================*/
 *,
 *:after,
@@ -9,36 +9,36 @@ html {
   box-sizing: border-box;
 }
 
- a {
+a {
   text-align: center;
   text-decoration: none;
 }
 
- body {
+body {
   font-family: Tahoma, Geneva, sans-serif;
   font-size: 16px;
   font-style: normal;
   font-weight: 400;
 }
 
- body,
+body,
 ol {
   margin: 0;
   padding: 0;
 }
 
- ol {
+ol {
   list-style-type: none;
 }
 
- .menu {
-  width: 84%;
+.menu {
+  width: 94%;
   padding: 75px;
   display: block;
   position: relative;
 }
 
- .menu > ol:first-child {
+.menu > ol:first-child {
   width: 100%;
   display: flex;
   position: absolute;
@@ -46,14 +46,14 @@ ol {
   justify-content: center;
 }
 
- .menu-item {
+.menu-item {
   width: 150px;
   position: relative;
   perspective: 100%;
   cursor: pointer;
 }
 
- .menu-item a {
+.menu-item a {
   width: 100%;
   padding: 16px 0;
   display: block;
@@ -64,7 +64,7 @@ ol {
   transform-style: preserve-3d;
 }
 
- .menu-item a:before {
+.menu-item a:before {
   width: 100%;
   padding: 16px 0;
   display: block;
@@ -73,44 +73,44 @@ ol {
   border-radius: 4px;
 }
 
- .menu > ol:first-child > .menu-item {
+.menu > ol:first-child > .menu-item {
   display: block;
 }
 
- .menu > ol:first-child > .menu-item > a {
+.menu > ol:first-child > .menu-item > a {
   background: #000;
   box-shadow: 0 8px 6px -6px #595959;
 }
 
- .menu > ol:first-child > .menu-item:nth-of-type(2) > a,
+.menu > ol:first-child > .menu-item:nth-of-type(2) > a,
 .menu > ol:first-child > .menu-item:nth-of-type(4) > a {
   border-left: 1px solid #fff;
   border-right: 1px solid #fff;
 }
 
- .menu > ol:first-child > .menu-item > a:before {
+.menu > ol:first-child > .menu-item > a:before {
   background: #ff9900;
   bottom: 90%;
   transform: rotateX(-90deg) translate3d(0, 0, 75px);
 }
 
- .menu > ol:first-child > .menu-item:nth-of-type(2) > a:before {
+.menu > ol:first-child > .menu-item:nth-of-type(2) > a:before {
   content: "About";
 }
 
- .menu > ol:first-child > .menu-item:nth-of-type(3) > a:before {
+.menu > ol:first-child > .menu-item:nth-of-type(3) > a:before {
   content: "Widgets";
 }
 
- .menu > ol:first-child > .menu-item:nth-of-type(4) > a:before {
+.menu > ol:first-child > .menu-item:nth-of-type(4) > a:before {
   content: "Kabobs";
 }
 
- .menu > ol:first-child > .menu-item:nth-of-type(5) > a:before {
+.menu > ol:first-child > .menu-item:nth-of-type(5) > a:before {
   content: "Contact";
 }
 
- .menu > ol:first-child > .menu-item:nth-of-type(3) > a:after,
+.menu > ol:first-child > .menu-item:nth-of-type(3) > a:after,
 .menu > ol:first-child > .menu-item:nth-of-type(4) > a:after {
   content: "\0025BE";
   width: 100%;
@@ -123,18 +123,18 @@ ol {
   text-align: center;
 }
 
- .menu > ol:first-child > .menu-item:hover > a {
+.menu > ol:first-child > .menu-item:hover > a {
   transform: rotateX(90deg);
 }
 
- .menu > ol:first-child > .menu-item:nth-of-type(3):hover > a:after,
+.menu > ol:first-child > .menu-item:nth-of-type(3):hover > a:after,
 .menu > ol:first-child > .menu-item:nth-of-type(4):hover > a:after {
   content: "\0025B4";
   color: #000;
   transform: rotateX(-90deg) translate3d(0, 0, 75px);
 }
 
- .sub-menu {
+.sub-menu {
   background: #fff;
   width: 100%;
   display: none;
@@ -144,19 +144,19 @@ ol {
   border-top: 1px solid #fff;
 }
 
- .sub-menu > .menu-item:nth-of-type(1) {
+.sub-menu > .menu-item:nth-of-type(1) {
   animation: fadein-down 0.5s 0.2s ease both;
 }
 
- .sub-menu > .menu-item:nth-of-type(2) {
+.sub-menu > .menu-item:nth-of-type(2) {
   animation: fadein-down 0.7s 0.2s ease both;
 }
 
- .sub-menu > .menu-item:nth-of-type(3) {
+.sub-menu > .menu-item:nth-of-type(3) {
   animation: fadein-down 0.9s 0.2s ease both;
 }
 
- @keyframes fadein-down {
+@keyframes fadein-down {
   from {
     display: none;
     opacity: 0;
@@ -169,21 +169,21 @@ ol {
   }
 }
 
- .sub-menu > .menu-item > a {
+.sub-menu > .menu-item > a {
   background: #ff9900;
 }
 
- .sub-menu > .menu-item:nth-of-type(2) > a {
+.sub-menu > .menu-item:nth-of-type(2) > a {
   border-top: 1px solid #fff;
   border-bottom: 1px solid #fff;
 }
 
- .sub-menu > .menu-item > a:before {
+.sub-menu > .menu-item > a:before {
   background: #bc003b;
   top: 0;
 }
 
- .menu
+.menu
   > ol:first-child
   > .menu-item:nth-of-type(3)
   > .sub-menu
@@ -192,7 +192,7 @@ ol {
   transform: rotateY(-90deg) translate3d(0, 0, 75px);
 }
 
- .menu
+.menu
   > ol:first-child
   > .menu-item:nth-of-type(3)
   > .sub-menu
@@ -201,7 +201,7 @@ ol {
   content: "Big Widgets";
 }
 
- .menu
+.menu
   > ol:first-child
   > .menu-item:nth-of-type(3)
   > .sub-menu
@@ -210,7 +210,7 @@ ol {
   content: "Bigger Widgets";
 }
 
- .menu
+.menu
   > ol:first-child
   > .menu-item:nth-of-type(3)
   > .sub-menu
@@ -219,7 +219,7 @@ ol {
   content: "Huge Widgets";
 }
 
- .menu
+.menu
   > ol:first-child
   > .menu-item:nth-of-type(3)
   > .sub-menu
@@ -228,7 +228,7 @@ ol {
   transform: rotateY(90deg);
 }
 
- .menu
+.menu
   > ol:first-child
   > .menu-item:nth-of-type(4)
   > .sub-menu
@@ -237,7 +237,7 @@ ol {
   transform: rotateY(90deg) translate3d(0, 0, 75px);
 }
 
- .menu
+.menu
   > ol:first-child
   > .menu-item:nth-of-type(4)
   > .sub-menu
@@ -246,7 +246,7 @@ ol {
   content: "Shishkabobs";
 }
 
- .menu
+.menu
   > ol:first-child
   > .menu-item:nth-of-type(4)
   > .sub-menu
@@ -255,7 +255,7 @@ ol {
   content: "BBQ kabobs";
 }
 
- .menu
+.menu
   > ol:first-child
   > .menu-item:nth-of-type(4)
   > .sub-menu
@@ -264,7 +264,7 @@ ol {
   content: "Summer kabobs";
 }
 
- .menu
+.menu
   > ol:first-child
   > .menu-item:nth-of-type(4)
   > .sub-menu
@@ -273,41 +273,41 @@ ol {
   transform: rotateY(-90deg);
 }
 
- .menu > ol:first-child > .menu-item:hover > .sub-menu {
+.menu > ol:first-child > .menu-item:hover > .sub-menu {
   display: block;
 }
 
- @media screen and (min-width: 321px) and (max-width: 799px) {
+@media screen and (min-width: 321px) and (max-width: 799px) {
   .menu {
     width: 320px;
     margin: auto;
   }
 }
 
- @media (max-width: 799px) {
+@media (max-width: 799px) {
   .menu > ol:first-child > .menu-item {
     width: 100%;
   }
 
-   .menu > ol:first-child > .menu-item > a {
+  .menu > ol:first-child > .menu-item > a {
     box-shadow: none;
   }
 
-   .menu > ol:first-child > .menu-item:nth-of-type(2) > a,
+  .menu > ol:first-child > .menu-item:nth-of-type(2) > a,
   .menu > ol:first-child > .menu-item:nth-of-type(4) > a {
     border: 1px solid #fff;
     border-left: none;
     border-right: none;
   }
 
-   .sub-menu > .menu-item {
+  .sub-menu > .menu-item {
     margin: auto;
   }
 }
 /*                                        ! Responsive 3D Flip Menu Ended Here ...
 =======================================================================================================================*/
 
- /* This Is Not Part Of Responsive 3D Flip Menu */
+/* This Is Not Part Of Responsive 3D Flip Menu */
 .me {
   background: url("https://s3-us-west-2.amazonaws.com/s.cdpn.io/1735448/profile/profile-80.jpg?1528976396")
     no-repeat center / contain;
@@ -322,7 +322,7 @@ ol {
   animation: me 2s linear infinite alternate;
 }
 
- @keyframes me {
+@keyframes me {
   from {
     transform: translateY(-4px);
   }
@@ -331,13 +331,13 @@ ol {
   }
 }
 
- .me:hover span {
+.me:hover span {
   right: 50px;
   opacity: 1;
   visibility: visible;
 }
 
- .me span {
+.me span {
   width: 150px;
   top: 10px;
   right: 0;
