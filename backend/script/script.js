@@ -2,7 +2,6 @@ var fs = require('fs');
 var DiagramSchema = require('../models/Diagram');
 var xmlEmcoder = require('./xmlEncoder');
 var shell = require("shelljs");
-var repoPath = "resources/"
 var classNames;
 var classConecteds;
 
@@ -11,9 +10,7 @@ module.exports = {
         classNames = [];
         classConecteds = [];
         var excist;
-        console.log('in readxml now');
         var readMe = fs.readFileSync(shell.pwd() + "/resources/" + GitRepo + ".xml", 'utf8');
-        console.log('in readxml nowasd');
         if(readMe.includes(".java")){
             var arrayOfLines = readMe.split("\n"); 
             var currentClassName;
@@ -74,7 +71,6 @@ module.exports = {
                     this.FindClassConnection(line,currentClassName);
                 }
             }
-        console.log("data generated from the xml");
         return this.SaveDiagram(GitRepo);
         }
     },
@@ -300,11 +296,9 @@ module.exports = {
         this.cleanUpFiles(GitRepo);
     },
     convertZip : function(path){
-       console.log("covertZip file funcation called");
         if(xmlEmcoder.saveXML(path) == 1) {
             return this.readXML(path);
         }
         
     }
-    
 };

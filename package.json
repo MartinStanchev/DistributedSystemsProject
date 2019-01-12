@@ -8,7 +8,7 @@
   "private": true,
   "main": "server/app.js",
   "scripts": {
-    "start": "node ./server/app.js",
+    "start": "node ./backend/app.js",
     "test": "test"
   },
   "repository": {
@@ -28,6 +28,7 @@
     "child_process": "^1.0.2",
     "crypto": "^1.0.1",
     "eslint": "^5.9.0",
+    "evilscan": "^1.7.1",
     "express": "^4.16.4",
     "folder-zip": "0.0.5",
     "jszip": "^3.1.5",
@@ -37,6 +38,7 @@
     "nodegit": "^0.23.0",
     "shelljs": "^0.8.3",
     "simple-git": "^1.107.0",
+    "socket.io": "^2.2.0",
     "vue": "^2.5.17",
     "vue-content-loader": "^0.2.1",
     "vue-router": "^3.0.1",

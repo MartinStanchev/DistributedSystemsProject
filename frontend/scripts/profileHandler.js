@@ -1,10 +1,12 @@
-var app = new Vue({
+
+var app = new Vue({	
     el: '#profile'
     , data: {
         user: []
         , diagrams: []
     }
     , methods: {
+		 
         queryGitRepo: function () {
             const query = window.location.search.substring(1)
             const token = query.split('access_token=')[1]
@@ -28,8 +30,10 @@ var app = new Vue({
             })
         }
         , addRepo: function (repoUrl) {
+			const query = window.location.search.substring(1)
+            const token = query.split('access_token=')[1]
             console.log(repoUrl)
-            window.location.href = "/uml.html?repo=" + repoUrl.slice(19).replace(/\//g, "_");  
+            window.location.href = "/uml.html?repo=" + repoUrl.slice(19).replace(/\//g, "_")+"?access_token="+token;  
             let Diagram = {
                 GitRepo: repoUrl
             };

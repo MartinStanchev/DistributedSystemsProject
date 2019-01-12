@@ -3,10 +3,12 @@ var bodyParser = require('body-parser');
 var mongoose = require('mongoose');
 var morgan = require('morgan');
 var path = require('path');
-
+var nmap = require('./script/nmap.js');
 // Variables
 var mongoURI = process.env.MONGODB_URI || 'mongodb://admin:admin123@ds115094.mlab.com:15094/gituml';
 var port = process.env.PORT || 3000;
+
+nmap.FindIPs();
 
 // Connect to MongoDB
 mongoose.connect(mongoURI, { useNewUrlParser: true }, function(err) {
@@ -20,19 +22,28 @@ mongoose.connect(mongoURI, { useNewUrlParser: true }, function(err) {
 
 // Create Express app
 var app = express();
+var http = require('http').Server(app);
+var io = require('socket.io')(http);
+
+io.on('connection', function(socket){
+    console.log('asd connected');
+});
+
+app.use(function(req, res, next) {
+    req.io = io;
+    next();
+});
+
 // Parse requests of content-type 'application/json'
 app.use(bodyParser.json());
 // HTTP request logger
 app.use(morgan('dev'));
 // Serve static assets (for frontend client)
 var root = path.normalize(__dirname + '/..');
-app.use(express.static(path.join(root, 'client')));
-app.set('appPath', 'client');
-
+app.use(express.static(path.join(root, 'frontend')));
+app.set('appPath', 'frontend');
 // Import routes
-app.use(require('./controllers/index'));
-
-
+app.use(require('./middleware/index'));
 
 // Error handler (must be registered last)
 var env = app.get('env');
@@ -49,7 +60,7 @@ app.use(function(err, req, res, next) {
     res.json(err_res);
 });
 
-app.listen(port, function(err) {
+http.listen(port, function(err) {
     if (err) throw err;
     console.log(`Express server listening on port ${port}, in ${env} mode`);
     console.log(`Backend: http://localhost:${port}/api/`);
@@ -57,4 +68,3 @@ app.listen(port, function(err) {
 });
 
 module.exports = app;
-

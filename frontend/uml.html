@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+
+<html>
+
+<head>
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>GitUML</title>
+    <link href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous" />
+    <link rel="stylesheet" href="css/bootstrap.css" />
+    <link rel="stylesheet" href="css/style.css" />
+    <link rel="stylesheet" href="css/uft.css" />
+
+    <link rel="stylesheet" href="css/bootstrap-social.css" />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gojs/1.8.33/go-debug.js"></script>
+    <script src="https://code.jquery.com/jquery-3.3.1.js" integrity="sha256-2Kok7MbOyxpgUVvAk/HJ2jigOSYS2auK4Pfzbm7uH60=" crossorigin="anonymous"></script>
+    <style>
+        .DiagramBox {
+			background-color: rgb(95, 95, 95);
+			background-blend-mode: screen;
+		}
+		
+		.btn {
+			padding: 12px;
+			display: block;
+			float: right;
+			color: white;
+			text-align: center;
+			margin: 5px 6px;
+		}
+body { padding-top:60px; }
+.widget .panel-body { padding:10px; }
+.widget .list-group { margin-bottom: 0; }
+.widget .panel-title { display:inline }
+.widget .label-info { float: right; }
+.widget li.list-group-item {border-radius: 0;border: 0;border-top: 1px solid #ddd;}
+.widget li.list-group-item:hover { background-color: rgba(86,61,124,.1); }
+.widget .mic-info { color: #666666;font-size: 11px; }
+.widget .action { margin-top:5px; }
+.widget .comment-text { font-size: 12px; }
+.widget .btn-block { border-top-left-radius:0px;border-top-right-radius:0px; }
+	</style>
+</head>
+
+<body>
+
+
+    <div id="uml">
+        <nav class="navbar navbar-expand-lg navbar-light bg-light" style="margin-top: -60px;">
+            <a href="#" class="navbar-left">
+                <img src="images/logo.png" width="200" height="80" style="margin-top: -10px;">
+
+            </a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarText" aria-controls="navbarText" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarText">
+                <ul class="navbar-nav mr-auto">
+                    <span class="navbar-text">
+                        <a class="nav-link" href="#" @click="homePage()">Home</a>
+                    </span>
+
+                </ul>
+                <span class="navbar-text">
+
+                    <a class="nav-link" href="index.html">Sign out</a>
+
+                </span>
+            </div>
+        </nav>
+
+        <div class="container">
+            <nav class="menu">
+                <ol>
+                    <li class="menu-item"><a href="#0">Select visualization </a>
+                        <ol class="sub-menu">
+                            <li class="menu-item"><a id="uml" href="#" @click="getRepo()">Class Diagram</a></li>
+                            <li class="menu-item"><a id="uml" href="#" @click="getRepoUml()">Interactive Force</a></li>
+                        </ol>
+                    </li>
+                </ol>
+            </nav>
+        </div>
+        <div class="row">
+            <div class="col-sm-9 offset-sm-2">
+                <div class="DiagramBox" id="myDiagramDiv" v-bind:model-data="nodedata" style="border: solid 1px rgb(255, 255, 255); width: 100%; height:540px"></div>
+                <br>
+                <button id="demo" type="button" class="btn btn-warning float-right" @click="saveChange()"> Save changes </button>
+                <br>
+            </div>
+        </div>
+        <div class="container">
+            <br>
+
+            <div class="panel panel-default widget">
+                <div class="panel-heading">
+                    <span class="glyphicon glyphicon-comment"></span>
+                    <h3 class="panel-title">
+                        Comments</h3>
+                    <div class="panel-body">
+                        <ul class="list-group">
+                            <li v-for="comment in comments" class="list-group-item">
+                                <div class="row">
+                                    <div class="col-xs-2 col-md-1">
+                                        <img :src="comment.userImage" class="img-circle img-responsive" alt="" /></div>
+                                    <div class="col-xs-10 col-md-11">
+                                        <div>
+                                            <div class="mic-info">
+                                                By: <a v-bind:href="user.html_url" target="_blank">{{comment.userName}}</a> on {{comment.time}}
+                                            </div>
+                                        </div>
+                                        <div class="comment-text">
+                                            {{comment.comment}}
+
+                                        </div>
+
+                            </li>
+                        </ul>
+
+                        <form role="form">
+                            <div class="form-group">
+                                <textarea class="form-control" id="addComment" rows="2" placeholder="Comment about latest update..." v-model="comment_diagram" required></textarea>
+                            </div>
+                            <button type="button" class="btn btn-warning" @click="addComment()">Add comment</button>
+                            <br>
+                            <br>
+                            <br>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</body>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/2.2.0/socket.io.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/vue"></script>
+<script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+<script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-waitingfor/1.2.7/bootstrap-waitingfor.js"></script>
+<script src="scripts/main.js"></script>
+<script src="scripts/uml.js"></script>
+
+
+
+
+</html>

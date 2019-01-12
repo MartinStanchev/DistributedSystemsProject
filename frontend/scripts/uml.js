@@ -15,7 +15,10 @@ var app = new Vue({
     Classes: [],
     SuperClass: "",
     classExtends: [],
-    linkdata: []
+    linkdata: [],
+    comments: [],
+	user: [],
+    comment_diagram: ""
   },
   methods: {
     hideModal: function() {
@@ -25,14 +28,31 @@ var app = new Vue({
       $("body").css("padding-right", "");
       $("#myModal").hide();
     },
+    getRepo: function() {
+      window.location.href = "/uml.html?repo=" + repo;
+    },
+    // uml1 for the uml old page
+    getRepoUml: function() {
+      window.location.href = "/NewUml.html?repo=" + repo;
+    },
+      
+      homePage: function() {
+        const query = window.location.search.substring(1)
+            const token = query.split('access_token=')[1]
+            window.location.href = "/profile.html?access_token="+token;  
+    },
+
     getUmlData: function() {
+      console.log('getuml');
       axios
-        .get("api/diagram/" + repo)
+        .get("api/diagrams/" + repo)
         .then(response => {
+          this.nodedata = response.data.data;
           if (response.data.data.length > 0) {
-            console.log("hide the wiating dialog");
-            waitingDialog.hide();
-            this.hideModal();
+
+            for (var t = 0; t < response.data.data[0].comments.length; t++) {
+              this.comments.push(response.data.data[0].comments[t]);
+            }
 
             // get the response from the data base and loop through its length,
             for (var j = 0; j < response.data.data.length; j++) {
@@ -48,7 +68,7 @@ var app = new Vue({
               }
             }
 
-            // // defines conecteds classes
+            // defines conecteds classes
             for (var a = 0; a < response.data.data.length; a++) {
               for (
                 var b = 0;
@@ -66,7 +86,51 @@ var app = new Vue({
           console.log(error);
         });
     },
+    saveChange: function(e) {
+      axios
+        .patch("/api/diagram/" + repo, {
+          Classes: myDiagram.model.nodeDataArray,
+          classConecteds: myDiagram.model.linkDataArray
+        })
+        .then(response => {
+          console.log("data is succefuly updated " + response.status);
+        })
+        .catch(err => {
+          window.alert("Sorry! You dont have authorization to make changes.");
+          console.log(err);
+        });
+    },
+	  queryGitUser: function () {
+            const query = window.location.search.substring(1)
+            const token = query.split('access_token=')[1]
+            fetch('https://api.github.com/user', {
+                headers: {
+                    Authorization: 'token ' + token
+                }
+            }).then(res => res.json()).then(res => {
+                this.user = res;
+            })
+        }, 
+    addComment: function() {
+      let co = {
+        userName: this.user.login,
+        comment: this.comment_diagram,
+		userImage: this.user.avatar_url
+      };
+      axios
+        .patch("/api/diagram/add/" + repo, co)
+        .then(response => {
+		      location.reload();
+          console.log(response);
+        })
+        .catch(error => {
+          window.alert("Sorry! You dont have authorization to add a comment.");
+          console.log(error);
+        });
+    },
+    
     init: function() {
+      console.log('init');
       var $ = go.GraphObject.make;
       myDiagram = $(go.Diagram, "myDiagramDiv", {
         initialContentAlignment: go.Spot.Center,
@@ -321,37 +385,198 @@ var app = new Vue({
         nodeDataArray: this.nodedata,
         linkDataArray: linkdata
       });
-        myDiagram.addModelChangedListener(function(e) {
-          if (e.isTransactionFinished) {
-            // Show the model data to the console after changing the diagram.
-            // add the patch request to save the changes to database
-            axios
-            .patch('/api/diagram/' + repo, {
-              Classes : e.model.nodeDataArray,
-              classConecteds : e.model.linkDataArray
-            })
-            .then(response=>{
-              console.log("data is succefuly updated "+  response.status)
-            })
-            .catch(err=>{
-              console.log(err);
-            })
-  
-          }
-        });
+    },
+     
+    refreshDiagram : function() {
+      myDiagram.clear();
+      this.getUmlData()
+    },
+
+     connectSocket: function() {
+      var socket = io();
+      socket.on('updateDiagram', this.refreshDiagram);
     }
   },
+	
   mounted() {
+    this.connectSocket();    
     waitingDialog.show("Loading", {
       dialogSize: "sm",
       progressType: "warning"
     });
-    setTimeout(function() {
-      waitingDialog.hide();
-    }, 2000);
-    //waitingDialog.show();
-    setTimeout(this.getUmlData(), 0);
-    //this.getUmlData();
+
+    this.getUmlData();
+    this.queryGitUser();
     this.init();
+
+    setTimeout(function() {
+      if(myDiagram.model.nodeDataArray.length == 0 && myDiagram.model.linkDataArray.length == 0){
+      }
+      else{
+        waitingDialog.hide();
+      }
+    }, 1000);
+    setTimeout(function() {
+      if(myDiagram.model.nodeDataArray.length == 0 && myDiagram.model.linkDataArray.length == 0){
+        console.log('getuml');
+        axios
+          .get("api/diagrams/" + repo)
+          .then(response => {
+            this.nodedata = response.data.data;
+            if (response.data.data.length > 0) {
+  
+              for (var t = 0; t < response.data.data[0].comments.length; t++) {
+                this.comments.push(response.data.data[0].comments[t]);
+              }
+  
+              // get the response from the data base and loop through its length,
+              for (var j = 0; j < response.data.data.length; j++) {
+                for (var i = 0; i < response.data.data[j].Classes.length; i++) {
+                  var data = {
+                    key: response.data.data[j].Classes[i].name,
+                    name: response.data.data[j].Classes[i].name,
+                    id: response.data.data[j].Classes[i]._id,
+                    repoID: response.data.data[j]._id,
+                    properties: response.data.data[j].Classes[i].properties
+                  };
+                  myDiagram.model.addNodeData(data);
+                }
+              }
+  
+              // defines conecteds classes
+              for (var a = 0; a < response.data.data.length; a++) {
+                for (
+                  var b = 0;
+                  b < response.data.data[a].classConecteds.length;
+                  b++
+                ) {
+                  myDiagram.model.addLinkData(
+                    response.data.data[a].classConecteds[b]
+                  );
+                }
+              }
+            }
+          })
+          .catch(error => {
+            console.log(error);
+          });
+      }
+      else{
+        waitingDialog.hide();
+      }    }, 2000);
+    setTimeout(function() {
+      if(myDiagram.model.nodeDataArray.length == 0 && myDiagram.model.linkDataArray.length == 0){    
+      }
+      else{
+        waitingDialog.hide();
+      }    }, 3000);
+    setTimeout(function() {
+      if(myDiagram.model.nodeDataArray.length == 0 && myDiagram.model.linkDataArray.length == 0){
+      }
+      else{
+        waitingDialog.hide();
+      }    }, 4000);
+    setTimeout(function() {
+      if(myDiagram.model.nodeDataArray.length == 0 && myDiagram.model.linkDataArray.length == 0){
+        console.log('getuml');
+        axios
+          .get("api/diagrams/" + repo)
+          .then(response => {
+            this.nodedata = response.data.data;
+            if (response.data.data.length > 0) {
+  
+              for (var t = 0; t < response.data.data[0].comments.length; t++) {
+                this.comments.push(response.data.data[0].comments[t]);
+              }
+  
+              // get the response from the data base and loop through its length,
+              for (var j = 0; j < response.data.data.length; j++) {
+                for (var i = 0; i < response.data.data[j].Classes.length; i++) {
+                  var data = {
+                    key: response.data.data[j].Classes[i].name,
+                    name: response.data.data[j].Classes[i].name,
+                    id: response.data.data[j].Classes[i]._id,
+                    repoID: response.data.data[j]._id,
+                    properties: response.data.data[j].Classes[i].properties
+                  };
+                  myDiagram.model.addNodeData(data);
+                }
+              }
+  
+              // defines conecteds classes
+              for (var a = 0; a < response.data.data.length; a++) {
+                for (
+                  var b = 0;
+                  b < response.data.data[a].classConecteds.length;
+                  b++
+                ) {
+                  myDiagram.model.addLinkData(
+                    response.data.data[a].classConecteds[b]
+                  );
+                }
+              }
+            }
+          })
+          .catch(error => {
+            console.log(error);
+          });     
+      }
+      else{
+        waitingDialog.hide();
+      }    }, 5000);
+    setTimeout(function() {
+      if(myDiagram.model.nodeDataArray.length == 0 && myDiagram.model.linkDataArray.length == 0){
+        console.log('getuml');
+        axios
+          .get("api/diagrams/" + repo)
+          .then(response => {
+            this.nodedata = response.data.data;
+            if (response.data.data.length > 0) {
+  
+              for (var t = 0; t < response.data.data[0].comments.length; t++) {
+                this.comments.push(response.data.data[0].comments[t]);
+              }
+  
+              // get the response from the data base and loop through its length,
+              for (var j = 0; j < response.data.data.length; j++) {
+                for (var i = 0; i < response.data.data[j].Classes.length; i++) {
+                  var data = {
+                    key: response.data.data[j].Classes[i].name,
+                    name: response.data.data[j].Classes[i].name,
+                    id: response.data.data[j].Classes[i]._id,
+                    repoID: response.data.data[j]._id,
+                    properties: response.data.data[j].Classes[i].properties
+                  };
+                  myDiagram.model.addNodeData(data);
+                }
+              }
+  
+              // defines conecteds classes
+              for (var a = 0; a < response.data.data.length; a++) {
+                for (
+                  var b = 0;
+                  b < response.data.data[a].classConecteds.length;
+                  b++
+                ) {
+                  myDiagram.model.addLinkData(
+                    response.data.data[a].classConecteds[b]
+                  );
+                }
+              }
+            }
+          })
+          .catch(error => {
+            console.log(error);
+          }); 
+      }
+      else{
+        waitingDialog.hide();
+      }    }, 6000);
+    setTimeout(function() {
+      if(myDiagram.model.nodeDataArray.length == 0 && myDiagram.model.linkDataArray.length == 0){
+        window.alert("One of the main node in the system is disabled or crashed! please enable it before refreshing the page.");
+        waitingDialog.hide();
+      }
+      }, 7000);
   }
 });
