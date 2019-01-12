@@ -122,21 +122,6 @@ var app = new Vue({
           console.log(error);
         });
     },
-
-    // saveComment: function(e) {
-    //   axios
-    //     .patch("/api/diagram/Georgesarkis_assig6", {
-    //       Classes: myDiagram.model.nodeDataArray,
-    //       classConecteds: myDiagram.model.linkDataArray
-    //     })
-    //     .then(response => {
-    //       console.log("data is succefuly updated " + response.status);
-    //     })
-    //     .catch(err => {
-    //       console.log(err);
-    //     });
-    // },
-
     
     init: function() {
       console.log('init');
