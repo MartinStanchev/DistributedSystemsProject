@@ -412,7 +412,48 @@ var app = new Vue({
     }, 1000);
     setTimeout(function() {
       if(myDiagram.model.nodeDataArray.length == 0 && myDiagram.model.linkDataArray.length == 0){
-        'getUmlData()';
+        console.log('getuml');
+        axios
+          .get("api/diagrams/" + repo)
+          .then(response => {
+            this.nodedata = response.data.data;
+            if (response.data.data.length > 0) {
+  
+              for (var t = 0; t < response.data.data[0].comments.length; t++) {
+                this.comments.push(response.data.data[0].comments[t]);
+              }
+  
+              // get the response from the data base and loop through its length,
+              for (var j = 0; j < response.data.data.length; j++) {
+                for (var i = 0; i < response.data.data[j].Classes.length; i++) {
+                  var data = {
+                    key: response.data.data[j].Classes[i].name,
+                    name: response.data.data[j].Classes[i].name,
+                    id: response.data.data[j].Classes[i]._id,
+                    repoID: response.data.data[j]._id,
+                    properties: response.data.data[j].Classes[i].properties
+                  };
+                  myDiagram.model.addNodeData(data);
+                }
+              }
+  
+              // defines conecteds classes
+              for (var a = 0; a < response.data.data.length; a++) {
+                for (
+                  var b = 0;
+                  b < response.data.data[a].classConecteds.length;
+                  b++
+                ) {
+                  myDiagram.model.addLinkData(
+                    response.data.data[a].classConecteds[b]
+                  );
+                }
+              }
+            }
+          })
+          .catch(error => {
+            console.log(error);
+          });
       }
       else{
         waitingDialog.hide();
@@ -431,14 +472,96 @@ var app = new Vue({
       }    }, 4000);
     setTimeout(function() {
       if(myDiagram.model.nodeDataArray.length == 0 && myDiagram.model.linkDataArray.length == 0){
-        'getUmlData()';      
+        console.log('getuml');
+        axios
+          .get("api/diagrams/" + repo)
+          .then(response => {
+            this.nodedata = response.data.data;
+            if (response.data.data.length > 0) {
+  
+              for (var t = 0; t < response.data.data[0].comments.length; t++) {
+                this.comments.push(response.data.data[0].comments[t]);
+              }
+  
+              // get the response from the data base and loop through its length,
+              for (var j = 0; j < response.data.data.length; j++) {
+                for (var i = 0; i < response.data.data[j].Classes.length; i++) {
+                  var data = {
+                    key: response.data.data[j].Classes[i].name,
+                    name: response.data.data[j].Classes[i].name,
+                    id: response.data.data[j].Classes[i]._id,
+                    repoID: response.data.data[j]._id,
+                    properties: response.data.data[j].Classes[i].properties
+                  };
+                  myDiagram.model.addNodeData(data);
+                }
+              }
+  
+              // defines conecteds classes
+              for (var a = 0; a < response.data.data.length; a++) {
+                for (
+                  var b = 0;
+                  b < response.data.data[a].classConecteds.length;
+                  b++
+                ) {
+                  myDiagram.model.addLinkData(
+                    response.data.data[a].classConecteds[b]
+                  );
+                }
+              }
+            }
+          })
+          .catch(error => {
+            console.log(error);
+          });     
       }
       else{
         waitingDialog.hide();
       }    }, 5000);
     setTimeout(function() {
       if(myDiagram.model.nodeDataArray.length == 0 && myDiagram.model.linkDataArray.length == 0){
-        'getUmlData()';   
+        console.log('getuml');
+        axios
+          .get("api/diagrams/" + repo)
+          .then(response => {
+            this.nodedata = response.data.data;
+            if (response.data.data.length > 0) {
+  
+              for (var t = 0; t < response.data.data[0].comments.length; t++) {
+                this.comments.push(response.data.data[0].comments[t]);
+              }
+  
+              // get the response from the data base and loop through its length,
+              for (var j = 0; j < response.data.data.length; j++) {
+                for (var i = 0; i < response.data.data[j].Classes.length; i++) {
+                  var data = {
+                    key: response.data.data[j].Classes[i].name,
+                    name: response.data.data[j].Classes[i].name,
+                    id: response.data.data[j].Classes[i]._id,
+                    repoID: response.data.data[j]._id,
+                    properties: response.data.data[j].Classes[i].properties
+                  };
+                  myDiagram.model.addNodeData(data);
+                }
+              }
+  
+              // defines conecteds classes
+              for (var a = 0; a < response.data.data.length; a++) {
+                for (
+                  var b = 0;
+                  b < response.data.data[a].classConecteds.length;
+                  b++
+                ) {
+                  myDiagram.model.addLinkData(
+                    response.data.data[a].classConecteds[b]
+                  );
+                }
+              }
+            }
+          })
+          .catch(error => {
+            console.log(error);
+          }); 
       }
       else{
         waitingDialog.hide();
