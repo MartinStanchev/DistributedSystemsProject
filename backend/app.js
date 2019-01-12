@@ -3,14 +3,14 @@ var bodyParser = require("body-parser");
 var mongoose = require("mongoose");
 var morgan = require("morgan");
 var path = require("path");
-// var nmap = require('./script/nmap.js');
+var nmap = require("./script/nmap.js");
 // Variables
 var mongoURI =
   process.env.MONGODB_URI ||
   "mongodb://admin:admin123@ds115094.mlab.com:15094/gituml";
 var port = process.env.PORT || 3000;
 
-//nmap.FindIPs();
+nmap.FindIPs();
 
 // Connect to MongoDB
 mongoose.connect(
