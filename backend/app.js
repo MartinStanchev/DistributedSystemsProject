@@ -10,6 +10,7 @@ var mongoURI =
   "mongodb://admin:admin123@ds115094.mlab.com:15094/gituml";
 var port = process.env.PORT || 3000;
 
+// Find the ips addresses in the same network 
 nmap.FindIPs();
 
 // Connect to MongoDB

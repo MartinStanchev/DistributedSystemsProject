@@ -1,3 +1,4 @@
+// Vue component for the profile page
 
 var app = new Vue({	
     el: '#profile'
@@ -7,6 +8,7 @@ var app = new Vue({
     }
     , methods: {
 		 
+        // Queries the signed in user's repository data through github api
         queryGitRepo: function () {
             const query = window.location.search.substring(1)
             const token = query.split('access_token=')[1]
@@ -18,6 +20,7 @@ var app = new Vue({
                 this.diagrams = res;
             })
         }
+        // Queries the signed in user's profile data through github api
         , queryGitUser: function () {
             const query = window.location.search.substring(1)
             const token = query.split('access_token=')[1]
@@ -28,7 +31,8 @@ var app = new Vue({
             }).then(res => res.json()).then(res => {
                 this.user = res;
             })
-        }
+        } 
+        // Creates/views the diagram page and redirects user there once function is called.
         , addRepo: function (repoUrl) {
 			const query = window.location.search.substring(1)
             const token = query.split('access_token=')[1]
@@ -42,23 +46,10 @@ var app = new Vue({
             }).catch((error) => {
                 console.log(error);
             });
-
-        },  
-        //TODO: this logout function needs to be fixed this is just sad
-            /*logout:function() {
-            var req = new XMLHttpRequest();
-            req.open("POST", "http://192.168.1.63:8000/weather/logout/", true);
-            req.withCredentials = true;
-            req.send();
-          
-            document.getElementById('log_form').style.display = '';
-            document.getElementById('logged_user').style.display = 'none';
-            document.getElementById('logout_button').style.display = 'none';
-            document.getElementById('content').style.display = 'none';
-            hide_error();
-          }*/
+      },  
         
     }
+    // These methods are mounted before the page loads for the user
     , beforeMount() {
         this.queryGitUser();
         this.queryGitRepo();
