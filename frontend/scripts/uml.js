@@ -60,14 +60,7 @@ var app = new Vue({
             //loop through Classes length and define the names and classes infromation
             for (var j = 0; j < response.data.data.length; j++) {
               for (var i = 0; i < response.data.data[j].Classes.length; i++) {
-                var data = {
-                  key: response.data.data[j].Classes[i].name,
-                  name: response.data.data[j].Classes[i].name,
-                  id: response.data.data[j].Classes[i]._id,
-                  repoID: response.data.data[j]._id,
-                  properties: response.data.data[j].Classes[i].properties
-                };
-                myDiagram.model.addNodeData(data);
+                myDiagram.model.addNodeData(response.data.data[j].Classes[i]);
               }
             }
 
@@ -78,9 +71,13 @@ var app = new Vue({
                 b < response.data.data[a].classConecteds.length;
                 b++
               ) {
-                myDiagram.model.addLinkData(
-                  response.data.data[a].classConecteds[b]
-                );
+                if (
+                  response.data.data[a].classConecteds[b].relationship !== ""
+                ) {
+                  myDiagram.model.addLinkData(
+                    response.data.data[a].classConecteds[b]
+                  );
+                }
               }
             }
           }
