@@ -41,11 +41,13 @@ router.post("/diagrams", function(req, res, next) {
   axios.all(request).then(
     axios.spread((...args) => {
       for (let i = 0; i < args.length; i++) {
-        if (args[i].data.data != "") {
+        console.log(args[i].status );
+        if (args[i].data.data != "" && args[i].status != 500) {
           res.status(200).json(args[i].data);
           found = true;
         }
       }
+
       if (found == false) {
         DiagramSchema.find({ GitRepo: link }, function(err, diagram) {
           if (err) return next(err);
@@ -134,9 +136,14 @@ router.get("/diagrams/:id", function(req, res, next) {
   axios.all(request).then(
     axios.spread((...args) => {
       for (let i = 0; i < args.length; i++) {
+        console.log(args[i].status );
+
         if (args[i].data.data != "") {
           res.status(200).json(args[i].data);
           found = true;
+        }
+        else if(args[i].status == 500){
+          found = false;
         }
       }
       if (found == false) {
@@ -156,8 +163,9 @@ router.get("/diagram/:id", function(req, res, next) {
   var link = req.params.id;
   DiagramSchema.find({ GitRepo: link }, function(err, repo) {
     if (err) {
+      res.status(500)
       return next(err);
-    }
+x    }
     res.status(200).json({ data: repo });
   });
 });

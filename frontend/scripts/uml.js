@@ -610,7 +610,7 @@ var app = new Vue({
         myDiagram.model.linkDataArray.length == 0
       ) {
         window.alert(
-          "One of the main node or databse in the system is disabled or crashed! please enable it before refreshing the page."
+          "Please refresh the page after 20 seconds. And make sure all the databases are activate!"
         );
         axios
         .get("api/nmap")
