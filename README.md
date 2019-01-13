@@ -5,8 +5,12 @@ DIT355 University of Gothenburg mini project
 `npm start`  
 Open localhost:3000
 
+### To start mongod service:  
+ `service mongod start`  in UNIX terminal.
+
 Server must be run on a Linux machine to execute *srcML* and *nmap*.  
-To install *nmap* run `sudo apt-get install nmap` in the console.
+To install *nmap* run `sudo apt-get install nmap` in the console.  
+`MongoDB` is required to be active and running on starting the server.
 
 A *github* account is required to login.  
 After loggin in choose a repository and click on *View Diagram* to see it visualised.  
