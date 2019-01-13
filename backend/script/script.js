@@ -6,6 +6,7 @@ var classNames;
 var classConecteds;
 
 module.exports = {
+    //read xml file line by line 
     readXML : function(GitRepo){
         classNames = [];
         classConecteds = [];
@@ -74,6 +75,7 @@ module.exports = {
         return this.SaveDiagram(GitRepo);
         }
     },
+    //find classes 
     FindClass: function(line){
         var firstIndex;
         var lastIndex;
@@ -90,6 +92,7 @@ module.exports = {
         
         return line.substring(firstIndex,lastIndex);
     },
+    // find super classes of the found classes
     FindSuperClass: function(line, currentClassName){
         var firstExtendsIndex;
         var lastExtendsIndex;
@@ -109,6 +112,7 @@ module.exports = {
         classConecteds.push(classExtend);
         return classExtend;
     },
+    //find attributes of the class
     FindAttributes : function(line){
         var firstVisibilityIndex;
         var lastVisibilityIndex;
@@ -161,6 +165,7 @@ module.exports = {
         var ls = {name : name1 , type : type1 , visibility : visibility1};
         return ls;
     },
+    //find the fincations of the class
     FindMethod : function(line){
         var firstVisibilityIndex;
         var lastVisibilityIndex;
@@ -241,6 +246,7 @@ module.exports = {
 
         return ls;
     },
+    //find the other classes that is connected to the found class
     FindClassConnection : function(line,current){
         var excist;
         for(var j = 0; j < classNames.length ; j++){
@@ -273,11 +279,13 @@ module.exports = {
             }
         }
     },
+    //delete xml file after processing data and saving it to database
     cleanUpFiles : function (pathToFolder) {
         shell.echo('deleting files... \n' + shell.ls('-A', __dirname + '/../../resources/'));
         shell.rm('-rf', __dirname + '/../../resources/' + pathToFolder);
         shell.rm(__dirname + '/../../resources/' + pathToFolder + ".xml");
     },
+    //save the data that is generated from reading xml file to database
     SaveDiagram : function(GitRepo){
         var Diagram = new DiagramSchema({
             GitRepo :  GitRepo,
@@ -295,6 +303,7 @@ module.exports = {
         });
         this.cleanUpFiles(GitRepo);
     },
+    // converts the file that is downloaded from the github to a zip and makes the connection between script.js and xmlEncoder.js
     convertZip : function(path){
         if(xmlEmcoder.saveXML(path) == 1) {
             return this.readXML(path);

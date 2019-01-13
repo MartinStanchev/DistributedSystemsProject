@@ -6,6 +6,7 @@ var request = require('request');
 var IPs = [];
 
 module.exports = {
+// searches all the ip addresses to the devices that is connected on the same network
     FindIPs : function(){
         var localIP = this.FindLocalIP();
         var res_dir = shell.pwd()  + '/resources';
@@ -45,6 +46,7 @@ module.exports = {
         } else {
         }
     },
+    //finds the local ip address of the current device
     FindLocalIP : function(){
         var localIP;
         Object.keys(ifaces).forEach(function (ifname) {
@@ -70,6 +72,7 @@ module.exports = {
           });
           return localIP;
     },
+// find active ips by sending an http request to them. if the response to the to the request valid system will add that ip to the ip list
     FindActiveIP : function(ip){ 
         var url = "http://" + ip +":3000/api/ip/" + this.FindLocalIP();
         request(url, function(error , response , body){
@@ -90,35 +93,11 @@ module.exports = {
             }
         });
     },
+    //get the found ips 
     GetIPs : function(){
-        //For fault tolorence
-        /*
-        var ActiveIPs = [];
-        for(var i = 0 ; i < IPs.length ; i++){
-            var url = "http://" + IPs[i] +":3000/api/ip/" + this.FindLocalIP();
-            request(url, function(error , response , body){
-                if(response != undefined){
-                    if(JSON.parse(response.body).ip != undefined){
-                        console.log("this ip is active : " + JSON.parse(response.body).ip);
-                        if(ActiveIPs.length == 0){
-                            ActiveIPs.push(JSON.parse(response.body).ip);
-                        }
-                        else{
-                            for(var i = 0 ; i < ActiveIPs.length ; i++){
-                                if(!ActiveIPs.includes(JSON.parse(response.body).ip)){
-                                    ActiveIPs.push(JSON.parse(response.body).ip);
-                                }
-                            }
-                        }
-                    }
-                }
-            });
-        }
-        console.log("acaliable ips : " + IPs);
-        console.log("active ips : " + ActiveIPs);
-        */
         return IPs;
     },
+    //set the found ips
     SetIPs : function(ip){
         if(IPs.length == 0){
             IPs.push(ip);
