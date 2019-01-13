@@ -312,7 +312,6 @@ var app = new Vue({
       }, 1000);
     setTimeout(function() {
       if(myDiagram.model.nodeDataArray.length == 0 && myDiagram.model.linkDataArray.length == 0){
-        'getUmlData()';
       }
       else{
         waitingDialog.hide();
@@ -331,7 +330,6 @@ var app = new Vue({
       }    }, 4000);
     setTimeout(function() {
       if(myDiagram.model.nodeDataArray.length == 0 && myDiagram.model.linkDataArray.length == 0){
-        'getUmlData()';      
       }
       else{
         waitingDialog.hide();
