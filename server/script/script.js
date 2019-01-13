@@ -9,6 +9,7 @@ var classNames;
 var classConecteds;
 var request = require('request');
 var IPs = [];
+const util = require('util')
 
 module.exports = {
     readXML : function(GitRepo, push_date){
@@ -371,8 +372,16 @@ module.exports = {
           });
           return localIP;
     },
-    FindActiveIP : function(ip){ 
-        var url = "http://" + ip +":3000/api/ip/" + this.FindLocalIP();
+    FindActiveIP : function(ip){
+        // Fix for strange format on passed ip address (The passed ip adress is passed as an object and not as a string)
+        ip = JSON.stringify(ip); // Object to string
+        ip = ip.replace(/[^0-9.]/g, ""); // Remove crazy stuff
+        var localIp = this.FindLocalIP(); // Local IP
+        var url = "http://" + ip +":3000/api/ip/" + localIp; // Build string
+        url = JSON.stringify(url); // Stringify string to prevent JS handling it as an object again
+        // End of ip string fix  //
+        
+        console.log("URL: " + url);
         request(url, function(error , response , body){
             if(response != undefined){
                 if(JSON.parse(response.body).ip!= undefined){
