@@ -11,7 +11,7 @@ var mongoURI =
 var port = process.env.PORT || 3000;
 
 // Find the ips addresses in the same network 
-//nmap.FindIPs();
+nmap.FindIPs();
 
 // Connect to MongoDB
 mongoose.connect(
