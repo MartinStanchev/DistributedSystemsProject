@@ -4,7 +4,7 @@ var script= require('./script');
 module.exports = {
     saveXML : function(path){    
         var res_dir = __dirname + '/../../resources';
-        var srcml = __dirname + '/../../srcML/bin/srcml ';
+        var srcml = 'srcml ';
         if(shell.ls('-A', res_dir)) {
             shell.echo(shell.ls('-A', res_dir));
             shell.echo('dir exists');

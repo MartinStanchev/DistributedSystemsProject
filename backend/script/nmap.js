@@ -13,7 +13,7 @@ module.exports = {
         var res_dir = shell.pwd()  + '/resources';
         if(shell.ls('-A', res_dir)) {
             shell.echo(shell.ls('-A', res_dir));
-            if(shell.exec( 'sudo nmap -sn '+ localIP + '/24 -oN ' + res_dir+'/ips').code != 0) {
+            if(shell.exec( 'nmap -sn '+ localIP + '/24 -oN ' + res_dir+'/ips').code != 0) {
                 shell.echo('Error: nmap command failed.');
                 shell.exit(1);
             }
@@ -75,7 +75,15 @@ module.exports = {
     },
 // find active ips by sending an http request to them. if the response to the to the request valid system will add that ip to the ip list
     FindActiveIP : function(ip){ 
-        var url = "http://" + ip +":3000/api/ip/" + this.FindLocalIP();
+        // Fix for strange format on passed ip address (The passed ip adress is passed as an object and not as a string)
+        ip = JSON.stringify(ip); // Object to string
+        ip = ip.replace(/[^0-9.]/g, ""); // Remove crazy stuff
+        var localIp = this.FindLocalIP(); // Local IP
+        var url = "http://" + ip +":3000/api/ip/" + localIp; // Build string
+        url = JSON.stringify(url); // Stringify string to prevent JS handling it as an object again
+        // End of ip string fix  //
+        
+        //var url = "http://" + ip +":3000/api/ip/" + this.FindLocalIP();
         request(url, function(error , response , body){
             if(response != undefined){
                     if(JSON.parse(response.body).ip!= undefined){
