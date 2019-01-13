@@ -32,6 +32,8 @@ router.get("/ip/:id", function(req, res, next) {
 //middleware post
 router.post("/diagrams", function(req, res, next) {
   var link = req.body.GitRepo.slice(19).replace(/\//g, "_");
+  var push_date = new Date(req.body.pushed_at);
+  console.log("PUSHED AT DATE: " + push_date);
   var ips = nmap.GetIPs();
   var found = false;
   var request = [];
@@ -43,6 +45,13 @@ router.post("/diagrams", function(req, res, next) {
       for (let i = 0; i < args.length; i++) {
         console.log(args[i].status );
         if (args[i].data.data != "" && args[i].status != 500) {
+                          // TODO - see the push date:
+                /*
+                var repoFound = args[i].data;
+                if(push_date > repoFound.LatestPush) {
+                    console.log("There is a newer version / later push than this one")
+                }
+                */
           res.status(200).json(args[i].data);
           found = true;
         }
@@ -52,20 +61,32 @@ router.post("/diagrams", function(req, res, next) {
         DiagramSchema.find({ GitRepo: link }, function(err, diagram) {
           if (err) return next(err);
           if (
-            diagram == null ||
+            (diagram == null ||
             diagram == [] ||
             diagram.length == 0 ||
-            diagram == ""
+            diagram == "") ||
+            diagram[0].LatestPush < push_date
           ) {
+
+              if(typeof diagram[0] !== 'undefined'){
+                if(diagram[0].LatestPush < push_date) {
+                    console.log("Diagram found but a newer version is pushed, updating the database");
+                    DiagramSchema.find({ GitRepo: link }).remove().exec(); // Remove the entry in database
+
+                }  
+            }
+
             Git.Clone(req.body.GitRepo, repoPath + link).then(function(
               repository
             ) {
               path = link;
               console.log("second response");
-              res.status(201).json(script.convertZip(path));
+              res.status(201).json(script.convertZip(path, push_date));
               Console.log("Successfully cloned to: " + Diagram.GitRepo);
             });
           } else {
+            console.log("Found diagram in database that is the newest version.")
+            console.log(diagram[0].LatestPush < push_date);
             console.log("third response");
             res.status(200);
           }

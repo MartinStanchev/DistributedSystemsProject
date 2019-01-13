@@ -3,6 +3,7 @@ var Schema = mongoose.Schema;
 
 var DiagramSchema = new Schema({
   GitRepo: { type: String, unique: true },
+  LatestPush: {type: Date},
   Classes: [
     {
       key: String,

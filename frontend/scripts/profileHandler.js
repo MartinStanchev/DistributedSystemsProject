@@ -33,13 +33,15 @@ var app = new Vue({
             })
         } 
         // Creates/views the diagram page and redirects user there once function is called.
-        , addRepo: function (repoUrl) {
+        , addRepo: function (repoUrl, pushed_at) {
 			const query = window.location.search.substring(1)
             const token = query.split('access_token=')[1]
             console.log(repoUrl)
+            console.log("PUSHED AT: " + pushed_at);
             window.location.href = "/uml.html?repo=" + repoUrl.slice(19).replace(/\//g, "_")+"?access_token="+token;  
             let Diagram = {
-                GitRepo: repoUrl
+                GitRepo: repoUrl,
+                pushed_at: pushed_at
             };
             axios.post('/api/diagrams', Diagram).then((response) => {
                 return Diagram;

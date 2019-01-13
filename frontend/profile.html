@@ -47,9 +47,11 @@
 								<div class="media-body">
 									<p>Repository name: {{diagram.name}}</p>
 									<p v-if="!diagram.description == ''">Repository description: {{diagram.description}}</p>
-									<p>Repository owner: {{diagram.owner.login}}</p> <a v-bind:href="diagram.html_url" target="_blank">Github repository link</a>
+									<p>Repository owner: {{diagram.owner.login}}</p> 
+									<h6>Latest push at: {{diagram.pushed_at}} </h6>
+									<a v-bind:href="diagram.html_url" target="_blank">Github repository link</a>
 									<br>
-									<button type="button" class="btn btn-warning float-right" @click="addRepo(diagram.html_url)">View Diagram</button>
+									<button type="button" class="btn btn-warning float-right" @click="addRepo(diagram.html_url, diagram.pushed_at)">View Diagram</button>
 								</div>
 							</li>
 						</ul>
@@ -59,7 +61,8 @@
 		</div>
 	</div>
 </body>
-<script src="https://cdn.jsdelivr.net/npm/vue"></script>
+<script src="https://unpkg.com/vue/dist/vue.js"></script>
+<script src="https://unpkg.com/vue-router/dist/vue-router.js"></script>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
 <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
 <script src="https://unpkg.com/axios/dist/axios.min.js"></script>

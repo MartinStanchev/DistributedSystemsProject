@@ -4,10 +4,11 @@ var xmlEmcoder = require('./xmlEncoder');
 var shell = require("shelljs");
 var classNames;
 var classConecteds;
+const util = require('util')
 
 module.exports = {
     //read xml file line by line 
-    readXML : function(GitRepo){
+    readXML : function(GitRepo, push_date){
         classNames = [];
         classConecteds = [];
         var excist;
@@ -72,7 +73,7 @@ module.exports = {
                     this.FindClassConnection(line,currentClassName);
                 }
             }
-        return this.SaveDiagram(GitRepo);
+        return this.SaveDiagram(GitRepo, push_date);
         }
     },
     //find classes 
@@ -286,9 +287,10 @@ module.exports = {
         shell.rm(__dirname + '/../../resources/' + pathToFolder + ".xml");
     },
     //save the data that is generated from reading xml file to database
-    SaveDiagram : function(GitRepo){
+    SaveDiagram : function(GitRepo, push_date){
         var Diagram = new DiagramSchema({
             GitRepo :  GitRepo,
+            LatestPush : push_date,
             Classes : classNames,
             classConecteds : classConecteds
         });
@@ -304,9 +306,9 @@ module.exports = {
         this.cleanUpFiles(GitRepo);
     },
     // converts the file that is downloaded from the github to a zip and makes the connection between script.js and xmlEncoder.js
-    convertZip : function(path){
+    convertZip : function(path, push_date){
         if(xmlEmcoder.saveXML(path) == 1) {
-            return this.readXML(path);
+            return this.readXML(path, push_date);
         }
         
     }
