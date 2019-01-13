@@ -163,9 +163,7 @@ router.get("/diagram/:id", function(req, res, next) {
 });
 
 router.get("/nmap", function(req, res, next) {
-  console.log("before : "+ nmap.GetIPs());
   nmap.FindIPs();
-  console.log("after : "+ nmap.GetIPs());
 });
 
 module.exports = router;
