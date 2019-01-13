@@ -605,7 +605,7 @@ var app = new Vue({
         myDiagram.model.linkDataArray.length == 0
       ) {
         window.alert(
-          "One of the main node in the system is disabled or crashed! please enable it before refreshing the page."
+          "One of the main node or databse in the system is disabled or crashed! please enable it before refreshing the page."
         );
         waitingDialog.hide();
       }
