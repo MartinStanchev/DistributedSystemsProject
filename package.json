@@ -6,7 +6,7 @@
     "node": "10.7.0"
   },
   "private": true,
-  "main": "server/app.js",
+  "main": "backend/app.js",
   "scripts": {
     "start": "node ./backend/app.js",
     "test": "test"
