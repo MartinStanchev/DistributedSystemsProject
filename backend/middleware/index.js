@@ -14,6 +14,7 @@ router.get('/api', function(req, res) {
     res.json({"message": "Welcome to DistrubutedSystemsProject - backend!"});
 });
 
+// Redirection path when user signs in through their github account
 router.get('/oauth/redirect', (req, res) => {
     const requestToken = req.query.code
   axios({

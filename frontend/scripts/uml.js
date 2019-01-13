@@ -17,7 +17,7 @@ var app = new Vue({
     classExtends: [],
     linkdata: [],
     comments: [],
-	user: [],
+    user: [],
     comment_diagram: ""
   },
   methods: {
@@ -28,56 +28,56 @@ var app = new Vue({
       $("body").css("padding-right", "");
       $("#myModal").hide();
     },
+    //  to get the repo url for the uml page
     getRepo: function() {
       window.location.href = "/uml.html?repo=" + repo;
     },
-    // uml1 for the uml old page
+    // to get the repo url for interactive force page
     getRepoUml: function() {
       window.location.href = "/NewUml.html?repo=" + repo;
     },
-      
-      homePage: function() {
-        const query = window.location.search.substring(1)
-            const token = query.split('access_token=')[1]
-            window.location.href = "/profile.html?access_token="+token;  
+    //  to get the url for the homePage(profile page)
+    homePage: function() {
+      const query = window.location.search.substring(1);
+      const token = query.split("access_token=")[1];
+      window.location.href = "/profile.html?access_token=" + token;
     },
 
+    // get the data from backend ,creates nodes data and links data
     getUmlData: function() {
-      console.log('getuml');
+      console.log("getuml");
       axios
         .get("api/diagrams/" + repo)
         .then(response => {
           this.nodedata = response.data.data;
           if (response.data.data.length > 0) {
-
+            // if we get response,fill it with all comments from our endpoints
             for (var t = 0; t < response.data.data[0].comments.length; t++) {
               this.comments.push(response.data.data[0].comments[t]);
             }
 
-            // get the response from the data base and loop through its length,
+            // if we get the response from the data base and ,loop through its length and creates node data (classes)
+            //loop through Classes length and define the names and classes infromation
             for (var j = 0; j < response.data.data.length; j++) {
               for (var i = 0; i < response.data.data[j].Classes.length; i++) {
-                var data = {
-                  key: response.data.data[j].Classes[i].name,
-                  name: response.data.data[j].Classes[i].name,
-                  id: response.data.data[j].Classes[i]._id,
-                  repoID: response.data.data[j]._id,
-                  properties: response.data.data[j].Classes[i].properties
-                };
-                myDiagram.model.addNodeData(data);
+                myDiagram.model.addNodeData(response.data.data[j].Classes[i]);
               }
             }
 
-            // defines conecteds classes
+            // defines conecteds classes base on the the relationships in the classConecteds array
             for (var a = 0; a < response.data.data.length; a++) {
               for (
                 var b = 0;
                 b < response.data.data[a].classConecteds.length;
                 b++
               ) {
-                myDiagram.model.addLinkData(
-                  response.data.data[a].classConecteds[b]
-                );
+                if (
+                  response.data.data[a].classConecteds[b].relationship !== ""
+                ) {
+                  myDiagram.model.addLinkData(
+                    response.data.data[a].classConecteds[b]
+                  );
+                }
               }
             }
           }
@@ -86,6 +86,7 @@ var app = new Vue({
           console.log(error);
         });
     },
+    // save the change when we update the classes,save the name of the classes and thier relationships
     saveChange: function(e) {
       axios
         .patch("/api/diagram/" + repo, {
@@ -100,27 +101,34 @@ var app = new Vue({
           console.log(err);
         });
     },
-	  queryGitUser: function () {
-            const query = window.location.search.substring(1)
-            const token = query.split('access_token=')[1]
-            fetch('https://api.github.com/user', {
-                headers: {
-                    Authorization: 'token ' + token
-                }
-            }).then(res => res.json()).then(res => {
-                this.user = res;
-            })
-        }, 
+    // get the user repo information to fetch it on the comment
+    queryGitUser: function() {
+      const query = window.location.search.substring(1);
+      const token = query.split("access_token=")[1];
+      fetch("https://api.github.com/user", {
+        headers: {
+          Authorization: "token " + token
+        }
+      })
+        .then(res => res.json())
+        .then(res => {
+          this.user = res;
+        });
+    },
+
+    // add comment to the diagram by the rpeo url
     addComment: function() {
+      //   defines the comment
       let co = {
         userName: this.user.login,
         comment: this.comment_diagram,
-		userImage: this.user.avatar_url
+        userImage: this.user.avatar_url
       };
+      // find the diagram by the repo url then update digram by adding the new comment(co)
       axios
         .patch("/api/diagram/add/" + repo, co)
         .then(response => {
-		      location.reload();
+          location.reload();
           console.log(response);
         })
         .catch(error => {
@@ -128,9 +136,9 @@ var app = new Vue({
           console.log(error);
         });
     },
-    
+    // this function initialize the class diagram graphical components
     init: function() {
-      console.log('init');
+      console.log("init");
       var $ = go.GraphObject.make;
       myDiagram = $(go.Diagram, "myDiagramDiv", {
         initialContentAlignment: go.Spot.Center,
@@ -386,20 +394,20 @@ var app = new Vue({
         linkDataArray: linkdata
       });
     },
-     
-    refreshDiagram : function() {
+
+    refreshDiagram: function() {
       myDiagram.clear();
-      this.getUmlData()
+      this.getUmlData();
     },
 
-     connectSocket: function() {
+    connectSocket: function() {
       var socket = io();
-      socket.on('updateDiagram', this.refreshDiagram);
+      socket.on("updateDiagram", this.refreshDiagram);
     }
   },
-	
+  // This basically means that once Vue is ready, we call getUmlData()+queryGitUser()+init() to fetch
   mounted() {
-    this.connectSocket();    
+    this.connectSocket();
     waitingDialog.show("Loading", {
       dialogSize: "sm",
       progressType: "warning"
@@ -410,26 +418,32 @@ var app = new Vue({
     this.init();
 
     setTimeout(function() {
-      if(myDiagram.model.nodeDataArray.length == 0 && myDiagram.model.linkDataArray.length == 0){
-      }
-      else{
+      if (
+        myDiagram.model.nodeDataArray.length == 0 &&
+        myDiagram.model.linkDataArray.length == 0
+      ) {
+      } else {
         waitingDialog.hide();
       }
     }, 1000);
     setTimeout(function() {
-      if(myDiagram.model.nodeDataArray.length == 0 && myDiagram.model.linkDataArray.length == 0){
-        console.log('getuml');
+      if (
+        myDiagram.model.nodeDataArray.length == 0 &&
+        myDiagram.model.linkDataArray.length == 0
+      ) {
+        console.log("getuml");
         axios
           .get("api/diagrams/" + repo)
           .then(response => {
             this.nodedata = response.data.data;
             if (response.data.data.length > 0) {
-  
+              // if we get response,fill it with all comments from our endpoints
               for (var t = 0; t < response.data.data[0].comments.length; t++) {
                 this.comments.push(response.data.data[0].comments[t]);
               }
-  
-              // get the response from the data base and loop through its length,
+
+              // if we get the response from the data base and ,loop through its length and creates node data (classes)
+              //loop through Classes length and define the names and classes infromation
               for (var j = 0; j < response.data.data.length; j++) {
                 for (var i = 0; i < response.data.data[j].Classes.length; i++) {
                   var data = {
@@ -442,8 +456,8 @@ var app = new Vue({
                   myDiagram.model.addNodeData(data);
                 }
               }
-  
-              // defines conecteds classes
+
+              // if we get the response from the data base ,defines conecteds classes base on the the relationships in the classConecteds array
               for (var a = 0; a < response.data.data.length; a++) {
                 for (
                   var b = 0;
@@ -460,36 +474,45 @@ var app = new Vue({
           .catch(error => {
             console.log(error);
           });
-      }
-      else{
+      } else {
         waitingDialog.hide();
-      }    }, 2000);
-    setTimeout(function() {
-      if(myDiagram.model.nodeDataArray.length == 0 && myDiagram.model.linkDataArray.length == 0){    
       }
-      else{
-        waitingDialog.hide();
-      }    }, 3000);
+    }, 2000);
     setTimeout(function() {
-      if(myDiagram.model.nodeDataArray.length == 0 && myDiagram.model.linkDataArray.length == 0){
+      if (
+        myDiagram.model.nodeDataArray.length == 0 &&
+        myDiagram.model.linkDataArray.length == 0
+      ) {
+      } else {
+        waitingDialog.hide();
       }
-      else{
-        waitingDialog.hide();
-      }    }, 4000);
+    }, 3000);
     setTimeout(function() {
-      if(myDiagram.model.nodeDataArray.length == 0 && myDiagram.model.linkDataArray.length == 0){
-        console.log('getuml');
+      if (
+        myDiagram.model.nodeDataArray.length == 0 &&
+        myDiagram.model.linkDataArray.length == 0
+      ) {
+      } else {
+        waitingDialog.hide();
+      }
+    }, 4000);
+    setTimeout(function() {
+      if (
+        myDiagram.model.nodeDataArray.length == 0 &&
+        myDiagram.model.linkDataArray.length == 0
+      ) {
+        console.log("getuml");
         axios
           .get("api/diagrams/" + repo)
           .then(response => {
             this.nodedata = response.data.data;
             if (response.data.data.length > 0) {
-  
               for (var t = 0; t < response.data.data[0].comments.length; t++) {
                 this.comments.push(response.data.data[0].comments[t]);
               }
-  
-              // get the response from the data base and loop through its length,
+
+              // if we get the response from the data base and ,loop through its length and creates node data (classes)
+              //loop through Classes length and define the names and classes infromation
               for (var j = 0; j < response.data.data.length; j++) {
                 for (var i = 0; i < response.data.data[j].Classes.length; i++) {
                   var data = {
@@ -502,8 +525,8 @@ var app = new Vue({
                   myDiagram.model.addNodeData(data);
                 }
               }
-  
-              // defines conecteds classes
+
+              // if we get the response from the data base ,defines conecteds classes base on the the relationships in the classConecteds array
               for (var a = 0; a < response.data.data.length; a++) {
                 for (
                   var b = 0;
@@ -519,25 +542,29 @@ var app = new Vue({
           })
           .catch(error => {
             console.log(error);
-          });     
-      }
-      else{
+          });
+      } else {
         waitingDialog.hide();
-      }    }, 5000);
+      }
+    }, 5000);
     setTimeout(function() {
-      if(myDiagram.model.nodeDataArray.length == 0 && myDiagram.model.linkDataArray.length == 0){
-        console.log('getuml');
+      if (
+        myDiagram.model.nodeDataArray.length == 0 &&
+        myDiagram.model.linkDataArray.length == 0
+      ) {
+        console.log("getuml");
         axios
           .get("api/diagrams/" + repo)
           .then(response => {
             this.nodedata = response.data.data;
             if (response.data.data.length > 0) {
-  
+              // if we get response,fill it with all comments from our endpoints
               for (var t = 0; t < response.data.data[0].comments.length; t++) {
                 this.comments.push(response.data.data[0].comments[t]);
               }
-  
-              // get the response from the data base and loop through its length,
+
+              // if we get the response from the data base and ,loop through its length and creates node data (classes)
+              // loop through Classes length and define the names and classes infromation
               for (var j = 0; j < response.data.data.length; j++) {
                 for (var i = 0; i < response.data.data[j].Classes.length; i++) {
                   var data = {
@@ -550,8 +577,8 @@ var app = new Vue({
                   myDiagram.model.addNodeData(data);
                 }
               }
-  
-              // defines conecteds classes
+
+              // if we get the response from the data base ,defines conecteds classes base on the the relationships in the classConecteds array
               for (var a = 0; a < response.data.data.length; a++) {
                 for (
                   var b = 0;
@@ -567,16 +594,21 @@ var app = new Vue({
           })
           .catch(error => {
             console.log(error);
-          }); 
-      }
-      else{
+          });
+      } else {
         waitingDialog.hide();
-      }    }, 6000);
+      }
+    }, 6000);
     setTimeout(function() {
-      if(myDiagram.model.nodeDataArray.length == 0 && myDiagram.model.linkDataArray.length == 0){
-        window.alert("One of the main node in the system is disabled or crashed! please enable it before refreshing the page.");
+      if (
+        myDiagram.model.nodeDataArray.length == 0 &&
+        myDiagram.model.linkDataArray.length == 0
+      ) {
+        window.alert(
+          "One of the main node in the system is disabled or crashed! please enable it before refreshing the page."
+        );
         waitingDialog.hide();
       }
-      }, 7000);
+    }, 7000);
   }
 });

@@ -2,6 +2,7 @@ var url_string = window.location.href;
 var url = new URL(url_string);
 var repo = url.searchParams.get("repo");
 
+// defines layout
 function ContinuousForceDirectedLayout() {
   go.ForceDirectedLayout.call(this);
   this._isObserving = false;
@@ -71,33 +72,33 @@ var app = new Vue({
       $("body").css("padding-right", "");
       $("#myModal").hide();
     },
+    //  to get the repo url for the uml page
     getRepo: function() {
       window.location.href = "/uml.html?repo=" + repo;
     },
-    // uml1 for the uml old page
+    // to get the repo url for interactive force page
     getRepoUml: function() {
       window.location.href = "/NewUml.html?repo=" + repo;
     },
-      
-      homePage: function() {
-        const query = window.location.search.substring(1)
-            const token = query.split('access_token=')[1]
-            window.location.href = "/profile.html?access_token="+token;  
+    //to get the url for the homePage(profile page)
+    homePage: function() {
+      const query = window.location.search.substring(1);
+      const token = query.split("access_token=")[1];
+      window.location.href = "/profile.html?access_token=" + token;
     },
-    
+    // get the data from backend ,creates nodes data and links data
     getUmlData: function() {
       axios
         .get("api/diagrams/" + repo)
         .then(response => {
           this.nodedata = response.data.data;
-
           if (response.data.data.length > 0) {
-
+            // if we get response,fill it with all comments from our endpoints
             for (var t = 0; t < response.data.data[0].comments.length; t++) {
               this.comments.push(response.data.data[0].comments[t]);
             }
-
-            // get the response from the data base and loop through its length,
+            // if we get the response from the data base and ,loop through its length and creates node data (classes)
+            //loop through Classes length and define the names
             for (var j = 0; j < response.data.data.length; j++) {
               for (var i = 0; i < response.data.data[j].Classes.length; i++) {
                 var data = {
@@ -111,7 +112,7 @@ var app = new Vue({
               }
             }
 
-            // defines conecteds classes
+            // if we get the response from the data base ,defines conecteds classes base on the the relationships in the classConecteds array
             for (var a = 0; a < response.data.data.length; a++) {
               for (
                 var b = 0;
@@ -134,7 +135,7 @@ var app = new Vue({
           console.log(error);
         });
     },
-
+    // save the change when we update the classes,save the name of the classes and thier relationships
     saveChange: function(e) {
       axios
         .patch("/api/diagram/" + repo, {
@@ -150,6 +151,7 @@ var app = new Vue({
           console.log(err);
         });
     },
+    // get the user repo information to fetch it on the comment
     queryGitUser: function() {
       const query = window.location.search.substring(1);
       const token = query.split("access_token=")[1];
@@ -163,12 +165,15 @@ var app = new Vue({
           this.user = res;
         });
     },
+    // add comment to the diagram by the rpeo url
     addComment: function() {
+      //   defines the comment
       let co = {
         userName: this.user.login,
         comment: this.comment_diagram,
         userImage: this.user.avatar_url
       };
+      // find the diagram by the repo url then update digram by adding the new comment(co)
       axios
         .patch("/api/diagram/add/" + repo, co)
         .then(response => {
@@ -189,7 +194,7 @@ var app = new Vue({
       //   { defaultSpringLength: 30, defaultElectricalCharge: 100 }
       // );
     },
-
+    // this function initialize the class diagram graphical components
     init: function() {
       if (window.goSamples) goSamples(); // init for these samples -- you don't need to call this
       var $ = go.GraphObject.make; // for conciseness in defining templates
@@ -281,17 +286,17 @@ var app = new Vue({
       });
       //myDiagram.model = new go.GraphLinksModel(nodeDataArray, linkDataArray);
     },
-    refreshDiagram : function() {
+    refreshDiagram: function() {
       myDiagram.clear();
-      this.getUmlData()
+      this.getUmlData();
     },
 
-     connectSocket: function() {
+    connectSocket: function() {
       var socket = io();
-      socket.on('updateDiagram', this.refreshDiagram);
+      socket.on("updateDiagram", this.refreshDiagram);
     }
   },
-
+  // This basically means that once Vue is ready, we call getUmlData()+queryGitUser()+init() to fetch
   mounted() {
     this.connectSocket();
     waitingDialog.show("Loading", {
@@ -304,47 +309,54 @@ var app = new Vue({
     this.init();
 
     setTimeout(function() {
-      if(myDiagram.model.nodeDataArray.length == 0 && myDiagram.model.linkDataArray.length == 0){
-      }
-      else{
+      if ( myDiagram.model.nodeDataArray.length == 0 && myDiagram.model.linkDataArray.length == 0) {
+      } else {
         waitingDialog.hide();
       }
-      }, 1000);
+    }, 1000);
     setTimeout(function() {
       if(myDiagram.model.nodeDataArray.length == 0 && myDiagram.model.linkDataArray.length == 0){
-      }
-      else{
+      } else{
         waitingDialog.hide();
-      }    }, 2000);
-    setTimeout(function() {
-      if(myDiagram.model.nodeDataArray.length == 0 && myDiagram.model.linkDataArray.length == 0){    
       }
-      else{
-        waitingDialog.hide();
-      }    }, 3000);
+    }, 2000);
     setTimeout(function() {
-      if(myDiagram.model.nodeDataArray.length == 0 && myDiagram.model.linkDataArray.length == 0){
-      }
-      else{
+      if (myDiagram.model.nodeDataArray.length == 0 && myDiagram.model.linkDataArray.length == 0) {
+      } else {
         waitingDialog.hide();
       }    }, 4000);
     setTimeout(function() {
       if(myDiagram.model.nodeDataArray.length == 0 && myDiagram.model.linkDataArray.length == 0){
       }
-      else{
+      else {
         waitingDialog.hide();
-      }    }, 5000);
+      } 
+    }, 3000);
     setTimeout(function() {
-      if(myDiagram.model.nodeDataArray.length == 0 && myDiagram.model.linkDataArray.length == 0){
-      }
-      else{
-        waitingDialog.hide();
-      }    }, 6000);
-    setTimeout(function() {
-      if(myDiagram.model.nodeDataArray.length == 0 && myDiagram.model.linkDataArray.length == 0){
-        window.alert("One of the main node in the system is disabled or crashed! please enable it before refreshing the page.");
+      if (myDiagram.model.nodeDataArray.length == 0 && myDiagram.model.linkDataArray.length == 0) {
+      } else {
         waitingDialog.hide();
       }
-      }, 7000);
+    }, 4000);
+    setTimeout(function() {
+      if (myDiagram.model.nodeDataArray.length == 0 && myDiagram.model.linkDataArray.length == 0) {
+      } else {
+        waitingDialog.hide();
+      }
+    }, 5000);
+    setTimeout(function() {
+      if (myDiagram.model.nodeDataArray.length == 0 && myDiagram.model.linkDataArray.length == 0) {
+      } else {
+        waitingDialog.hide();
+      }
+    }, 6000);
+    setTimeout(function() {
+      if (myDiagram.model.nodeDataArray.length == 0 && myDiagram.model.linkDataArray.length == 0) {
+        window.alert(
+          "One of the main node in the system is disabled or crashed! please enable it before refreshing the page."
+        );
+        waitingDialog.hide();
+      }
+    }, 7000);
   }
 });
