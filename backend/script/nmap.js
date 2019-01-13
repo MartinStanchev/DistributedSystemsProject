@@ -8,6 +8,7 @@ var IPs = [];
 module.exports = {
 // searches all the ip addresses to the devices that is connected on the same network
     FindIPs : function(){
+        IPs = [];
         var localIP = this.FindLocalIP();
         var res_dir = shell.pwd()  + '/resources';
         if(shell.ls('-A', res_dir)) {

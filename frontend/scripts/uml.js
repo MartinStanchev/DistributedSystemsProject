@@ -607,6 +607,11 @@ var app = new Vue({
         window.alert(
           "One of the main node or databse in the system is disabled or crashed! please enable it before refreshing the page."
         );
+        axios
+        .get("api/nmap")
+        .catch(error => {
+          console.log(error);
+        });
         waitingDialog.hide();
       }
     }, 7000);
