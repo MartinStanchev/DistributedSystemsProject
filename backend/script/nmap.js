@@ -13,7 +13,7 @@ module.exports = {
         var res_dir = shell.pwd()  + '/resources';
         if(shell.ls('-A', res_dir)) {
             shell.echo(shell.ls('-A', res_dir));
-            if(shell.exec( 'nmap -sn '+ localIP + '/24 -oN ' + res_dir+'/ips').code != 0) {
+            if(shell.exec( 'sudo nmap -sn '+ localIP + '/24 -oN ' + res_dir+'/ips').code != 0) {
                 shell.echo('Error: nmap command failed.');
                 shell.exit(1);
             }
