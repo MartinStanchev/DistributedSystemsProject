@@ -7,7 +7,7 @@ var nmap = require("./script/nmap.js");
 // Variables
 var mongoURI =
   process.env.MONGODB_URI ||
-  "mongodb://admin:admin123@ds115094.mlab.com:15094/gituml";
+  "mongodb://localhost:27017/gituml";
 var port = process.env.PORT || 3000;
 
 // Find the ips addresses in the same network 
