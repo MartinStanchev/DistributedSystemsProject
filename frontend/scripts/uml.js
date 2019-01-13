@@ -88,6 +88,7 @@ var app = new Vue({
     },
     // save the change when we update the classes,save the name of the classes and thier relationships
     saveChange: function(e) {
+      if(myDiagram.model.nodeDataArray.length != 0 || myDiagram.model.linkDataArray.length != 0) {
       axios
         .patch("/api/diagram/" + repo, {
           Classes: myDiagram.model.nodeDataArray,
@@ -100,6 +101,10 @@ var app = new Vue({
           window.alert("Sorry! You dont have authorization to make changes.");
           console.log(err);
         });
+      } else {
+        //window.alert("Don't spam save change!!!!!!!!");
+        window.location.reload();
+      }
     },
     // get the user repo information to fetch it on the comment
     queryGitUser: function() {
