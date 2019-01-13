@@ -3,7 +3,7 @@ DIT355 University of Gothenburg mini project
 ### To start the server: 
 `npm install`   
 `npm start`  
-Open localhost:3000
+Open localhost:3000 or the server's IP address if testing on another computer. 
 
 ### To start mongod service:  
  `service mongod start`  in UNIX terminal.
